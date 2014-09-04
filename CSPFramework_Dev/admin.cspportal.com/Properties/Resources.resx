@@ -138,6 +138,9 @@
   <data name="DeleteVendor_Success" xml:space="preserve">
     <value>Vendor Has been Deleted Successfully !</value>
   </data>
+  <data name="EditCustomerVendor_Success" xml:space="preserve">
+    <value>Customer-Vendor Mapping Has been Updated Successfully !</value>
+  </data>
   <data name="EditUser_Success" xml:space="preserve">
     <value>User Has been Updated Successfully !</value>
   </data>

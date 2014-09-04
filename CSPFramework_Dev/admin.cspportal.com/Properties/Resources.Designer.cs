@@ -124,6 +124,15 @@ namespace admin.cspportal.com.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Customer-Vendor Mapping Has been Updated Successfully !.
+        /// </summary>
+        public static string EditCustomerVendor_Success {
+            get {
+                return ResourceManager.GetString("EditCustomerVendor_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User Has been Updated Successfully !.
         /// </summary>
         public static string EditUser_Success {

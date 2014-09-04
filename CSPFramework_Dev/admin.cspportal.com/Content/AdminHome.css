@@ -10214,6 +10214,7 @@ a .field-validation-error {
 }
 
 .error {
+    font-weight:bold;
     font-size: 12px;
     display: block;
     padding: 10px;
@@ -10227,6 +10228,7 @@ a .field-validation-error {
 }
 
 .success {
+    font-weight:bold;
     font-size: 12px;
     display: block;
     padding: 10px;
@@ -10234,8 +10236,8 @@ a .field-validation-error {
     color: #075c13;
     background: #b5f9bf;
     border: 1px solid #075c13;
-    width: 31%;
-    margin-left: 34%;
+    width: 35%;
+    margin-left: 31%;
 }
 
 #Loginform .success {

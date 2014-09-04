@@ -70,7 +70,7 @@ namespace admin.cspportal.com.Controllers
             if (selectedFunction == "ISP")
             {
                 CustomerVendorViewModelPost isp = new CustomerVendorViewModelPost();
-                return PartialView("_Function_ISP", isp);
+                return PartialView("ISP", isp);
             }
             return Content("");
         }
@@ -158,6 +158,50 @@ namespace admin.cspportal.com.Controllers
             if (response.IsSuccessStatusCode)
             {
                 TempData[Properties.Resources.Success] = Properties.Resources.DeleteCutomerVendor_Success;
+                return RedirectToAction("Index", "CustomerVendor"); 
+            }
+
+            TempData[Properties.Resources.Error] = Properties.Resources.Global_Error;
+            return RedirectToAction("Index", "CustomerVendor"); 
+        }
+
+        public ActionResult EditCustomerVendorProfile(int custvendorid)
+        {
+            HttpResponseMessage response;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://api.cspportal.com/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // HTTP GET                     
+                response = client.GetAsync("api/CustomerVendor/GetCustomerVendor?custvendorid=" + custvendorid).Result;
+            }
+
+            CustomerVendorViewModelPost newCustomerVendor = new CustomerVendorViewModelPost();
+            if (response.IsSuccessStatusCode)
+            {
+                newCustomerVendor = response.Content.ReadAsAsync<CustomerVendorViewModelPost>().Result;
+            }
+
+            return View(newCustomerVendor);
+        }
+
+        public ActionResult UpdateCustomerVendorProfile(CustomerVendorViewModelPost customerVendorViewModelPost)
+        {
+            HttpResponseMessage response;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://api.cspportal.com/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // HTTP POST                     
+                response = client.PostAsJsonAsync("api/CustomerVendor/UpdateCustomerVendor", customerVendorViewModelPost).Result;
+            }
+            if (response.StatusCode.Equals(HttpStatusCode.Created))
+            {
+                TempData[Properties.Resources.Success] = Properties.Resources.EditCustomerVendor_Success;
                 return RedirectToAction("Index", "CustomerVendor"); 
             }
 

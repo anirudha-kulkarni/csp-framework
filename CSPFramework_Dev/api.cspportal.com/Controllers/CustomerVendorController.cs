@@ -134,6 +134,7 @@ namespace api.cspportal.com.Controllers
 
             CustomerVendorViewModelPost custVendorModel = new CustomerVendorViewModelPost();
             custVendorModel.newCustomerVendorModel = new NewCustomerVendorModel();
+            custVendorModel.newCustomerVendorModel.Customer_Vendor_Id = custVendor.customer_vendor_id;
             custVendorModel.newCustomerVendorModel.Vendor_Id = custVendor.vendor_id;
             custVendorModel.newCustomerVendorModel.VendorName = custVendor.Vendor.name;
             custVendorModel.newCustomerVendorModel.Account = custVendor.account_number;
@@ -184,6 +185,40 @@ namespace api.cspportal.com.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(custVendor);
+        }
+
+        [HttpPost]
+        [ResponseType(typeof(Customer_Vendors))]
+        [AllowAnonymous]
+        public async Task<IHttpActionResult> UpdateCustomerVendor(CustomerVendorViewModelPost updatedCustVendor)
+        {
+            try
+            {
+                Customer_Vendors oldCustVendor = (from oldcustVendorInfo in _context.Customer_Vendors
+                                                  where oldcustVendorInfo.customer_vendor_id == updatedCustVendor.newCustomerVendorModel.Customer_Vendor_Id
+                                                  select oldcustVendorInfo).FirstOrDefault();
+                if (oldCustVendor != null)
+                {
+                    oldCustVendor.vendor_id = updatedCustVendor.newCustomerVendorModel.Vendor_Id;
+                    oldCustVendor.client_id = updatedCustVendor.newCustomerVendorModel.Client_Id;
+                    oldCustVendor.account_number = updatedCustVendor.newCustomerVendorModel.Account;
+                    oldCustVendor.username_L1 = updatedCustVendor.newCustomerVendorModel.L1UserName;
+                    oldCustVendor.password_L1 = updatedCustVendor.newCustomerVendorModel.L1Password;
+                    oldCustVendor.username_L2 = updatedCustVendor.newCustomerVendorModel.L2UserName;
+                    oldCustVendor.password_L2 = updatedCustVendor.newCustomerVendorModel.L2Password;
+                    oldCustVendor.Agreement.start_date = updatedCustVendor.newCustomerVendorModel.AgreementStartDate;
+                    oldCustVendor.Agreement.end_date = updatedCustVendor.newCustomerVendorModel.AgreementEndDate;
+                    oldCustVendor.status = updatedCustVendor.newCustomerVendorModel.Status;
+                    oldCustVendor.site = updatedCustVendor.newCustomerVendorModel.Site;
+                    await _context.SaveChangesAsync();
+                    return CreatedAtRoute("DefaultApi", new { id = oldCustVendor.customer_vendor_id }, oldCustVendor);
+                }
+                return NotFound();
+            }
+            catch (Exception)
+            {
+                throw new InvalidOperationException();
+            }
         }
     }
 }

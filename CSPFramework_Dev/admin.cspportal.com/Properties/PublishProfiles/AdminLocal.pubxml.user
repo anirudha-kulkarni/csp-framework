@@ -10,13 +10,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/admin.cspportal.com.dll">
-      <publishTime>08/28/2014 19:37:10</publishTime>
+      <publishTime>09/04/2014 18:40:50</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>08/13/2014 13:08:20</publishTime>
     </File>
     <File Include="bin/CSPLibrary.dll">
-      <publishTime>08/28/2014 18:19:58</publishTime>
+      <publishTime>09/04/2014 18:40:49</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>08/22/2014 11:50:26</publishTime>
@@ -109,7 +109,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/13/2014 13:08:20</publishTime>
     </File>
     <File Include="Content/AdminHome.css">
-      <publishTime>08/28/2014 12:17:19</publishTime>
+      <publishTime>09/04/2014 18:32:43</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
       <publishTime>08/21/2014 18:29:09</publishTime>
@@ -146,6 +146,102 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/images/profile_photo.png">
       <publishTime>08/28/2014 16:10:36</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/images/animated-overlay.gif">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/images/ui-bg_flat_0_aaaaaa_40x100.png">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/images/ui-bg_flat_75_ffffff_40x100.png">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/images/ui-bg_glass_55_fbf9ee_1x400.png">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/images/ui-bg_glass_65_ffffff_1x400.png">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/images/ui-bg_glass_75_dadada_1x400.png">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/images/ui-bg_glass_75_e6e6e6_1x400.png">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/images/ui-bg_glass_95_fef1ec_1x400.png">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/images/ui-bg_highlight-soft_75_cccccc_1x100.png">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/images/ui-icons_222222_256x240.png">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/images/ui-icons_2e83ff_256x240.png">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/images/ui-icons_454545_256x240.png">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/images/ui-icons_888888_256x240.png">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/images/ui-icons_cd0a0a_256x240.png">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/jquery-ui.css">
+      <publishTime>03/14/2013 12:17:00</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/jquery.ui.accordion.css">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/jquery.ui.all.css">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/jquery.ui.autocomplete.css">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/jquery.ui.base.css">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/jquery.ui.button.css">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/jquery.ui.core.css">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/jquery.ui.datepicker.css">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/jquery.ui.dialog.css">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/jquery.ui.menu.css">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/jquery.ui.progressbar.css">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/jquery.ui.resizable.css">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/jquery.ui.selectable.css">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/jquery.ui.slider.css">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/jquery.ui.spinner.css">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/jquery.ui.tabs.css">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/jquery.ui.theme.css">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Content/jquery-ui/jquery.ui.tooltip.css">
+      <publishTime>03/14/2013 12:16:58</publishTime>
     </File>
     <File Include="Content/login.css">
       <publishTime>08/20/2014 18:22:30</publishTime>
@@ -189,6 +285,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/jquery-1.10.2.min.map">
       <publishTime>08/19/2014 15:06:18</publishTime>
     </File>
+    <File Include="Scripts/jquery.ui.core.js">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
+    <File Include="Scripts/jquery.ui.datepicker.js">
+      <publishTime>03/14/2013 12:16:58</publishTime>
+    </File>
     <File Include="Scripts/jquery.validate.js">
       <publishTime>08/19/2014 15:06:23</publishTime>
     </File>
@@ -211,10 +313,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/19/2014 15:06:21</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>08/28/2014 13:04:46</publishTime>
+      <publishTime>09/03/2014 14:28:30</publishTime>
     </File>
     <File Include="Views/Account/Login.cshtml">
-      <publishTime>08/27/2014 12:11:14</publishTime>
+      <publishTime>09/01/2014 18:56:42</publishTime>
     </File>
     <File Include="Views/Account/Manage.cshtml">
       <publishTime>08/19/2014 19:03:58</publishTime>
@@ -243,23 +345,80 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/AdminHome/EditUser.cshtml">
       <publishTime>08/28/2014 19:35:33</publishTime>
     </File>
+    <File Include="Views/CustomerVendor/AddNewCustomerVendor.cshtml">
+      <publishTime>09/04/2014 17:15:27</publishTime>
+    </File>
+    <File Include="Views/CustomerVendor/DisplayCustomerVendorProfile.cshtml">
+      <publishTime>09/04/2014 12:15:48</publishTime>
+    </File>
+    <File Include="Views/CustomerVendor/EditCustomerVendorProfile.cshtml">
+      <publishTime>09/04/2014 18:25:59</publishTime>
+    </File>
+    <File Include="Views/CustomerVendor/Index.cshtml">
+      <publishTime>09/04/2014 12:16:05</publishTime>
+    </File>
+    <File Include="Views/People/ChangePassword.cshtml">
+      <publishTime>09/04/2014 12:16:21</publishTime>
+    </File>
+    <File Include="Views/People/DisplayUserProfile.cshtml">
+      <publishTime>09/04/2014 12:16:29</publishTime>
+    </File>
+    <File Include="Views/People/EditUser.cshtml">
+      <publishTime>09/04/2014 12:16:34</publishTime>
+    </File>
+    <File Include="Views/People/People.cshtml">
+      <publishTime>09/04/2014 12:16:59</publishTime>
+    </File>
+    <File Include="Views/Shared/DisplayTemplates/RegisteredCustomerVendorList.cshtml">
+      <publishTime>09/04/2014 16:02:27</publishTime>
+    </File>
     <File Include="Views/Shared/DisplayTemplates/RegisteredUserList.cshtml">
-      <publishTime>08/28/2014 18:02:34</publishTime>
+      <publishTime>09/01/2014 17:35:25</publishTime>
+    </File>
+    <File Include="Views/Shared/DisplayTemplates/RegisteredVendorsList.cshtml">
+      <publishTime>09/01/2014 19:58:51</publishTime>
     </File>
     <File Include="Views/Shared/EditorTemplates/AccountRoles.cshtml">
-      <publishTime>08/25/2014 11:10:05</publishTime>
+      <publishTime>09/02/2014 14:14:59</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/CustomersList.cshtml">
+      <publishTime>09/02/2014 14:11:25</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/Functions.cshtml">
+      <publishTime>09/02/2014 16:54:37</publishTime>
     </File>
     <File Include="Views/Shared/EditorTemplates/NewUserModel.cshtml">
-      <publishTime>08/28/2014 18:06:20</publishTime>
+      <publishTime>09/02/2014 12:32:58</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/NewVendorRegistrationModel.cshtml">
+      <publishTime>09/01/2014 19:58:08</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/UserStatus.cshtml">
+      <publishTime>09/02/2014 14:17:19</publishTime>
+    </File>
+    <File Include="Views/Shared/EditorTemplates/VendorsList.cshtml">
+      <publishTime>09/02/2014 19:31:13</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>08/19/2014 15:06:21</publishTime>
     </File>
+    <File Include="Views/Shared/ISP.cshtml">
+      <publishTime>09/03/2014 12:17:17</publishTime>
+    </File>
     <File Include="Views/Shared/_AdminLayout.cshtml">
-      <publishTime>08/26/2014 20:51:40</publishTime>
+      <publishTime>09/04/2014 17:38:50</publishTime>
     </File>
     <File Include="Views/Shared/_LoginLayout.cshtml">
-      <publishTime>08/20/2014 17:36:20</publishTime>
+      <publishTime>09/04/2014 11:40:39</publishTime>
+    </File>
+    <File Include="Views/Vendors/DisplayVendorProfile.cshtml">
+      <publishTime>09/03/2014 17:59:00</publishTime>
+    </File>
+    <File Include="Views/Vendors/EditVendor.cshtml">
+      <publishTime>09/02/2014 11:05:11</publishTime>
+    </File>
+    <File Include="Views/Vendors/Index.cshtml">
+      <publishTime>09/04/2014 12:17:41</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>08/19/2014 15:30:41</publishTime>
@@ -268,7 +427,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/20/2014 19:19:59</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/28/2014 12:55:28</publishTime>
+      <publishTime>09/04/2014 18:40:51</publishTime>
     </File>
   </ItemGroup>
 </Project>

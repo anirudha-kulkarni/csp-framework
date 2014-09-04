@@ -1,5 +1,0 @@
-E:\CSPNetworks\CSPFramework_Dev\CSPLibrary\bin\Debug\CSPLibrary.dll
-E:\CSPNetworks\CSPFramework_Dev\CSPLibrary\bin\Debug\CSPLibrary.pdb
-E:\CSPNetworks\CSPFramework_Dev\CSPLibrary\obj\Debug\CSPLibrary.dll
-E:\CSPNetworks\CSPFramework_Dev\CSPLibrary\obj\Debug\CSPLibrary.pdb
-E:\CSPNetworks\CSPFramework_Dev\CSPLibrary\obj\Debug\CSPLibrary.csprojResolveAssemblyReference.cache

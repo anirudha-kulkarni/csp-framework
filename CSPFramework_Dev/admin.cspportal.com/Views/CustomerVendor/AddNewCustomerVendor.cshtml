@@ -10,10 +10,14 @@
     @using (Html.BeginForm("PostNewCustomerVendor", "CustomerVendor", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new {enctype = "multipart/form-data",  @class = "form-horizontal", @id = "NewCustomerVendorForm" }))
     {
 
-        <div class="form-group">
+         <div class="modal-footer">
+            <a href="/CustomerVendor/Index" class="btn">Cancel</a>
+            <input type="submit" class="btn" value="Save" />
+        </div>         
+        @*<div class="form-group">
         </div>
         <div class="form-group">
-        </div>
+        </div>*@
 
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
@@ -32,20 +36,22 @@
                 @Html.ValidationMessageFor(m => m.newCustomerVendorModel.Account)
             </div>
         </div>
+        
+        
         <div class="form-group">
             <div class="panel-group" id="accordion" style="margin-left: 26.5%;margin-right: 10%;">
-                <div class="panel panel-primary">
+                <div class="panel">
 
-                    <div class="panel-heading">
+                    <div class="panel-heading" style="background-color:grey">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#accordionOne">
-                                <strong>
-                                    Select Function                                  
-                                </strong>
-                            </a>
+                            @*<a data-toggle="collapse" data-parent="#accordion" href="#accordionOne">*@
+                            <strong style="color:black">
+                                Select Function
+                            </strong>
+                            @*</a>*@
                         </h4>
                     </div>
-                    <div id="accordionOne" class="panel-collapse collapse">
+                    <div id="accordionOne" class="panel-group">
                         <div class="panel-body">
                             @*body here*@
                             <div class="form-group">
@@ -55,6 +61,7 @@
                                     @Html.ValidationMessageFor(m => m.newCustomerVendorModel.Function)
                                 </div>
                             </div>
+                           
                             <!-- Place where you will insert your partial -->
                             <div id="partialFunction_" style="display: none;"> </div>
                         </div>
@@ -69,16 +76,18 @@
         
         <div class="form-group">
             <div class="panel-group" id="unamesnadpass_" style="margin-left: 26.5%;margin-right: 10%;">
-                <div class="panel panel-primary">
+                <div class="panel">
 
-                    <div class="panel-heading">
+                    <div class="panel-heading" style="background-color:grey">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#unamesnadpass_" href="#unamepasschild_">
-                                <strong>Usernames and Passwords</strong>
-                            </a>
+                            @*<a data-toggle="collapse" data-parent="#unamesnadpass_" href="#unamepasschild_">*@
+                            <strong style="color:black">
+                                 Usernames and Passwords
+                            </strong>
+                            @*</a>*@
                         </h4>
                     </div>
-                    <div id="unamepasschild_" class="panel-collapse collapse">
+                    <div id="unamepasschild_" class="panel-group">
                         <div class="panel-body">
                             @*body here*@
                             <div class="form-group">
@@ -125,16 +134,18 @@
         
         <div class="form-group">
             <div class="panel-group" id="agreementsSec_" style="margin-left: 26.5%;margin-right: 10%;">
-                <div class="panel panel-primary">
+                <div class="panel">
 
-                    <div class="panel-heading">
+                    <div class="panel-heading" style="background-color:grey">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#agreementsSec_" href="#agreementsSecChild_">
-                                <strong>Agreement</strong>
-                            </a>
+                            @*<a data-toggle="collapse" data-parent="#agreementsSec_" href="#agreementsSecChild_">*@
+                            <strong style="color:black">
+                                Agreement
+                             </strong>
+                            @*</a>*@
                         </h4>
                     </div>
-                    <div id="agreementsSecChild_" class="panel-collapse collapse">
+                    <div id="agreementsSecChild_" class="panel-group">
                         <div class="panel-body">
                             @*body here*@
                             <div class="form-group">

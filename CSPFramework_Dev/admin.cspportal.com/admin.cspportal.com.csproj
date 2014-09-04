@@ -302,10 +302,11 @@
     <Content Include="Views\CustomerVendor\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\RegisteredCustomerVendorList.cshtml" />
     <Content Include="Views\CustomerVendor\AddNewCustomerVendor.cshtml" />
-    <Content Include="Views\Shared\_Function_ISP.cshtml" />
+    <Content Include="Views\Shared\ISP.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Functions.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\VendorsList.cshtml" />
     <Content Include="Views\CustomerVendor\DisplayCustomerVendorProfile.cshtml" />
+    <Content Include="Views\CustomerVendor\EditCustomerVendorProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
