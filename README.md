@@ -22,11 +22,11 @@ Following things will need for project :
 ** IIS 7 
 
 * Configuration
-** Create a website in IIS called admin.cspportal.com and give the path of admin.cspportal.com project.
-** Create a website in IIS called api.cspportal.com and give the path of api.cspportal.com project.
+* Create a website in IIS called admin.cspportal.com and give the path of admin.cspportal.com project.
+* Create a website in IIS called api.cspportal.com and give the path of api.cspportal.com project.
 
 * Database configuration
-** Will update soon.
+* Will update soon.
 
 * Deployment instructions
-** Will update soon.
+* Will update soon.
