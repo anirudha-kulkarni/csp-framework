@@ -1,0 +1,76 @@
+﻿@model CSPLibrary.UserLoginModel
+
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+<body>
+    <section id="loginForm">        
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+        {
+        @*<form id="login_form" action="http://api.cspportal.com/api/User/AuthUser" method="POST">*@
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            @Html.LabelFor(m => m.EmailAddress)
+            @Html.TextBoxFor(m => m.EmailAddress, new { @id = "email" })
+            @Html.ValidationMessageFor(m => m.EmailAddress)
+
+            @Html.LabelFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password, new { @id = "password" })
+            @Html.ValidationMessageFor(m => m.Password)
+
+            @*@Html.LabelFor(m => m.AccountRole)
+            @Html.EditorFor(m => m.AccountRole, new { @class = "" })
+            @Html.ValidationMessageFor(m => m.AccountRole)*@
+
+            <input type="submit" value="Login" id="submit" />
+        @*</form>*@
+        }
+    </section>
+</body>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @*<script>
+
+
+        //callback handler for form submit
+        $("#login_form").submit(function (e) {
+            debugger;
+            $.support.cors = true;
+            var user = {
+                "Password": $('#password').val(),
+                "EmailAddress": $('#email').val(),               
+                "AccountRole": $('#accountrole :selected').val()               
+            };
+            var userDetails = JSON.stringify({ "myModel": user });
+
+            var postData = $(this).serializeArray();
+            var formURL = $(this).attr("action");
+            $.ajax(
+            {
+                type: "POST",
+                url: formURL,               
+                data: userDetails,
+                dataType: 'json',              
+                contentType: "application/json;charset=utf-8",
+                success: function (data, textStatus, jqXHR) {
+                    //data: return data from server
+                    alert("Successs !!");
+                    
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    //if fails
+                    debugger;
+                    alert("Errorr!!");
+                }
+            });
+            e.preventDefault(); //STOP default action
+            e.unbind(); //unbind. to stop multiple form submit.
+        });
+
+        // $("#login_form").submit(); //Submit  the FORM
+    </script>*@
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="36fd77d96c9e467481c041acf2aaf993" Name="Diagram1">
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.Agreement" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.Client" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.CSP_Services" Width="1.5" PointX="1.5" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.CSP_Teams" Width="1.5" PointX="1.5" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.Customer_Vendors" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.Function" Width="1.5" PointX="0.75" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.Status_Types" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.UserGroup" Width="1.5" PointX="3.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.User" Width="1.5" PointX="6" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.Vendor" Width="1.5" PointX="0.75" PointY="24.125" IsExpanded="true" />
+        <AssociationConnector Association="CSPFRAMEWORKModel.FK_Customer_Vendors_Agreements" ManuallyRouted="false" />
+        <AssociationConnector Association="CSPFRAMEWORKModel.FK_Clients_Services" ManuallyRouted="false" />
+        <AssociationConnector Association="CSPFRAMEWORKModel.FK_Clients_Teams" ManuallyRouted="false" />
+        <AssociationConnector Association="CSPFRAMEWORKModel.FK_Customer_Vendors_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="CSPFRAMEWORKModel.FK_Users_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="CSPFRAMEWORKModel.FK_Customer_Vendors_Functions" ManuallyRouted="false" />
+        <AssociationConnector Association="CSPFRAMEWORKModel.FK_Customer_Vendors_StatusTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="CSPFRAMEWORKModel.FK_Customer_Vendors_Vendor" ManuallyRouted="false" />
+        <AssociationConnector Association="CSPFRAMEWORKModel.FK_Users_StatusTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="CSPFRAMEWORKModel.FK_Users_UserGroups" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,15 @@
+﻿@using CSPLibrary
+@using admin.cspportal.com.Helpers
+@{
+    
+    String selectedVal = "Current";
+    if (@Model != null)
+    {
+        selectedVal = (String)@Model.ToString();
+    }
+    var items = DropDonwHelper.GetItems("GetUserStatus", selectedVal);
+
+}
+
+@Html.DropDownList("", items, new { @id = "userstatus_" })
+

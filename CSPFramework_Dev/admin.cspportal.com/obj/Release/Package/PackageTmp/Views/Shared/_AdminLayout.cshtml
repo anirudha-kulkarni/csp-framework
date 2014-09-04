@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/admin/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <header>
+        <div class="wrapper">
+            <div class="userInfo">
+                <div class="userContainer">
+                    <a><span class="welText well-lg">Welcome, @User.Identity.Name</span></a>
+                    
+                    <b>@Html.ActionLink("Logout", "Logout", "Account", new { @class = "loading" })</b>
+                           
+                    </div>
+                </div>
+            <a class="logo" href="/" title="CSP: Visual Business Documentation">
+                <img src="/Content/images/logo_csp.gif" alt="CSP: Visual Business Documentation">
+            </a>
+        </div>
+
+        <div class="welcome">
+            <div class="navSection">
+                <div class="wrapper">
+                    <div id="serviceProvider"></div>
+                    <div class="tabs">
+                        <ul>
+                            <li class="">
+                                <a href="/Dashboard" title="Dashboard">Dashboard</a>
+                            </li>
+                            <li class="dd">
+                                <!-- dd = dropdown -->
+
+                                <a href="/NetworkLocations" id="networksNav" title="Networks" class="">Networks</a>
+                            </li>
+                            <li class="dd">
+                                <!-- "dd" is the styles for ul under this navigation -->
+
+                                <a href="/Application" id="applicationsNav" title="Applications" class="">Applications</a>
+                            </li>
+                            <li class="selected" id="LuckyAnchor_561545952_386">
+                                <a href="/AdminHome/AdminHome" title="Business">Business</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - CSP Networks</p>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

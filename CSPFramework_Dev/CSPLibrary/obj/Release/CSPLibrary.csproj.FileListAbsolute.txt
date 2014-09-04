@@ -1,0 +1,5 @@
+E:\CSPNetworks\CSPFramework_Dev\CSPLibrary\bin\Release\CSPLibrary.dll
+E:\CSPNetworks\CSPFramework_Dev\CSPLibrary\bin\Release\CSPLibrary.pdb
+E:\CSPNetworks\CSPFramework_Dev\CSPLibrary\obj\Release\CSPLibrary.csprojResolveAssemblyReference.cache
+E:\CSPNetworks\CSPFramework_Dev\CSPLibrary\obj\Release\CSPLibrary.dll
+E:\CSPNetworks\CSPFramework_Dev\CSPLibrary\obj\Release\CSPLibrary.pdb

@@ -1,0 +1,22 @@
+﻿@model CSPLibrary.VendorsViewModel
+@{
+    ViewBag.Title = "Vendors List";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="wrapper" id="companySetup">
+
+    @*Render Registered USers table from Editor Template*@
+    @Html.DisplayFor(m => m.RegisteredVendorsList, "RegisteredVendorsList")
+
+    @*Render New User registration from Editor Template*@
+    @Html.EditorFor(m => m.NewVendorRegistrationModel, "NewVendorRegistrationModel")
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Content/admin/css")
+}

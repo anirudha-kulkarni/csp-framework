@@ -1,0 +1,16 @@
+﻿@using CSPLibrary
+@using admin.cspportal.com.Helpers
+@{
+    String selectedVal = "";
+    if (@Model != null)
+    {
+        selectedVal = (String)@Model.ToString();
+    }
+
+    var items = DropDonwHelper.GetItems("GetCustomers", selectedVal);
+
+}
+
+@Html.DropDownList("", items, new { @id = "customerslist_" })
+
+

@@ -1,0 +1,9 @@
+﻿@using CSPLibrary
+@using admin.cspportal.com.Helpers
+@{
+
+    var items = typeof(AccountRoles).GetItems((int?)Model);
+
+}
+
+@Html.DropDownList("", items, new { @id = "accountrole" })
