@@ -5,25 +5,28 @@ This README would normally document whatever steps are necessary to get your app
 ### What is this repository for? ###
 
 * Quick summary
+This repository is for CSP Frameowrk project for CSP clinet.
+
 * Version
+1.0
+
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
 ### How do I get set up? ###
 
 * Summary of set up
+Following things will need for project :
+** VS 2013
+** .Net Framework 4.5.1
+** MS SQL 2012
+** IIS 7 
+
 * Configuration
-* Dependencies
+** Create a website in IIS called admin.cspportal.com and give the path of admin.cspportal.com project.
+** Create a website in IIS called api.cspportal.com and give the path of api.cspportal.com project.
+
 * Database configuration
-* How to run tests
+** Will update soon.
+
 * Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+** Will update soon.
