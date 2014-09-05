@@ -60,7 +60,9 @@ namespace CSPLibrary
 
         [Required]
         [Display(Name = "Status")]
-        public String Status { get; set; }
+        public int? Status { get; set; }
+
+        public string StatusString { get; set; }
 
         [Required]
         [Display(Name = "Client Id")]

@@ -1,0 +1,196 @@
+﻿@model CSPLibrary.NewClientModel
+
+@{
+    ViewBag.Title = "Add New Client";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Add New Client</h2>
+
+
+<div class="col-sm-10">
+    @using (Html.BeginForm("PostNewClient", "Clients", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", @id = "NewCustomerVendorForm" }))
+    {
+
+        <div class="modal-footer">
+            <a href="/Clients/Index" class="btn">Cancel</a>
+            <input type="submit" class="btn" value="Save" />
+        </div>
+        @*<div class="form-group">
+            </div>
+            <div class="form-group">
+            </div>*@
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(m => m.Client_Code, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Client_Code, new { @autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.Client_Code)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Company_Name, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Company_Name, new { @autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.Company_Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Address, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Address, new { @autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.Address)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.City, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.City, new { @autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.City)
+            </div>
+        </div>
+        
+         <div class="form-group">
+            @Html.LabelFor(m => m.State, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.EditorFor(m => m.State, "StateList", new { @autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.State)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.Zip, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Zip, new { @autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.Zip)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.PhoneNumber, new { @autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.PhoneNumber)
+            </div>
+        </div>
+        
+         <div class="form-group">
+            @Html.LabelFor(m => m.MobileNumber, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.MobileNumber, new { @autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.MobileNumber)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.Company_Name, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Company_Name, new { @autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.Company_Name)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.Website, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Website, new { @autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.Website)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="panel-group" id="agreementsSec_" style="margin-left: 26.5%;margin-right: 10%;">
+                <div class="panel">
+
+                    <div class="panel-heading" style="background-color:grey">
+                        <h4 class="panel-title">
+                            @*<a data-toggle="collapse" data-parent="#agreementsSec_" href="#agreementsSecChild_">*@
+                            <strong style="color:black">
+                                Agreement
+                            </strong>
+                            @*</a>*@
+                        </h4>
+                    </div>
+                    <div id="agreementsSecChild_" class="panel-group">
+                        <div class="panel-body">                          
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.AgreementStartDate, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.AgreementStartDate, new { @class = "datepicker", @data_provide = "datepicker" })
+                                    @Html.ValidationMessageFor(m => m.AgreementStartDate)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.AgreementEndDate, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.AgreementEndDate, new { @class = "datepicker", @data_provide = "datepicker" })
+                                    @Html.ValidationMessageFor(m => m.AgreementEndDate)
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Team, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.EditorFor(m => m.Team, "TeamList")
+                @Html.ValidationMessageFor(m => m.Team)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.Status, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.EditorFor(m => m.Status, "UserStatus")
+                @Html.ValidationMessageFor(m => m.Status)
+            </div>
+        </div>
+                
+        <div class="form-group">
+            @Html.LabelFor(m => m.Sites, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Sites)
+                @Html.ValidationMessageFor(m => m.Sites)
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <a href="/Clients/Index" class="btn">Cancel</a>
+            <input type="submit" class="btn" value="Save" />
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/admin/css")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/bundles/jqueryui-css")
+
+
+    <script>
+        $(document).ready(function () {
+            // Initialize datepicker
+            $(".datepicker").datepicker({
+                changeMonth: false,
+                changeYear: true
+            });
+        });
+    </script>
+}

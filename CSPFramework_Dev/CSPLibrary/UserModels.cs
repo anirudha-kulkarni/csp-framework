@@ -89,20 +89,21 @@ namespace CSPLibrary
         public string Customer_Name { get; set; }
 
         [Display(Name = "Status")]
-        public string Status { get; set; }   
+        public int? Status { get; set; }
+
+        [Display(Name = "Status String")]
+        public string StatusString { get; set; }   
 
         [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
         public String Phone { get; set; }
 
-        [Display(Name = "Fax")]
+        [Display(Name = "Mobile Number")]
         [DataType(DataType.PhoneNumber)]
-        public String Fax { get; set; }
+        public String MobileNumber { get; set; }
 
         [Display(Name = "Address")]
         public string Address { get; set; }
-
-       
     }
 
     public class ChangePasswordModel

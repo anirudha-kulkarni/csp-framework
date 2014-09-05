@@ -1,0 +1,41 @@
+﻿@model CSPLibrary.CustomerVendorViewModelPost
+
+
+
+<div class="form-group">
+    @Html.LabelFor(m => m.isp.IP, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.isp.IP, new { @autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.isp.IP)
+    </div>
+</div>
+
+
+<div class="form-group">
+    @Html.LabelFor(m => m.isp.SubnetMask, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.isp.SubnetMask, new { @autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.isp.SubnetMask)
+    </div>
+</div>
+
+
+<div class="form-group">
+    @Html.LabelFor(m => m.isp.DNS1, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.isp.DNS1, new { @autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.isp.DNS1)
+    </div>
+</div>
+
+
+<div class="form-group">
+    @Html.LabelFor(m => m.isp.DNS2, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.isp.DNS2, new { @autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.isp.DNS2)
+    </div>
+</div>
+
+
+

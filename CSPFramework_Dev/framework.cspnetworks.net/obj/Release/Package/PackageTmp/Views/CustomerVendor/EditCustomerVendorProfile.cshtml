@@ -1,0 +1,261 @@
+﻿@model CSPLibrary.CustomerVendorViewModelPost
+
+@{
+    ViewBag.Title = "Edit Customer-Vendor Mapping";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Edit Customer-Vendor mapping</h2>
+
+<div class="col-sm-10">
+    @using (Html.BeginForm("UpdateCustomerVendorProfile", "CustomerVendor", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", @id = "NewCustomerVendorForm" }))
+    {
+
+        <div class="modal-footer">
+            <a href="/CustomerVendor/Index" class="btn">Cancel</a>
+            <input type="submit" class="btn" value="Save" />
+        </div>
+        @*<div class="form-group">
+            </div>
+            <div class="form-group">
+            </div>*@
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(m => m.newCustomerVendorModel.Customer_Vendor_Id)
+        <div class="form-group">
+            @Html.LabelFor(m => m.newCustomerVendorModel.VendorName, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.EditorFor(m => m.newCustomerVendorModel.Vendor_Id, "VendorsList", new { @autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.newCustomerVendorModel.VendorName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.newCustomerVendorModel.Account, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.newCustomerVendorModel.Account, new { @autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.newCustomerVendorModel.Account)
+            </div>
+        </div>
+        
+        
+        <div class="form-group">
+            <div class="panel-group" id="accordion" style="margin-left: 26.5%;margin-right: 10%;">
+                <div class="panel">
+
+                    <div class="panel-heading" style="background-color:grey">
+                        <h4 class="panel-title">
+                            @*<a data-toggle="collapse" data-parent="#accordion" href="#accordionOne">*@
+                            <strong style="color:black">
+                                Select Function
+                            </strong>
+                            @*</a>*@
+                        </h4>
+                    </div>
+                    <div id="accordionOne" class="panel-group">
+                        <div class="panel-body">
+                            @*body here*@
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.newCustomerVendorModel.Function, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.Function, new { @disabled = "disabled", @readonly = "true" })
+                                    @Html.ValidationMessageFor(m => m.newCustomerVendorModel.Function)
+                                </div>
+                            </div>
+                            <!-- Place where you will insert your partial -->
+                            <div id="partialFunction_" >
+                                @Html.Partial(Model.newCustomerVendorModel.Function, Model);
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+        </div>
+
+
+        <div class="form-group">
+            <div class="panel-group" id="unamesnadpass_" style="margin-left: 26.5%;margin-right: 10%;">
+                <div class="panel">
+
+                    <div class="panel-heading" style="background-color:grey">
+                        <h4 class="panel-title">
+                            @*<a data-toggle="collapse" data-parent="#unamesnadpass_" href="#unamepasschild_">*@
+                            <strong style="color:black">
+                                Usernames and Passwords
+                            </strong>
+                            @*</a>*@
+                        </h4>
+                    </div>
+                    <div id="unamepasschild_" class="panel-group">
+                        <div class="panel-body">
+                            @*body here*@
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.newCustomerVendorModel.L1UserName, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.L1UserName)
+                                    @Html.ValidationMessageFor(m => m.newCustomerVendorModel.L1UserName)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.newCustomerVendorModel.L1Password, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.L1Password)
+                                    @Html.ValidationMessageFor(m => m.newCustomerVendorModel.L1Password)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.newCustomerVendorModel.L2UserName, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.L2UserName)
+                                    @Html.ValidationMessageFor(m => m.newCustomerVendorModel.L2UserName)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.newCustomerVendorModel.L2Password, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.L2Password)
+                                    @Html.ValidationMessageFor(m => m.newCustomerVendorModel.L2Password)
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+        </div>
+
+
+        <div class="form-group">
+            <div class="panel-group" id="agreementsSec_" style="margin-left: 26.5%;margin-right: 10%;">
+                <div class="panel">
+
+                    <div class="panel-heading" style="background-color:grey">
+                        <h4 class="panel-title">
+                            @*<a data-toggle="collapse" data-parent="#agreementsSec_" href="#agreementsSecChild_">*@
+                            <strong style="color:black">
+                                Agreement
+                            </strong>
+                            @*</a>*@
+                        </h4>
+                    </div>
+                    <div id="agreementsSecChild_" class="panel-group">
+                        <div class="panel-body">
+                            @*body here*@
+                            @*<div class="form-group">
+                                @Html.LabelFor(m => m.newCustomerVendorModel.AgreementPath, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.AgreementPath, new { type = "file", accept = ".pdf" })
+                                    @Html.ValidationMessageFor(m => m.newCustomerVendorModel.AgreementPath)
+                                </div>
+                            </div>*@
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.newCustomerVendorModel.AgreementStartDate, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.AgreementStartDate, new { @class = "datepicker", @data_provide = "datepicker" })
+                                    @Html.ValidationMessageFor(m => m.newCustomerVendorModel.AgreementStartDate)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.newCustomerVendorModel.AgreementEndDate, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.AgreementEndDate, new { @class = "datepicker", @data_provide = "datepicker" })
+                                    @Html.ValidationMessageFor(m => m.newCustomerVendorModel.AgreementEndDate)
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.newCustomerVendorModel.Status, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.EditorFor(m => m.newCustomerVendorModel.Status, "UserStatus")
+                @Html.ValidationMessageFor(m => m.newCustomerVendorModel.Status)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.newCustomerVendorModel.ClientCode, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.EditorFor(m => m.newCustomerVendorModel.Client_Id, "CustomersList")
+                @Html.ValidationMessageFor(m => m.newCustomerVendorModel.ClientCode)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.newCustomerVendorModel.Site, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.newCustomerVendorModel.Site)
+                @Html.ValidationMessageFor(m => m.newCustomerVendorModel.Site)
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <a href="/CustomerVendor/Index" class="btn">Cancel</a>
+            <input type="submit" class="btn" value="Save" />
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/admin/css")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/bundles/jqueryui-css")
+
+
+    <script>
+
+        function populateFunctionDetails(selectedFunction) {
+            /* Get the selected value of dropdownlist */
+            
+
+            /* Request the partial view with .get request. */
+            $.get('/CustomerVendor/GetFunctionView?selectedFunction=' + selectedFunction, function (data) {
+
+                /* data is the pure html returned from action method, load it to your page */
+                $('#partialFunction_').html(data);
+                /* little fade in effect */
+                $('#partialFunction_').fadeIn('fast');
+            });
+        }
+     
+        
+       
+
+        $(document).ready(function () {
+            /* This is change event for your dropdownlist */
+            $('#functionDropDown_').change(function () {
+                var selectedFunction = $(this).val();
+                populateFunctionDetails(selectedFunction);
+            });            
+
+            // Initialize datepicker
+            $(".datepicker").datepicker({
+                changeMonth: false,
+                changeYear: true
+            });
+        });
+    </script>
+}
+

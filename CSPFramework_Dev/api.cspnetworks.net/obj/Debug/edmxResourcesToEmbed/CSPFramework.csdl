@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CSPFRAMEWORKModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Agreement">
+    <Key>
+      <PropertyRef Name="agreement_id" />
+    </Key>
+    <Property Name="agreement_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="filepath" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="start_date" Type="DateTime" Precision="3" />
+    <Property Name="end_date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Clients" Relationship="Self.FK_Clients_Agreement" FromRole="Agreements" ToRole="Clients" />
+    <NavigationProperty Name="Customer_Vendors" Relationship="Self.FK_Customer_Vendors_Agreements" FromRole="Agreements" ToRole="Customer_Vendors" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="client_id" />
+    </Key>
+    <Property Name="client_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="client_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="company_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="zip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="website" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="service_type" Type="Int32" />
+    <Property Name="agreement_id" Type="Int32" />
+    <Property Name="team" Type="Int32" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="sites" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Agreement" Relationship="Self.FK_Clients_Agreement" FromRole="Clients" ToRole="Agreements" />
+    <NavigationProperty Name="Enum_Type_Values" Relationship="Self.FK_Clients_ServiceType" FromRole="Clients" ToRole="Enum_Type_Values" />
+    <NavigationProperty Name="Enum_Type_Values1" Relationship="Self.FK_Clients_Status" FromRole="Clients" ToRole="Enum_Type_Values" />
+    <NavigationProperty Name="Enum_Type_Values2" Relationship="Self.FK_Clients_Team" FromRole="Clients" ToRole="Enum_Type_Values" />
+    <NavigationProperty Name="Customer_Vendors" Relationship="Self.FK_Customer_Vendors_Clients" FromRole="Clients" ToRole="Customer_Vendors" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_Users_Clients" FromRole="Clients" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Customer_Vendors">
+    <Key>
+      <PropertyRef Name="customer_vendor_id" />
+    </Key>
+    <Property Name="customer_vendor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="vendor_id" Type="Int32" />
+    <Property Name="account_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="function_name" Type="Int32" />
+    <Property Name="function_notes" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="username_L1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="password_L1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="agreement_id" Type="Int32" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="client_id" Type="Int32" />
+    <Property Name="site" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="username_L2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="password_L2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Agreement" Relationship="Self.FK_Customer_Vendors_Agreements" FromRole="Customer_Vendors" ToRole="Agreements" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_Customer_Vendors_Clients" FromRole="Customer_Vendors" ToRole="Clients" />
+    <NavigationProperty Name="Enum_Type_Values" Relationship="Self.FK_Customer_Vendors_FunctionName" FromRole="Customer_Vendors" ToRole="Enum_Type_Values" />
+    <NavigationProperty Name="Enum_Type_Values1" Relationship="Self.FK_Customer_Vendors_Status" FromRole="Customer_Vendors" ToRole="Enum_Type_Values" />
+    <NavigationProperty Name="Vendor" Relationship="Self.FK_Customer_Vendors_Vendors" FromRole="Customer_Vendors" ToRole="Vendors" />
+  </EntityType>
+  <EntityType Name="Enum_Type_Values">
+    <Key>
+      <PropertyRef Name="enum_type_value_id" />
+    </Key>
+    <Property Name="enum_type_value_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="enum_type_id" Type="Int32" Nullable="false" />
+    <Property Name="enum_type_value" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Clients" Relationship="Self.FK_Clients_ServiceType" FromRole="Enum_Type_Values" ToRole="Clients" />
+    <NavigationProperty Name="Clients1" Relationship="Self.FK_Clients_Status" FromRole="Enum_Type_Values" ToRole="Clients" />
+    <NavigationProperty Name="Clients2" Relationship="Self.FK_Clients_Team" FromRole="Enum_Type_Values" ToRole="Clients" />
+    <NavigationProperty Name="Customer_Vendors" Relationship="Self.FK_Customer_Vendors_FunctionName" FromRole="Enum_Type_Values" ToRole="Customer_Vendors" />
+    <NavigationProperty Name="Customer_Vendors1" Relationship="Self.FK_Customer_Vendors_Status" FromRole="Enum_Type_Values" ToRole="Customer_Vendors" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_Users_Status" FromRole="Enum_Type_Values" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Enum_Types">
+    <Key>
+      <PropertyRef Name="enum_type_id" />
+    </Key>
+    <Property Name="enum_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="enum_type_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User_Groups">
+    <Key>
+      <PropertyRef Name="user_group" />
+    </Key>
+    <Property Name="user_group" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="rights" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_Users_UserGroups" FromRole="User_Groups" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="user_group" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="client_id" Type="Int32" />
+    <Property Name="security_question_one" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="security_question_two" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="security_answer_one" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="security_answer_two" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="creation_date" Type="DateTime" Precision="3" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_Users_Clients" FromRole="Users" ToRole="Clients" />
+    <NavigationProperty Name="Enum_Type_Values" Relationship="Self.FK_Users_Status" FromRole="Users" ToRole="Enum_Type_Values" />
+    <NavigationProperty Name="User_Groups" Relationship="Self.FK_Users_UserGroups" FromRole="Users" ToRole="User_Groups" />
+  </EntityType>
+  <EntityType Name="Vendor">
+    <Key>
+      <PropertyRef Name="vendor_id" />
+    </Key>
+    <Property Name="vendor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="support_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="support_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="website" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Customer_Vendors" Relationship="Self.FK_Customer_Vendors_Vendors" FromRole="Vendors" ToRole="Customer_Vendors" />
+  </EntityType>
+  <Association Name="FK_Clients_Agreement">
+    <End Role="Agreements" Type="Self.Agreement" Multiplicity="0..1" />
+    <End Role="Clients" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agreements">
+        <PropertyRef Name="agreement_id" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="agreement_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Vendors_Agreements">
+    <End Role="Agreements" Type="Self.Agreement" Multiplicity="0..1" />
+    <End Role="Customer_Vendors" Type="Self.Customer_Vendors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agreements">
+        <PropertyRef Name="agreement_id" />
+      </Principal>
+      <Dependent Role="Customer_Vendors">
+        <PropertyRef Name="agreement_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clients_ServiceType">
+    <End Role="Enum_Type_Values" Type="Self.Enum_Type_Values" Multiplicity="0..1" />
+    <End Role="Clients" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Enum_Type_Values">
+        <PropertyRef Name="enum_type_value_id" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="service_type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clients_Status">
+    <End Role="Enum_Type_Values" Type="Self.Enum_Type_Values" Multiplicity="0..1" />
+    <End Role="Clients" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Enum_Type_Values">
+        <PropertyRef Name="enum_type_value_id" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clients_Team">
+    <End Role="Enum_Type_Values" Type="Self.Enum_Type_Values" Multiplicity="0..1" />
+    <End Role="Clients" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Enum_Type_Values">
+        <PropertyRef Name="enum_type_value_id" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="team" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Vendors_Clients">
+    <End Role="Clients" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Customer_Vendors" Type="Self.Customer_Vendors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="client_id" />
+      </Principal>
+      <Dependent Role="Customer_Vendors">
+        <PropertyRef Name="client_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Clients">
+    <End Role="Clients" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="client_id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="client_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Vendors_FunctionName">
+    <End Role="Enum_Type_Values" Type="Self.Enum_Type_Values" Multiplicity="0..1" />
+    <End Role="Customer_Vendors" Type="Self.Customer_Vendors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Enum_Type_Values">
+        <PropertyRef Name="enum_type_value_id" />
+      </Principal>
+      <Dependent Role="Customer_Vendors">
+        <PropertyRef Name="function_name" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Vendors_Status">
+    <End Role="Enum_Type_Values" Type="Self.Enum_Type_Values" Multiplicity="0..1" />
+    <End Role="Customer_Vendors" Type="Self.Customer_Vendors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Enum_Type_Values">
+        <PropertyRef Name="enum_type_value_id" />
+      </Principal>
+      <Dependent Role="Customer_Vendors">
+        <PropertyRef Name="status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Vendors_Vendors">
+    <End Role="Vendors" Type="Self.Vendor" Multiplicity="0..1" />
+    <End Role="Customer_Vendors" Type="Self.Customer_Vendors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendors">
+        <PropertyRef Name="vendor_id" />
+      </Principal>
+      <Dependent Role="Customer_Vendors">
+        <PropertyRef Name="vendor_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Status">
+    <End Role="Enum_Type_Values" Type="Self.Enum_Type_Values" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Enum_Type_Values">
+        <PropertyRef Name="enum_type_value_id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_UserGroups">
+    <End Role="User_Groups" Type="Self.User_Groups" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User_Groups">
+        <PropertyRef Name="user_group" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="user_group" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CSPFRAMEWORKEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Agreements" EntityType="Self.Agreement" />
+    <EntitySet Name="Clients" EntityType="Self.Client" />
+    <EntitySet Name="Customer_Vendors" EntityType="Self.Customer_Vendors" />
+    <EntitySet Name="Enum_Type_Values" EntityType="Self.Enum_Type_Values" />
+    <EntitySet Name="Enum_Types" EntityType="Self.Enum_Types" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="User_Groups" EntityType="Self.User_Groups" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="Vendors" EntityType="Self.Vendor" />
+    <AssociationSet Name="FK_Clients_Agreement" Association="Self.FK_Clients_Agreement">
+      <End Role="Agreements" EntitySet="Agreements" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Vendors_Agreements" Association="Self.FK_Customer_Vendors_Agreements">
+      <End Role="Agreements" EntitySet="Agreements" />
+      <End Role="Customer_Vendors" EntitySet="Customer_Vendors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clients_ServiceType" Association="Self.FK_Clients_ServiceType">
+      <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clients_Status" Association="Self.FK_Clients_Status">
+      <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clients_Team" Association="Self.FK_Clients_Team">
+      <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Vendors_Clients" Association="Self.FK_Customer_Vendors_Clients">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Customer_Vendors" EntitySet="Customer_Vendors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Clients" Association="Self.FK_Users_Clients">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Vendors_FunctionName" Association="Self.FK_Customer_Vendors_FunctionName">
+      <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
+      <End Role="Customer_Vendors" EntitySet="Customer_Vendors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Vendors_Status" Association="Self.FK_Customer_Vendors_Status">
+      <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
+      <End Role="Customer_Vendors" EntitySet="Customer_Vendors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Vendors_Vendors" Association="Self.FK_Customer_Vendors_Vendors">
+      <End Role="Vendors" EntitySet="Vendors" />
+      <End Role="Customer_Vendors" EntitySet="Customer_Vendors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Status" Association="Self.FK_Users_Status">
+      <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_UserGroups" Association="Self.FK_Users_UserGroups">
+      <End Role="User_Groups" EntitySet="User_Groups" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(CSPFRAMEWORKModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(CSPFRAMEWORKModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

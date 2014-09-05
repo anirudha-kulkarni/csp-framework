@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "admin.cspportal.com", "admin.cspportal.com\admin.cspportal.com.csproj", "{2120A935-147C-42A5-90CE-3B5C1925874E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "framework.cspnetworks.net", "framework.cspnetworks.net\framework.cspnetworks.net.csproj", "{2120A935-147C-42A5-90CE-3B5C1925874E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSPLibrary", "CSPLibrary\CSPLibrary.csproj", "{40E55B41-B3DF-4724-999A-A67D3CEC1825}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api.cspportal.com", "api.cspportal.com\api.cspportal.com.csproj", "{6F1A5050-1610-4454-A501-90D98385825C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api.cspnetworks.net", "api.cspnetworks.net\api.cspnetworks.net.csproj", "{6F1A5050-1610-4454-A501-90D98385825C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="AdminHomeViewModel.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="ClientModels.cs" />
     <Compile Include="CustomerVendorModels.cs" />
     <Compile Include="FunctionsModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
