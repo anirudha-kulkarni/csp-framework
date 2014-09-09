@@ -40,7 +40,7 @@ namespace api.cspnetworks.net.Controllers
             UserLoginModel model = loginModel.userLoginModel;
             User user = _context.Users.FirstOrDefault(usr => (usr.email == model.EmailAddress && usr.password == model.Password));
 
-            if (user != null && user.Enum_Type_Values.enum_type_value.Equals("Current"))
+            if (user != null && user.Status_Enum_Type_Values.enum_type_value.Equals("Current"))
             {
                 return Request.CreateResponse(HttpStatusCode.OK, "{}");
             }
@@ -69,7 +69,7 @@ namespace api.cspnetworks.net.Controllers
             userModel.AccountRole = user.user_group;
             userModel.Customer_Id = user.client_id;
             userModel.Customer_Name = user.Client.company_name;
-            userModel.StatusString = user.Enum_Type_Values.enum_type_value;
+            userModel.StatusString = user.Status_Enum_Type_Values.enum_type_value;
             userModel.Status = user.status;
             return Ok(userModel);
         }

@@ -184,6 +184,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\CustomerVendorController.cs" />
+    <Compile Include="Controllers\DownloadController.cs" />
     <Compile Include="Controllers\PeopleController.cs" />
     <Compile Include="Controllers\VendorsController.cs" />
     <Compile Include="Helpers\DropDonwHelper.cs" />
@@ -255,6 +256,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.maskedinput.js" />
     <Content Include="Scripts\jquery.ui.core.js" />
     <Content Include="Scripts\jquery.ui.datepicker.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -314,11 +316,14 @@
     <Content Include="Views\Clients\AddNewClient.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TeamList.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\StateList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ServicesList.cshtml" />
+    <Content Include="Views\Clients\EditClientProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Download\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

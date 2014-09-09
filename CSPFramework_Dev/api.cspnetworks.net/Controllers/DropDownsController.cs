@@ -130,5 +130,28 @@ namespace api.cspnetworks.net.Controllers
             }
             return null;
         }
+
+        public Dictionary<String, String> GetClientServices()
+        {
+            Enum_Types enumType = (from enums in _context.Enum_Types
+                                   where enums.enum_type_name == "CSP_Services"
+                                   select enums).FirstOrDefault();
+            if (enumType != null)
+            {
+                IQueryable<Enum_Type_Values> enumTypeValues = (from values in _context.Enum_Type_Values
+                                                               where values.enum_type_id == enumType.enum_type_id
+                                                               select values);
+                if (enumTypeValues != null)
+                {
+                    Dictionary<String, String> dictionary = new Dictionary<String, String>();
+                    foreach (var item in enumTypeValues)
+                    {
+                        dictionary.Add(item.enum_type_value, item.enum_type_value_id.ToString());
+                    }
+                    return dictionary;
+                }
+            }
+            return null;
+        }
     }
 }

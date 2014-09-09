@@ -37,9 +37,9 @@ namespace api.cspnetworks.net
         public string sites { get; set; }
     
         public virtual Agreement Agreement { get; set; }
-        public virtual Enum_Type_Values Enum_Type_Values { get; set; }
-        public virtual Enum_Type_Values Enum_Type_Values1 { get; set; }
-        public virtual Enum_Type_Values Enum_Type_Values2 { get; set; }
+        public virtual Enum_Type_Values ServiceType_Enum_Type_Values { get; set; }
+        public virtual Enum_Type_Values Status_Enum_Type_Values { get; set; }
+        public virtual Enum_Type_Values Team_Enum_Type_Values { get; set; }
         public virtual ICollection<Customer_Vendors> Customer_Vendors { get; set; }
         public virtual ICollection<User> Users { get; set; }
     }

@@ -138,7 +138,6 @@ namespace framework.cspnetworks.net.Controllers
             {
                 newCustomerVendor = response.Content.ReadAsAsync<CustomerVendorViewModelPost>().Result;
             }
-
             return View(newCustomerVendor);
         }
 

@@ -27,7 +27,7 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.Name, new { @class = "col-sm-3 control-label" })
                 <div class="col-sm-9">
-                    @Html.TextBoxFor(m => m.Name)
+                    @Html.TextBoxFor(m => m.Name, new { @placeholder = "Enter Full Name" })
                     @Html.ValidationMessageFor(m => m.Name)
                 </div>
             </div>
@@ -68,7 +68,7 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.Phone, new { @class = "col-sm-3 control-label" })
                 <div class="col-sm-9">
-                    @Html.TextBoxFor(m => m.Phone)
+                    @Html.TextBoxFor(m => m.Phone, new { @class="phone", @placeholder = "999.999.9999" })
                     @Html.ValidationMessageFor(m => m.Phone)
                 </div>
             </div>
@@ -76,7 +76,7 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.MobileNumber, new { @class = "col-sm-3 control-label" })
                 <div class="col-sm-9">
-                    @Html.TextBoxFor(m => m.MobileNumber)
+                    @Html.TextBoxFor(m => m.MobileNumber, new { @class="phone", @placeholder = "999.999.9999" })
                     @Html.ValidationMessageFor(m => m.MobileNumber)
                 </div>
             </div>
@@ -84,7 +84,7 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.Address, new { @class = "col-sm-3 control-label" })
                 <div class="col-sm-9">
-                    @Html.TextBoxFor(m => m.Address)
+                    @Html.TextBoxFor(m => m.Address, new { @placeholder = "Enter Address" })
                     @Html.ValidationMessageFor(m => m.Address)
                 </div>
             </div>
@@ -100,3 +100,17 @@
 
 </div>
 
+@section Scripts {    
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery/maskedEdit")
+
+    <script>
+        $(document).ready(function () {         
+
+            // Maked Edit Controls
+            jQuery(function ($) {
+                $(".phone").mask("999.999.9999");                
+            });
+        });
+    </script>
+}

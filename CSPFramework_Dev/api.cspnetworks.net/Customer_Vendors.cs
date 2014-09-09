@@ -30,8 +30,8 @@ namespace api.cspnetworks.net
     
         public virtual Agreement Agreement { get; set; }
         public virtual Client Client { get; set; }
-        public virtual Enum_Type_Values Enum_Type_Values { get; set; }
-        public virtual Enum_Type_Values Enum_Type_Values1 { get; set; }
+        public virtual Enum_Type_Values FunctionName_Enum_Type_Values { get; set; }
+        public virtual Enum_Type_Values Status_Enum_Type_Values { get; set; }
         public virtual Vendor Vendor { get; set; }
     }
 }

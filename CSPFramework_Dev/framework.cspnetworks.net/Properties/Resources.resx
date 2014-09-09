@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddClient_Success" xml:space="preserve">
+    <value>Client Has been Added Successfully !</value>
+  </data>
   <data name="AddCutomerVendor_Success" xml:space="preserve">
     <value>Customer-Vendor Mapping Has been Added Successfully !</value>
   </data>
@@ -129,6 +132,9 @@
   <data name="ChangePassword_Success" xml:space="preserve">
     <value>Password Has been Updated Successfully !</value>
   </data>
+  <data name="DeleteClient_Success" xml:space="preserve">
+    <value>Client Has been Deleted Successfully !</value>
+  </data>
   <data name="DeleteCutomerVendor_Success" xml:space="preserve">
     <value>Customer-Vendor Mapping Has been Deleted Successfully !</value>
   </data>
@@ -137,6 +143,9 @@
   </data>
   <data name="DeleteVendor_Success" xml:space="preserve">
     <value>Vendor Has been Deleted Successfully !</value>
+  </data>
+  <data name="EditClientr_Success" xml:space="preserve">
+    <value>Client Has been Updated Successfully !</value>
   </data>
   <data name="EditCustomerVendor_Success" xml:space="preserve">
     <value>Customer-Vendor Mapping Has been Updated Successfully !</value>

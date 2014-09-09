@@ -43,7 +43,7 @@ namespace api.cspnetworks.net.Controllers
                 regCustVendor.Vendor_Id = custVendor.vendor_id;
                 regCustVendor.VendorName = custVendor.Vendor.name;
                 regCustVendor.Account = custVendor.account_number;
-                regCustVendor.Function = custVendor.Enum_Type_Values.enum_type_value;
+                regCustVendor.Function = custVendor.FunctionName_Enum_Type_Values.enum_type_value;
                 regCustVendor.FunctionNotes = custVendor.function_notes;
                 regCustVendor.L1UserName = custVendor.username_L1;
                 regCustVendor.L1Password = custVendor.password_L1;
@@ -55,7 +55,7 @@ namespace api.cspnetworks.net.Controllers
                     regCustVendor.AgreementStartDate = custVendor.Agreement.start_date;
                     regCustVendor.AgreementEndDate = custVendor.Agreement.end_date;
                 }                
-                regCustVendor.StatusString = custVendor.Enum_Type_Values1.enum_type_value;
+                regCustVendor.StatusString = custVendor.Status_Enum_Type_Values.enum_type_value;
                 regCustVendor.Status = custVendor.status;
 
                 regCustVendor.Client_Id = custVendor.client_id;
@@ -143,9 +143,9 @@ namespace api.cspnetworks.net.Controllers
             custVendorModel.newCustomerVendorModel.Vendor_Id = custVendor.vendor_id;
             custVendorModel.newCustomerVendorModel.VendorName = custVendor.Vendor.name;
             custVendorModel.newCustomerVendorModel.Account = custVendor.account_number;
-            custVendorModel.newCustomerVendorModel.Function = custVendor.Enum_Type_Values.enum_type_value;
+            custVendorModel.newCustomerVendorModel.Function = custVendor.FunctionName_Enum_Type_Values.enum_type_value;
             string functionNotes = custVendor.function_notes;
-            if (custVendor.Enum_Type_Values.enum_type_value == "ISP" && !String.IsNullOrEmpty(functionNotes))
+            if (custVendor.FunctionName_Enum_Type_Values.enum_type_value == "ISP" && !String.IsNullOrEmpty(functionNotes))
             {
                 custVendorModel.isp = new ISP();
                 custVendorModel.isp = JsonConvert.DeserializeObject<ISP>(functionNotes);
@@ -163,7 +163,7 @@ namespace api.cspnetworks.net.Controllers
                 custVendorModel.newCustomerVendorModel.AgreementEndDate = custVendor.Agreement.end_date;
 	        }
 
-            custVendorModel.newCustomerVendorModel.StatusString = custVendor.Enum_Type_Values1.enum_type_value;
+            custVendorModel.newCustomerVendorModel.StatusString = custVendor.Status_Enum_Type_Values.enum_type_value;
             custVendorModel.newCustomerVendorModel.Status = custVendor.status;
 
             if (custVendor.Client != null)

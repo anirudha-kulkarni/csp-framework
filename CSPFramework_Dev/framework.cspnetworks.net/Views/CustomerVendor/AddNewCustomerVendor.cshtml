@@ -32,7 +32,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.newCustomerVendorModel.Account, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.newCustomerVendorModel.Account, new { @autofocus = "autofocus" })
+                @Html.TextBoxFor(m => m.newCustomerVendorModel.Account, new { @autofocus = "autofocus", @placeholder = "Enter Account Number" })
                 @Html.ValidationMessageFor(m => m.newCustomerVendorModel.Account)
             </div>
         </div>
@@ -93,7 +93,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(m => m.newCustomerVendorModel.L1UserName, new { @class = "col-sm-3 control-label" })
                                 <div class="col-sm-8">
-                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.L1UserName)
+                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.L1UserName, new { @placeholder = "Enter L1 Username" })
                                     @Html.ValidationMessageFor(m => m.newCustomerVendorModel.L1UserName)
                                 </div>
                             </div>
@@ -101,7 +101,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(m => m.newCustomerVendorModel.L1Password, new { @class = "col-sm-3 control-label" })
                                 <div class="col-sm-8">
-                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.L1Password)
+                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.L1Password, new { @placeholder = "Enter L1 Password" })
                                     @Html.ValidationMessageFor(m => m.newCustomerVendorModel.L1Password)
                                 </div>
                             </div>
@@ -109,7 +109,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(m => m.newCustomerVendorModel.L2UserName, new { @class = "col-sm-3 control-label" })
                                 <div class="col-sm-8">
-                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.L2UserName)
+                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.L2UserName, new { @placeholder = "Enter L2 Username" })
                                     @Html.ValidationMessageFor(m => m.newCustomerVendorModel.L2UserName)
                                 </div>
                             </div>
@@ -117,7 +117,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(m => m.newCustomerVendorModel.L2Password, new { @class = "col-sm-3 control-label" })
                                 <div class="col-sm-8">
-                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.L2Password)
+                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.L2Password, new { @placeholder = "Enter L2 Password" })
                                     @Html.ValidationMessageFor(m => m.newCustomerVendorModel.L2Password)
                                 </div>
                             </div>
@@ -159,7 +159,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(m => m.newCustomerVendorModel.AgreementStartDate, new { @class = "col-sm-3 control-label" })
                                 <div class="col-sm-8">
-                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.AgreementStartDate, new {@class="datepicker", @data_provide = "datepicker" })
+                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.AgreementStartDate, new { @class = "datepicker", @data_provide = "datepicker", @placeholder = "01/25/2014" })
                                     @Html.ValidationMessageFor(m => m.newCustomerVendorModel.AgreementStartDate)
                                 </div>
                             </div>
@@ -167,7 +167,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(m => m.newCustomerVendorModel.AgreementEndDate, new { @class = "col-sm-3 control-label" })
                                 <div class="col-sm-8">
-                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.AgreementEndDate, new { @class = "datepicker", @data_provide = "datepicker" })
+                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.AgreementEndDate, new { @class = "datepicker", @data_provide = "datepicker", @placeholder = "01/25/2014" })
                                     @Html.ValidationMessageFor(m => m.newCustomerVendorModel.AgreementEndDate)
                                 </div>
                             </div>
@@ -200,7 +200,7 @@
          <div class="form-group">
             @Html.LabelFor(m => m.newCustomerVendorModel.Site, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.newCustomerVendorModel.Site)
+                @Html.TextBoxFor(m => m.newCustomerVendorModel.Site, new { @placeholder = "Enter Site" })
                 @Html.ValidationMessageFor(m => m.newCustomerVendorModel.Site)
             </div>
         </div>

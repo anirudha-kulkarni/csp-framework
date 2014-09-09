@@ -28,6 +28,7 @@ namespace CSPLibrary
 
         [Required]
         [Display(Name = "Support Email")]
+        [EmailAddress]
         public String SupportEmail { get; set; }
 
         [Required]

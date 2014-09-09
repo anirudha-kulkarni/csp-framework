@@ -19,7 +19,9 @@ namespace framework.cspnetworks.net
 
             bundles.Add(new StyleBundle("~/bundles/jqueryui-css").Include(
                         "~/Content/jquery-ui/jquery.ui.*"));
-                
+
+
+            
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -42,6 +44,9 @@ namespace framework.cspnetworks.net
             bundles.Add(new StyleBundle("~/Content/admin/css").Include(
                      "~/Content/bootstrap.css",
                      "~/Content/AdminHome.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jquery/maskedEdit").Include(
+                "~/Scripts/jquery.maskedinput.js"));
 
         }
     }

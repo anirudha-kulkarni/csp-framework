@@ -16,19 +16,19 @@
                         @Html.ValidationSummary(true)
 
                         @Html.LabelFor(m => m.Name, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.Name)
+                        @Html.TextBoxFor(m => m.Name, new { @placeholder = "Enter Vendor Name" })
                         @Html.ValidationMessageFor(m => m.Name)
 
                         @Html.LabelFor(m => m.SupportNumber, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.SupportNumber)
+                        @Html.TextBoxFor(m => m.SupportNumber, new { @placeholder = "Enter Vendor Support Number" })
                         @Html.ValidationMessageFor(m => m.SupportNumber)
 
                         @Html.LabelFor(m => m.SupportEmail, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.SupportEmail)
+                        @Html.TextBoxFor(m => m.SupportEmail, new { @placeholder = "Enter Vendor Support Email" })
                         @Html.ValidationMessageFor(m => m.SupportEmail)
 
                         @Html.LabelFor(m => m.website, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.website)
+                        @Html.TextBoxFor(m => m.website, new { @placeholder = "Enter Vendor Website" })
                         @Html.ValidationMessageFor(m => m.website)
 
                     </div>

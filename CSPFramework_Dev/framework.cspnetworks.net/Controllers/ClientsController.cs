@@ -83,5 +83,95 @@ namespace framework.cspnetworks.net.Controllers
         {
             return View();
         }
+
+        public ActionResult PostNewClient(NewClientModel newClient)
+        {
+            HttpResponseMessage response;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://api.cspnetworks.net/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // HTTP POST                     
+                response = client.PostAsJsonAsync("api/Clients/PostNewClient", newClient).Result;
+            }
+            if (response.StatusCode.Equals(HttpStatusCode.Created))
+            {
+                TempData[Properties.Resources.Success] = Properties.Resources.AddClient_Success;
+                return RedirectToAction("Index", "Clients");
+            }
+
+            TempData[Properties.Resources.Error] = Properties.Resources.Global_Error;
+
+            return RedirectToAction("Index", "Clients");
+        }
+
+        [Authorize]
+        public ActionResult DeleteClient(int clientid)
+        {
+            HttpResponseMessage response;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://api.cspnetworks.net/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // HTTP Delete                     
+                response = client.DeleteAsync("api/Clients/DeleteClient?clientid=" + clientid).Result;
+            }
+            if (response.IsSuccessStatusCode)
+            {
+                TempData[Properties.Resources.Success] = Properties.Resources.DeleteClient_Success;
+                return RedirectToAction("Index", "Clients");
+            }
+
+            TempData[Properties.Resources.Error] = Properties.Resources.Global_Error;
+            return RedirectToAction("Index", "Clients");
+        }
+
+        public ActionResult EditClientProfile(int clientid)
+        {
+            HttpResponseMessage response;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://api.cspnetworks.net/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // HTTP GET                     
+                response = client.GetAsync("api/Clients/GetClient/" + clientid).Result;
+            }
+
+            NewClientModel newClient = new NewClientModel();
+            if (response.IsSuccessStatusCode)
+            {
+                newClient = response.Content.ReadAsAsync<NewClientModel>().Result;
+            }
+
+            return View(newClient);
+        }
+
+        public ActionResult UpdateClientProfile(NewClientModel newClient)
+        {
+            HttpResponseMessage response;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://api.cspnetworks.net/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // HTTP POST                     
+                response = client.PostAsJsonAsync("api/Clients/UpdateClient", newClient).Result;
+            }
+            if (response.StatusCode.Equals(HttpStatusCode.Created))
+            {
+                TempData[Properties.Resources.Success] = Properties.Resources.EditClientr_Success;
+                return RedirectToAction("Index", "Clients");
+            }
+
+            TempData[Properties.Resources.Error] = Properties.Resources.Global_Error;
+            return RedirectToAction("Index", "Clients");
+        }
 	}
 }

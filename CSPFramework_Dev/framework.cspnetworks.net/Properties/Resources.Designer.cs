@@ -61,6 +61,15 @@ namespace framework.cspnetworks.net.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Client Has been Added Successfully !.
+        /// </summary>
+        public static string AddClient_Success {
+            get {
+                return ResourceManager.GetString("AddClient_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Customer-Vendor Mapping Has been Added Successfully !.
         /// </summary>
         public static string AddCutomerVendor_Success {
@@ -97,6 +106,15 @@ namespace framework.cspnetworks.net.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Client Has been Deleted Successfully !.
+        /// </summary>
+        public static string DeleteClient_Success {
+            get {
+                return ResourceManager.GetString("DeleteClient_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Customer-Vendor Mapping Has been Deleted Successfully !.
         /// </summary>
         public static string DeleteCutomerVendor_Success {
@@ -120,6 +138,15 @@ namespace framework.cspnetworks.net.Properties {
         public static string DeleteVendor_Success {
             get {
                 return ResourceManager.GetString("DeleteVendor_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client Has been Updated Successfully !.
+        /// </summary>
+        public static string EditClientr_Success {
+            get {
+                return ResourceManager.GetString("EditClientr_Success", resourceCulture);
             }
         }
         

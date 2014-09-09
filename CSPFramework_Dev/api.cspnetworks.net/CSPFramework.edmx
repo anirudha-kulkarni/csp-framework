@@ -384,9 +384,9 @@
           <Property Name="status" Type="Int32" />
           <Property Name="sites" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Agreement" Relationship="Self.FK_Clients_Agreement" FromRole="Clients" ToRole="Agreements" />
-          <NavigationProperty Name="Enum_Type_Values" Relationship="Self.FK_Clients_ServiceType" FromRole="Clients" ToRole="Enum_Type_Values" />
-          <NavigationProperty Name="Enum_Type_Values1" Relationship="Self.FK_Clients_Status" FromRole="Clients" ToRole="Enum_Type_Values" />
-          <NavigationProperty Name="Enum_Type_Values2" Relationship="Self.FK_Clients_Team" FromRole="Clients" ToRole="Enum_Type_Values" />
+          <NavigationProperty Name="ServiceType_Enum_Type_Values" Relationship="Self.FK_Clients_ServiceType" FromRole="Clients" ToRole="Enum_Type_Values" />
+          <NavigationProperty Name="Status_Enum_Type_Values" Relationship="Self.FK_Clients_Status" FromRole="Clients" ToRole="Enum_Type_Values" />
+          <NavigationProperty Name="Team_Enum_Type_Values" Relationship="Self.FK_Clients_Team" FromRole="Clients" ToRole="Enum_Type_Values" />
           <NavigationProperty Name="Customer_Vendors" Relationship="Self.FK_Customer_Vendors_Clients" FromRole="Clients" ToRole="Customer_Vendors" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Users_Clients" FromRole="Clients" ToRole="Users" />
         </EntityType>
@@ -409,8 +409,8 @@
           <Property Name="password_L2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Agreement" Relationship="Self.FK_Customer_Vendors_Agreements" FromRole="Customer_Vendors" ToRole="Agreements" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Customer_Vendors_Clients" FromRole="Customer_Vendors" ToRole="Clients" />
-          <NavigationProperty Name="Enum_Type_Values" Relationship="Self.FK_Customer_Vendors_FunctionName" FromRole="Customer_Vendors" ToRole="Enum_Type_Values" />
-          <NavigationProperty Name="Enum_Type_Values1" Relationship="Self.FK_Customer_Vendors_Status" FromRole="Customer_Vendors" ToRole="Enum_Type_Values" />
+          <NavigationProperty Name="FunctionName_Enum_Type_Values" Relationship="Self.FK_Customer_Vendors_FunctionName" FromRole="Customer_Vendors" ToRole="Enum_Type_Values" />
+          <NavigationProperty Name="Status_Enum_Type_Values" Relationship="Self.FK_Customer_Vendors_Status" FromRole="Customer_Vendors" ToRole="Enum_Type_Values" />
           <NavigationProperty Name="Vendor" Relationship="Self.FK_Customer_Vendors_Vendors" FromRole="Customer_Vendors" ToRole="Vendors" />
         </EntityType>
         <EntityType Name="Enum_Type_Values">
@@ -472,7 +472,7 @@
           <Property Name="creation_date" Type="DateTime" Precision="3" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Users_Clients" FromRole="Users" ToRole="Clients" />
-          <NavigationProperty Name="Enum_Type_Values" Relationship="Self.FK_Users_Status" FromRole="Users" ToRole="Enum_Type_Values" />
+          <NavigationProperty Name="Status_Enum_Type_Values" Relationship="Self.FK_Users_Status" FromRole="Users" ToRole="Enum_Type_Values" />
           <NavigationProperty Name="User_Groups" Relationship="Self.FK_Users_UserGroups" FromRole="Users" ToRole="User_Groups" />
         </EntityType>
         <EntityType Name="Vendor">
