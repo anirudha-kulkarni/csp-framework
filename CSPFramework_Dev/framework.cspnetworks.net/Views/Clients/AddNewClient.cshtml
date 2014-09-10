@@ -74,7 +74,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.PhoneNumber, new { @autofocus = "autofocus", @class = "phone", @placeholder = "999.999.9999" })
+                @Html.TextBoxFor(m => m.PhoneNumber, new { @autofocus = "autofocus", @class = "phone", @placeholder = "999-999-9999" })
                 @Html.ValidationMessageFor(m => m.PhoneNumber)
             </div>
         </div>
@@ -82,7 +82,7 @@
          <div class="form-group">
             @Html.LabelFor(m => m.MobileNumber, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.MobileNumber, new { @autofocus = "autofocus", @class="phone", @placeholder="999.999.9999"})
+                @Html.TextBoxFor(m => m.MobileNumber, new { @autofocus = "autofocus", @class="phone", @placeholder="999-999-9999"})
                 @Html.ValidationMessageFor(m => m.MobileNumber)
             </div>
         </div>
@@ -194,8 +194,8 @@
 
             // Maked Edit Controls
             jQuery(function ($) {
-                $(".phone").mask("999.999.9999");
-                $(".zip").mask("99999");
+                $(".phone").mask("000-000-0000");
+                $(".zip").mask("00000");
             });
             
 

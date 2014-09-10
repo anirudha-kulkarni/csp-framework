@@ -46,7 +46,7 @@ namespace framework.cspnetworks.net
                      "~/Content/AdminHome.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery/maskedEdit").Include(
-                "~/Scripts/jquery.maskedinput.js"));
+                "~/Scripts/jquery.mask.js"));
 
         }
     }

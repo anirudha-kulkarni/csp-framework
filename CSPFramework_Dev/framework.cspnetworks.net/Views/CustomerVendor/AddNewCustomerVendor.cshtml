@@ -219,10 +219,26 @@
     @Styles.Render("~/Content/admin/css")
     @Scripts.Render("~/bundles/jqueryui")
     @Styles.Render("~/bundles/jqueryui-css")
-
+    @Scripts.Render("~/bundles/jquery/maskedEdit")
    
    <script>
-    $(document).ready(function () {
+    var options = {
+        onKeyPress: function (cep, event, currentField, options) {
+            // console.log('An key was pressed!:', cep, ' event: ', event,'currentField: ', currentField, ' options: ', options);
+            if (cep) {
+                var ipArray = cep.split(".");
+                var lastValue = ipArray[ipArray.length - 1];
+                if (lastValue != "" && parseInt(lastValue) > 255) {
+                    ipArray[ipArray.length - 1] = '255';
+                    var resultingValue = ipArray.join(".");
+                    currentField.attr('value', resultingValue);
+                }
+            }
+        }
+    };
+
+    $(document).ready(function () {        
+
         /* This is change event for your dropdownlist */
         $('#functionDropDown_').change(function () {
 
@@ -236,6 +252,7 @@
                 $('#partialFunction_').html(data);
                 /* little fade in effect */
                 $('#partialFunction_').fadeIn('fast');
+                
             });
 
         });

@@ -5,7 +5,7 @@
 <div class="form-group">
     @Html.LabelFor(m => m.isp.IP, new { @class = "col-sm-3 control-label" })
     <div class="col-sm-8">
-        @Html.TextBoxFor(m => m.isp.IP, new { @autofocus = "autofocus" })
+        @Html.TextBoxFor(m => m.isp.IP, new { @autofocus = "autofocus", @class = "ip_address" })
         @Html.ValidationMessageFor(m => m.isp.IP)
     </div>
 </div>
@@ -39,3 +39,6 @@
 
 
 
+<script>    
+    $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', { translation: { 'Z': { pattern: /[0-9]/, optional: true } } });
+</script>
