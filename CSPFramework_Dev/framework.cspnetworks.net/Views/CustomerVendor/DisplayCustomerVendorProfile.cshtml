@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Customer-Vendor Profile";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";        
 }
 
 <div class="col-lg-12 center" style="margin-left:9%">
@@ -30,35 +30,16 @@
 
                                 <tr>
                                     <td><strong>Function :</strong></td>
-                                    <td>@Model.newCustomerVendorModel.Function</td>
+                                    <td>@Model.newCustomerVendorModel.FunctionString</td>
                                 </tr>
-                                @if (@Model.isp != null)
-                                {
+                                @if (@Model.iFunction != null)
+                                {                                    
+                                     
                                     <tr>
                                         <td><strong>Function Notes :</strong></td>
                                         <td>
-                                            <table>
-                                                <tbody>
-                                                    <tr>
-                                                        <td><i><strong>IP : </strong></i></td>
-                                                        <td>@Model.isp.IP</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><i><strong>Subnet Mask: </strong></i></td>
-                                                        <td>@Model.isp.SubnetMask</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><i><strong>DNS1 : </strong></i></td>
-                                                        <td>@Model.isp.DNS1</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><i><strong>DNS2 : </strong></i></td>
-                                                        <td>@Model.isp.DNS2</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                            @Html.DisplayFor(m => m, "FunctionNotes", @Model)                                            
                                         </td>
-
                                     </tr>
                                 }
 

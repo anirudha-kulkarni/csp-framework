@@ -190,6 +190,9 @@
     <Compile Include="Enum_Type_Values.cs">
       <DependentUpon>CSPFramework.tt</DependentUpon>
     </Compile>
+    <Compile Include="Function_Notes.cs">
+      <DependentUpon>CSPFramework.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

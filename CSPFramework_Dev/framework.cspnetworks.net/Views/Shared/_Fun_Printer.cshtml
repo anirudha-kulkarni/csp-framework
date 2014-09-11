@@ -1,0 +1,75 @@
+﻿@model CSPLibrary.Fun_Printer
+@{
+    String[] values = {
+        "Network",
+        "Local"
+                      };
+    String selectedValue = "";
+    if (@Model != null)
+    {
+        if (!String.IsNullOrEmpty(@Model.Printer_Solution))
+        {
+            selectedValue = @Model.Printer_Solution;
+        }        
+    }
+    var items = values.Zip(values, (name, value) =>
+          new SelectListItem
+          {
+              Text = name,
+              Value = value.ToString(),
+              Selected = value == selectedValue
+          });
+
+}
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Printer_Solution, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.DropDownListFor(m => m.Printer_Solution, @items, new { @autofocus = "autofocus", @onchange = "Printer_Solution_Change()" })
+        @Html.ValidationMessageFor(m => m.Printer_Solution)
+
+    </div>
+</div>
+
+@if (String.IsNullOrEmpty(@Model.Printer_Solution) || @Model.Printer_Solution.Equals("Local"))
+{
+    <div id="printer_hide_group">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Printer_IP_Address, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Printer_IP_Address, new { @autofocus = "autofocus", @class = "ip_address" })
+                @Html.ValidationMessageFor(m => m.Printer_IP_Address)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Printer_Management_Url, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Printer_Management_Url, new { @autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.Printer_Management_Url)
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div id="printer_hide_group" style="display:none">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Printer_IP_Address, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Printer_IP_Address, new { @autofocus = "autofocus", @class = "ip_address" })
+                @Html.ValidationMessageFor(m => m.Printer_IP_Address)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Printer_Management_Url, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Printer_Management_Url, new { @autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.Printer_Management_Url)
+            </div>
+        </div>
+    </div>
+}

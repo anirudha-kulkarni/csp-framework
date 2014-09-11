@@ -1,0 +1,161 @@
+﻿@model CSPLibrary.CustomerVendorViewModelPost
+
+
+@if (@Model != null)
+{
+    <table>
+        <tbody>
+            @switch (@Model.newCustomerVendorModel.FunctionString)
+            {
+                case "Application":
+                    {
+                        CSPLibrary.Fun_Application funApp = new CSPLibrary.Fun_Application();
+                        funApp = Newtonsoft.Json.JsonConvert.DeserializeObject<CSPLibrary.Fun_Application>(Model.iFunction.ToString());
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funApp.App_Solution) :</strong></i></td>
+                            <td>@funApp.App_Solution</td>
+                        </tr>
+                    }
+                    break;
+
+                case "Fax":
+                    {
+                        CSPLibrary.Fun_Fax funFax = new CSPLibrary.Fun_Fax();
+                        funFax = Newtonsoft.Json.JsonConvert.DeserializeObject<CSPLibrary.Fun_Fax>(Model.iFunction.ToString());
+
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funFax.Fax_Solution) :</strong></i></td>
+                            <td>@funFax.Fax_Solution</td>
+                        </tr>
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funFax.Fax_Number) :</strong></i></td>
+                            <td>@funFax.Fax_Number</td>
+                        </tr>
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funFax.Fax_Management_Url) :</strong></i></td>
+                            <td>@funFax.Fax_Management_Url</td>
+                        </tr>
+                    }
+                    break;
+
+                case "Phone System":
+                    {
+                        CSPLibrary.Fun_Phone_System funPhone = new CSPLibrary.Fun_Phone_System();
+                        funPhone = Newtonsoft.Json.JsonConvert.DeserializeObject<CSPLibrary.Fun_Phone_System>(Model.iFunction.ToString());
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funPhone.Phone_Sys_Solution) :</strong></i></td>
+                            <td>@funPhone.Phone_Sys_Solution</td>
+                        </tr>
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funPhone.Phone_Sys_IP_Address) :</strong></i></td>
+                            <td>@funPhone.Phone_Sys_IP_Address</td>
+                        </tr>
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funPhone.Phone_Sys_Management_Url) :</strong></i></td>
+                            <td>@funPhone.Phone_Sys_Management_Url</td>
+                        </tr>
+                    }
+                    break;
+
+                case "Connectivity - Phone":
+                    {
+                        CSPLibrary.Fun_Connectivity_Phone funConnPhone = new CSPLibrary.Fun_Connectivity_Phone();
+                        funConnPhone = Newtonsoft.Json.JsonConvert.DeserializeObject<CSPLibrary.Fun_Connectivity_Phone>(Model.iFunction.ToString());
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funConnPhone.Conn_Phone_Solution) :</strong></i></td>
+                            <td>@funConnPhone.Conn_Phone_Solution</td>
+                        </tr>
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funConnPhone.Conn_Phone_Phone_Number) :</strong></i></td>
+                            <td>@funConnPhone.Conn_Phone_Phone_Number</td>
+                        </tr>
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funConnPhone.Conn_Phone_Management_Url) :</strong></i></td>
+                            <td>@funConnPhone.Conn_Phone_Management_Url</td>
+                        </tr>
+                    }
+                    break;
+
+                case "Cloud":
+                    {
+                        CSPLibrary.Fun_Cloud funCloud = new CSPLibrary.Fun_Cloud();
+                        funCloud = Newtonsoft.Json.JsonConvert.DeserializeObject<CSPLibrary.Fun_Cloud>(Model.iFunction.ToString());
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funCloud.Cloud_Solution) :</strong></i></td>
+                            <td>@funCloud.Cloud_Solution</td>
+                        </tr>
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funCloud.Cloud_IP_Address) :</strong></i></td>
+                            <td>@funCloud.Cloud_IP_Address</td>
+                        </tr>
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funCloud.Cloud_Management_Url) :</strong></i></td>
+                            <td>@funCloud.Cloud_Management_Url</td>
+                        </tr>
+                    }
+                    break;
+
+                case "Connectivity - Internet":
+                    {
+                        CSPLibrary.Fun_Connectivity_Internet funConnInt = new CSPLibrary.Fun_Connectivity_Internet();
+                        funConnInt = Newtonsoft.Json.JsonConvert.DeserializeObject<CSPLibrary.Fun_Connectivity_Internet>(Model.iFunction.ToString());
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funConnInt.Conn_Int_Solution) :</strong></i></td>
+                            <td>@funConnInt.Conn_Int_Solution</td>
+                        </tr>
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funConnInt.Conn_Int_Connectivity) :</strong></i></td>
+                            <td>@funConnInt.Conn_Int_Connectivity</td>
+                        </tr>
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funConnInt.Conn_Int_Wan_IP_Address) :</strong></i></td>
+                            <td>@funConnInt.Conn_Int_Wan_IP_Address</td>
+                        </tr>
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funConnInt.Conn_Int_Wan_IPs) :</strong></i></td>
+                            <td>@funConnInt.Conn_Int_Wan_IPs</td>
+                        </tr>
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funConnInt.Conn_Int_SubnetMask) :</strong></i></td>
+                            <td>@funConnInt.Conn_Int_SubnetMask</td>
+                        </tr>
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funConnInt.Conn_Int_DNS1) :</strong></i></td>
+                            <td>@funConnInt.Conn_Int_DNS1</td>
+                        </tr>
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funConnInt.Conn_Int_DNS2) :</strong></i></td>
+                            <td>@funConnInt.Conn_Int_DNS2</td>
+                        </tr>
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funConnInt.Conn_Int_Management_Url) :</strong></i></td>
+                            <td>@funConnInt.Conn_Int_Management_Url</td>
+                        </tr>
+                    }
+                    break;
+
+                case "Printer":
+                    {
+                        CSPLibrary.Fun_Printer funPrinter = new CSPLibrary.Fun_Printer();
+                        funPrinter = Newtonsoft.Json.JsonConvert.DeserializeObject<CSPLibrary.Fun_Printer>(Model.iFunction.ToString());
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funPrinter.Printer_Solution) :</strong></i></td>
+                            <td>@funPrinter.Printer_Solution</td>
+                        </tr>
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funPrinter.Printer_IP_Address) :</strong></i></td>
+                            <td>@funPrinter.Printer_IP_Address</td>
+                        </tr>
+                        <tr>
+                            <td><i><strong>@Html.LabelFor(temp => funPrinter.Printer_Management_Url) :</strong></i></td>
+                            <td>@funPrinter.Printer_Management_Url</td>
+                        </tr>
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        </tbody>
+    </table>
+}

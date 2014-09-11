@@ -21,6 +21,7 @@
 
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
+        @Html.HiddenFor(m => m.newCustomerVendorModel.FunctionString)
         <div class="form-group">
             @Html.LabelFor(m => m.newCustomerVendorModel.VendorName, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
@@ -36,9 +37,13 @@
                 @Html.ValidationMessageFor(m => m.newCustomerVendorModel.Account)
             </div>
         </div>
-        
-        
+
+ <span  id="errorDiv_" style="display: none; font-weight:bold; font-size: 12px; padding: 10px; margin: -20px 0; color: #d35d51; background: #f7e2df; border: 1px solid #d35d51;">
+                Oops ! Something has gone wrong. Please try again !
+            </span>
+
         <div class="form-group">
+            
             <div class="panel-group" id="accordion" style="margin-left: 26.5%;margin-right: 10%;">
                 <div class="panel">
 
@@ -53,7 +58,7 @@
                     </div>
                     <div id="accordionOne" class="panel-group">
                         <div class="panel-body">
-                            @*body here*@
+                            @*body here*@                            
                             <div class="form-group">
                                 @Html.LabelFor(m => m.newCustomerVendorModel.Function, new { @class = "col-sm-3 control-label" })
                                 <div class="col-sm-8">
@@ -63,7 +68,9 @@
                             </div>
                            
                             <!-- Place where you will insert your partial -->
-                            <div id="partialFunction_" style="display: none;"> </div>
+                            <div id="partialFunction_" >
+                                @Html.Partial("_Fun_Application")
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -158,17 +165,35 @@
 
                             <div class="form-group">
                                 @Html.LabelFor(m => m.newCustomerVendorModel.AgreementStartDate, new { @class = "col-sm-3 control-label" })
-                                <div class="col-sm-8">
-                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.AgreementStartDate, new { @class = "datepicker", @data_provide = "datepicker", @placeholder = "01/25/2014" })
-                                    @Html.ValidationMessageFor(m => m.newCustomerVendorModel.AgreementStartDate)
+                                <div class="row">
+                                    <div class="container">
+                                        <div class="col-sm-8">
+                                            <div class='input-group date' id="startDate_">
+                                                @Html.TextBoxFor(m => m.newCustomerVendorModel.AgreementStartDate, new { @class = "form-control", @placeholder = "01/25/2014" })
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                            @Html.ValidationMessageFor(m => m.newCustomerVendorModel.AgreementStartDate)
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 @Html.LabelFor(m => m.newCustomerVendorModel.AgreementEndDate, new { @class = "col-sm-3 control-label" })
-                                <div class="col-sm-8">
-                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.AgreementEndDate, new { @class = "datepicker", @data_provide = "datepicker", @placeholder = "01/25/2014" })
-                                    @Html.ValidationMessageFor(m => m.newCustomerVendorModel.AgreementEndDate)
+                                <div class="row">
+                                    <div class="container">
+                                        <div class="col-sm-8">
+                                            <div class='input-group date' id="endDate_">
+                                                @Html.TextBoxFor(m => m.newCustomerVendorModel.AgreementEndDate, new { @class = "form-control", @placeholder = "01/25/2014" })
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                            @Html.ValidationMessageFor(m => m.newCustomerVendorModel.AgreementEndDate)
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -217,9 +242,11 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jquery")
     @Styles.Render("~/Content/admin/css")
-    @Scripts.Render("~/bundles/jqueryui")
-    @Styles.Render("~/bundles/jqueryui-css")
-    @Scripts.Render("~/bundles/jquery/maskedEdit")
+    @Scripts.Render("~/bundles/maskedEdit")
+    @Scripts.Render("~/bundles/moment")
+    @Scripts.Render("~/bundles/bootstrap-datepicker")
+    @Styles.Render("~/bundles/bootstrap-datepicker-css")
+   
    
    <script>
     var options = {
@@ -237,6 +264,26 @@
         }
     };
 
+    function App_Solution_Change() {
+        var selectedVal = $('#App_Solution option:selected').text();
+        if (selectedVal === "Cloud") {
+            $('#app_login_url').show();
+        }
+        else {
+            $('#app_login_url').hide();
+        }
+    }
+
+    function Printer_Solution_Change() {
+        var selectedVal = $('#Printer_Solution option:selected').text();
+        if (selectedVal === "Network") {
+            $('#printer_hide_group').show();
+        }
+        else {
+            $('#printer_hide_group').hide();
+        }
+    }
+
     $(document).ready(function () {        
 
         /* This is change event for your dropdownlist */
@@ -244,7 +291,7 @@
 
             /* Get the selected value of dropdownlist */
             var selectedFunction = $('#functionDropDown_ option:selected').text();
-
+            $('#newCustomerVendorModel_FunctionString').attr('value', selectedFunction);
             /* Request the partial view with .get request. */
             $.get('/CustomerVendor/GetFunctionView?selectedFunction=' + selectedFunction, function (data) {
 
@@ -253,15 +300,31 @@
                 /* little fade in effect */
                 $('#partialFunction_').fadeIn('fast');
                 
+            }).fail(function () {
+                // alert("Something is Wrong !!!");
+                debugger;
+                $("#errorDiv_").fadeIn('slow');
+                $("#errorDiv_").delay(3000).fadeOut(1000);
             });
 
         });
 
         // Initialize datepicker
-        $(".datepicker").datepicker({
-                changeMonth: false,
-                changeYear: true
-            });
+        $("#startDate_").datetimepicker({
+            pickTime: false
+        });
+        $("#endDate_").datetimepicker({
+            pickTime: false
+        });
+        $("#startDate_").on("dp.change", function (e) {
+            $('#endDate_').data("DateTimePicker").setMinDate(e.date);
+        });
+        $("#endDate_").on("dp.change", function (e) {
+            $('#startDate_').data("DateTimePicker").setMaxDate(e.date);
+        });
+
+        //
+        $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', { translation: { 'Z': { pattern: /[0-9]/, optional: true } } , clearIfNotMatch : true});       
     });
 </script>
 

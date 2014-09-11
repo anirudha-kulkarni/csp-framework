@@ -1,0 +1,61 @@
+﻿@model CSPLibrary.Fun_Application
+@{
+    String[] values = {
+        "Cloud",
+        "On-Premise" 
+                     };
+    String selectedValue = "";
+    if (@Model != null)
+    {
+        selectedValue = (String)@Model.ToString();
+    }
+    var items = values.Zip(values, (name, value) =>
+          new SelectListItem
+          {
+              Text = name,
+              Value = value.ToString(),
+              Selected = value == selectedValue
+          });
+
+}
+
+<div class="form-group">
+    @Html.LabelFor(m => m.App_Solution, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.DropDownListFor(m => m.App_Solution, @items, new { @autofocus = "autofocus", @onchange = "App_Solution_Change()" })
+        @Html.ValidationMessageFor(m => m.App_Solution)
+
+    </div>
+</div>
+
+
+<div class="form-group">
+    @Html.LabelFor(m => m.App_IP_Address, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.App_IP_Address, new { @autofocus = "autofocus", @class = "ip_address" })
+        @Html.ValidationMessageFor(m => m.App_IP_Address)
+    </div>
+</div>
+
+
+
+<div id="app_login_url">
+    <div class="form-group">
+        @Html.LabelFor(m => m.App_Login_Url, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-8">
+            @Html.TextBoxFor(m => m.App_Login_Url, new { @autofocus = "autofocus" })
+            @Html.ValidationMessageFor(m => m.App_Login_Url)
+        </div>
+    </div>
+</div>
+
+
+
+<div class="form-group">
+    @Html.LabelFor(m => m.App_Management_Url, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.App_Management_Url, new { @autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.App_Management_Url)
+    </div>
+</div>
+

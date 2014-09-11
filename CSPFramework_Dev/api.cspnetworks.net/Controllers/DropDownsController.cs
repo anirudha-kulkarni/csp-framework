@@ -87,6 +87,7 @@ namespace api.cspnetworks.net.Controllers
                 if (enumTypeValues != null)
                 {
                     Dictionary<String, String> dictionary = new Dictionary<String, String>();
+                    
                     foreach (var item in enumTypeValues)
                     {
                         dictionary.Add(item.enum_type_value, item.enum_type_value_id.ToString());

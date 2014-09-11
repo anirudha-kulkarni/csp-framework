@@ -1,0 +1,51 @@
+﻿
+@model CSPLibrary.Fun_Fax
+@{
+    String[] values = {
+        "Analog",
+        "PRI",
+        "SIP",
+        "Virtual"
+                     };
+    String selectedValue = "";
+    if (@Model != null)
+    {
+        selectedValue = (String)@Model.ToString();
+    }
+    var items = values.Zip(values, (name, value) =>
+          new SelectListItem
+          {
+              Text = name,
+              Value = value.ToString(),
+              Selected = value == selectedValue
+          });
+
+}
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Fax_Solution, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.DropDownListFor(m => m.Fax_Solution, @items, new { @autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Fax_Solution)
+
+    </div>
+</div>
+
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Fax_Number, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.Fax_Number, new { @autofocus = "autofocus", @class = "phone" })
+        @Html.ValidationMessageFor(m => m.Fax_Number)
+    </div>
+</div>
+
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Fax_Management_Url, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.Fax_Management_Url, new { @autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Fax_Management_Url)
+    </div>
+</div>
+

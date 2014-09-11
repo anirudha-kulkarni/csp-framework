@@ -23,6 +23,7 @@
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
         @Html.HiddenFor(m => m.newCustomerVendorModel.Customer_Vendor_Id)
+        @Html.HiddenFor(m => m.newCustomerVendorModel.FunctionString)
         <div class="form-group">
             @Html.LabelFor(m => m.newCustomerVendorModel.VendorName, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
@@ -38,8 +39,8 @@
                 @Html.ValidationMessageFor(m => m.newCustomerVendorModel.Account)
             </div>
         </div>
-        
-        
+
+
         <div class="form-group">
             <div class="panel-group" id="accordion" style="margin-left: 26.5%;margin-right: 10%;">
                 <div class="panel">
@@ -59,13 +60,67 @@
                             <div class="form-group">
                                 @Html.LabelFor(m => m.newCustomerVendorModel.Function, new { @class = "col-sm-3 control-label" })
                                 <div class="col-sm-8">
-                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.Function, new { @disabled = "disabled", @readonly = "true" })
+                                    @Html.EditorFor(m => m.newCustomerVendorModel.Function, "Functions")
                                     @Html.ValidationMessageFor(m => m.newCustomerVendorModel.Function)
                                 </div>
                             </div>
                             <!-- Place where you will insert your partial -->
-                            <div id="partialFunction_" >
-                                @Html.Partial(Model.newCustomerVendorModel.Function, Model);
+                            <div id="partialFunction_">
+                                @switch (@Model.newCustomerVendorModel.FunctionString)
+                                {
+                                    case "Application":
+                                            {
+                                                CSPLibrary.Fun_Application funApp = Newtonsoft.Json.JsonConvert.DeserializeObject<CSPLibrary.Fun_Application>(Model.iFunction.ToString());
+                                                @Html.Partial("_Fun_Application", funApp);      
+                                            }
+                                        break;                                       
+                                              
+                                    case "Fax":
+                                            {
+                                                CSPLibrary.Fun_Fax funFax = Newtonsoft.Json.JsonConvert.DeserializeObject<CSPLibrary.Fun_Fax>(Model.iFunction.ToString());
+                                                @Html.Partial("_Fun_Fax", funFax);                                                
+                                            }                                    
+                                            break;
+                                            
+                                    case "Phone System":                                    
+                                            {
+                                                CSPLibrary.Fun_Phone_System funPhoneSys = Newtonsoft.Json.JsonConvert.DeserializeObject<CSPLibrary.Fun_Phone_System>(Model.iFunction.ToString());
+                                                @Html.Partial("_Fun_Phone_System", funPhoneSys);                                                     
+                                            }
+                                            break;
+                                            
+                                    case "Connectivity - Phone":
+                                            {
+                                                CSPLibrary.Fun_Connectivity_Phone funConnPhone = Newtonsoft.Json.JsonConvert.DeserializeObject<CSPLibrary.Fun_Connectivity_Phone>(Model.iFunction.ToString());
+                                                @Html.Partial("_Fun_Connectivity_Phone", funConnPhone);                                       
+                                            }
+                                            break;
+                                            
+                                    case "Cloud":
+                                            {
+                                                CSPLibrary.Fun_Cloud funCloud = Newtonsoft.Json.JsonConvert.DeserializeObject<CSPLibrary.Fun_Cloud>(Model.iFunction.ToString());
+                                                @Html.Partial("_Fun_Cloud", funCloud);                                                                                         
+                                            }
+                                            break;
+                                            
+                                    case "Connectivity - Internet":
+                                            {
+                                                CSPLibrary.Fun_Connectivity_Internet funConnInt = Newtonsoft.Json.JsonConvert.DeserializeObject<CSPLibrary.Fun_Connectivity_Internet>(Model.iFunction.ToString());
+                                                @Html.Partial("_Fun_Connectivity_Internet", funConnInt);                                          
+                                            }
+                                           break;
+                                           
+                                    case "Printer":
+                                            {
+                                                CSPLibrary.Fun_Printer funPrinter = Newtonsoft.Json.JsonConvert.DeserializeObject<CSPLibrary.Fun_Printer>(Model.iFunction.ToString());
+                                                @Html.Partial("_Fun_Printer", funPrinter);
+                                            }
+                                            break;
+                                            
+                                    default:
+                                           break;
+                                }
+
                             </div>
                         </div>
                     </div>
@@ -152,26 +207,44 @@
                         <div class="panel-body">
                             @*body here*@
                             @*<div class="form-group">
-                                @Html.LabelFor(m => m.newCustomerVendorModel.AgreementPath, new { @class = "col-sm-3 control-label" })
-                                <div class="col-sm-8">
-                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.AgreementPath, new { type = "file", accept = ".pdf" })
-                                    @Html.ValidationMessageFor(m => m.newCustomerVendorModel.AgreementPath)
-                                </div>
-                            </div>*@
+                                    @Html.LabelFor(m => m.newCustomerVendorModel.AgreementPath, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-8">
+                                        @Html.TextBoxFor(m => m.newCustomerVendorModel.AgreementPath, new { type = "file", accept = ".pdf" })
+                                        @Html.ValidationMessageFor(m => m.newCustomerVendorModel.AgreementPath)
+                                    </div>
+                                </div>*@
 
                             <div class="form-group">
                                 @Html.LabelFor(m => m.newCustomerVendorModel.AgreementStartDate, new { @class = "col-sm-3 control-label" })
-                                <div class="col-sm-8">
-                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.AgreementStartDate, new { @class = "datepicker", @data_provide = "datepicker", @placeholder = "01/25/2014" })
-                                    @Html.ValidationMessageFor(m => m.newCustomerVendorModel.AgreementStartDate)
-                                </div>
+                                <div class="row">
+                                    <div class="container">
+                                        <div class="col-sm-8">
+                                            <div class='input-group date' id="startDate_">
+                                                @Html.TextBoxFor(m => m.newCustomerVendorModel.AgreementStartDate, new { @class = "form-control", @placeholder = "01/25/2014" })
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                            @Html.ValidationMessageFor(m => m.newCustomerVendorModel.AgreementStartDate)
+                                        </div>
+                                    </div>
+                                </div>                                
                             </div>
 
                             <div class="form-group">
                                 @Html.LabelFor(m => m.newCustomerVendorModel.AgreementEndDate, new { @class = "col-sm-3 control-label" })
-                                <div class="col-sm-8">
-                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.AgreementEndDate, new { @class = "datepicker", @data_provide = "datepicker", @placeholder = "01/25/2014" })
-                                    @Html.ValidationMessageFor(m => m.newCustomerVendorModel.AgreementEndDate)
+                                <div class="row">
+                                    <div class="container">
+                                        <div class="col-sm-8">
+                                            <div class='input-group date' id="endDate_">
+                                                @Html.TextBoxFor(m => m.newCustomerVendorModel.AgreementEndDate, new { @class = "form-control", @placeholder = "01/25/2014" })
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                            @Html.ValidationMessageFor(m => m.newCustomerVendorModel.AgreementEndDate)
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -211,25 +284,65 @@
         <div class="modal-footer">
             <a href="/CustomerVendor/Index" class="btn">Cancel</a>
             <input type="submit" class="btn" value="Save" />
-        </div>
+        </div>        
     }
 
 </div>
 
 @section Scripts {
+    @Styles.Render("~/Content/admin/css")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jquery")
-    @Styles.Render("~/Content/admin/css")
-    @Scripts.Render("~/bundles/jqueryui")
-    @Styles.Render("~/bundles/jqueryui-css")
+    @Scripts.Render("~/bundles/maskedEdit")
+    @Scripts.Render("~/bundles/moment")
+    @Scripts.Render("~/bundles/bootstrap-datepicker")
+    @Styles.Render("~/bundles/bootstrap-datepicker-css")
 
 
     <script>
+    var options = {
+        onKeyPress: function (cep, event, currentField, options) {
+            // console.log('An key was pressed!:', cep, ' event: ', event,'currentField: ', currentField, ' options: ', options);
+            if (cep) {
+                var ipArray = cep.split(".");
+                var lastValue = ipArray[ipArray.length - 1];
+                if (lastValue != "" && parseInt(lastValue) > 255) {
+                    ipArray[ipArray.length - 1] = '255';
+                    var resultingValue = ipArray.join(".");
+                    currentField.attr('value', resultingValue);
+                }
+            }
+        }
+    };
 
-        function populateFunctionDetails(selectedFunction) {
+    function App_Solution_Change() {
+        var selectedVal = $('#App_Solution option:selected').text();
+        if (selectedVal === "Cloud") {
+            $('#app_login_url').show();
+        }
+        else {
+            $('#app_login_url').hide();
+        }
+    }
+
+    function Printer_Solution_Change() {
+        var selectedVal = $('#Printer_Solution option:selected').text();
+        if (selectedVal === "Network") {
+            $('#printer_hide_group').show();
+        }
+        else {
+            $('#printer_hide_group').hide();
+        }
+    }
+
+    $(document).ready(function () {
+
+        /* This is change event for your dropdownlist */
+        $('#functionDropDown_').change(function () {
+
             /* Get the selected value of dropdownlist */
-            
-
+            var selectedFunction = $('#functionDropDown_ option:selected').text();
+            $('#newCustomerVendorModel_FunctionString').attr('value', selectedFunction);
             /* Request the partial view with .get request. */
             $.get('/CustomerVendor/GetFunctionView?selectedFunction=' + selectedFunction, function (data) {
 
@@ -237,25 +350,30 @@
                 $('#partialFunction_').html(data);
                 /* little fade in effect */
                 $('#partialFunction_').fadeIn('fast');
-            });
-        }
-     
-        
-       
 
-        $(document).ready(function () {
-            /* This is change event for your dropdownlist */
-            $('#functionDropDown_').change(function () {
-                var selectedFunction = $('#functionDropDown_ option:selected').text();
-                populateFunctionDetails(selectedFunction);
-            });            
-
-            // Initialize datepicker
-            $(".datepicker").datepicker({
-                changeMonth: false,
-                changeYear: true
             });
+
         });
-    </script>
+
+        // Initialize datepicker
+        $("#startDate_").datetimepicker({
+            pickTime: false
+        });
+        $("#endDate_").datetimepicker({
+            pickTime: false
+        });
+        $("#startDate_").on("dp.change", function (e) {
+            $('#endDate_').data("DateTimePicker").setMinDate(e.date);
+        });
+        $("#endDate_").on("dp.change", function (e) {
+            $('#startDate_').data("DateTimePicker").setMaxDate(e.date);
+        });
+
+        //
+        $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', { translation: { 'Z': { pattern: /[0-9]/, optional: true } }, clearIfNotMatch: true });
+        $(".phone").mask("000-000-0000", { clearIfNotMatch: true });
+    });
+</script>
+
 }
 

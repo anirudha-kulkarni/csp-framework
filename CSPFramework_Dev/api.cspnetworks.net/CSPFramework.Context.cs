@@ -36,6 +36,7 @@ namespace api.cspnetworks.net
         public virtual DbSet<User_Groups> User_Groups { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
+        public virtual DbSet<Function_Notes> Function_Notes { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

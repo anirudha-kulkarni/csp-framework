@@ -1,0 +1,119 @@
+﻿@model CSPLibrary.Fun_Connectivity_Internet
+@{
+    String[] solutions = {
+                            "DSL",
+                            "Cable",
+                            "DS1",
+                            "DS3",
+                            "Wireless"
+                         };
+
+    String[] connectivity = {
+                                 "Primary",
+                                 "Secondary"
+                             };
+                             
+    String solutionSelectedValue = "";
+    String connectivitySelectedValue = "";
+    
+    if (@Model != null)
+    {
+        if(! String.IsNullOrEmpty(@Model.Conn_Int_Solution))
+        {
+            solutionSelectedValue = @Model.Conn_Int_Solution;
+        }
+        
+        if(! String.IsNullOrEmpty(@Model.Conn_Int_Connectivity))
+        {
+            connectivitySelectedValue = @Model.Conn_Int_Connectivity;
+        }
+    }                             
+   
+    var SolutionItems = solutions.Zip(solutions, (name, value) =>
+          new SelectListItem
+          {
+              Text = name,
+              Value = value.ToString(),
+              Selected = value == solutionSelectedValue
+          });
+
+    var ConnectivityItems = connectivity.Zip(connectivity, (name, value) =>
+          new SelectListItem
+          {
+              Text = name,
+              Value = value.ToString(),
+              Selected = value == connectivitySelectedValue
+          });
+
+}
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Conn_Int_Solution, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.DropDownListFor(m => m.Conn_Int_Solution, @SolutionItems, new { @autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Conn_Int_Solution)
+
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Conn_Int_Connectivity, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.DropDownListFor(m => m.Conn_Int_Connectivity, @ConnectivityItems, new { @autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Conn_Int_Connectivity)
+
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Conn_Int_Wan_IP_Address, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.Conn_Int_Wan_IP_Address, new { @autofocus = "autofocus", @class = "ip_address" })
+        @Html.ValidationMessageFor(m => m.Conn_Int_Wan_IP_Address)
+    </div>
+</div>
+
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Conn_Int_SubnetMask, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.Conn_Int_SubnetMask, new { @autofocus = "autofocus", @class = "ip_address" })
+        @Html.ValidationMessageFor(m => m.Conn_Int_SubnetMask)
+    </div>
+</div>
+
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Conn_Int_DNS1, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.Conn_Int_DNS1, new { @autofocus = "autofocus", @class = "ip_address" })
+        @Html.ValidationMessageFor(m => m.Conn_Int_DNS1)
+    </div>
+</div>
+
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Conn_Int_DNS2, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.Conn_Int_DNS2, new { @autofocus = "autofocus", @class = "ip_address" })
+        @Html.ValidationMessageFor(m => m.Conn_Int_DNS2)
+    </div>
+</div>
+
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Conn_Int_Wan_IPs, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.Conn_Int_Wan_IPs, new { @autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Conn_Int_Wan_IPs)
+    </div>
+</div>
+
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Conn_Int_Management_Url, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.Conn_Int_Management_Url, new { @autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Conn_Int_Management_Url)
+    </div>
+</div>

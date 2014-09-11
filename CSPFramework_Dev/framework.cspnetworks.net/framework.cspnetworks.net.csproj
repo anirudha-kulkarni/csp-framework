@@ -184,9 +184,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\CustomerVendorController.cs" />
-    <Compile Include="Controllers\DownloadController.cs" />
     <Compile Include="Controllers\PeopleController.cs" />
     <Compile Include="Controllers\VendorsController.cs" />
+    <Compile Include="CustomBinders\CustomerVendorModelBinder.cs" />
     <Compile Include="Helpers\DropDonwHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -201,6 +201,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\AdminHome.css" />
+    <Content Include="Content\bootstrap-datepicker\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datepicker\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\icons\add.png" />
@@ -249,6 +251,8 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap-datepicker\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datepicker\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\AdminLocal.pubxml" />
@@ -256,8 +260,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.mask.js" />
-    <Content Include="Scripts\jquery.mask.min.js" />
+    <Content Include="Scripts\masked-edit\jquery.mask.js" />
+    <Content Include="Scripts\masked-edit\jquery.mask.min.js" />
     <Content Include="Scripts\jquery.ui.core.js" />
     <Content Include="Scripts\jquery.ui.datepicker.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -265,6 +269,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -306,7 +311,6 @@
     <Content Include="Views\CustomerVendor\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\RegisteredCustomerVendorList.cshtml" />
     <Content Include="Views\CustomerVendor\AddNewCustomerVendor.cshtml" />
-    <Content Include="Views\Shared\ISP.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Functions.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\VendorsList.cshtml" />
     <Content Include="Views\CustomerVendor\DisplayCustomerVendorProfile.cshtml" />
@@ -319,12 +323,19 @@
     <Content Include="Views\Shared\EditorTemplates\StateList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ServicesList.cshtml" />
     <Content Include="Views\Clients\EditClientProfile.cshtml" />
+    <Content Include="Views\Shared\_Fun_Application.cshtml" />
+    <Content Include="Views\Shared\_Fun_Fax.cshtml" />
+    <Content Include="Views\Shared\_Fun_Phone_System.cshtml" />
+    <Content Include="Views\Shared\_Fun_Connectivity_Phone.cshtml" />
+    <Content Include="Views\Shared\_Fun_Cloud.cshtml" />
+    <Content Include="Views\Shared\_Fun_Connectivity_Internet.cshtml" />
+    <Content Include="Views\Shared\_Fun_Printer.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\FunctionNotes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Download\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

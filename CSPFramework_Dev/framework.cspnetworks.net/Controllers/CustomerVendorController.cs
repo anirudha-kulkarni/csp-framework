@@ -1,4 +1,5 @@
 ﻿using CSPLibrary;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -67,11 +68,39 @@ namespace framework.cspnetworks.net.Controllers
         [Authorize]
         public ActionResult GetFunctionView(String selectedFunction)
         {
-            if (selectedFunction == "ISP")
+            switch (selectedFunction)
             {
-                CustomerVendorViewModelPost isp = new CustomerVendorViewModelPost();
-                return PartialView("ISP", isp);
-            }
+                case "Application":
+                     Fun_Application application = new Fun_Application();
+                     return PartialView("_Fun_Application", application);
+
+                case "Fax":
+                    Fun_Fax funFax = new Fun_Fax();
+                    return PartialView("_Fun_Fax", funFax);
+
+                case "Phone System":
+                    Fun_Phone_System funPhoneSys = new Fun_Phone_System();
+                    return PartialView("_Fun_Phone_System", funPhoneSys);
+
+                case "Connectivity - Phone":
+                    Fun_Connectivity_Phone funConnPhone = new Fun_Connectivity_Phone();
+                    return PartialView("_Fun_Connectivity_Phone", funConnPhone);
+
+                case "Cloud":
+                    Fun_Cloud funCloud = new Fun_Cloud();
+                    return PartialView("_Fun_Cloud", funCloud);
+
+                case "Connectivity - Internet":
+                    Fun_Connectivity_Internet funConnInt = new Fun_Connectivity_Internet();
+                    return PartialView("_Fun_Connectivity_Internet", funConnInt);
+                    
+                case "Printer":
+                    Fun_Printer funPrinter = new Fun_Printer();
+                    return PartialView("_Fun_Printer", funPrinter);
+
+                default:
+                    break;
+            }          
             return Content("");
         }
 
@@ -136,8 +165,8 @@ namespace framework.cspnetworks.net.Controllers
             CustomerVendorViewModelPost newCustomerVendor = new CustomerVendorViewModelPost();
             if (response.IsSuccessStatusCode)
             {
-                newCustomerVendor = response.Content.ReadAsAsync<CustomerVendorViewModelPost>().Result;
-            }
+                newCustomerVendor = response.Content.ReadAsAsync<CustomerVendorViewModelPost>().Result;                
+            }          
             return View(newCustomerVendor);
         }
 
@@ -164,6 +193,7 @@ namespace framework.cspnetworks.net.Controllers
             return RedirectToAction("Index", "CustomerVendor"); 
         }
 
+        [Authorize]
         public ActionResult EditCustomerVendorProfile(int custvendorid)
         {
             HttpResponseMessage response;
@@ -186,6 +216,7 @@ namespace framework.cspnetworks.net.Controllers
             return View(newCustomerVendor);
         }
 
+        [Authorize]
         public ActionResult UpdateCustomerVendorProfile(CustomerVendorViewModelPost customerVendorViewModelPost)
         {
             HttpResponseMessage response;
@@ -206,6 +237,6 @@ namespace framework.cspnetworks.net.Controllers
 
             TempData[Properties.Resources.Error] = Properties.Resources.Global_Error;
             return RedirectToAction("Index", "CustomerVendor"); 
-        }
+        }        
 	}
 }

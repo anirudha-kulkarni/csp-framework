@@ -14,13 +14,23 @@ namespace framework.cspnetworks.net
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                        "~/Scripts/jquery.ui.*"));
+            //bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+            //            "~/Scripts/jquery.ui.*"));
 
-            bundles.Add(new StyleBundle("~/bundles/jqueryui-css").Include(
-                        "~/Content/jquery-ui/jquery.ui.*"));
+            //bundles.Add(new StyleBundle("~/bundles/jqueryui-css").Include(
+            //            "~/Content/jquery-ui/jquery.ui.*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-datepicker").Include(
+                        "~/Scripts/bootstrap-datepicker/bootstrap-*"));
 
+            bundles.Add(new StyleBundle("~/bundles/bootstrap-datepicker-css").Include(
+                        "~/Content/bootstrap-datepicker/bootstrap-*"));
+
+            bundles.Add(new ScriptBundle("~/bundles/moment").Include(
+                        "~/Scripts/moment.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/maskedEdit").Include(
+                "~/Scripts/masked-edit/jquery.mask.js"));
             
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
@@ -43,10 +53,7 @@ namespace framework.cspnetworks.net
 
             bundles.Add(new StyleBundle("~/Content/admin/css").Include(
                      "~/Content/bootstrap.css",
-                     "~/Content/AdminHome.css"));
-
-            bundles.Add(new ScriptBundle("~/bundles/jquery/maskedEdit").Include(
-                "~/Scripts/jquery.mask.js"));
+                     "~/Content/AdminHome.css"));            
 
         }
     }

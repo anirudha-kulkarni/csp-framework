@@ -121,19 +121,37 @@
 
                             <div class="form-group">
                                 @Html.LabelFor(m => m.AgreementStartDate, new { @class = "col-sm-3 control-label" })
-                                <div class="col-sm-8">
-                                    @Html.TextBoxFor(m => m.AgreementStartDate, new { @class = "datepicker", @data_provide = "datepicker", @placeholder = "01/25/2014" })
-                                    @Html.ValidationMessageFor(m => m.AgreementStartDate)
+                                <div class="row">
+                                    <div class="container">
+                                        <div class="col-sm-8">
+                                            <div class='input-group date' id="startDate_">
+                                                @Html.TextBoxFor(m => m.AgreementStartDate, new { @class = "form-control", @placeholder = "01/25/2014" })
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                            @Html.ValidationMessageFor(m => m.AgreementStartDate)
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 @Html.LabelFor(m => m.AgreementEndDate, new { @class = "col-sm-3 control-label" })
-                                <div class="col-sm-8">
-                                    @Html.TextBoxFor(m => m.AgreementEndDate, new { @class = "datepicker", @data_provide = "datepicker", @placeholder = "01/25/2014" })
-                                    @Html.ValidationMessageFor(m => m.AgreementEndDate)
+                                <div class="row">
+                                    <div class="container">
+                                        <div class="col-sm-8">
+                                            <div class='input-group date' id="endDate_">
+                                                @Html.TextBoxFor(m => m.AgreementEndDate, new { @class = "form-control", @placeholder = "01/25/2014" })
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                            @Html.ValidationMessageFor(m => m.AgreementEndDate)
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </div>       
 
                         </div>
                     </div>
@@ -180,16 +198,27 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jquery")
     @Styles.Render("~/Content/admin/css")
-    @Scripts.Render("~/bundles/jqueryui")
-    @Styles.Render("~/bundles/jqueryui-css")
-    @Scripts.Render("~/bundles/jquery/maskedEdit")
+    @Scripts.Render("~/bundles/moment")
+    @Scripts.Render("~/bundles/bootstrap-datepicker")
+    @Styles.Render("~/bundles/bootstrap-datepicker-css")
 
+
+
+   
     <script>
         $(document).ready(function () {
             // Initialize datepicker
-            $(".datepicker").datepicker({
-                changeMonth: false,
-                changeYear: true
+            $("#startDate_").datetimepicker({
+                pickTime: false
+            });
+            $("#endDate_").datetimepicker({
+                pickTime: false
+            });
+            $("#startDate_").on("dp.change", function (e) {
+                $('#endDate_').data("DateTimePicker").setMinDate(e.date);
+            });
+            $("#endDate_").on("dp.change", function (e) {
+                $('#startDate_').data("DateTimePicker").setMaxDate(e.date);
             });
 
             // Maked Edit Controls

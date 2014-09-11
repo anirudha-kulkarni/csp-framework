@@ -1,0 +1,51 @@
+﻿@model CSPLibrary.Fun_Cloud
+@{
+    String[] values = {
+        "Dedicated Physical Server",
+        "Dedicated Cloud Server",
+        "Shared Cloud Server",
+        "Email",
+        "Cloud Drive"
+                     };
+    String selectedValue = "";
+    if (@Model != null)
+    {
+        selectedValue = (String)@Model.ToString();
+    }
+    var items = values.Zip(values, (name, value) =>
+          new SelectListItem
+          {
+              Text = name,
+              Value = value.ToString(),
+              Selected = value == selectedValue
+          });
+
+}
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Cloud_Solution, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.DropDownListFor(m => m.Cloud_Solution, @items, new { @autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Cloud_Solution)
+    </div>
+</div>
+
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Cloud_IP_Address, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.Cloud_IP_Address, new { @autofocus = "autofocus", @class = "ip_address" })
+        @Html.ValidationMessageFor(m => m.Cloud_IP_Address)
+    </div>
+</div>
+
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Cloud_Management_Url, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.Cloud_Management_Url, new { @autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Cloud_Management_Url)
+    </div>
+</div>
+
+

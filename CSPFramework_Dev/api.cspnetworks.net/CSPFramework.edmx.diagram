@@ -7,7 +7,7 @@
       <Diagram DiagramId="4f50ba6fa8ae4e699d8b74b3f7a5c9eb" Name="Diagram1">
         <EntityTypeShape EntityType="CSPFRAMEWORKModel.Agreement" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CSPFRAMEWORKModel.Client" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CSPFRAMEWORKModel.Customer_Vendors" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.Customer_Vendors" Width="2" PointX="5.25" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CSPFRAMEWORKModel.Enum_Type_Values" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CSPFRAMEWORKModel.Enum_Types" Width="1.5" PointX="8.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CSPFRAMEWORKModel.sysdiagram" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
@@ -26,6 +26,8 @@
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Customer_Vendors_Vendors" ManuallyRouted="false" />
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Users_Status" ManuallyRouted="false" />
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Users_UserGroups" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.Function_Notes" Width="2.5" PointX="10.375" PointY="4" />
+        <AssociationConnector Association="CSPFRAMEWORKModel.FK_Customer_Vendors_FunctionNotes" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

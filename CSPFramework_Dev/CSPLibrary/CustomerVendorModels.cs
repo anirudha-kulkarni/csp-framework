@@ -26,7 +26,9 @@ namespace CSPLibrary
 
         [Required]
         [Display(Name = "Function")]
-        public string Function { get; set; }
+        public int? Function { get; set; }
+
+        public string FunctionString { get; set; }
 
         [Required]
         [Display(Name = "Function Notes")]
@@ -84,7 +86,9 @@ namespace CSPLibrary
     public class CustomerVendorViewModelPost
     {
         public NewCustomerVendorModel newCustomerVendorModel { get; set; }
-        public ISP isp { get; set; } 
+        
+        public Object iFunction { get; set; } 
+        //public ISP isp { get; set; } 
     }
     
 }

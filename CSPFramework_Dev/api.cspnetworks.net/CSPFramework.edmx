@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CSPFRAMEWORKModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CSPFRAMEWORKModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Agreements">
           <Key>
             <PropertyRef Name="agreement_id" />
@@ -42,7 +42,7 @@
           <Property Name="vendor_id" Type="int" />
           <Property Name="account_number" Type="varchar" MaxLength="50" />
           <Property Name="function_name" Type="int" />
-          <Property Name="function_notes" Type="varchar" MaxLength="400" />
+          <Property Name="FunctionNotes_Id" Type="int" />
           <Property Name="username_L1" Type="varchar" MaxLength="100" />
           <Property Name="password_L1" Type="varchar" MaxLength="100" />
           <Property Name="agreement_id" Type="int" />
@@ -66,6 +66,23 @@
           </Key>
           <Property Name="enum_type_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="enum_type_name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Function_Notes">
+          <Key>
+            <PropertyRef Name="FunctionNotes_Id" />
+          </Key>
+          <Property Name="FunctionNotes_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="solution" Type="varchar" MaxLength="50" />
+          <Property Name="connectivity" Type="varchar" MaxLength="50" />
+          <Property Name="ip_address" Type="varchar" MaxLength="50" />
+          <Property Name="login_url" Type="varchar" MaxLength="200" />
+          <Property Name="management_url" Type="varchar" MaxLength="200" />
+          <Property Name="fax_number" Type="varchar" MaxLength="50" />
+          <Property Name="phone_number" Type="varchar" MaxLength="50" />
+          <Property Name="subnet_mask" Type="varchar" MaxLength="50" />
+          <Property Name="DNS1" Type="varchar" MaxLength="50" />
+          <Property Name="DNS2" Type="varchar" MaxLength="50" />
+          <Property Name="WAN_IPs" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -198,6 +215,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Customer_Vendors_FunctionNotes">
+          <End Role="Function_Notes" Type="Self.Function_Notes" Multiplicity="0..1" />
+          <End Role="Customer_Vendors" Type="Self.Customer_Vendors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Function_Notes">
+              <PropertyRef Name="FunctionNotes_Id" />
+            </Principal>
+            <Dependent Role="Customer_Vendors">
+              <PropertyRef Name="FunctionNotes_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Customer_Vendors_Status">
           <End Role="Enum_Type_Values" Type="Self.Enum_Type_Values" Multiplicity="0..1" />
           <End Role="Customer_Vendors" Type="Self.Customer_Vendors" Multiplicity="*" />
@@ -295,6 +324,7 @@
           <EntitySet Name="Customer_Vendors" EntityType="Self.Customer_Vendors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Enum_Type_Values" EntityType="Self.Enum_Type_Values" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Enum_Types" EntityType="Self.Enum_Types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Function_Notes" EntityType="Self.Function_Notes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Groups" EntityType="Self.User_Groups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
@@ -327,6 +357,10 @@
             <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
             <End Role="Customer_Vendors" EntitySet="Customer_Vendors" />
           </AssociationSet>
+          <AssociationSet Name="FK_Customer_Vendors_FunctionNotes" Association="Self.FK_Customer_Vendors_FunctionNotes">
+            <End Role="Function_Notes" EntitySet="Function_Notes" />
+            <End Role="Customer_Vendors" EntitySet="Customer_Vendors" />
+          </AssociationSet>
           <AssociationSet Name="FK_Customer_Vendors_Status" Association="Self.FK_Customer_Vendors_Status">
             <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
             <End Role="Customer_Vendors" EntitySet="Customer_Vendors" />
@@ -348,8 +382,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CSPFRAMEWORKModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -398,7 +431,6 @@
           <Property Name="vendor_id" Type="Int32" />
           <Property Name="account_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="function_name" Type="Int32" />
-          <Property Name="function_notes" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
           <Property Name="username_L1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="password_L1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="agreement_id" Type="Int32" />
@@ -412,6 +444,8 @@
           <NavigationProperty Name="FunctionName_Enum_Type_Values" Relationship="Self.FK_Customer_Vendors_FunctionName" FromRole="Customer_Vendors" ToRole="Enum_Type_Values" />
           <NavigationProperty Name="Status_Enum_Type_Values" Relationship="Self.FK_Customer_Vendors_Status" FromRole="Customer_Vendors" ToRole="Enum_Type_Values" />
           <NavigationProperty Name="Vendor" Relationship="Self.FK_Customer_Vendors_Vendors" FromRole="Customer_Vendors" ToRole="Vendors" />
+          <Property Name="FunctionNotes_Id" Type="Int32" />
+          <NavigationProperty Name="Function_Notes" Relationship="CSPFRAMEWORKModel.FK_Customer_Vendors_FunctionNotes" FromRole="Customer_Vendors" ToRole="Function_Notes" />
         </EntityType>
         <EntityType Name="Enum_Type_Values">
           <Key>
@@ -718,6 +752,11 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="Function_Notes" EntityType="CSPFRAMEWORKModel.Function_Notes" />
+          <AssociationSet Name="FK_Customer_Vendors_FunctionNotes" Association="CSPFRAMEWORKModel.FK_Customer_Vendors_FunctionNotes">
+            <End Role="Function_Notes" EntitySet="Function_Notes" />
+            <End Role="Customer_Vendors" EntitySet="Customer_Vendors" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -730,6 +769,36 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="Function_Notes">
+          <Key>
+            <PropertyRef Name="FunctionNotes_Id" />
+          </Key>
+          <Property Name="FunctionNotes_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="solution" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="connectivity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="login_url" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="management_url" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="fax_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="subnet_mask" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DNS1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DNS2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WAN_IPs" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customer_Vendors" Relationship="CSPFRAMEWORKModel.FK_Customer_Vendors_FunctionNotes" FromRole="Function_Notes" ToRole="Customer_Vendors" />
+        </EntityType>
+        <Association Name="FK_Customer_Vendors_FunctionNotes">
+          <End Type="CSPFRAMEWORKModel.Function_Notes" Role="Function_Notes" Multiplicity="0..1" />
+          <End Type="CSPFRAMEWORKModel.Customer_Vendors" Role="Customer_Vendors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Function_Notes">
+              <PropertyRef Name="FunctionNotes_Id" />
+            </Principal>
+            <Dependent Role="Customer_Vendors">
+              <PropertyRef Name="FunctionNotes_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -770,11 +839,11 @@
           <EntitySetMapping Name="Customer_Vendors">
             <EntityTypeMapping TypeName="CSPFRAMEWORKModel.Customer_Vendors">
               <MappingFragment StoreEntitySet="Customer_Vendors">
+                <ScalarProperty Name="FunctionNotes_Id" ColumnName="FunctionNotes_Id" />
                 <ScalarProperty Name="customer_vendor_id" ColumnName="customer_vendor_id" />
                 <ScalarProperty Name="vendor_id" ColumnName="vendor_id" />
                 <ScalarProperty Name="account_number" ColumnName="account_number" />
                 <ScalarProperty Name="function_name" ColumnName="function_name" />
-                <ScalarProperty Name="function_notes" ColumnName="function_notes" />
                 <ScalarProperty Name="username_L1" ColumnName="username_L1" />
                 <ScalarProperty Name="password_L1" ColumnName="password_L1" />
                 <ScalarProperty Name="agreement_id" ColumnName="agreement_id" />
@@ -878,6 +947,24 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="CSPFRAMEWORKModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="CSPFRAMEWORKModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="Function_Notes">
+            <EntityTypeMapping TypeName="CSPFRAMEWORKModel.Function_Notes">
+              <MappingFragment StoreEntitySet="Function_Notes">
+                <ScalarProperty Name="WAN_IPs" ColumnName="WAN_IPs" />
+                <ScalarProperty Name="DNS2" ColumnName="DNS2" />
+                <ScalarProperty Name="DNS1" ColumnName="DNS1" />
+                <ScalarProperty Name="subnet_mask" ColumnName="subnet_mask" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="fax_number" ColumnName="fax_number" />
+                <ScalarProperty Name="management_url" ColumnName="management_url" />
+                <ScalarProperty Name="login_url" ColumnName="login_url" />
+                <ScalarProperty Name="ip_address" ColumnName="ip_address" />
+                <ScalarProperty Name="connectivity" ColumnName="connectivity" />
+                <ScalarProperty Name="solution" ColumnName="solution" />
+                <ScalarProperty Name="FunctionNotes_Id" ColumnName="FunctionNotes_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

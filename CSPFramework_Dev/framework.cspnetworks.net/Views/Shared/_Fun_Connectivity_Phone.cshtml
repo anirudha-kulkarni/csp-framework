@@ -1,0 +1,51 @@
+﻿@model CSPLibrary.Fun_Connectivity_Phone
+@{
+    String[] values = {
+        "Analog",
+        "PRI",
+        "SIP",
+        "Virtual"
+                     };
+    String selectedValue = "";
+    if (@Model != null)
+    {
+        selectedValue = (String)@Model.ToString();
+    }
+    var items = values.Zip(values, (name, value) =>
+          new SelectListItem
+          {
+              Text = name,
+              Value = value.ToString(),
+              Selected = value == selectedValue
+          });
+
+}
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Conn_Phone_Solution, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.DropDownListFor(m => m.Conn_Phone_Solution, @items, new { @autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Conn_Phone_Solution)
+
+    </div>
+</div>
+
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Conn_Phone_Phone_Number, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.Conn_Phone_Phone_Number, new { @autofocus = "autofocus", @class = "phone" })
+        @Html.ValidationMessageFor(m => m.Conn_Phone_Phone_Number)
+    </div>
+</div>
+
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Conn_Phone_Management_Url, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-8">
+        @Html.TextBoxFor(m => m.Conn_Phone_Management_Url, new { @autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Conn_Phone_Management_Url)
+    </div>
+</div>
+
+
