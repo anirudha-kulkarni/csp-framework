@@ -12,6 +12,36 @@ namespace CSPLibrary
         public IEnumerable<CSPLibrary.NewClientModel> RegisteredClientsList { get; set; }        
     }
 
+    public class ClientSite
+    {
+        [Display(Name = "Address")]
+        public String Address { get; set; }
+
+        [Display(Name = "City")]
+        public String City { get; set; }
+
+        [Display(Name = "State")]
+        public String State { get; set; }
+
+        [Display(Name = "Zip")]
+        public String Zip { get; set; }
+
+        [Required]
+        [Display(Name = "Phone Number")]
+        [DataType(DataType.PhoneNumber)]
+        public String PhoneNumber { get; set; }
+
+        [Display(Name = "Fax Number")]
+        [DataType(DataType.PhoneNumber)]
+        public String FaxNumber { get; set; }
+    }
+
+    public class NewClientViewModel
+    {
+        public NewClientModel newClientModel { get; set; }
+        public List<ClientSite> clientSites { get; set; }
+    }
+
     public class NewClientModel
     {
         [Required]
@@ -27,27 +57,27 @@ namespace CSPLibrary
         public String Company_Name { get; set; }
 
         
-        [Display(Name = "Address")]
-        public String Address{ get; set; }
+        //[Display(Name = "Address")]
+        //public String Address{ get; set; }
 
         
-        [Display(Name = "City")]
-        public String City { get; set; }
+        //[Display(Name = "City")]
+        //public String City { get; set; }
 
-        [Display(Name = "State")]
-        public String State { get; set; }
+        //[Display(Name = "State")]
+        //public String State { get; set; }
 
-        [Display(Name = "Zip")]
-        public String Zip { get; set; }
+        //[Display(Name = "Zip")]
+        //public String Zip { get; set; }
 
-        [Required]
-        [Display(Name = "Phone Number")]
-        [DataType(DataType.PhoneNumber)]
-        public String PhoneNumber { get; set; }
+        //[Required]
+        //[Display(Name = "Phone Number")]
+        //[DataType(DataType.PhoneNumber)]
+        //public String PhoneNumber { get; set; }
 
-        [Display(Name = "Mobile Number")]
-        [DataType(DataType.PhoneNumber)]
-        public String MobileNumber { get; set; }
+        //[Display(Name = "Mobile Number")]
+        //[DataType(DataType.PhoneNumber)]
+        //public String MobileNumber { get; set; }
 
         [Required]
         [Display(Name = "Website")]

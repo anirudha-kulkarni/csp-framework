@@ -1,4 +1,4 @@
-﻿@model CSPLibrary.NewClientModel
+﻿@model CSPLibrary.NewClientViewModel
 
 @{
     ViewBag.Title = "Edit Client Profile";
@@ -23,84 +23,84 @@
 
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
-        @Html.HiddenFor(m => m.Client_Id);
+        @Html.HiddenFor(m => m.newClientModel.Client_Id);
         <div class="form-group">
-            @Html.LabelFor(m => m.Client_Code, new { @class = "col-sm-3 control-label" })
+            @Html.LabelFor(m => m.newClientModel.Client_Code, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.Client_Code, new { @autofocus = "autofocus", @placeholder = "Enter Client Code" })
-                @Html.ValidationMessageFor(m => m.Client_Code)
+                @Html.TextBoxFor(m => m.newClientModel.Client_Code, new { @autofocus = "autofocus", @placeholder = "Enter Client Code" })
+                @Html.ValidationMessageFor(m => m.newClientModel.Client_Code)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Company_Name, new { @class = "col-sm-3 control-label" })
+            @Html.LabelFor(m => m.newClientModel.Company_Name, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.Company_Name, new { @autofocus = "autofocus", @placeholder = "Enter Company Name" })
-                @Html.ValidationMessageFor(m => m.Company_Name)
+                @Html.TextBoxFor(m => m.newClientModel.Company_Name, new { @autofocus = "autofocus", @placeholder = "Enter Company Name" })
+                @Html.ValidationMessageFor(m => m.newClientModel.Company_Name)
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(m => m.newClientModel.Address, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.newClientModel.Address, new { @autofocus = "autofocus", @placeholder = "Enter Address" })
+                    @Html.ValidationMessageFor(m => m.newClientModel.Address)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.newClientModel.City, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.newClientModel.City, new { @autofocus = "autofocus", @placeholder = "Enter City" })
+                    @Html.ValidationMessageFor(m => m.newClientModel.City)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.newClientModel.State, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-8">
+                    @Html.EditorFor(m => m.newClientModel.State, "StateList", new { @autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(m => m.newClientModel.State)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.newClientModel.Zip, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.newClientModel.Zip, new { @autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(m => m.newClientModel.Zip)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.newClientModel.PhoneNumber, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.newClientModel.PhoneNumber, new { @autofocus = "autofocus", @class = "phone", @placeholder = "999-999-9999" })
+                    @Html.ValidationMessageFor(m => m.newClientModel.PhoneNumber)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.newClientModel.MobileNumber, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.newClientModel.MobileNumber, new { @autofocus = "autofocus", @class = "phone", @placeholder = "999-999-9999" })
+                    @Html.ValidationMessageFor(m => m.newClientModel.MobileNumber)
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.newClientModel.ServiceType, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.DisplayFor(m => m.newClientModel.ServiceType, "ServicesList", new { @autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.newClientModel.ServiceType)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Address, new { @class = "col-sm-3 control-label" })
+            @Html.LabelFor(m => m.newClientModel.Website, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.Address, new { @autofocus = "autofocus", @placeholder = "Enter Address" })
-                @Html.ValidationMessageFor(m => m.Address)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.City, new { @class = "col-sm-3 control-label" })
-            <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.City, new { @autofocus = "autofocus", @placeholder = "Enter City" })
-                @Html.ValidationMessageFor(m => m.City)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.State, new { @class = "col-sm-3 control-label" })
-            <div class="col-sm-8">
-                @Html.EditorFor(m => m.State, "StateList", new { @autofocus = "autofocus" })
-                @Html.ValidationMessageFor(m => m.State)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.Zip, new { @class = "col-sm-3 control-label" })
-            <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.Zip, new { @autofocus = "autofocus" })
-                @Html.ValidationMessageFor(m => m.Zip)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-sm-3 control-label" })
-            <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.PhoneNumber, new { @autofocus = "autofocus", @class = "phone", @placeholder = "999-999-9999" })
-                @Html.ValidationMessageFor(m => m.PhoneNumber)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.MobileNumber, new { @class = "col-sm-3 control-label" })
-            <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.MobileNumber, new { @autofocus = "autofocus", @class = "phone", @placeholder = "999-999-9999" })
-                @Html.ValidationMessageFor(m => m.MobileNumber)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.ServiceType, new { @class = "col-sm-3 control-label" })
-            <div class="col-sm-8">
-                @Html.DisplayFor(m => m.ServiceType, "ServicesList", new { @autofocus = "autofocus" })
-                @Html.ValidationMessageFor(m => m.ServiceType)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.Website, new { @class = "col-sm-3 control-label" })
-            <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.Website, new { @autofocus = "autofocus", @placeholder = @"http://www.example.com" })
-                @Html.ValidationMessageFor(m => m.Website)
+                @Html.TextBoxFor(m => m.newClientModel.Website, new { @autofocus = "autofocus", @placeholder = @"http://www.example.com" })
+                @Html.ValidationMessageFor(m => m.newClientModel.Website)
             </div>
         </div>
 
@@ -121,38 +121,38 @@
                         <div class="panel-body">
 
                             <div class="form-group">
-                                @Html.LabelFor(m => m.AgreementStartDate, new { @class = "col-sm-3 control-label" })
+                                @Html.LabelFor(m => m.newClientModel.AgreementStartDate, new { @class = "col-sm-3 control-label" })
                                 <div class="row">
                                     <div class="container">
                                         <div class="col-sm-8">
                                             <div class='input-group date' id="startDate_">
-                                                @Html.TextBoxFor(m => m.AgreementStartDate, new { @class = "form-control", @placeholder = "01/25/2014" })
+                                                @Html.TextBoxFor(m => m.newClientModel.AgreementStartDate, new { @class = "form-control", @placeholder = "01/25/2014" })
                                                 <span class="input-group-addon">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </span>
                                             </div>
-                                            @Html.ValidationMessageFor(m => m.AgreementStartDate)
+                                            @Html.ValidationMessageFor(m => m.newClientModel.AgreementStartDate)
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(m => m.AgreementEndDate, new { @class = "col-sm-3 control-label" })
+                                @Html.LabelFor(m => m.newClientModel.AgreementEndDate, new { @class = "col-sm-3 control-label" })
                                 <div class="row">
                                     <div class="container">
                                         <div class="col-sm-8">
                                             <div class='input-group date' id="endDate_">
-                                                @Html.TextBoxFor(m => m.AgreementEndDate, new { @class = "form-control", @placeholder = "01/25/2014" })
+                                                @Html.TextBoxFor(m => m.newClientModel.AgreementEndDate, new { @class = "form-control", @placeholder = "01/25/2014" })
                                                 <span class="input-group-addon">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </span>
                                             </div>
-                                            @Html.ValidationMessageFor(m => m.AgreementEndDate)
+                                            @Html.ValidationMessageFor(m => m.newClientModel.AgreementEndDate)
                                         </div>
                                     </div>
                                 </div>
-                            </div>                        
+                            </div>
 
                         </div>
                     </div>
@@ -164,29 +164,109 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Team, new { @class = "col-sm-3 control-label" })
+            @Html.LabelFor(m => m.newClientModel.Team, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.EditorFor(m => m.Team, "TeamList")
-                @Html.ValidationMessageFor(m => m.Team)
+                @Html.EditorFor(m => m.newClientModel.Team, "TeamList")
+                @Html.ValidationMessageFor(m => m.newClientModel.Team)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Status, new { @class = "col-sm-3 control-label" })
+            @Html.LabelFor(m => m.newClientModel.Status, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.EditorFor(m => m.Status, "UserStatus")
-                @Html.ValidationMessageFor(m => m.Status)
+                @Html.EditorFor(m => m.newClientModel.Status, "UserStatus")
+                @Html.ValidationMessageFor(m => m.newClientModel.Status)
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.Sites, new { @class = "col-sm-3 control-label" })
-            <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.Sites, new { @placeholder = "Enter Sites" })
-                @Html.ValidationMessageFor(m => m.Sites)
+        @*<div class="form-group">
+                @Html.LabelFor(m => m.newClientModel.Sites, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.newClientModel.Sites, new { @placeholder = "Enter Sites" })
+                    @Html.ValidationMessageFor(m => m.newClientModel.Sites)
+                </div>
+            </div>*@
+
+        <div class="form-group">            
+            @*<div class="col-sm-8">*@
+                @Html.TextBoxFor(m => m.newClientModel.Sites, new { @placeholder = "Enter Sites", @style = "display:none" })               
+            @*</div>*@
+            <div class="panel-group" id="clientSitePanel_" style="margin-left: 26.5%;margin-right: 10%;">
+                <div class="panel">
+                    <div class="panel-heading" style="background-color:grey">
+                        <h4 class="panel-title">
+                            <strong style="color:black">
+                                Client Sites
+                            </strong>
+                            @*</a>*@
+                        </h4>
+                    </div>
+                    <div class="panel-group">
+                        <div class="panel-body">
+                            <div id="SitesPanel">
+                                @{
+                                    int count = 1;
+                                    foreach (CSPLibrary.ClientSite item in @Model.clientSites)
+                                    {
+                                        string divId = "Sites" + count;
+                                        count++;
+                                        <div id="@divId" class="panel" style="border-width:thin;border-color:gray;margin-bottom:2%;">
+                                            <div style="background-color:dimgray" class="panel-heading">
+                                                <h4 class="panel-title"><strong style="color:black;">Site Information</strong></h4>
+                                            </div>
+
+                                            <div class="panel-group">
+                                                <div class="panel-body">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3">Address</label>
+                                                        <div class="col-sm-8">
+                                                            <input class="address" value="@item.Address">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3">City</label>
+                                                        <div class="col-sm-8">
+                                                            <input class="city" value="@item.City">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3">State</label>
+                                                        <div class="col-sm-8">
+                                                            <input class="state" value="@item.State">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3">Zip</label>
+                                                        <div class="col-sm-8">
+                                                            <input class="zip" maxlength="5" autocomplete="off" value="@item.Zip">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3">Phone Number</label>
+                                                        <div class="col-sm-8">
+                                                            <input class="phNumber" value="@item.PhoneNumber">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3">Fax</label>
+                                                        <div class="col-sm-8">
+                                                            <input class="mobNumber" value="@item.FaxNumber">
+                                                        </div>
+                                                    </div>
+                                                    <input type="button" class="btn col-md-offset-8 col-md-3 removeSite_" value="Reomve" style="margin-bottom: 15px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                            <input id="AddNew_btn" type="button" class="btn col-md-5" value="Add More Sites" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
+        
         <div class="modal-footer">
             <a href="/Clients/Index" class="btn">Cancel</a>
             <input type="submit" class="btn" value="Update Client" />
@@ -198,14 +278,14 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jquery")
-    @Styles.Render("~/Content/admin/css")
-    @Scripts.Render("~/bundles/moment")
+    @Styles.Render("~/Content/admin/css")    
+    @Scripts.Render("~/bundles/maskedEdit")
+    @Scripts.Render("~/bundles/moment")    
     @Scripts.Render("~/bundles/bootstrap-datepicker")
-    @Styles.Render("~/bundles/bootstrap-datepicker-css")  
+    @Styles.Render("~/bundles/bootstrap-datepicker-css")
 
     <script>
-        $(document).ready(function () {
-
+        $(document).ready(function () {            
             // Initialize datepicker
             $("#startDate_").datetimepicker({
                 pickTime: false
@@ -222,8 +302,149 @@
 
             // Maked Edit Controls
             jQuery(function ($) {
-                $(".phone").mask("000-000-0000", { clearIfNotMatch: true });
+                $(".phone").mask("000.000.0000", { clearIfNotMatch: true });
             });
+
+        });
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+            $(".removeSite_").click(function(e){
+                e.toElement.parentNode.parentNode.parentNode.remove();
+            });
+        });        
+
+        function RemoveParent() {
+            debugger;
+            $(this).parent(3);
+        }
+        function createElement(tagName) {
+            return document.createElement(tagName);
+        }
+
+        function appendChild(parent, child) {
+            parent.appendChild(child);
+        }
+
+        function createFormGroupDiv(labelText, className) {
+
+            var input = createElement('input');
+            $(input).attr("class", className);
+            var label = createElement('label');
+            label.innerHTML = labelText;
+            $(label).attr('class', 'control-label col-md-3');
+
+            var formDiv = createElement('div');
+            $(formDiv).attr('class', 'form-group');
+
+            var formChild = createElement('div');
+            $(formChild).attr('class', 'col-sm-8');
+            appendChild(formChild, input);
+            appendChild(formDiv, label);
+            appendChild(formDiv, formChild);
+            return formDiv;
+        }
+        function createSiteDiv(id) {
+
+            var siteDiv = createElement('div');
+            $(siteDiv).attr('id', id);
+            $(siteDiv).attr('class', 'panel');
+            $(siteDiv).attr('style', 'border-width:thin;border-color:gray;margin-bottom:2%;');
+
+            var panelHeadingDiv = createElement('div');
+            $(panelHeadingDiv).attr('style', "background-color:dimgray");
+            $(panelHeadingDiv).attr('class', 'panel-heading');
+            panelHeadingDiv.innerHTML = "<h4 class='panel-title'><strong style='color:black;'>Site Information</strong></h4>";
+
+            var panelGroup = createElement('div');
+            $(panelGroup).attr('class', 'panel-group');
+
+            var boostrapDiv = createElement('div');
+            $(boostrapDiv).attr('class', 'panel-body');
+
+            var addressDiv = createFormGroupDiv('Address', 'address');
+            var cityDiv = createFormGroupDiv('City', 'city');
+            var stateDiv = createFormGroupDiv('State', 'state');
+            var zipDiv = createFormGroupDiv('Zip', 'zip');
+            var phoneNoDiv = createFormGroupDiv('Phone Number', 'phNumber');
+            var mobNoDiv = createFormGroupDiv('Fax', 'mobNumber');
+            var removeBtn = createElement('input');
+            $(removeBtn).attr('type', 'button');
+            $(removeBtn).attr('class', 'btn col-md-offset-8 col-md-3');
+            $(removeBtn).attr('value', 'Reomve');
+            $(removeBtn).attr('style', 'margin-bottom: 15px;');
+            $(removeBtn).click(function () {
+                $(siteDiv).remove();
+            });
+
+            appendChild(boostrapDiv, addressDiv);
+            appendChild(boostrapDiv, cityDiv);
+            appendChild(boostrapDiv, stateDiv);
+            appendChild(boostrapDiv, zipDiv);
+            appendChild(boostrapDiv, phoneNoDiv);
+            appendChild(boostrapDiv, mobNoDiv);
+            appendChild(boostrapDiv, removeBtn);
+
+            appendChild(panelGroup, boostrapDiv);
+            appendChild(siteDiv, panelHeadingDiv);
+            appendChild(siteDiv, panelGroup);
+
+            return siteDiv;
+        }
+        @if (Model.clientSites.Count == 0)
+        {
+            <text>
+                var idSuffix = 1;
+                $("#SitesPanel").append(createSiteDiv('Sites1'));
+        </text>
+        }
+        else
+        {
+            <text>
+        var idSuffix = @Model.clientSites.Count;
+            </text>
+            
+        }
+        debugger;
+
+        $('#AddNew_btn').click(function () {
+            idSuffix++;
+            var id = "Sites" + idSuffix;
+            var siteDiv = createSiteDiv(id);
+            $("#SitesPanel").append(siteDiv);
+            setTimeout(window.scrollTo(0, document.body.scrollHeight), 1000);
+        });
+
+        function fetchAllInputs() {
+            var allSites = [];
+            for (var i = 1; i <= idSuffix; i++) {
+                var elementID = "Sites" + i;
+                if ($("#" + elementID + "").length != 0) {
+                    var sites = {
+                        Address: {},
+                        City: {},
+                        State: {},
+                        Zip: {},
+                        PhoneNumber: {},
+                        FaxNumber: {}
+                    };
+                    sites.Address = $("#" + elementID + " .address").val();
+                    sites.City = $("#" + elementID + " .city").val();
+                    sites.State = $("#" + elementID + " .state").val();
+                    sites.Zip = $("#" + elementID + " .zip").val();
+                    sites.PhoneNumber = $("#" + elementID + " .phNumber").val();
+                    sites.FaxNumber = $("#" + elementID + " .mobNumber").val();
+
+                    allSites.push(sites);
+                }
+            }
+            console.log(JSON.stringify(allSites));
+            return JSON.stringify(allSites);
+        }
+        $('#NewCustomerVendorForm').submit(function () {
+            $('[name="Sites"]').val(fetchAllInputs());
 
         });
     </script>

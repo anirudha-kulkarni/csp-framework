@@ -24,7 +24,7 @@
 
                 <th class="header"><a href="javascript:;" title="Sort" class="arrow"><span>Client Code</span></a></th>
                 <th class="header"><a href="javascript:;" title="Sort" class="arrow"><span>Company Name</span></a></th>
-                <th class="header"><a href="javascript:;" title="" class="arrow"><span>Phone</span></a></th>
+                <th class="header"><a href="javascript:;" title="" class="arrow"><span>Service Type</span></a></th>
                 <th class="header"><a href="javascript:;" title="Sort" class="arrow"><span>Website</span></a></th>
                 <th width="200" class="header">&nbsp;</th>
                 @*<th class="filter header"></th>*@
@@ -45,7 +45,7 @@
                         <td></td>
                         <td onclick="window.document.location = '/Clients/DisplayClientProfile?clientid=@client.Client_Id';"><strong><a href="#">@client.Client_Code</a></strong></td>
                         <td onclick="window.document.location = '/Clients/DisplayClientProfile?clientid=@client.Client_Id';">@client.Company_Name</td>
-                        <td onclick="window.document.location = '/Clients/DisplayClientProfile?clientid=@client.Client_Id';">@client.PhoneNumber</td>
+                        <td onclick="window.document.location = '/Clients/DisplayClientProfile?clientid=@client.Client_Id';">@client.ServiceTypeString</td>
                         <td onclick="window.document.location = '/Clients/DisplayClientProfile?clientid=@client.Client_Id';"><strong>@client.Website</strong></td>
 
                         <td>

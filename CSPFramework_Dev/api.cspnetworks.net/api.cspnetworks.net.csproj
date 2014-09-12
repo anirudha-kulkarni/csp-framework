@@ -160,6 +160,9 @@
     <Compile Include="Client.cs">
       <DependentUpon>CSPFramework.tt</DependentUpon>
     </Compile>
+    <Compile Include="Client_Site.cs">
+      <DependentUpon>CSPFramework.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\CustomerVendorController.cs" />
     <Compile Include="Controllers\DropDownsController.cs" />

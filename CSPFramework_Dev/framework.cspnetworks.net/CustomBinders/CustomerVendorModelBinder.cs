@@ -9,7 +9,6 @@ namespace framework.cspnetworks.net.CustomBinders
 {
     public class CustomerVendorModelBinder : DefaultModelBinder
     {
-
         public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
             if (bindingContext.ModelType == typeof(CustomerVendorViewModelPost))
@@ -49,7 +48,7 @@ namespace framework.cspnetworks.net.CustomBinders
                 }
                 else
                 {
-                    newModel.newCustomerVendorModel.AgreementStartDate = DateTime.Parse(request.Form.Get("newCustomerVendorModel.AgreementEndDate"));
+                    newModel.newCustomerVendorModel.AgreementEndDate = DateTime.Parse(request.Form.Get("newCustomerVendorModel.AgreementEndDate"));
                 }
                 
                 newModel.newCustomerVendorModel.Status = Parse<int>(request.Form.Get("newCustomerVendorModel.Status"));
@@ -59,8 +58,7 @@ namespace framework.cspnetworks.net.CustomBinders
                 newModel.newCustomerVendorModel.ClientCode = request.Form.Get("newCustomerVendorModel.ClientCode");
                 newModel.newCustomerVendorModel.Site = request.Form.Get("newCustomerVendorModel.Site");
 
-                return newModel;
-              
+                return newModel;              
             }
             else
             {
@@ -148,7 +146,6 @@ namespace framework.cspnetworks.net.CustomBinders
                 return default(T);
             }
             return (T)System.Convert.ChangeType(val, Type.GetTypeCode(typeof(T)));
-        }
-      
+        }      
     }
 }

@@ -28,6 +28,8 @@
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Users_UserGroups" ManuallyRouted="false" />
         <EntityTypeShape EntityType="CSPFRAMEWORKModel.Function_Notes" Width="2.5" PointX="10.375" PointY="4" />
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Customer_Vendors_FunctionNotes" />
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.Client_Site" Width="1.5" PointX="5.25" PointY="10.5" />
+        <AssociationConnector Association="CSPFRAMEWORKModel.FK_Client_Sites_Clients" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

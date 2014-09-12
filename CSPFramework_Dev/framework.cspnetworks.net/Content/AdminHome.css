@@ -11612,7 +11612,7 @@ td#Incompletes .incompleteFlag,td#Incompletes .clearedFlag {
     background-size: 32px
 }
 
-.wrapper .tableHeader {
+.tableHeader {
     background: #20272d;
     -webkit-border-top-left-radius: 4px;
     -webkit-border-top-right-radius: 4px;
@@ -11624,7 +11624,7 @@ td#Incompletes .incompleteFlag,td#Incompletes .clearedFlag {
     margin-top: 15px
 }
 
-.wrapper .tableHeader h2 {
+.tableHeader h2 {
     color: #fff;
     font-size: 20px;
     margin: 9px 0 9px 5px
@@ -11727,7 +11727,7 @@ table th.center .detailedNotes,table td.center .detailedNotes {
     display: inline-block
 }
 
-table th a,table td a {
+.wrapper table th a,.wrapper table td a {
     color: #d6dbdf;
     display: block
 }

@@ -35,7 +35,7 @@
 <div class="form-group">
     @Html.LabelFor(m => m.Fax_Number, new { @class = "col-sm-3 control-label" })
     <div class="col-sm-8">
-        @Html.TextBoxFor(m => m.Fax_Number, new { @autofocus = "autofocus", @class = "phone" })
+        @Html.TextBoxFor(m => m.Fax_Number, new { @autofocus = "autofocus", @class = "multi_phone", @placeholder = "949.555.1000-1200" })
         @Html.ValidationMessageFor(m => m.Fax_Number)
     </div>
 </div>
@@ -44,8 +44,14 @@
 <div class="form-group">
     @Html.LabelFor(m => m.Fax_Management_Url, new { @class = "col-sm-3 control-label" })
     <div class="col-sm-8">
-        @Html.TextBoxFor(m => m.Fax_Management_Url, new { @autofocus = "autofocus" })
+        @Html.TextBoxFor(m => m.Fax_Management_Url, new { @autofocus = "autofocus", @placeholder = @"http://www.example.com" })
         @Html.ValidationMessageFor(m => m.Fax_Management_Url)
     </div>
 </div>
 
+<script>
+    if ($) {
+        $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', { translation: { 'Z': { pattern: /[0-9]/, optional: true } }, clearIfNotMatch: true });
+        $(".multi_phone").mask("000.000.0000-0000");
+    }
+</script>

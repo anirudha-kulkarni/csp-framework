@@ -1,4 +1,5 @@
 ﻿using CSPLibrary;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,8 +94,13 @@ namespace framework.cspnetworks.net.Controllers
                 client.DefaultRequestHeaders.Accept.Clear();
                 //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+                NewClientViewModel newClientViewModel = new NewClientViewModel();
+                newClientViewModel.newClientModel = new NewClientModel();
+                newClientViewModel.newClientModel = newClient;
+                newClientViewModel.clientSites = JsonConvert.DeserializeObject<List<ClientSite>>(newClient.Sites);
+
                 // HTTP POST                     
-                response = client.PostAsJsonAsync("api/Clients/PostNewClient", newClient).Result;
+                response = client.PostAsJsonAsync("api/Clients/PostNewClient", newClientViewModel).Result;
             }
             if (response.StatusCode.Equals(HttpStatusCode.Created))
             {
@@ -143,10 +149,10 @@ namespace framework.cspnetworks.net.Controllers
                 response = client.GetAsync("api/Clients/GetClient/" + clientid).Result;
             }
 
-            NewClientModel newClient = new NewClientModel();
+            NewClientViewModel newClient = new NewClientViewModel();
             if (response.IsSuccessStatusCode)
             {
-                newClient = response.Content.ReadAsAsync<NewClientModel>().Result;
+                newClient = response.Content.ReadAsAsync<NewClientViewModel>().Result;
             }
 
             return View(newClient);

@@ -14,6 +14,19 @@
           <Property Name="start_date" Type="datetime" />
           <Property Name="end_date" Type="datetime" />
         </EntityType>
+        <EntityType Name="Client_Site">
+          <Key>
+            <PropertyRef Name="client_site_id" />
+          </Key>
+          <Property Name="client_site_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="100" />
+          <Property Name="city" Type="varchar" MaxLength="50" />
+          <Property Name="state" Type="varchar" MaxLength="50" />
+          <Property Name="zip" Type="varchar" MaxLength="50" />
+          <Property Name="phone" Type="varchar" MaxLength="50" />
+          <Property Name="fax" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Clients">
           <Key>
             <PropertyRef Name="client_id" />
@@ -131,6 +144,18 @@
           <Property Name="support_email" Type="varchar" MaxLength="50" />
           <Property Name="website" Type="varchar" MaxLength="50" />
         </EntityType>
+        <Association Name="FK_Client_Sites_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Client_Site" Type="Self.Client_Site" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="Client_Site">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Clients_Agreement">
           <End Role="Agreements" Type="Self.Agreements" Multiplicity="0..1" />
           <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
@@ -320,6 +345,7 @@
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="CSPFRAMEWORKModelStoreContainer">
           <EntitySet Name="Agreements" EntityType="Self.Agreements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client_Site" EntityType="Self.Client_Site" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer_Vendors" EntityType="Self.Customer_Vendors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Enum_Type_Values" EntityType="Self.Enum_Type_Values" Schema="dbo" store:Type="Tables" />
@@ -329,6 +355,10 @@
           <EntitySet Name="User_Groups" EntityType="Self.User_Groups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vendors" EntityType="Self.Vendors" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Client_Sites_Clients" Association="Self.FK_Client_Sites_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Client_Site" EntitySet="Client_Site" />
+          </AssociationSet>
           <AssociationSet Name="FK_Clients_Agreement" Association="Self.FK_Clients_Agreement">
             <End Role="Agreements" EntitySet="Agreements" />
             <End Role="Clients" EntitySet="Clients" />
@@ -422,6 +452,7 @@
           <NavigationProperty Name="Team_Enum_Type_Values" Relationship="Self.FK_Clients_Team" FromRole="Clients" ToRole="Enum_Type_Values" />
           <NavigationProperty Name="Customer_Vendors" Relationship="Self.FK_Customer_Vendors_Clients" FromRole="Clients" ToRole="Customer_Vendors" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Users_Clients" FromRole="Clients" ToRole="Users" />
+          <NavigationProperty Name="Client_Site" Relationship="CSPFRAMEWORKModel.FK_Client_Sites_Clients" FromRole="Client" ToRole="Client_Site" />
         </EntityType>
         <EntityType Name="Customer_Vendors">
           <Key>
@@ -757,6 +788,11 @@
             <End Role="Function_Notes" EntitySet="Function_Notes" />
             <End Role="Customer_Vendors" EntitySet="Customer_Vendors" />
           </AssociationSet>
+          <EntitySet Name="Client_Site" EntityType="CSPFRAMEWORKModel.Client_Site" />
+          <AssociationSet Name="FK_Client_Sites_Clients" Association="CSPFRAMEWORKModel.FK_Client_Sites_Clients">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Client_Site" EntitySet="Client_Site" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -796,6 +832,32 @@
             </Principal>
             <Dependent Role="Customer_Vendors">
               <PropertyRef Name="FunctionNotes_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Client_Site">
+          <Key>
+            <PropertyRef Name="client_site_id" />
+          </Key>
+          <Property Name="client_site_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="zip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Client" Relationship="CSPFRAMEWORKModel.FK_Client_Sites_Clients" FromRole="Client_Site" ToRole="Client" />
+        </EntityType>
+        <Association Name="FK_Client_Sites_Clients">
+          <End Type="CSPFRAMEWORKModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="CSPFRAMEWORKModel.Client_Site" Role="Client_Site" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="Client_Site">
+              <PropertyRef Name="client_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -962,6 +1024,20 @@
                 <ScalarProperty Name="connectivity" ColumnName="connectivity" />
                 <ScalarProperty Name="solution" ColumnName="solution" />
                 <ScalarProperty Name="FunctionNotes_Id" ColumnName="FunctionNotes_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client_Site">
+            <EntityTypeMapping TypeName="CSPFRAMEWORKModel.Client_Site">
+              <MappingFragment StoreEntitySet="Client_Site">
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="client_site_id" ColumnName="client_site_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

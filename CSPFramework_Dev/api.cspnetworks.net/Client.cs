@@ -18,6 +18,7 @@ namespace api.cspnetworks.net
         {
             this.Customer_Vendors = new HashSet<Customer_Vendors>();
             this.Users = new HashSet<User>();
+            this.Client_Site = new HashSet<Client_Site>();
         }
     
         public int client_id { get; set; }
@@ -42,5 +43,6 @@ namespace api.cspnetworks.net
         public virtual Enum_Type_Values Team_Enum_Type_Values { get; set; }
         public virtual ICollection<Customer_Vendors> Customer_Vendors { get; set; }
         public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<Client_Site> Client_Site { get; set; }
     }
 }

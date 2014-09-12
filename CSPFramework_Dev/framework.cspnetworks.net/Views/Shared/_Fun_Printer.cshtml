@@ -37,7 +37,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Printer_IP_Address, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.Printer_IP_Address, new { @autofocus = "autofocus", @class = "ip_address" })
+                @Html.TextBoxFor(m => m.Printer_IP_Address, new { @autofocus = "autofocus", @class = "ip_address", @placeholder = "127.0.0.1" })
                 @Html.ValidationMessageFor(m => m.Printer_IP_Address)
             </div>
         </div>
@@ -46,7 +46,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Printer_Management_Url, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.Printer_Management_Url, new { @autofocus = "autofocus" })
+                @Html.TextBoxFor(m => m.Printer_Management_Url, new { @autofocus = "autofocus", @placeholder = @"http://www.example.com" })
                 @Html.ValidationMessageFor(m => m.Printer_Management_Url)
             </div>
         </div>
@@ -58,7 +58,7 @@ else
         <div class="form-group">
             @Html.LabelFor(m => m.Printer_IP_Address, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.Printer_IP_Address, new { @autofocus = "autofocus", @class = "ip_address" })
+                @Html.TextBoxFor(m => m.Printer_IP_Address, new { @autofocus = "autofocus", @class = "ip_address", @placeholder = "127.0.0.1" })
                 @Html.ValidationMessageFor(m => m.Printer_IP_Address)
             </div>
         </div>
@@ -67,9 +67,15 @@ else
         <div class="form-group">
             @Html.LabelFor(m => m.Printer_Management_Url, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.Printer_Management_Url, new { @autofocus = "autofocus" })
+                @Html.TextBoxFor(m => m.Printer_Management_Url, new { @autofocus = "autofocus", @placeholder = @"http://www.example.com" })
                 @Html.ValidationMessageFor(m => m.Printer_Management_Url)
             </div>
         </div>
     </div>
 }
+
+<script>
+    if ($) {
+        $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', { translation: { 'Z': { pattern: /[0-9]/, optional: true } }, clearIfNotMatch: true });
+    }
+</script>
