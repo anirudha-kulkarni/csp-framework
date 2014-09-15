@@ -205,6 +205,7 @@
     <Content Include="Content\bootstrap-datepicker\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\flatfont.css" />
     <Content Include="Content\images\icons\add.png" />
     <Content Include="Content\images\icons\drop-down.png" />
     <Content Include="Content\images\icons\dropDown.png" />
@@ -255,6 +256,9 @@
     <Content Include="Scripts\bootstrap-datepicker\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\flat-icons\flaticon.eot" />
+    <Content Include="fonts\flat-icons\flaticon.ttf" />
+    <Content Include="fonts\flat-icons\flaticon.woff" />
     <None Include="Properties\PublishProfiles\AdminLocal.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

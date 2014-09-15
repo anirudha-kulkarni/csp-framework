@@ -49,10 +49,10 @@
                         <td onclick="window.document.location = '/People/DisplayUserProfile?userid=@user.User_Id';"><strong>@user.AccountRole</strong></td>
 
                         <td>
-                            <div class="toolLinks">
-                                <a href="/People/EditUser?userid=@user.User_Id" class=" edit" title="Edit User Profile."></a>
-                                <a href="/People/ChangePassword?userid=@user.User_Id" class="lock" title="Change password for this user.">Change Password</a>
-                                <a href="#delete-confirmation" data-toggle="modal" refer="/People/DeleteUser?userid=@user.User_Id" class="trash" title="Delete this user.">Delete</a>
+                            <div class="tool-Links">
+                                <a href="/People/EditUser?userid=@user.User_Id" class="flaticon-edit" title="Edit User Profile."></a>
+                                <a href="/People/ChangePassword?userid=@user.User_Id" class="flaticon-lock" title="Change password for this user."></a>
+                                <a href="#delete-confirmation" data-toggle="modal" refer="/People/DeleteUser?userid=@user.User_Id" class="flaticon-recycle" title="Delete this user."></a>
                             </div>
                         </td>
                     </tr>

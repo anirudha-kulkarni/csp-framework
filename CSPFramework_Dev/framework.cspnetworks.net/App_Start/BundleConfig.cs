@@ -53,7 +53,8 @@ namespace framework.cspnetworks.net
 
             bundles.Add(new StyleBundle("~/Content/admin/css").Include(
                      "~/Content/bootstrap.css",
-                     "~/Content/AdminHome.css"));            
+                     "~/Content/AdminHome.css",
+                     "~/Content/flatfont.css"));            
 
         }
     }
