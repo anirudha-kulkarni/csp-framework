@@ -254,7 +254,7 @@
                                                             <input class="mobNumber" value="@item.FaxNumber">
                                                         </div>
                                                     </div>
-                                                    <input type="button" class="btn col-md-offset-8 col-md-3 removeSite_" value="Reomve" style="margin-bottom: 15px;">
+                                                    <input type="button" class="btn col-md-offset-8 col-md-3 removeSite_" value="Remove" style="margin-bottom: 15px;">
                                                 </div>
                                             </div>
                                         </div>
@@ -314,9 +314,24 @@
 
         $(document).ready(function () {
             //var deleteSites = [];
-            $(".removeSite_").click(function(e){
+            $(".removeSite_").click(function(event){
                 //deleteSites.push($("#"+e.toElement.parentNode.parentNode.parentNode.id +" .Client_Site_Id").val());
-                e.toElement.parentNode.parentNode.parentNode.remove();
+               
+                if(typeof event.toElement !== "undefined")
+                {
+                    event.toElement.parentNode.parentNode.parentNode.remove();
+                }
+                else if(typeof event.relatedTarget !== "undefined")
+                {
+                    if(event.relatedTarget !== null)
+                    {
+                        event.relatedTarget.parentNode.parentNode.parentNode.remove();
+                    }
+                    else if(typeof event.currentTarget !== "undefined")
+                    {
+                        event.currentTarget.parentNode.parentNode.parentNode.remove();
+                    }
+                }
             });
         });        
 
@@ -377,7 +392,7 @@
             var removeBtn = createElement('input');
             $(removeBtn).attr('type', 'button');
             $(removeBtn).attr('class', 'btn col-md-offset-8 col-md-3');
-            $(removeBtn).attr('value', 'Reomve');
+            $(removeBtn).attr('value', 'Remove');
             $(removeBtn).attr('style', 'margin-bottom: 15px;');
             $(removeBtn).click(function () {
                 $(siteDiv).remove();
