@@ -214,7 +214,8 @@
                                             <div style="background-color:dimgray" class="panel-heading">
                                                 <h4 class="panel-title"><strong style="color:black;">Site Information</strong></h4>
                                             </div>
-
+                                           
+                                            <input style="display:none" class="Client_Site_Id" value="@item.Client_Site_Id">
                                             <div class="panel-group">
                                                 <div class="panel-body">
                                                     <div class="form-group">
@@ -260,6 +261,7 @@
                                     }
                                 }
                             </div>
+                            <input style="display:none" name="newClientModel.Sites">
                             <input id="AddNew_btn" type="button" class="btn col-md-5" value="Add More Sites" />
                         </div>
                     </div>
@@ -311,7 +313,9 @@
     <script>
 
         $(document).ready(function () {
+            //var deleteSites = [];
             $(".removeSite_").click(function(e){
+                //deleteSites.push($("#"+e.toElement.parentNode.parentNode.parentNode.id +" .Client_Site_Id").val());
                 e.toElement.parentNode.parentNode.parentNode.remove();
             });
         });        
@@ -423,6 +427,7 @@
                 var elementID = "Sites" + i;
                 if ($("#" + elementID + "").length != 0) {
                     var sites = {
+                        Client_Site_Id:{},
                         Address: {},
                         City: {},
                         State: {},
@@ -436,6 +441,10 @@
                     sites.Zip = $("#" + elementID + " .zip").val();
                     sites.PhoneNumber = $("#" + elementID + " .phNumber").val();
                     sites.FaxNumber = $("#" + elementID + " .mobNumber").val();
+                    if($("#" + elementID + " .Client_Site_Id")){
+                        sites.Client_Site_Id = $("#" + elementID + " .Client_Site_Id").val();
+                    }
+
 
                     allSites.push(sites);
                 }
@@ -444,8 +453,8 @@
             return JSON.stringify(allSites);
         }
         $('#NewCustomerVendorForm').submit(function () {
-            $('[name="Sites"]').val(fetchAllInputs());
-
+            $('[name="newClientModel.Sites"]').val(fetchAllInputs());
+          //  $('[name="deleteSites"]').val(deleteSites);
         });
     </script>
 }

@@ -14,6 +14,9 @@ namespace CSPLibrary
 
     public class ClientSite
     {
+        [Display(Name = "Client_Site_Id")]
+        public int Client_Site_Id { get; set; }
+
         [Display(Name = "Address")]
         public String Address { get; set; }
 
@@ -40,6 +43,7 @@ namespace CSPLibrary
     {
         public NewClientModel newClientModel { get; set; }
         public List<ClientSite> clientSites { get; set; }
+
     }
 
     public class NewClientModel
@@ -56,11 +60,11 @@ namespace CSPLibrary
         [Display(Name = "Company Name")]
         public String Company_Name { get; set; }
 
-        
-        //[Display(Name = "Address")]
-        //public String Address{ get; set; }
 
-        
+        //[Display(Name = "Address")]
+        //public String Address { get; set; }
+
+
         //[Display(Name = "City")]
         //public String City { get; set; }
 

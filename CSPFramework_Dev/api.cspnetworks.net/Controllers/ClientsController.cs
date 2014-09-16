@@ -137,6 +137,7 @@ namespace api.cspnetworks.net.Controllers
             foreach (Client_Site item in clientSites)
             {
                 ClientSite tempClientSite = new ClientSite();
+                tempClientSite.Client_Site_Id = item.client_site_id;
                 tempClientSite.Address = item.address;
                 tempClientSite.City = item.city;
                 tempClientSite.State = item.state;
@@ -222,8 +223,25 @@ namespace api.cspnetworks.net.Controllers
             {
                 return NotFound();
             }
-
             _context.Clients.Remove(client);
+
+            IQueryable<Client_Site> clientSites = (from clinetSitesDb in _context.Client_Site
+                                                   where clinetSitesDb.client_id == clientid
+                                                   select clinetSitesDb);
+            
+            if (clientSites != null)
+            {
+                foreach (Client_Site item in clientSites)
+                {
+                    if (item != null)
+                    {
+                        _context.Client_Site.Remove(item);
+                    }
+
+                }
+            }
+           
+            
             await _context.SaveChangesAsync();
 
             return Ok(client);
@@ -232,18 +250,25 @@ namespace api.cspnetworks.net.Controllers
         [HttpPost]
         [ResponseType(typeof(Client))]
         [AllowAnonymous]
-        public async Task<IHttpActionResult> UpdateClient(NewClientModel newClient)
+        public async Task<IHttpActionResult> UpdateClient(NewClientViewModel newClientViewModel)
         {
+            
             try
             {
                 Client client = (from oldClientInfo in _context.Clients
-                                 where oldClientInfo.client_id == newClient.Client_Id
+                                 where oldClientInfo.client_id == newClientViewModel.newClientModel.Client_Id
                                     select oldClientInfo).FirstOrDefault();
+
+                List<Client_Site> dbClientSites = client.Client_Site.ToList<Client_Site>();
+                
+                
+
+
                 if (client != null)
                 {
 
-                    client.client_code = newClient.Client_Code;
-                    client.company_name = newClient.Company_Name;
+                    client.client_code = newClientViewModel.newClientModel.Client_Code;
+                    client.company_name = newClientViewModel.newClientModel.Company_Name;
                     //client.address = newClient.Address;
                     //client.address = newClient.Address;
                     //client.city = newClient.City;
@@ -251,29 +276,29 @@ namespace api.cspnetworks.net.Controllers
                     //client.zip = newClient.Zip;
                     //client.phone = newClient.PhoneNumber;
                     //client.mobile = newClient.MobileNumber;
-                    client.website = newClient.Website;
-                    client.service_type = newClient.ServiceType;
+                    client.website = newClientViewModel.newClientModel.Website;
+                    client.service_type = newClientViewModel.newClientModel.ServiceType;
                     
                     Agreement agreement = null;
-                    if (newClient.AgreementStartDate != null || newClient.AgreementEndDate != null)
+                    if (newClientViewModel.newClientModel.AgreementStartDate != null || newClientViewModel.newClientModel.AgreementEndDate != null)
                     {
                         if (client.Agreement == null)
                         {
                             agreement = new Agreement();
-                            agreement.start_date = newClient.AgreementStartDate;
-                            agreement.end_date = newClient.AgreementEndDate;
+                            agreement.start_date = newClientViewModel.newClientModel.AgreementStartDate;
+                            agreement.end_date = newClientViewModel.newClientModel.AgreementEndDate;
                         }
                         else
                         {
-                            client.Agreement.start_date = (newClient.AgreementStartDate != null) ? newClient.AgreementStartDate  : client.Agreement.start_date;
-                            client.Agreement.end_date = (newClient.AgreementEndDate != null) ? newClient.AgreementEndDate : client.Agreement.end_date;
+                            client.Agreement.start_date = (newClientViewModel.newClientModel.AgreementStartDate != null) ? newClientViewModel.newClientModel.AgreementStartDate : client.Agreement.start_date;
+                            client.Agreement.end_date = (newClientViewModel.newClientModel.AgreementEndDate != null) ? newClientViewModel.newClientModel.AgreementEndDate : client.Agreement.end_date;
                         }
                         
                     }
 
-                    client.team = newClient.Team;
-                    client.status = newClient.Status;
-                    client.sites = newClient.Sites;
+                    client.team = newClientViewModel.newClientModel.Team;
+                    client.status = newClientViewModel.newClientModel.Status;
+                    //client.sites = newClient.Sites;
 
                     using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, TransactionScopeAsyncFlowOption.Enabled))
                     {
@@ -284,6 +309,98 @@ namespace api.cspnetworks.net.Controllers
                             client.agreement_id = agreement.agreement_id;
                         }                        
                         await _context.SaveChangesAsync();
+
+                        foreach (var dbSite in dbClientSites)// Present in DB and Absent in Client Array
+                        {
+                            if (newClientViewModel.clientSites.Exists(x => x.Client_Site_Id.Equals(dbSite.client_site_id)))
+                            {
+                                // Present in Client Array
+                                // So, update DB with new one
+                                ClientSite site = newClientViewModel.clientSites.Find(x => x.Client_Site_Id.Equals(dbSite.client_site_id));
+                                dbSite.address = site.Address;
+                                dbSite.city = site.City;
+                                dbSite.state = site.State;
+                                dbSite.zip = site.Zip;
+                                dbSite.phone = site.PhoneNumber;
+                                dbSite.fax = site.FaxNumber;
+                                            
+                            }
+                            else
+                            {
+                                // Not present in Client Array And present in DB
+                                // So delete from DB
+                                _context.Client_Site.Remove(dbSite);
+                                
+                            }
+                            await _context.SaveChangesAsync();
+                        }
+
+                        foreach (var item in newClientViewModel.clientSites)// Present in Client Array and Absent in DB
+                        {
+                            
+                            if (dbClientSites.Exists(m => m.client_site_id.Equals(item.Client_Site_Id)))
+                            {
+                                // Present in Client Array and Present in DB
+                                continue;
+                            }
+                            else
+                            {
+                                // Add new Client Site in the DB.
+                                Client_Site clientSite = new Client_Site();
+                                clientSite.client_id = client.client_id;
+                                clientSite.address = item.Address;
+                                clientSite.city = item.City;
+                                clientSite.state = item.State;
+                                clientSite.zip = item.Zip;
+                                clientSite.phone = item.PhoneNumber;
+                                clientSite.fax = item.FaxNumber;
+
+                                _context.Client_Site.Add(clientSite);
+                                await _context.SaveChangesAsync();
+                            }
+                        }
+
+                        //foreach (ClientSite item in newClientViewModel.clientSites)
+                        //{
+                            
+                        //    Client_Site clientSite = new Client_Site();
+                        //    if (item.Client_Site_Id != 0)
+                        //    {
+                                
+                        //        if(dbClientSites.Exists(x => x.client_site_id.Equals(item.Client_Site_Id)))
+                        //        {
+                        //            // ID Present in DB
+                        //            // So Update it !
+                        //        }
+                        //        else
+                        //        {
+                        //            // Add New Site
+                        //        }
+                        //        clientSite = (from clinetSitesDb in _context.Client_Site
+                        //                      where clinetSitesDb.client_site_id == item.Client_Site_Id
+                        //                      select clinetSitesDb).FirstOrDefault();
+                        //        clientSite.address = item.Address;
+                        //        clientSite.city = item.City;
+                        //        clientSite.state = item.State;
+                        //        clientSite.zip = item.Zip;
+                        //        clientSite.phone = item.PhoneNumber;
+                        //        clientSite.fax = item.FaxNumber;
+                        //    }
+                        //    else
+                        //    {
+
+                        //        clientSite.client_id = client.client_id;
+                        //        clientSite.address = item.Address;
+                        //        clientSite.city = item.City;
+                        //        clientSite.state = item.State;
+                        //        clientSite.zip = item.Zip;
+                        //        clientSite.phone = item.PhoneNumber;
+                        //        clientSite.fax = item.FaxNumber;
+
+                        //        _context.Client_Site.Add(clientSite);
+                        //    }
+                        //    await _context.SaveChangesAsync();
+                        //}
                         scope.Complete();
                     }
 
