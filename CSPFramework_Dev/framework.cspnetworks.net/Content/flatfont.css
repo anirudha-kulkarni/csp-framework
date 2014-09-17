@@ -2,11 +2,11 @@
 /*New FlatIcon*/
 @font-face {
 	font-family: "Flaticon";
-	src: url("./../fonts/flat-icons/flaticon.eot");
-	src: url("./../fonts/flat-icons/flaticon.eot#iefix") format("embedded-opentype"),
-	url("./../fonts/flat-icons/flaticon.woff") format("woff"),
-	url("./../fonts/flat-icons/flaticon.ttf") format("truetype"),
-	url("./../fonts/flat-icons/flaticon.svg") format("svg");
+	src: url("/fonts/flat-icons/flaticon.eot");
+	src: url("/fonts/flat-icons/flaticon.eot#iefix") format("embedded-opentype"),
+	url("/fonts/flat-icons/flaticon.woff") format("woff"),
+	url("/fonts/flat-icons/flaticon.ttf") format("truetype"),
+	url("/fonts/flat-icons/flaticon.svg") format("svg");
 	font-weight: normal;
 	font-style: normal;
 }

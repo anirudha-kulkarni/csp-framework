@@ -41,41 +41,35 @@ namespace api.cspnetworks.net.Controllers
 
                 newClient.Client_Id = client.client_id;
                 newClient.Client_Code = client.client_code;
-                newClient.Company_Name = client.company_name;
-                //newClient.Address = client.address;
-                //newClient.City = client.city;
-                //newClient.State = client.state;
-                //newClient.Zip = client.zip;
-                //newClient.PhoneNumber = client.phone;
-                //newClient.MobileNumber = client.mobile;
+                newClient.Company_Name = client.company_name;                
                 newClient.Website = client.website;
                 if (client.service_type != null)
                 {
                     newClient.ServiceType = client.service_type;
                     newClient.ServiceTypeString = client.ServiceType_Enum_Type_Values.enum_type_value;
                 }
-                
 
-                if(client.Agreement != null)
+
+                if (client.Agreement != null)
                 {
                     newClient.AgreementStartDate = client.Agreement.start_date;
-                    newClient.AgreementEndDate = client.Agreement.end_date;                    
+                    newClient.AgreementEndDate = client.Agreement.end_date;
                 }
 
                 if (client.team != null)
                 {
                     newClient.Team = client.team;
-                    newClient.TeamString = client.Team_Enum_Type_Values.enum_type_value;    
+                    newClient.TeamString = client.Team_Enum_Type_Values.enum_type_value;
                 }
 
                 if (client.status != null)
                 {
                     newClient.Status = client.status;
-                    newClient.StatusString = client.Status_Enum_Type_Values.enum_type_value;    
-                }                
+                    newClient.StatusString = client.Status_Enum_Type_Values.enum_type_value;
+                }
 
                 newClient.Sites = client.sites;
-                
+
                 regClients.Add(newClient);
             }
             return regClients;
@@ -107,9 +101,9 @@ namespace api.cspnetworks.net.Controllers
             if (client.service_type != null)
             {
                 newClient.newClientModel.ServiceType = client.service_type;
-                newClient.newClientModel.ServiceTypeString = client.ServiceType_Enum_Type_Values.enum_type_value;    
+                newClient.newClientModel.ServiceTypeString = client.ServiceType_Enum_Type_Values.enum_type_value;
             }
-            
+
 
             if (client.Agreement != null)
             {
@@ -120,19 +114,19 @@ namespace api.cspnetworks.net.Controllers
             if (client.team != null)
             {
                 newClient.newClientModel.Team = client.team;
-                newClient.newClientModel.TeamString = client.Team_Enum_Type_Values.enum_type_value;    
+                newClient.newClientModel.TeamString = client.Team_Enum_Type_Values.enum_type_value;
             }
 
             if (client.status != null)
             {
                 newClient.newClientModel.Status = client.status;
-                newClient.newClientModel.StatusString = client.Status_Enum_Type_Values.enum_type_value;    
+                newClient.newClientModel.StatusString = client.Status_Enum_Type_Values.enum_type_value;
             }
-            
+
             newClient.clientSites = new List<ClientSite>();
             IQueryable<Client_Site> clientSites = (from clinetSitesDb in _context.Client_Site
-                                       where clinetSitesDb.client_id == id
-                                       select clinetSitesDb);
+                                                   where clinetSitesDb.client_id == id
+                                                   select clinetSitesDb);
 
             foreach (Client_Site item in clientSites)
             {
@@ -156,38 +150,29 @@ namespace api.cspnetworks.net.Controllers
         {
             Client client = new Client();
             client.client_code = newClientViewModel.newClientModel.Client_Code;
-            client.company_name = newClientViewModel.newClientModel.Company_Name;
-            //client.address = newClientViewModel.newClientModel.Address;            
-            //client.city = newClientViewModel.newClientModel.City;
-            //client.state = newClientViewModel.newClientModel.State;
-            //client.zip = newClientViewModel.newClientModel.Zip;
-            //client.phone = newClientViewModel.newClientModel.PhoneNumber;
-            //client.mobile = newClientViewModel.newClientModel.MobileNumber;
+            client.company_name = newClientViewModel.newClientModel.Company_Name;            
             client.website = newClientViewModel.newClientModel.Website;
             client.service_type = newClientViewModel.newClientModel.ServiceType;
-            
+
             Agreement agreement = null;
             if (newClientViewModel.newClientModel.AgreementStartDate != null || newClientViewModel.newClientModel.AgreementEndDate != null)
             {
                 agreement = new Agreement();
                 agreement.start_date = newClientViewModel.newClientModel.AgreementStartDate;
-                agreement.end_date = newClientViewModel.newClientModel.AgreementEndDate;                
+                agreement.end_date = newClientViewModel.newClientModel.AgreementEndDate;
             }
 
             client.team = newClientViewModel.newClientModel.Team;
-            client.status = newClientViewModel.newClientModel.Status;
-            //client.sites = newClientViewModel.newClientModel.Sites;
+            client.status = newClientViewModel.newClientModel.Status;           
 
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, TransactionScopeAsyncFlowOption.Enabled))
             {
                 if (agreement != null)
                 {
-                    _context.Agreements.Add(agreement);
-                    await _context.SaveChangesAsync();
+                    _context.Agreements.Add(agreement);                    
                     client.agreement_id = agreement.agreement_id;
                 }
-                _context.Clients.Add(client);
-                await _context.SaveChangesAsync();
+                _context.Clients.Add(client);                
 
 
                 if (newClientViewModel.clientSites != null)
@@ -204,13 +189,12 @@ namespace api.cspnetworks.net.Controllers
                         dbClientSite.state = clientSite.State;
                         dbClientSite.zip = clientSite.Zip;
 
-                        _context.Client_Site.Add(dbClientSite);
-                        await _context.SaveChangesAsync();
+                        _context.Client_Site.Add(dbClientSite);                       
                     }
                 }
+                await _context.SaveChangesAsync();
                 scope.Complete();
             }
-
             return CreatedAtRoute("DefaultApi", new { id = client.client_id }, client);
         }
 
@@ -223,27 +207,34 @@ namespace api.cspnetworks.net.Controllers
             {
                 return NotFound();
             }
-            _context.Clients.Remove(client);
-
-            IQueryable<Client_Site> clientSites = (from clinetSitesDb in _context.Client_Site
-                                                   where clinetSitesDb.client_id == clientid
-                                                   select clinetSitesDb);
-            
-            if (clientSites != null)
+            Agreement agreement = null;
+            if (client.Agreement != null)
             {
-                foreach (Client_Site item in clientSites)
-                {
-                    if (item != null)
-                    {
-                        _context.Client_Site.Remove(item);
-                    }
-
-                }
+                agreement = await _context.Agreements.FindAsync(client.Agreement.agreement_id);
             }
-           
-            
-            await _context.SaveChangesAsync();
 
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, TransactionScopeAsyncFlowOption.Enabled))
+            {
+                if (client.Client_Site != null && client.Client_Site.Count > 0)
+                {                    
+                    List<Client_Site> clientsSites = new List<Client_Site>(client.Client_Site);
+                    foreach (Client_Site item in clientsSites)
+                    {
+                        if (item != null)
+                        {
+                            _context.Client_Site.Remove(item);                            
+                        }
+                    }
+                }
+                if (agreement != null)
+                {
+                    _context.Agreements.Remove(agreement);                    
+                }
+                _context.Clients.Remove(client);
+
+                await _context.SaveChangesAsync();
+                scope.Complete();
+            }
             return Ok(client);
         }
 
@@ -252,33 +243,21 @@ namespace api.cspnetworks.net.Controllers
         [AllowAnonymous]
         public async Task<IHttpActionResult> UpdateClient(NewClientViewModel newClientViewModel)
         {
-            
             try
             {
                 Client client = (from oldClientInfo in _context.Clients
                                  where oldClientInfo.client_id == newClientViewModel.newClientModel.Client_Id
-                                    select oldClientInfo).FirstOrDefault();
+                                 select oldClientInfo).FirstOrDefault();
 
                 List<Client_Site> dbClientSites = client.Client_Site.ToList<Client_Site>();
-                
-                
-
 
                 if (client != null)
                 {
-
                     client.client_code = newClientViewModel.newClientModel.Client_Code;
                     client.company_name = newClientViewModel.newClientModel.Company_Name;
-                    //client.address = newClient.Address;
-                    //client.address = newClient.Address;
-                    //client.city = newClient.City;
-                    //client.state = newClient.State;
-                    //client.zip = newClient.Zip;
-                    //client.phone = newClient.PhoneNumber;
-                    //client.mobile = newClient.MobileNumber;
                     client.website = newClientViewModel.newClientModel.Website;
                     client.service_type = newClientViewModel.newClientModel.ServiceType;
-                    
+
                     Agreement agreement = null;
                     if (newClientViewModel.newClientModel.AgreementStartDate != null || newClientViewModel.newClientModel.AgreementEndDate != null)
                     {
@@ -293,22 +272,18 @@ namespace api.cspnetworks.net.Controllers
                             client.Agreement.start_date = (newClientViewModel.newClientModel.AgreementStartDate != null) ? newClientViewModel.newClientModel.AgreementStartDate : client.Agreement.start_date;
                             client.Agreement.end_date = (newClientViewModel.newClientModel.AgreementEndDate != null) ? newClientViewModel.newClientModel.AgreementEndDate : client.Agreement.end_date;
                         }
-                        
                     }
 
                     client.team = newClientViewModel.newClientModel.Team;
                     client.status = newClientViewModel.newClientModel.Status;
-                    //client.sites = newClient.Sites;
 
                     using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, TransactionScopeAsyncFlowOption.Enabled))
                     {
                         if (agreement != null)
                         {
-                            _context.Agreements.Add(agreement);
-                            await _context.SaveChangesAsync();
+                            _context.Agreements.Add(agreement);                           
                             client.agreement_id = agreement.agreement_id;
-                        }                        
-                        await _context.SaveChangesAsync();
+                        }                       
 
                         foreach (var dbSite in dbClientSites)// Present in DB and Absent in Client Array
                         {
@@ -323,21 +298,19 @@ namespace api.cspnetworks.net.Controllers
                                 dbSite.zip = site.Zip;
                                 dbSite.phone = site.PhoneNumber;
                                 dbSite.fax = site.FaxNumber;
-                                            
+
                             }
                             else
                             {
                                 // Not present in Client Array And present in DB
                                 // So delete from DB
                                 _context.Client_Site.Remove(dbSite);
-                                
-                            }
-                            await _context.SaveChangesAsync();
+
+                            }                           
                         }
 
                         foreach (var item in newClientViewModel.clientSites)// Present in Client Array and Absent in DB
                         {
-                            
                             if (dbClientSites.Exists(m => m.client_site_id.Equals(item.Client_Site_Id)))
                             {
                                 // Present in Client Array and Present in DB
@@ -355,55 +328,12 @@ namespace api.cspnetworks.net.Controllers
                                 clientSite.phone = item.PhoneNumber;
                                 clientSite.fax = item.FaxNumber;
 
-                                _context.Client_Site.Add(clientSite);
-                                await _context.SaveChangesAsync();
+                                _context.Client_Site.Add(clientSite);                                
                             }
                         }
-
-                        //foreach (ClientSite item in newClientViewModel.clientSites)
-                        //{
-                            
-                        //    Client_Site clientSite = new Client_Site();
-                        //    if (item.Client_Site_Id != 0)
-                        //    {
-                                
-                        //        if(dbClientSites.Exists(x => x.client_site_id.Equals(item.Client_Site_Id)))
-                        //        {
-                        //            // ID Present in DB
-                        //            // So Update it !
-                        //        }
-                        //        else
-                        //        {
-                        //            // Add New Site
-                        //        }
-                        //        clientSite = (from clinetSitesDb in _context.Client_Site
-                        //                      where clinetSitesDb.client_site_id == item.Client_Site_Id
-                        //                      select clinetSitesDb).FirstOrDefault();
-                        //        clientSite.address = item.Address;
-                        //        clientSite.city = item.City;
-                        //        clientSite.state = item.State;
-                        //        clientSite.zip = item.Zip;
-                        //        clientSite.phone = item.PhoneNumber;
-                        //        clientSite.fax = item.FaxNumber;
-                        //    }
-                        //    else
-                        //    {
-
-                        //        clientSite.client_id = client.client_id;
-                        //        clientSite.address = item.Address;
-                        //        clientSite.city = item.City;
-                        //        clientSite.state = item.State;
-                        //        clientSite.zip = item.Zip;
-                        //        clientSite.phone = item.PhoneNumber;
-                        //        clientSite.fax = item.FaxNumber;
-
-                        //        _context.Client_Site.Add(clientSite);
-                        //    }
-                        //    await _context.SaveChangesAsync();
-                        //}
+                        await _context.SaveChangesAsync();
                         scope.Complete();
                     }
-
                     return CreatedAtRoute("DefaultApi", new { id = client.client_id }, client);
                 }
                 return NotFound();

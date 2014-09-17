@@ -104,6 +104,18 @@
         //    $(this).find('.dropdown-menu').first().stop(true, true).slideUp(105)
         //});
 
+        var handleMasks = function () {
+            if ($(".phone") !== undefined) {
+                $(".phone").mask("000.000.0000");
+            }
+            if ($(".fax") !== undefined) {
+                $(".fax").mask("000.000.0000");
+            }
+            if ($(".zip") !== undefined) {
+                $(".zip").mask("00000");
+            }
+        };
+
         $(document).ready(function () {
 
             setTimeout(function () {
@@ -115,6 +127,12 @@
                 $('#anchorDelete_').attr("href", $(this).attr("refer"));
             });
 
+            $(document).on('mask-it', function () {
+                handleMasks();
+            }).trigger('mask-it');
+
+            // call mask-it event
+            $(document).trigger('mask-it');
 
             //$('#delete-confirmation').on('show.bs.modal', function (e) {
             //    debugger;

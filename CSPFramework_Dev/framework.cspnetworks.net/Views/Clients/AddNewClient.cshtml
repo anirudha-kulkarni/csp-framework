@@ -94,7 +94,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Website, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.Website, new { @autofocus = "autofocus", @placeholder = @"http://www.example.com" })
+                @Html.TextBoxFor(m => m.Website, new { @autofocus = "autofocus", @class = "url", @placeholder = @"http://www.example.com" })
                 @Html.ValidationMessageFor(m => m.Website)
             </div>
         </div>
@@ -220,7 +220,8 @@
     @Scripts.Render("~/bundles/bootstrap-datepicker")
     @Styles.Render("~/bundles/bootstrap-datepicker-css")
 
-    <script>
+    <script>        
+
         $(document).ready(function () {
             // Initialize datepicker
             $("#startDate_").datetimepicker({
@@ -236,11 +237,19 @@
                 $('#startDate_').data("DateTimePicker").setMaxDate(e.date);
             });
 
+            //$(".zip").load(function () {
+            //    $(".zip").mask("00000");
+            //});
+
+            //$(".phone").on(function () {
+            //    $(".phone").mask("00000");
+            //});
+
             // Maked Edit Controls
-            jQuery(function ($) {
-                $(".phone").mask("000.000.0000");
-                $(".zip").mask("00000");
-            });
+            //jQuery(function ($) {
+            //    $(".phone").mask("000.000.0000");
+            //    $(".zip").mask("00000");
+            //});
         });
     </script>
 
@@ -361,8 +370,8 @@
             var cityDiv = createFormGroupDiv('City', 'city');
             var stateDiv = createFormGroupDiv('State', 'state');
             var zipDiv = createFormGroupDiv('Zip', 'zip');
-            var phoneNoDiv = createFormGroupDiv('Phone Number', 'phNumber');
-            var mobNoDiv = createFormGroupDiv('Fax', 'mobNumber');
+            var phoneNoDiv = createFormGroupDiv('Phone Number', 'phone');
+            var mobNoDiv = createFormGroupDiv('Fax', 'fax');
             var removeBtn = createElement('input');
             $(removeBtn).attr('type', 'button');
             $(removeBtn).attr('class', 'btn col-md-offset-8 col-md-3');
@@ -382,8 +391,8 @@
 
             appendChild(panelGroup, boostrapDiv);
             appendChild(siteDiv, panelHeadingDiv);
-            appendChild(siteDiv, panelGroup);
-            
+            appendChild(siteDiv, panelGroup);            
+
             return siteDiv;
         }
         var idSuffix = 1;
@@ -395,6 +404,9 @@
             var siteDiv = createSiteDiv(id);
             $("#SitesPanel").append(siteDiv);
             setTimeout(window.scrollTo(0, document.body.scrollHeight), 1000);
+
+            // call mask-it event
+            $(document).trigger('mask-it');
         });
 
         function fetchAllInputs() {
@@ -414,8 +426,8 @@
                     sites.City = $("#" + elementID + " .city").val();
                     sites.State = $("#" + elementID + " .state").val();
                     sites.Zip = $("#" + elementID + " .zip").val();
-                    sites.PhoneNumber = $("#" + elementID + " .phNumber").val();
-                    sites.FaxNumber = $("#" + elementID + " .mobNumber").val();
+                    sites.PhoneNumber = $("#" + elementID + " .phone").val();
+                    sites.FaxNumber = $("#" + elementID + " .fax").val();
 
                     allSites.push(sites);
                 }

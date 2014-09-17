@@ -76,6 +76,8 @@ namespace CSPLibrary
 
         [Display(Name = "Site")]
         public String Site { get; set; }
+
+        public String SolutionString { get; set; }
     }
 
    public class CustomerVendorViewModel

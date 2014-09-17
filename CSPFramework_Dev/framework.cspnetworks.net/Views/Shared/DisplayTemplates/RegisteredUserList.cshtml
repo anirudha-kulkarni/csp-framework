@@ -12,7 +12,7 @@
         <a id="adduser" type="button" class=" add" href="#add-new-user" data-toggle="modal">Add</a>
     </span>
 
-    <h2>People</h2>
+    <h2>Users List</h2>
 </div>
 
 <div id="contactList">
@@ -43,7 +43,7 @@
                 {
                     <tr>
                         <td></td>
-                        <td onclick="window.document.location = '/People/DisplayUserProfile?userid=@user.User_Id';"><strong><a href="#">@user.Name</a></strong></td>
+                        <td onclick="window.document.location = '/People/DisplayUserProfile?userid=@user.User_Id';"><strong><a href="#">@user.FisrtName @user.LastName</a></strong></td>
                         <td onclick="window.document.location = '/People/DisplayUserProfile?userid=@user.User_Id';">@user.Email</td>
                         <td onclick="window.document.location = '/People/DisplayUserProfile?userid=@user.User_Id';">@user.Phone</td>
                         <td onclick="window.document.location = '/People/DisplayUserProfile?userid=@user.User_Id';"><strong>@user.AccountRole</strong></td>

@@ -1,12 +1,8 @@
 ﻿@model CSPLibrary.NewVendorModel
 @{
-    ViewBag.Title = "EditVendor";
+    ViewBag.Title = "Edit Vendor Profile";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
-@*<h2>EditUser</h2>
-    <h2>@Model.Email</h2>
-    <h2>@Model.Customer_Id</h2>*@
 
 <div class="col-lg-12 center" style="margin-left:9%">
     <div class="tableHeader col-lg-9">
@@ -44,7 +40,7 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.SupportNumber, new { @class = "col-sm-3 control-label" })
                 <div class="col-sm-9">
-                    @Html.EditorFor(m => m.SupportNumber)
+                    @Html.TextBoxFor(m => m.SupportNumber, new { @class="phone" })
                     @Html.ValidationMessageFor(m => m.SupportNumber)
                 </div>
             </div>
@@ -52,7 +48,7 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.website, new { @class = "col-sm-3 control-label" })
                 <div class="col-sm-9">
-                    @Html.EditorFor(m => m.website)
+                    @Html.TextBoxFor(m => m.website, new { @class="url" })
                     @Html.ValidationMessageFor(m => m.website)
                 </div>
             </div>            
@@ -68,3 +64,9 @@
 
 </div>
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/admin/css")
+    @Scripts.Render("~/bundles/maskedEdit")
+}
