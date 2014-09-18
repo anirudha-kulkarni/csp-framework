@@ -17,6 +17,7 @@ namespace api.cspnetworks.net
         public Vendor()
         {
             this.Customer_Vendors = new HashSet<Customer_Vendors>();
+            this.Hardwares = new HashSet<Hardware>();
         }
     
         public int vendor_id { get; set; }
@@ -26,5 +27,6 @@ namespace api.cspnetworks.net
         public string website { get; set; }
     
         public virtual ICollection<Customer_Vendors> Customer_Vendors { get; set; }
+        public virtual ICollection<Hardware> Hardwares { get; set; }
     }
 }
