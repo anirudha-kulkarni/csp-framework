@@ -40,54 +40,6 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-                @Html.LabelFor(m => m.newClientModel.Address, new { @class = "col-sm-3 control-label" })
-                <div class="col-sm-8">
-                    @Html.TextBoxFor(m => m.newClientModel.Address, new { @autofocus = "autofocus", @placeholder = "Enter Address" })
-                    @Html.ValidationMessageFor(m => m.newClientModel.Address)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.newClientModel.City, new { @class = "col-sm-3 control-label" })
-                <div class="col-sm-8">
-                    @Html.TextBoxFor(m => m.newClientModel.City, new { @autofocus = "autofocus", @placeholder = "Enter City" })
-                    @Html.ValidationMessageFor(m => m.newClientModel.City)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.newClientModel.State, new { @class = "col-sm-3 control-label" })
-                <div class="col-sm-8">
-                    @Html.EditorFor(m => m.newClientModel.State, "StateList", new { @autofocus = "autofocus" })
-                    @Html.ValidationMessageFor(m => m.newClientModel.State)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.newClientModel.Zip, new { @class = "col-sm-3 control-label" })
-                <div class="col-sm-8">
-                    @Html.TextBoxFor(m => m.newClientModel.Zip, new { @autofocus = "autofocus" })
-                    @Html.ValidationMessageFor(m => m.newClientModel.Zip)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.newClientModel.PhoneNumber, new { @class = "col-sm-3 control-label" })
-                <div class="col-sm-8">
-                    @Html.TextBoxFor(m => m.newClientModel.PhoneNumber, new { @autofocus = "autofocus", @class = "phone", @placeholder = "999-999-9999" })
-                    @Html.ValidationMessageFor(m => m.newClientModel.PhoneNumber)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.newClientModel.MobileNumber, new { @class = "col-sm-3 control-label" })
-                <div class="col-sm-8">
-                    @Html.TextBoxFor(m => m.newClientModel.MobileNumber, new { @autofocus = "autofocus", @class = "phone", @placeholder = "999-999-9999" })
-                    @Html.ValidationMessageFor(m => m.newClientModel.MobileNumber)
-                </div>
-            </div>*@
-
         <div class="form-group">
             @Html.LabelFor(m => m.newClientModel.ServiceType, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
@@ -119,7 +71,13 @@
                     </div>
                     <div id="agreementsSecChild_" class="panel-group">
                         <div class="panel-body">
-
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.newClientModel.AgreementPath, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.newClientModel.AgreementPath, new { type = "file", accept = ".pdf" })
+                                    @Html.ValidationMessageFor(m => m.newClientModel.AgreementPath)
+                                </div>
+                            </div>
                             <div class="form-group">
                                 @Html.LabelFor(m => m.newClientModel.AgreementStartDate, new { @class = "col-sm-3 control-label" })
                                 <div class="row">
@@ -163,11 +121,76 @@
         <div class="form-group">
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(m => m.newClientModel.Team, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
                 @Html.EditorFor(m => m.newClientModel.Team, "TeamList")
                 @Html.ValidationMessageFor(m => m.newClientModel.Team)
+            </div>
+        </div>*@
+        <div class="form-group">
+            <div class="panel-group" id="agreementsSec_" style="margin-left: 26.5%;margin-right: 10%;">
+                <div class="panel">
+
+                    <div class="panel-heading" style="background-color:grey">
+                        <h4 class="panel-title">
+                          <strong style="color:black">
+                                Team
+                            </strong>
+                         </h4>
+                    </div>
+                    <div id="agreementsSecChild_" class="panel-group">
+                        <div class="panel-body">
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.newClientModel.executiveIncharge, new { @class = "col-sm-3 control-label" })
+                                <div class="row">
+                                    <div class="container">
+                                        <div class="col-sm-8">
+                                             @Html.EditorFor(m => m.newClientModel.executiveIncharge, "CSPUsers")
+                                             @Html.ValidationMessageFor(m => m.newClientModel.executiveIncharge)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.newClientModel.programManager, new { @class = "col-sm-3 control-label" })
+                                <div class="row">
+                                    <div class="container">
+                                        <div class="col-sm-8">
+                                             @Html.EditorFor(m => m.newClientModel.programManager, "CSPUsers")
+                                             @Html.ValidationMessageFor(m => m.newClientModel.programManager)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.newClientModel.accountManager, new { @class = "col-sm-3 control-label" })
+                                <div class="row">
+                                    <div class="container">
+                                        <div class="col-sm-8">
+                                               @Html.EditorFor(m => m.newClientModel.accountManager, "CSPUsers")
+                                               @Html.ValidationMessageFor(m => m.newClientModel.accountManager)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.newClientModel.pamManager, new { @class = "col-sm-3 control-label" })
+                                <div class="row">
+                                    <div class="container">
+                                        <div class="col-sm-8">
+                                              @Html.EditorFor(m => m.newClientModel.pamManager, "CSPUsers")
+                                              @Html.ValidationMessageFor(m => m.newClientModel.pamManager)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

@@ -33,6 +33,7 @@ namespace api.cspnetworks.net
         public virtual ICollection<Client> Clients2 { get; set; }
         public virtual ICollection<Customer_Vendors> Customer_Vendors { get; set; }
         public virtual ICollection<Customer_Vendors> Customer_Vendors1 { get; set; }
+        public virtual Enum_Types Enum_Types { get; set; }
         public virtual ICollection<User> Users { get; set; }
     }
 }

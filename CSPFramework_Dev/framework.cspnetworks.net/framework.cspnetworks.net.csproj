@@ -336,6 +336,7 @@
     <Content Include="Views\Shared\_Fun_Connectivity_Internet.cshtml" />
     <Content Include="Views\Shared\_Fun_Printer.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\FunctionNotes.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CSPUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

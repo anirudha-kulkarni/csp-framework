@@ -27,36 +27,7 @@
                                     <td>@Model.newClientModel.Company_Name</td>
                                 </tr>
 
-                                @*<tr>
-                                    <td><strong>Address :</strong></td>
-                                    <td>@Model.Address</td>
-                                </tr>
                                 
-                                <tr>
-                                    <td><strong>City :</strong></td>
-                                    <td>@Model.City</td>
-                                </tr>
-
-                                <tr>
-                                    <td><strong>State :</strong></td>
-                                    <td>@Model.State</td>
-                                </tr>
-
-                                <tr>
-                                    <td><strong>Zip :</strong></td>
-                                    <td>@Model.Zip</td>
-                                </tr>
-
-                                <tr>
-                                    <td><strong>Phone Number :</strong></td>
-                                    <td>@Model.PhoneNumber</td>
-                                </tr>
-
-                                <tr>
-                                    <td><strong>Mobile Number :</strong></td>
-                                    <td>@Model.MobileNumber</td>
-                                </tr>*@
-
                                 <tr>
                                     <td><strong>Website :</strong></td>
                                     <td><a href="@Model.newClientModel.Website" target="_blank">@Model.newClientModel.Website</a></td>
@@ -72,7 +43,15 @@
                                     <td>
                                         <table>
                                             <tbody>
-                                                
+                                                <tr>
+                                                    <td><i><strong>Agreement File :</strong></i></td>
+                                                    <td>
+                                                        @if (Model.newClientModel.AgreementPath != null)
+                                                        {
+                                                            <a href="@Model.newClientModel.AgreementPath">Agreement File</a>;
+                                                        }
+                                                    </td>
+                                                </tr>
                                                 <tr>
                                                     <td><i><strong>Agreement Start Date :</strong></i></td>
                                                     <td>
@@ -97,10 +76,21 @@
                                 </tr>
 
                                 <tr>
-                                    <td><strong>Team :</strong></td>
-                                    <td>@Model.newClientModel.TeamString</td>
+                                    <td><strong>Executive In Charge :</strong></td>
+                                    <td>@Model.newClientModel.executiveInchargeString</td>
                                 </tr>
-
+                                <tr>
+                                    <td><strong>Program Manager :</strong></td>
+                                    <td>@Model.newClientModel.programManagerString</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Account Manager :</strong></td>
+                                    <td>@Model.newClientModel.accountManagerString</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>PAM/Overflow Manager :</strong></td>
+                                    <td>@Model.newClientModel.pamManagerString</td>
+                                </tr>
                                 <tr>
                                     <td><strong>Status :</strong></td>
                                     <td>@Model.newClientModel.StatusString</td>

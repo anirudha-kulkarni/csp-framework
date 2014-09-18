@@ -1,0 +1,16 @@
+﻿@using CSPLibrary
+@using framework.cspnetworks.net.Helpers
+@using CSPLibrary
+@using framework.cspnetworks.net.Helpers
+@{
+    
+    String selectedVal = "";
+    if (@Model != null)
+    {
+        selectedVal = (String)@Model.ToString();
+    }
+    var items = DropDonwHelper.GetItems("GetCSPUsers", selectedVal);
+
+}
+
+@Html.DropDownList("", items, new { @id = "teamlist_" })

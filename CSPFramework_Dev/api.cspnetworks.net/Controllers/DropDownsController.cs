@@ -154,5 +154,23 @@ namespace api.cspnetworks.net.Controllers
             }
             return null;
         }
+        public Dictionary<string,int> GetCSPUsers() {
+
+             Client client = (from clientDB in _context.Clients
+                             where clientDB.client_code == "CSP"
+                             select clientDB).FirstOrDefault();
+             Dictionary<String,int> dictionary = new Dictionary< String,int>();
+             IQueryable<User> user = (from values in _context.Users
+                                          where values.client_id == client.client_id
+                                          select values);
+             foreach (var userItem in user)
+             {
+                dictionary.Add(userItem.firstname, userItem.user_id);
+             }
+                 
+             
+
+             return dictionary;
+        }
     }
 }

@@ -16,9 +16,9 @@ namespace api.cspnetworks.net
     {
         public Client()
         {
+            this.Client_Site = new HashSet<Client_Site>();
             this.Customer_Vendors = new HashSet<Customer_Vendors>();
             this.Users = new HashSet<User>();
-            this.Client_Site = new HashSet<Client_Site>();
         }
     
         public int client_id { get; set; }
@@ -36,13 +36,21 @@ namespace api.cspnetworks.net
         public Nullable<int> team { get; set; }
         public Nullable<int> status { get; set; }
         public string sites { get; set; }
+        public Nullable<int> executive_incharge { get; set; }
+        public Nullable<int> program_manager { get; set; }
+        public Nullable<int> account_manager { get; set; }
+        public Nullable<int> PAM_manager { get; set; }
     
         public virtual Agreement Agreement { get; set; }
+        public virtual ICollection<Client_Site> Client_Site { get; set; }
+        public virtual User Account_Manager_Enum { get; set; }
+        public virtual User Exe_InCharge_Enum { get; set; }
         public virtual Enum_Type_Values ServiceType_Enum_Type_Values { get; set; }
         public virtual Enum_Type_Values Status_Enum_Type_Values { get; set; }
         public virtual Enum_Type_Values Team_Enum_Type_Values { get; set; }
         public virtual ICollection<Customer_Vendors> Customer_Vendors { get; set; }
         public virtual ICollection<User> Users { get; set; }
-        public virtual ICollection<Client_Site> Client_Site { get; set; }
+        public virtual User PAM_Manager_Enum { get; set; }
+        public virtual User Program_Manager_Enum { get; set; }
     }
 }
