@@ -46,7 +46,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Printer_Management_Url, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.Printer_Management_Url, new { @autofocus = "autofocus", @placeholder = @"http://www.example.com" })
+                @Html.TextBoxFor(m => m.Printer_Management_Url, new { @autofocus = "autofocus",  @class="url", @placeholder = @"http://www.example.com" })
                 @Html.ValidationMessageFor(m => m.Printer_Management_Url)
             </div>
         </div>
@@ -67,7 +67,7 @@ else
         <div class="form-group">
             @Html.LabelFor(m => m.Printer_Management_Url, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.Printer_Management_Url, new { @autofocus = "autofocus", @placeholder = @"http://www.example.com" })
+                @Html.TextBoxFor(m => m.Printer_Management_Url, new { @autofocus = "autofocus",  @class="url", @placeholder = @"http://www.example.com" })
                 @Html.ValidationMessageFor(m => m.Printer_Management_Url)
             </div>
         </div>

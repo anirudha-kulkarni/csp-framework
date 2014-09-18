@@ -71,10 +71,10 @@ namespace framework.cspnetworks.net.Controllers
                 response = client.GetAsync("api/Clients/GetClient/" + clientid).Result;
             }
 
-            NewClientModel newClient = new NewClientModel();
+            NewClientViewModel newClient = new NewClientViewModel();
             if (response.IsSuccessStatusCode)
             {
-                newClient = response.Content.ReadAsAsync<NewClientModel>().Result;
+                newClient = response.Content.ReadAsAsync<NewClientViewModel>().Result;
             }
 
             return View(newClient);
@@ -158,7 +158,7 @@ namespace framework.cspnetworks.net.Controllers
             return View(newClient);
         }
 
-        public ActionResult UpdateClientProfile(NewClientModel newClient)
+        public ActionResult UpdateClientProfile(NewClientViewModel newClientViewModel)
         {
             HttpResponseMessage response;
             using (var client = new HttpClient())
@@ -167,8 +167,9 @@ namespace framework.cspnetworks.net.Controllers
                 client.DefaultRequestHeaders.Accept.Clear();
                 //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                // HTTP POST                     
-                response = client.PostAsJsonAsync("api/Clients/UpdateClient", newClient).Result;
+                // HTTP POST    
+                newClientViewModel.clientSites = JsonConvert.DeserializeObject<List<ClientSite>>(newClientViewModel.newClientModel.Sites);
+                response = client.PostAsJsonAsync("api/Clients/UpdateClient", newClientViewModel).Result;
             }
             if (response.StatusCode.Equals(HttpStatusCode.Created))
             {

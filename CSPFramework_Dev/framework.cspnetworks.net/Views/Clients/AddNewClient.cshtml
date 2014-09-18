@@ -94,7 +94,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Website, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.Website, new { @autofocus = "autofocus", @placeholder = @"http://www.example.com" })
+                @Html.TextBoxFor(m => m.Website, new { @autofocus = "autofocus", @class = "url", @placeholder = @"http://www.example.com" })
                 @Html.ValidationMessageFor(m => m.Website)
             </div>
         </div>
@@ -220,7 +220,8 @@
     @Scripts.Render("~/bundles/bootstrap-datepicker")
     @Styles.Render("~/bundles/bootstrap-datepicker-css")
 
-    <script>
+    <script>        
+
         $(document).ready(function () {
             // Initialize datepicker
             $("#startDate_").datetimepicker({
@@ -236,11 +237,19 @@
                 $('#startDate_').data("DateTimePicker").setMaxDate(e.date);
             });
 
+            //$(".zip").load(function () {
+            //    $(".zip").mask("00000");
+            //});
+
+            //$(".phone").on(function () {
+            //    $(".phone").mask("00000");
+            //});
+
             // Maked Edit Controls
-            jQuery(function ($) {
-                $(".phone").mask("000.000.0000");
-                $(".zip").mask("00000");
-            });
+            //jQuery(function ($) {
+            //    $(".phone").mask("000.000.0000");
+            //    $(".zip").mask("00000");
+            //});
         });
     </script>
 
@@ -252,21 +261,89 @@
         function appendChild(parent, child) {
             parent.appendChild(child);
         }       
+        function addOption(selectbox, text, value) {
+            var optn = createElement("OPTION");
+            optn.text = text;
+            optn.value = value;
+            selectbox.options.add(optn);
+        }
+        function createDropDown() {
+            var states = new Array(
+                "Alabama",
+                "Alaska",
+                "Arizona",
+                "Arkansas",
+                "California",
+                "Colorado",
+                "Connecticut",
+                "Delaware",
+                "Florida",
+                "Georgia",
+                "Hawaii",
+                "Idaho",
+                "Illinois",
+                "Indiana",
+                "Iowa",
+                "Kansas",
+                "Kentucky",
+                "Louisiana",
+                "Maine",
+                "Maryland",
+                "Massachusetts",
+                "Michigan",
+                "Minnesota",
+                "Mississippi",
+                "Missouri",
+                "Montana",
+                "Nebraska",
+                "Nevada",
+                "New Hampshire",
+                "New Jersey",
+                "New Mexico",
+                "New York",
+                "North Carolina",
+                "North Dakota",
+                "Ohio",
+                "Oklahoma",
+                "Oregon",
+                "Pennsylvania",
+                "Rhode Island",
+                "South Carolina",
+                "South Dakota",
+                "Tennessee",
+                "Texas",
+                "Utah",
+                "Vermont",
+                "Virginia",
+                "Washington",
+                "West Virginia",
+                "Wisconsin",
+                "Wyoming"
 
+                );
+            var stateSelect = createElement('select');
+            for (var i = 0; i < states.length; ++i) {
+                addOption(stateSelect, states[i], states[i]);
+            }
+            return stateSelect;
+        }
         function createFormGroupDiv(labelText, className) {
-            
-            var input = createElement('input');
-            $(input).attr("class", className);
+            var inputField;
+            if (className == 'state') {
+                inputField = createDropDown();
+            }
+            else {
+                inputField = createElement('input');
+            }
+            $(inputField).attr("class", className);
             var label = createElement('label');
             label.innerHTML = labelText;
             $(label).attr('class', 'control-label col-md-3');
-
             var formDiv = createElement('div');
             $(formDiv).attr('class', 'form-group');
-
             var formChild = createElement('div');
             $(formChild).attr('class', 'col-sm-8');
-            appendChild(formChild, input);
+            appendChild(formChild, inputField);
             appendChild(formDiv, label);
             appendChild(formDiv, formChild);
             return formDiv;
@@ -293,12 +370,12 @@
             var cityDiv = createFormGroupDiv('City', 'city');
             var stateDiv = createFormGroupDiv('State', 'state');
             var zipDiv = createFormGroupDiv('Zip', 'zip');
-            var phoneNoDiv = createFormGroupDiv('Phone Number', 'phNumber');
-            var mobNoDiv = createFormGroupDiv('Fax', 'mobNumber');
+            var phoneNoDiv = createFormGroupDiv('Phone Number', 'phone');
+            var mobNoDiv = createFormGroupDiv('Fax', 'fax');
             var removeBtn = createElement('input');
             $(removeBtn).attr('type', 'button');
             $(removeBtn).attr('class', 'btn col-md-offset-8 col-md-3');
-            $(removeBtn).attr('value', 'Reomve');
+            $(removeBtn).attr('value', 'Remove');
             $(removeBtn).attr('style', 'margin-bottom: 15px;');
             $(removeBtn).click(function () {
                 $(siteDiv).remove();
@@ -314,8 +391,8 @@
 
             appendChild(panelGroup, boostrapDiv);
             appendChild(siteDiv, panelHeadingDiv);
-            appendChild(siteDiv, panelGroup);
-            
+            appendChild(siteDiv, panelGroup);            
+
             return siteDiv;
         }
         var idSuffix = 1;
@@ -327,6 +404,9 @@
             var siteDiv = createSiteDiv(id);
             $("#SitesPanel").append(siteDiv);
             setTimeout(window.scrollTo(0, document.body.scrollHeight), 1000);
+
+            // call mask-it event
+            $(document).trigger('mask-it');
         });
 
         function fetchAllInputs() {
@@ -346,8 +426,8 @@
                     sites.City = $("#" + elementID + " .city").val();
                     sites.State = $("#" + elementID + " .state").val();
                     sites.Zip = $("#" + elementID + " .zip").val();
-                    sites.PhoneNumber = $("#" + elementID + " .phNumber").val();
-                    sites.FaxNumber = $("#" + elementID + " .mobNumber").val();
+                    sites.PhoneNumber = $("#" + elementID + " .phone").val();
+                    sites.FaxNumber = $("#" + elementID + " .fax").val();
 
                     allSites.push(sites);
                 }

@@ -14,6 +14,7 @@ using CSPLibrary;
 using System.Net.Http.Headers;
 using System.Net;
 using System.IO;
+using framework.cspnetworks.net.Helpers;
 
 namespace framework.cspnetworks.net.Controllers
 {
@@ -61,7 +62,46 @@ namespace framework.cspnetworks.net.Controllers
                     !response.StatusCode.Equals(HttpStatusCode.Unauthorized));
                 if (isValid)
                 {
-                    FormsAuthentication.SetAuthCookie(model.EmailAddress, false);
+                    //FormsAuthentication.SetAuthCookie(model.EmailAddress, false);
+                    int coockieExpires;
+                    int sessionTimeout;
+                    var ip = Request.UserHostAddress;
+                    
+                    if (ip == ConfigHelper.InternalIPAddress)
+                    {
+                        coockieExpires = ConfigHelper.InternalExpiration;
+                        sessionTimeout = ConfigHelper.InternalSessionExpiration;
+                    }
+                    else
+                    {
+                        coockieExpires = ConfigHelper.ExternalExpiration;
+                        sessionTimeout = ConfigHelper.ExternalSessionExpiration;
+                    }
+
+                    Session.Add("User", model.EmailAddress);
+                    Session.Timeout = sessionTimeout;
+
+                    var ticket = new FormsAuthenticationTicket(0,
+                                       model.EmailAddress,
+                                       DateTime.Now,
+                                       DateTime.Now.AddMinutes(coockieExpires),
+                                       true,
+                                       "",
+                                       FormsAuthentication.FormsCookiePath);
+
+                    string encryptedCookieContent = FormsAuthentication.Encrypt(ticket);
+
+                    var formsAuthenticationTicketCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedCookieContent)
+                    {
+                        Domain = FormsAuthentication.CookieDomain,
+                        Path = FormsAuthentication.FormsCookiePath,
+                        HttpOnly = true,
+                        Secure = FormsAuthentication.RequireSSL
+                    };
+
+                    formsAuthenticationTicketCookie.Expires = DateTime.Now.AddMinutes(coockieExpires);
+                    System.Web.HttpContext.Current.Response.Cookies.Add(formsAuthenticationTicketCookie);
+
                     return RedirectToAction("People", "People");
                 }
                 else

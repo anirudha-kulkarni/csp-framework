@@ -146,7 +146,8 @@
           <Property Name="security_answer_two" Type="varchar" MaxLength="100" />
           <Property Name="status" Type="int" />
           <Property Name="creation_date" Type="datetime" />
-          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="firstname" Type="varchar" MaxLength="50" />
+          <Property Name="lastname" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Vendors">
           <Key>
@@ -691,10 +692,11 @@
           <Property Name="security_answer_two" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="Int32" />
           <Property Name="creation_date" Type="DateTime" Precision="3" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Users_Clients" FromRole="Users" ToRole="Clients" />
           <NavigationProperty Name="Status_Enum_Type_Values" Relationship="Self.FK_Users_Status" FromRole="Users" ToRole="Enum_Type_Values" />
           <NavigationProperty Name="User_Groups" Relationship="Self.FK_Users_UserGroups" FromRole="Users" ToRole="User_Groups" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Vendor">
           <Key>
@@ -1200,6 +1202,8 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="CSPFRAMEWORKModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="password" ColumnName="password" />
@@ -1214,7 +1218,6 @@
                 <ScalarProperty Name="security_answer_two" ColumnName="security_answer_two" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="creation_date" ColumnName="creation_date" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

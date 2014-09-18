@@ -107,6 +107,7 @@ namespace framework.cspnetworks.net.Controllers
         [Authorize]
         public ActionResult PostNewCustomerVendor(CustomerVendorViewModelPost customerVendorViewModelPost)
         {
+
             // Check if there is a agreement file and save it.
             if (Request.Files[0] != null && Request.Files[0].ContentLength > 0)
             {
@@ -219,6 +220,27 @@ namespace framework.cspnetworks.net.Controllers
         [Authorize]
         public ActionResult UpdateCustomerVendorProfile(CustomerVendorViewModelPost customerVendorViewModelPost)
         {
+
+            // Check if there is a agreement file and save it.
+            if (Request.Files[0] != null && Request.Files[0].ContentLength > 0)
+            {
+                var fileExtension = Path.GetExtension(Request.Files[0].FileName).Substring(1);
+                if (fileExtension.ToLowerInvariant() == "pdf")
+                {
+                    var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), Guid.NewGuid().ToString() + "." + fileExtension);
+
+                    // Create directory only once after creating the application
+                    bool isExists = System.IO.Directory.Exists(Server.MapPath("~/App_Data/uploads"));
+                    if (!isExists)
+                    {
+                        System.IO.Directory.CreateDirectory(Server.MapPath("~/App_Data/uploads"));
+                    }
+
+                    Request.Files[0].SaveAs(path);
+                    customerVendorViewModelPost.newCustomerVendorModel.AgreementPath = path;
+                }
+            }
+
             HttpResponseMessage response;
             using (var client = new HttpClient())
             {

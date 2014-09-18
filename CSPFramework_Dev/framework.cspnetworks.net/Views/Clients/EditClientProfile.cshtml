@@ -99,7 +99,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.newClientModel.Website, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.newClientModel.Website, new { @autofocus = "autofocus", @placeholder = @"http://www.example.com" })
+                @Html.TextBoxFor(m => m.newClientModel.Website, new { @autofocus = "autofocus", @class = "url", @placeholder = @"http://www.example.com" })
                 @Html.ValidationMessageFor(m => m.newClientModel.Website)
             </div>
         </div>
@@ -214,7 +214,8 @@
                                             <div style="background-color:dimgray" class="panel-heading">
                                                 <h4 class="panel-title"><strong style="color:black;">Site Information</strong></h4>
                                             </div>
-
+                                           
+                                            <input style="display:none" class="Client_Site_Id" value="@item.Client_Site_Id">
                                             <div class="panel-group">
                                                 <div class="panel-body">
                                                     <div class="form-group">
@@ -244,22 +245,23 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Phone Number</label>
                                                         <div class="col-sm-8">
-                                                            <input class="phNumber" value="@item.PhoneNumber">
+                                                            <input class="phone" value="@item.PhoneNumber">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Fax</label>
                                                         <div class="col-sm-8">
-                                                            <input class="mobNumber" value="@item.FaxNumber">
+                                                            <input class="fax" value="@item.FaxNumber">
                                                         </div>
                                                     </div>
-                                                    <input type="button" class="btn col-md-offset-8 col-md-3 removeSite_" value="Reomve" style="margin-bottom: 15px;">
+                                                    <input type="button" class="btn col-md-offset-8 col-md-3 removeSite_" value="Remove" style="margin-bottom: 15px;">
                                                 </div>
                                             </div>
                                         </div>
                                     }
                                 }
                             </div>
+                            <input style="display:none" name="newClientModel.Sites">
                             <input id="AddNew_btn" type="button" class="btn col-md-5" value="Add More Sites" />
                         </div>
                     </div>
@@ -311,8 +313,25 @@
     <script>
 
         $(document).ready(function () {
-            $(".removeSite_").click(function(e){
-                e.toElement.parentNode.parentNode.parentNode.remove();
+            //var deleteSites = [];
+            $(".removeSite_").click(function(event){
+                //deleteSites.push($("#"+e.toElement.parentNode.parentNode.parentNode.id +" .Client_Site_Id").val());
+               
+                if(typeof event.toElement !== "undefined")
+                {
+                    event.toElement.parentNode.parentNode.parentNode.remove();
+                }
+                else if(typeof event.relatedTarget !== "undefined")
+                {
+                    if(event.relatedTarget !== null)
+                    {
+                        event.relatedTarget.parentNode.parentNode.parentNode.remove();
+                    }
+                    else if(typeof event.currentTarget !== "undefined")
+                    {
+                        event.currentTarget.parentNode.parentNode.parentNode.remove();
+                    }
+                }
             });
         });        
 
@@ -368,12 +387,12 @@
             var cityDiv = createFormGroupDiv('City', 'city');
             var stateDiv = createFormGroupDiv('State', 'state');
             var zipDiv = createFormGroupDiv('Zip', 'zip');
-            var phoneNoDiv = createFormGroupDiv('Phone Number', 'phNumber');
-            var mobNoDiv = createFormGroupDiv('Fax', 'mobNumber');
+            var phoneNoDiv = createFormGroupDiv('Phone Number', 'phone');
+            var mobNoDiv = createFormGroupDiv('Fax', 'fax');
             var removeBtn = createElement('input');
             $(removeBtn).attr('type', 'button');
             $(removeBtn).attr('class', 'btn col-md-offset-8 col-md-3');
-            $(removeBtn).attr('value', 'Reomve');
+            $(removeBtn).attr('value', 'Remove');
             $(removeBtn).attr('style', 'margin-bottom: 15px;');
             $(removeBtn).click(function () {
                 $(siteDiv).remove();
@@ -423,6 +442,7 @@
                 var elementID = "Sites" + i;
                 if ($("#" + elementID + "").length != 0) {
                     var sites = {
+                        Client_Site_Id:{},
                         Address: {},
                         City: {},
                         State: {},
@@ -434,8 +454,12 @@
                     sites.City = $("#" + elementID + " .city").val();
                     sites.State = $("#" + elementID + " .state").val();
                     sites.Zip = $("#" + elementID + " .zip").val();
-                    sites.PhoneNumber = $("#" + elementID + " .phNumber").val();
-                    sites.FaxNumber = $("#" + elementID + " .mobNumber").val();
+                    sites.PhoneNumber = $("#" + elementID + " .phone").val();
+                    sites.FaxNumber = $("#" + elementID + " .fax").val();
+                    if($("#" + elementID + " .Client_Site_Id")){
+                        sites.Client_Site_Id = $("#" + elementID + " .Client_Site_Id").val();
+                    }
+
 
                     allSites.push(sites);
                 }
@@ -444,8 +468,8 @@
             return JSON.stringify(allSites);
         }
         $('#NewCustomerVendorForm').submit(function () {
-            $('[name="Sites"]').val(fetchAllInputs());
-
+            $('[name="newClientModel.Sites"]').val(fetchAllInputs());
+          //  $('[name="deleteSites"]').val(deleteSites);
         });
     </script>
 }

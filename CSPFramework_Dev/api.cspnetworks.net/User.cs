@@ -28,7 +28,8 @@ namespace api.cspnetworks.net
         public string security_answer_two { get; set; }
         public Nullable<int> status { get; set; }
         public Nullable<System.DateTime> creation_date { get; set; }
-        public string name { get; set; }
+        public string firstname { get; set; }
+        public string lastname { get; set; }
     
         public virtual Client Client { get; set; }
         public virtual Enum_Type_Values Status_Enum_Type_Values { get; set; }

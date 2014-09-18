@@ -67,7 +67,8 @@ namespace api.cspnetworks.net.Controllers
             
             NewUserModel userModel = new NewUserModel();
             userModel.User_Id = user.user_id;
-            userModel.Name = user.name;
+            userModel.FirstName = user.firstname;
+            userModel.LastName = user.lastname;
             userModel.Email = user.email;
             userModel.Password = user.password;
             userModel.Phone = user.phone;
@@ -92,7 +93,8 @@ namespace api.cspnetworks.net.Controllers
                 RegisteredUserModel regUser = new RegisteredUserModel();
                 regUser.User_Id = user.user_id;
                 regUser.Email = user.email;
-                regUser.Name = user.name;
+                regUser.FisrtName = user.firstname;
+                regUser.LastName = user.lastname;
                 regUser.AccountRole = user.user_group;
                 regUser.Phone = user.phone;
                 regUsers.Add(regUser);
@@ -115,7 +117,8 @@ namespace api.cspnetworks.net.Controllers
             try
             {
                 User user = new User();
-                user.name = newUser.Name;
+                user.firstname = newUser.FirstName;
+                user.lastname = newUser.LastName;
                 user.email = newUser.Email;
                 user.password = GetMd5Hash(newUser.Password);
                 user.phone = newUser.Phone;
@@ -129,7 +132,6 @@ namespace api.cspnetworks.net.Controllers
                 await _context.SaveChangesAsync();
 
                 return CreatedAtRoute("DefaultApi", new { id = user.user_id }, user);
-
             }
             catch (Exception)
             {
@@ -148,7 +150,8 @@ namespace api.cspnetworks.net.Controllers
                               select oldUserInfo).FirstOrDefault();
                 if(oldUser != null)
                 {
-                    oldUser.name = updatedUser.Name;
+                    oldUser.firstname = updatedUser.FirstName;
+                    oldUser.lastname = updatedUser.LastName;
                     oldUser.user_group = updatedUser.AccountRole.ToString();
                     oldUser.client_id = updatedUser.Customer_Id;
                     oldUser.status = updatedUser.Status;

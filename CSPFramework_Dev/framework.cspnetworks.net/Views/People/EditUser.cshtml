@@ -25,10 +25,18 @@
             <div class="form-group">
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.Name, new { @class = "col-sm-3 control-label" })
+                @Html.LabelFor(m => m.FirstName, new { @class = "col-sm-3 control-label" })
                 <div class="col-sm-9">
-                    @Html.TextBoxFor(m => m.Name, new { @placeholder = "Enter Full Name" })
-                    @Html.ValidationMessageFor(m => m.Name)
+                    @Html.TextBoxFor(m => m.FirstName, new { @placeholder = "Enter Full Name" })
+                    @Html.ValidationMessageFor(m => m.FirstName)
+                </div>
+            </div>
+            
+             <div class="form-group">
+                @Html.LabelFor(m => m.LastName, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(m => m.LastName, new { @placeholder = "Enter Full Name" })
+                    @Html.ValidationMessageFor(m => m.LastName)
                 </div>
             </div>
 

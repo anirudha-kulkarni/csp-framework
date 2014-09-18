@@ -188,6 +188,7 @@
     <Compile Include="Controllers\PeopleController.cs" />
     <Compile Include="Controllers\VendorsController.cs" />
     <Compile Include="CustomBinders\CustomerVendorModelBinder.cs" />
+    <Compile Include="Helpers\ConfigHelper.cs" />
     <Compile Include="Helpers\DropDonwHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

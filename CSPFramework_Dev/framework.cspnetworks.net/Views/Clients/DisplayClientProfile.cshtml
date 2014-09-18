@@ -1,4 +1,4 @@
-﻿@model CSPLibrary.NewClientModel
+﻿@model CSPLibrary.NewClientViewModel 
 @{
     ViewBag.Title = "Client Profile";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -7,7 +7,7 @@
 <div class="col-lg-12 center" style="margin-left:9%">
     <div class="tableHeader col-lg-9">
         <a class="col-lg-2 btn" href="/Clients/Index/">All Clients</a>
-        <h2 class="col-lg-8">Profile of client @Model.Client_Code</h2>
+        <h2 class="col-lg-8">Profile of client @Model.newClientModel.Client_Code</h2>
     </div>
     <div class="col-lg-9 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad">
         <div class="panel panel-info">
@@ -19,15 +19,15 @@
                             <tbody>
                                 <tr>
                                     <td><strong>Client Code :</strong></td>
-                                    <td>@Model.Client_Code</td>
+                                    <td>@Model.newClientModel.Client_Code</td>
                                 </tr>
 
                                 <tr>
                                     <td><strong>Company Name : </strong></td>
-                                    <td>@Model.Company_Name</td>
+                                    <td>@Model.newClientModel.Company_Name</td>
                                 </tr>
 
-                                <tr>
+                                @*<tr>
                                     <td><strong>Address :</strong></td>
                                     <td>@Model.Address</td>
                                 </tr>
@@ -55,16 +55,16 @@
                                 <tr>
                                     <td><strong>Mobile Number :</strong></td>
                                     <td>@Model.MobileNumber</td>
-                                </tr>
+                                </tr>*@
 
                                 <tr>
                                     <td><strong>Website :</strong></td>
-                                    <td>@Model.Website</td>
+                                    <td><a href="@Model.newClientModel.Website" target="_blank">@Model.newClientModel.Website</a></td>
                                 </tr>
 
                                 <tr>
                                     <td><strong>Service Type :</strong></td>
-                                    <td>@Model.ServiceTypeString</td>
+                                    <td>@Model.newClientModel.ServiceTypeString</td>
                                 </tr>
 
                                 <tr>
@@ -76,18 +76,18 @@
                                                 <tr>
                                                     <td><i><strong>Agreement Start Date :</strong></i></td>
                                                     <td>
-                                                        @if (Model.AgreementStartDate != null)
+                                                        @if (Model.newClientModel.AgreementStartDate != null)
                                                         {
-                                                            @Model.AgreementStartDate.Value.ToShortDateString();
+                                                            @Model.newClientModel.AgreementStartDate.Value.ToShortDateString();
                                                         }
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td><i><strong>Agreement End Date :</strong></i></td>
                                                     <td>
-                                                        @if (Model.AgreementEndDate != null)
+                                                        @if (Model.newClientModel.AgreementEndDate != null)
                                                         {
-                                                            @Model.AgreementEndDate.Value.ToShortDateString()
+                                                            @Model.newClientModel.AgreementEndDate.Value.ToShortDateString()
                                                         }
                                                     </td>
                                                 </tr>
@@ -98,17 +98,64 @@
 
                                 <tr>
                                     <td><strong>Team :</strong></td>
-                                    <td>@Model.TeamString</td>
+                                    <td>@Model.newClientModel.TeamString</td>
                                 </tr>
 
                                 <tr>
                                     <td><strong>Status :</strong></td>
-                                    <td>@Model.StatusString</td>
+                                    <td>@Model.newClientModel.StatusString</td>
                                 </tr>
 
                                 <tr>
-                                    <td><strong>Sites :</strong></td>
-                                    <td>@Model.Sites</td>
+                                    @*<td><strong>Sites :</strong></td>
+                                        <td>@Model.newClientModel.Sites</td>*@
+                                    <td colspan="2">
+                                        <table>
+                                           @{
+                                               int count = 1;
+                                             foreach (CSPLibrary.ClientSite item in @Model.clientSites)
+                                            {
+                                                 string location = "Location " + @count + " :";
+                                                    <tr>
+                                                        <td colspan="2" style="border-top: none; color: rgb(244, 165, 79);"><strong>@location</strong></td>
+                                                    </tr>   
+                                                count++;
+                                                    <tr>
+                                                        <td><strong>Address :</strong></td>
+                                                        <td>@item.Address</td>
+                                                    </tr>
+                                
+                                                    <tr>
+                                                        <td><strong>City :</strong></td>
+                                                        <td>@item.City</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><strong>State :</strong></td>
+                                                        <td>@item.State</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><strong>Zip :</strong></td>
+                                                        <td>@item.Zip</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><strong>Phone Number :</strong></td>
+                                                        <td>@item.PhoneNumber</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><strong>Fax :</strong></td>
+                                                        <td>@item.FaxNumber</td>
+                                                    </tr>
+                                               <tr>
+                                                   <td colspan="2"></td>
+                                               </tr>
+                                                }
+                                           }
+                                        </table>
+                                    </td>
                                 </tr>
 
                             </tbody>
