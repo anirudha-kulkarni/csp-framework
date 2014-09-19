@@ -77,6 +77,7 @@ namespace CSPLibrary
         [Display(Name = "Site")]
         public int? Site { get; set; }
 
+        public string SiteString { get; set; }
         public String SolutionString { get; set; }
     }
 
@@ -91,6 +92,8 @@ namespace CSPLibrary
         
         public Object iFunction { get; set; } 
         //public ISP isp { get; set; } 
+
+        public int site_id { get; set; }
     }
     
 }

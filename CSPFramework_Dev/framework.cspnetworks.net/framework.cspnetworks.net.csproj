@@ -337,6 +337,8 @@
     <Content Include="Views\Shared\_Fun_Printer.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\FunctionNotes.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CSPUsers.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Site_List.cshtml" />
+    <Content Include="Views\Shared\_Site_List_Partial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

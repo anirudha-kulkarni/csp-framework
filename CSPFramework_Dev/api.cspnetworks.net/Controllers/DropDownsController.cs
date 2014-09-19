@@ -154,23 +154,47 @@ namespace api.cspnetworks.net.Controllers
             }
             return null;
         }
-        public Dictionary<string,int> GetCSPUsers() {
+        public Dictionary<String,String> GetCSPUsers() {
 
              Client client = (from clientDB in _context.Clients
                              where clientDB.client_code == "CSP"
                              select clientDB).FirstOrDefault();
-             Dictionary<String,int> dictionary = new Dictionary< String,int>();
-             IQueryable<User> user = (from values in _context.Users
-                                          where values.client_id == client.client_id
-                                          select values);
-             foreach (var userItem in user)
+             if (client != null)
              {
-                dictionary.Add(userItem.firstname, userItem.user_id);
-             }
-                 
-             
+                 Dictionary<String, String> dictionary = new Dictionary<String, String>();
+                 IQueryable<User> user = (from values in _context.Users
+                                          where values.client_id == client.client_id
+                                         select values);
+                 if (user != null) {
+                     foreach (var userItem in user)
+                     {
+                         dictionary.Add(userItem.user_id.ToString(), userItem.firstname + " (" + userItem.email + ")");
+                     }
+                 }
 
-             return dictionary;
+                 return dictionary;
+
+             }
+             return null;
+        }
+
+        public Dictionary<String, String> GetSites(int id) {
+
+            IQueryable<Client_Site> clientSites = (from site in _context.Client_Site
+                                                     where site.client_id == id
+                                                   select site);
+
+            Dictionary<String,String> dictionary = new Dictionary< String,String>();
+
+            if (clientSites != null)
+            {
+                foreach (var item in clientSites)
+                {
+                    dictionary.Add(item.client_site_id.ToString(), item.site_name);
+                }    
+            }
+            
+            return dictionary;
         }
     }
 }

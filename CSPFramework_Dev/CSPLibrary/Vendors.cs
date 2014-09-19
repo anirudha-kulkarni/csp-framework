@@ -6,6 +6,13 @@ using System.Text;
 
 namespace CSPLibrary
 {
+    public class Site_LocationModel
+    {
+        public int client_id { get; set; }
+        public String SiteName { get; set; }
+        public int site_id { get; set; }
+    }
+
     public class VendorsViewModel
     {
         public IEnumerable<CSPLibrary.NewVendorModel> RegisteredVendorsList { get; set; }

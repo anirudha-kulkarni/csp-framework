@@ -43,7 +43,8 @@ namespace api.cspnetworks.net.Controllers
                 newClient.Client_Code = client.client_code;
                 //newClient.MobileNumber = client.mobile;
                 newClient.Company_Name = client.company_name;
- newClient.Website = client.website;                if (client.service_type != null)
+                newClient.Website = client.website;                
+                if (client.service_type != null)
                 {
                     newClient.ServiceType = client.service_type;
                     newClient.ServiceTypeString = client.ServiceType_Enum_Type_Values.enum_type_value;
@@ -53,7 +54,7 @@ namespace api.cspnetworks.net.Controllers
                 if (client.Agreement != null)
                 {
                     newClient.AgreementStartDate = client.Agreement.start_date;
-newClient.AgreementPath = client.Agreement.filepath;                }
+                    newClient.AgreementPath = client.Agreement.filepath;                }
 
                 if (client.team != null)
                 {
@@ -163,6 +164,7 @@ newClient.AgreementPath = client.Agreement.filepath;                }
             {
                 ClientSite tempClientSite = new ClientSite();
                 tempClientSite.Client_Site_Id = item.client_site_id;
+                tempClientSite.SiteName = item.site_name;
                 tempClientSite.Address = item.address;
                 tempClientSite.City = item.city;
                 tempClientSite.State = item.state;
@@ -181,10 +183,12 @@ newClient.AgreementPath = client.Agreement.filepath;                }
         {
             Client client = new Client();
             client.client_code = newClientViewModel.newClientModel.Client_Code;
-client.executive_incharge = newClientViewModel.newClientModel.executiveIncharge;
+            client.company_name = newClientViewModel.newClientModel.Company_Name;
+            client.executive_incharge = newClientViewModel.newClientModel.executiveIncharge;
             client.program_manager = newClientViewModel.newClientModel.programManager;
             client.account_manager = newClientViewModel.newClientModel.accountManager;
-            client.PAM_manager = newClientViewModel.newClientModel.pamManager;            client.website = newClientViewModel.newClientModel.Website;
+            client.PAM_manager = newClientViewModel.newClientModel.pamManager;            
+            client.website = newClientViewModel.newClientModel.Website;
             client.service_type = newClientViewModel.newClientModel.ServiceType;
 
             Agreement agreement = null;
@@ -193,7 +197,9 @@ client.executive_incharge = newClientViewModel.newClientModel.executiveIncharge;
             {
                 agreement = new Agreement();
                 agreement.start_date = newClientViewModel.newClientModel.AgreementStartDate;
-agreement.filepath = newClientViewModel.newClientModel.AgreementPath;            }
+                agreement.end_date = newClientViewModel.newClientModel.AgreementEndDate;
+                agreement.filepath = newClientViewModel.newClientModel.AgreementPath;          
+            }
 
             client.team = newClientViewModel.newClientModel.Team;
             client.status = newClientViewModel.newClientModel.Status;           
@@ -215,12 +221,14 @@ agreement.filepath = newClientViewModel.newClientModel.AgreementPath;           
                     {
                         Client_Site dbClientSite = new Client_Site();
                         dbClientSite.client_id = client.client_id;
+                        dbClientSite.site_name = clientSite.SiteName;
                         dbClientSite.address = clientSite.Address;
                         dbClientSite.city = clientSite.City;
                         dbClientSite.fax = clientSite.FaxNumber;
                         dbClientSite.phone = clientSite.PhoneNumber;
                         dbClientSite.state = clientSite.State;
                         dbClientSite.zip = clientSite.Zip;
+
 
                         _context.Client_Site.Add(dbClientSite);                       
                     }
@@ -332,6 +340,7 @@ agreement.filepath = newClientViewModel.newClientModel.AgreementPath;           
                                 // Present in Client Array
                                 // So, update DB with new one
                                 ClientSite site = newClientViewModel.clientSites.Find(x => x.Client_Site_Id.Equals(dbSite.client_site_id));
+                                dbSite.site_name = site.SiteName;
                                 dbSite.address = site.Address;
                                 dbSite.city = site.City;
                                 dbSite.state = site.State;
@@ -361,6 +370,7 @@ agreement.filepath = newClientViewModel.newClientModel.AgreementPath;           
                                 // Add new Client Site in the DB.
                                 Client_Site clientSite = new Client_Site();
                                 clientSite.client_id = client.client_id;
+                                clientSite.site_name = item.SiteName;
                                 clientSite.address = item.Address;
                                 clientSite.city = item.City;
                                 clientSite.state = item.State;
@@ -371,7 +381,8 @@ agreement.filepath = newClientViewModel.newClientModel.AgreementPath;           
                                 _context.Client_Site.Add(clientSite);                                
                             }
                         }
-await _context.SaveChangesAsync();                        scope.Complete();
+                       await _context.SaveChangesAsync();                        
+                       scope.Complete();
                     }
                     return CreatedAtRoute("DefaultApi", new { id = client.client_id }, client);
                 }

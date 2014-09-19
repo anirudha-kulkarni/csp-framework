@@ -56,7 +56,7 @@ namespace framework.cspnetworks.net.CustomBinders
 
                 newModel.newCustomerVendorModel.Client_Id = Parse<int>(request.Form.Get("newCustomerVendorModel.Client_Id"));
                 newModel.newCustomerVendorModel.ClientCode = request.Form.Get("newCustomerVendorModel.ClientCode");
-                //newModel.newCustomerVendorModel.Site = request.Form.Get("newCustomerVendorModel.Site");
+                newModel.newCustomerVendorModel.Site = Parse<int>(request.Form.Get("site_id"));
 
                 return newModel;              
             }
