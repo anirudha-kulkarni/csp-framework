@@ -184,6 +184,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\CustomerVendorController.cs" />
+    <Compile Include="Controllers\HardwareController.cs" />
     <Compile Include="Controllers\PeopleController.cs" />
     <Compile Include="Controllers\VendorsController.cs" />
     <Compile Include="CustomBinders\CustomerVendorModelBinder.cs" />
@@ -336,6 +337,17 @@
     <Content Include="Views\Shared\_Fun_Connectivity_Internet.cshtml" />
     <Content Include="Views\Shared\_Fun_Printer.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\FunctionNotes.cshtml" />
+    <Content Include="Views\Hardware\Index.cshtml" />
+    <Content Include="Views\Hardware\AddNewHardware.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\HardwareMakeList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\HardwareItemList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\PurchasedBy.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\RegisteredHardwareList.cshtml" />
+    <Content Include="Views\Hardware\DisplayHardwareDetails.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SoftwareList.cshtml" />
+    <Content Include="Views\Shared\_HardwareDropDownList.cshtml" />
+    <Content Include="Views\Hardware\EditHardware.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\HardwareStatusList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

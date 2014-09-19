@@ -1,0 +1,20 @@
+﻿@model CSPLibrary.HardwareViewModel
+@{
+    ViewBag.Title = "Hardware List";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="wrapper" id="companySetup">
+
+    @*Render Registered Hardware table from Editor Template*@
+    @Html.DisplayFor(m => m.RegisteredHardwareList, "RegisteredHardwareList")
+
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/admin/css")
+}

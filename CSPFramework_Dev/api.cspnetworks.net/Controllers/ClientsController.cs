@@ -46,7 +46,7 @@ namespace api.cspnetworks.net.Controllers
                 if (client.service_type != null)
                 {
                     newClient.ServiceType = client.service_type;
-                    newClient.ServiceTypeString = client.ServiceType_Enum_Type_Values.enum_type_value;
+                    newClient.ServiceTypeString = client.ServiceType_Enum_Type_Value.enum_type_value;
                 }
 
 
@@ -101,7 +101,7 @@ namespace api.cspnetworks.net.Controllers
             if (client.service_type != null)
             {
                 newClient.newClientModel.ServiceType = client.service_type;
-                newClient.newClientModel.ServiceTypeString = client.ServiceType_Enum_Type_Values.enum_type_value;
+                newClient.newClientModel.ServiceTypeString = client.ServiceType_Enum_Type_Value.enum_type_value;
             }
 
 
