@@ -208,6 +208,9 @@
     <Compile Include="Software.cs">
       <DependentUpon>CSPFrameworkEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>CSPFrameworkEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="User.cs">
       <DependentUpon>CSPFrameworkEntities.tt</DependentUpon>
     </Compile>

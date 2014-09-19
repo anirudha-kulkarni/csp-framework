@@ -20,6 +20,11 @@
                         <table class="table table-user-information">
                             <tbody>
                                 <tr>
+                                    <td><strong>CSPN Asset Tag :</strong></td>
+                                    <td>@Model.Hardware_Id</td>
+                                </tr>
+
+                                <tr>
                                     <td><strong>Vendor Name :</strong></td>
                                     <td>@Model.Vendor_Name</td>
                                 </tr>
@@ -47,7 +52,7 @@
                                 @if (@Model.ItemName.ToLower().Contains("accessory") && @Model.Associted_Hardware_Id.HasValue)
                                 {
                                     <tr>
-                                        <td><strong>Associated Hardware CSPNAssetTag</strong></td>
+                                        <td><strong>Associated Hardware CSPN Asset Tag</strong></td>
                                         <td>@Model.Associted_Hardware_Id</td>
                                     </tr>
                                 }

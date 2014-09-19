@@ -19,8 +19,8 @@ namespace api.cspnetworks.net
             this.Clients = new HashSet<Client>();
             this.Clients1 = new HashSet<Client>();
             this.Clients2 = new HashSet<Client>();
-            this.FunctionName_Customer_Vendors = new HashSet<Customer_Vendors>();
-            this.Status_Customer_Vendors = new HashSet<Customer_Vendors>();
+            this.Customer_Vendors = new HashSet<Customer_Vendors>();
+            this.Customer_Vendors1 = new HashSet<Customer_Vendors>();
             this.Hardwares = new HashSet<Hardware>();
             this.Hardwares1 = new HashSet<Hardware>();
             this.Hardwares2 = new HashSet<Hardware>();
@@ -35,9 +35,8 @@ namespace api.cspnetworks.net
         public virtual ICollection<Client> Clients { get; set; }
         public virtual ICollection<Client> Clients1 { get; set; }
         public virtual ICollection<Client> Clients2 { get; set; }
-        public virtual ICollection<Customer_Vendors> FunctionName_Customer_Vendors { get; set; }
-        public virtual ICollection<Customer_Vendors> Status_Customer_Vendors { get; set; }
-        public virtual Enum_Types Enum_Types { get; set; }
+        public virtual ICollection<Customer_Vendors> Customer_Vendors { get; set; }
+        public virtual ICollection<Customer_Vendors> Customer_Vendors1 { get; set; }
         public virtual ICollection<Hardware> Hardwares { get; set; }
         public virtual ICollection<Hardware> Hardwares1 { get; set; }
         public virtual ICollection<Hardware> Hardwares2 { get; set; }

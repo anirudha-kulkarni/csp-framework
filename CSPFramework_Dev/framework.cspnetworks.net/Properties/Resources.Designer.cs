@@ -79,7 +79,7 @@ namespace framework.cspnetworks.net.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hardware has been addes successfully !.
+        ///   Looks up a localized string similar to Hardware has been added successfully !.
         /// </summary>
         public static string AddHardware_Success {
             get {
