@@ -20,15 +20,15 @@
                         @Html.ValidationMessageFor(m => m.Name)
 
                         @Html.LabelFor(m => m.SupportNumber, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.SupportNumber, new { @placeholder = "Enter Vendor Support Number", @class="phone" })
+                        @Html.TextBoxFor(m => m.SupportNumber, new { @placeholder = "999.999.999", @class="phone" })
                         @Html.ValidationMessageFor(m => m.SupportNumber)
 
                         @Html.LabelFor(m => m.SupportEmail, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.SupportEmail, new { @placeholder = "Enter Vendor Support Email" })
+                        @Html.TextBoxFor(m => m.SupportEmail, new { @placeholder = "example@domain.com" })
                         @Html.ValidationMessageFor(m => m.SupportEmail)
 
                         @Html.LabelFor(m => m.website, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.website, new { @placeholder = "Enter Vendor Website" , @class="url" })
+                        @Html.TextBoxFor(m => m.website, new { @placeholder = @"http://www.example.com" , @class="url" })
                         @Html.ValidationMessageFor(m => m.website)
 
                     </div>
