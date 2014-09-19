@@ -272,10 +272,7 @@ namespace api.cspnetworks.net.Controllers
             }
             return null;
         }
-<<<<<<< HEAD
 
-
-=======
         public Dictionary<String,String> GetCSPUsers() {
 
              Client client = (from clientDB in _context.Clients
@@ -318,6 +315,5 @@ namespace api.cspnetworks.net.Controllers
             
             return dictionary;
         }
->>>>>>> smit-bug-fixes
     }
 }

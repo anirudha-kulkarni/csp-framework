@@ -45,9 +45,6 @@ namespace framework.cspnetworks.net.Helpers
             return items;
         }
 
-<<<<<<< HEAD
-        
-=======
         public static IEnumerable<SelectListItem> GetCSPUsers(String dropDownApiMethod, String selectedValue)
         {
 
@@ -118,7 +115,7 @@ namespace framework.cspnetworks.net.Helpers
             return items;
         }
 
->>>>>>> smit-bug-fixes
+
         //public static IEnumerable<SelectListItem> GetItems(this Type enumType, int? selectedValue)
         //{
         //    if (!typeof(Enum).IsAssignableFrom(enumType))

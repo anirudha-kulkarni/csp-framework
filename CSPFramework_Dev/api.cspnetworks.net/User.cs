@@ -16,10 +16,10 @@ namespace api.cspnetworks.net
     {
         public User()
         {
-            this.Account_Manager_Client = new HashSet<Client>();
-            this.Exe_InCharge_Clients = new HashSet<Client>();
+            this.Account_Manager_Clients = new HashSet<Client>();
+            this.Executive_Incharge_Clients = new HashSet<Client>();
             this.PAM_Manager_Clients = new HashSet<Client>();
-            this.Prog_Manager_Clients = new HashSet<Client>();
+            this.Program_Manager_Clients = new HashSet<Client>();
         }
     
         public int user_id { get; set; }
@@ -39,11 +39,11 @@ namespace api.cspnetworks.net
         public string firstname { get; set; }
         public string lastname { get; set; }
     
-        public virtual ICollection<Client> Account_Manager_Client { get; set; }
-        public virtual ICollection<Client> Exe_InCharge_Clients { get; set; }
-        public virtual Client Client { get; set; }
+        public virtual ICollection<Client> Account_Manager_Clients { get; set; }
+        public virtual ICollection<Client> Executive_Incharge_Clients { get; set; }
         public virtual ICollection<Client> PAM_Manager_Clients { get; set; }
-        public virtual ICollection<Client> Prog_Manager_Clients { get; set; }
+        public virtual ICollection<Client> Program_Manager_Clients { get; set; }
+        public virtual Client Client { get; set; }
         public virtual Enum_Type_Values Status_Enum_Type_Values { get; set; }
         public virtual User_Groups User_Groups { get; set; }
     }

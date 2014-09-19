@@ -44,22 +44,15 @@ namespace api.cspnetworks.net
     
         public virtual Agreement Agreement { get; set; }
         public virtual ICollection<Client_Site> Client_Site { get; set; }
-<<<<<<< HEAD
-        public virtual Enum_Type_Values ServiceType_Enum_Type_Value { get; set; }
-=======
-        public virtual User Account_Manager_Enum { get; set; }
-        public virtual User Exe_InCharge_Enum { get; set; }
         public virtual Enum_Type_Values ServiceType_Enum_Type_Values { get; set; }
->>>>>>> smit-bug-fixes
         public virtual Enum_Type_Values Status_Enum_Type_Values { get; set; }
         public virtual Enum_Type_Values Team_Enum_Type_Values { get; set; }
+        public virtual User Account_Manager_User { get; set; }
+        public virtual User Executive_Incharge_User { get; set; }
+        public virtual User PAM_Manager_User { get; set; }
+        public virtual User Program_Manager_User { get; set; }
         public virtual ICollection<Customer_Vendors> Customer_Vendors { get; set; }
         public virtual ICollection<Hardware> Hardwares { get; set; }
         public virtual ICollection<User> Users { get; set; }
-<<<<<<< HEAD
-=======
-        public virtual User PAM_Manager_Enum { get; set; }
-        public virtual User Program_Manager_Enum { get; set; }
->>>>>>> smit-bug-fixes
     }
 }
