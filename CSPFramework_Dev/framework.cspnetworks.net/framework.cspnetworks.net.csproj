@@ -337,6 +337,7 @@
     <Content Include="Views\Shared\_Fun_Connectivity_Internet.cshtml" />
     <Content Include="Views\Shared\_Fun_Printer.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\FunctionNotes.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Hardware\Index.cshtml" />
     <Content Include="Views\Hardware\AddNewHardware.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\HardwareMakeList.cshtml" />
@@ -348,6 +349,11 @@
     <Content Include="Views\Shared\_HardwareDropDownList.cshtml" />
     <Content Include="Views\Hardware\EditHardware.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\HardwareStatusList.cshtml" />
+=======
+    <Content Include="Views\Shared\EditorTemplates\CSPUsers.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Site_List.cshtml" />
+    <Content Include="Views\Shared\_Site_List_Partial.cshtml" />
+>>>>>>> smit-bug-fixes
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

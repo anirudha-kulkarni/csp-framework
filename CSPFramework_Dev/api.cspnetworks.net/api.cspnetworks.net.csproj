@@ -201,6 +201,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Hardware.cs">
       <DependentUpon>CSPFrameworkEntities.tt</DependentUpon>
     </Compile>
@@ -211,6 +212,9 @@
     <Compile Include="sysdiagram.cs">
       <DependentUpon>CSPFrameworkEntities.tt</DependentUpon>
     </Compile>
+=======
+    <Compile Include="Properties\AssemblyInfo.cs" />
+>>>>>>> smit-bug-fixes
     <Compile Include="User.cs">
       <DependentUpon>CSPFrameworkEntities.tt</DependentUpon>
     </Compile>

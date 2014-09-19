@@ -1,0 +1,16 @@
+﻿@using CSPLibrary
+@using framework.cspnetworks.net.Helpers
+@{
+    int? client_id = ViewData["client_id"] as int?;
+    String selectedVal = "";
+    int site_id = 1;
+    if (@Model != null)
+    {
+        site_id = (int)@Model;
+        selectedVal = (String)@Model.ToString();
+    }
+    var items = DropDonwHelper.GetClientSitesList(client_id, selectedVal);
+
+}
+
+@Html.DropDownList("", items, new { @id = "siteslist_", @name="site_id"})

@@ -41,8 +41,9 @@ namespace api.cspnetworks.net.Controllers
 
                 newClient.Client_Id = client.client_id;
                 newClient.Client_Code = client.client_code;
-                newClient.Company_Name = client.company_name;                
-                newClient.Website = client.website;
+                //newClient.MobileNumber = client.mobile;
+                newClient.Company_Name = client.company_name;
+                newClient.Website = client.website;                
                 if (client.service_type != null)
                 {
                     newClient.ServiceType = client.service_type;
@@ -53,15 +54,26 @@ namespace api.cspnetworks.net.Controllers
                 if (client.Agreement != null)
                 {
                     newClient.AgreementStartDate = client.Agreement.start_date;
-                    newClient.AgreementEndDate = client.Agreement.end_date;
-                }
+                    newClient.AgreementPath = client.Agreement.filepath;                }
 
                 if (client.team != null)
                 {
                     newClient.Team = client.team;
-                    newClient.TeamString = client.Team_Enum_Type_Values.enum_type_value;
+                    newClient.TeamString = client.Team_Enum_Type_Values.enum_type_value;                       
                 }
-
+               if (client.program_manager != null) {
+                    newClient.programManager = client.program_manager;
+                    newClient.programManagerString = client.Program_Manager_Enum.firstname;
+                }
+                if (client.account_manager != null)
+                {
+                    newClient.accountManager = client.account_manager;
+                    newClient.accountManagerString = client.Account_Manager_Enum.firstname;  
+                }
+                if (client.PAM_manager != null) {
+                    newClient.pamManager = client.PAM_manager;
+                    newClient.pamManagerString = client.PAM_Manager_Enum.firstname;
+                }
                 if (client.status != null)
                 {
                     newClient.Status = client.status;
@@ -109,6 +121,7 @@ namespace api.cspnetworks.net.Controllers
             {
                 newClient.newClientModel.AgreementStartDate = client.Agreement.start_date;
                 newClient.newClientModel.AgreementEndDate = client.Agreement.end_date;
+                newClient.newClientModel.AgreementPath = client.Agreement.filepath;
             }
 
             if (client.team != null)
@@ -116,7 +129,26 @@ namespace api.cspnetworks.net.Controllers
                 newClient.newClientModel.Team = client.team;
                 newClient.newClientModel.TeamString = client.Team_Enum_Type_Values.enum_type_value;
             }
-
+            if (client.executive_incharge != null)
+            {
+                newClient.newClientModel.executiveIncharge = client.executive_incharge;
+                newClient.newClientModel.executiveInchargeString = client.Exe_InCharge_Enum.firstname;
+            }
+            if (client.program_manager != null)
+            {
+                newClient.newClientModel.programManager = client.program_manager;
+                newClient.newClientModel.programManagerString = client.Program_Manager_Enum.firstname;
+            }
+            if (client.account_manager != null)
+            {
+                newClient.newClientModel.accountManager = client.account_manager;
+                newClient.newClientModel.accountManagerString = client.Account_Manager_Enum.firstname;
+            }
+            if (client.PAM_manager != null)
+            {
+                newClient.newClientModel.pamManager = client.PAM_manager;
+                newClient.newClientModel.pamManagerString = client.PAM_Manager_Enum.firstname;
+            }
             if (client.status != null)
             {
                 newClient.newClientModel.Status = client.status;
@@ -132,6 +164,7 @@ namespace api.cspnetworks.net.Controllers
             {
                 ClientSite tempClientSite = new ClientSite();
                 tempClientSite.Client_Site_Id = item.client_site_id;
+                tempClientSite.SiteName = item.site_name;
                 tempClientSite.Address = item.address;
                 tempClientSite.City = item.city;
                 tempClientSite.State = item.state;
@@ -150,16 +183,22 @@ namespace api.cspnetworks.net.Controllers
         {
             Client client = new Client();
             client.client_code = newClientViewModel.newClientModel.Client_Code;
-            client.company_name = newClientViewModel.newClientModel.Company_Name;            
+            client.company_name = newClientViewModel.newClientModel.Company_Name;
+            client.executive_incharge = newClientViewModel.newClientModel.executiveIncharge;
+            client.program_manager = newClientViewModel.newClientModel.programManager;
+            client.account_manager = newClientViewModel.newClientModel.accountManager;
+            client.PAM_manager = newClientViewModel.newClientModel.pamManager;            
             client.website = newClientViewModel.newClientModel.Website;
             client.service_type = newClientViewModel.newClientModel.ServiceType;
 
             Agreement agreement = null;
-            if (newClientViewModel.newClientModel.AgreementStartDate != null || newClientViewModel.newClientModel.AgreementEndDate != null)
+            if (newClientViewModel.newClientModel.AgreementStartDate != null || newClientViewModel.newClientModel.AgreementEndDate != null || 
+                newClientViewModel.newClientModel.AgreementPath != null)
             {
                 agreement = new Agreement();
                 agreement.start_date = newClientViewModel.newClientModel.AgreementStartDate;
                 agreement.end_date = newClientViewModel.newClientModel.AgreementEndDate;
+                agreement.filepath = newClientViewModel.newClientModel.AgreementPath;          
             }
 
             client.team = newClientViewModel.newClientModel.Team;
@@ -182,12 +221,14 @@ namespace api.cspnetworks.net.Controllers
                     {
                         Client_Site dbClientSite = new Client_Site();
                         dbClientSite.client_id = client.client_id;
+                        dbClientSite.site_name = clientSite.SiteName;
                         dbClientSite.address = clientSite.Address;
                         dbClientSite.city = clientSite.City;
                         dbClientSite.fax = clientSite.FaxNumber;
                         dbClientSite.phone = clientSite.PhoneNumber;
                         dbClientSite.state = clientSite.State;
                         dbClientSite.zip = clientSite.Zip;
+
 
                         _context.Client_Site.Add(dbClientSite);                       
                     }
@@ -259,22 +300,29 @@ namespace api.cspnetworks.net.Controllers
                     client.service_type = newClientViewModel.newClientModel.ServiceType;
 
                     Agreement agreement = null;
-                    if (newClientViewModel.newClientModel.AgreementStartDate != null || newClientViewModel.newClientModel.AgreementEndDate != null)
+                    if (newClientViewModel.newClientModel.AgreementStartDate != null || newClientViewModel.newClientModel.AgreementEndDate != null ||
+                        newClientViewModel.newClientModel.AgreementPath != null)
                     {
                         if (client.Agreement == null)
                         {
                             agreement = new Agreement();
                             agreement.start_date = newClientViewModel.newClientModel.AgreementStartDate;
                             agreement.end_date = newClientViewModel.newClientModel.AgreementEndDate;
+                            agreement.filepath = newClientViewModel.newClientModel.AgreementPath;
                         }
                         else
                         {
                             client.Agreement.start_date = (newClientViewModel.newClientModel.AgreementStartDate != null) ? newClientViewModel.newClientModel.AgreementStartDate : client.Agreement.start_date;
                             client.Agreement.end_date = (newClientViewModel.newClientModel.AgreementEndDate != null) ? newClientViewModel.newClientModel.AgreementEndDate : client.Agreement.end_date;
+                            client.Agreement.filepath = (newClientViewModel.newClientModel.AgreementPath != null) ? newClientViewModel.newClientModel.AgreementPath : client.Agreement.filepath;
                         }
                     }
 
-                    client.team = newClientViewModel.newClientModel.Team;
+                    //client.team = newClientViewModel.newClientModel.Team;
+                    client.executive_incharge = newClientViewModel.newClientModel.executiveIncharge;
+                    client.program_manager = newClientViewModel.newClientModel.programManager;
+                    client.account_manager = newClientViewModel.newClientModel.accountManager;
+                    client.PAM_manager = newClientViewModel.newClientModel.pamManager;
                     client.status = newClientViewModel.newClientModel.Status;
 
                     using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, TransactionScopeAsyncFlowOption.Enabled))
@@ -292,6 +340,7 @@ namespace api.cspnetworks.net.Controllers
                                 // Present in Client Array
                                 // So, update DB with new one
                                 ClientSite site = newClientViewModel.clientSites.Find(x => x.Client_Site_Id.Equals(dbSite.client_site_id));
+                                dbSite.site_name = site.SiteName;
                                 dbSite.address = site.Address;
                                 dbSite.city = site.City;
                                 dbSite.state = site.State;
@@ -321,6 +370,7 @@ namespace api.cspnetworks.net.Controllers
                                 // Add new Client Site in the DB.
                                 Client_Site clientSite = new Client_Site();
                                 clientSite.client_id = client.client_id;
+                                clientSite.site_name = item.SiteName;
                                 clientSite.address = item.Address;
                                 clientSite.city = item.City;
                                 clientSite.state = item.State;
@@ -331,8 +381,8 @@ namespace api.cspnetworks.net.Controllers
                                 _context.Client_Site.Add(clientSite);                                
                             }
                         }
-                        await _context.SaveChangesAsync();
-                        scope.Complete();
+                       await _context.SaveChangesAsync();                        
+                       scope.Complete();
                     }
                     return CreatedAtRoute("DefaultApi", new { id = client.client_id }, client);
                 }

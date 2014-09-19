@@ -4,6 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
+<<<<<<< HEAD:CSPFramework_Dev/api.cspnetworks.net/CSPFrameworkEntities.edmx.diagram
       <Diagram DiagramId="b5ea255589e54718bd8c75882c3c905c" Name="Diagram1">
         <EntityTypeShape EntityType="CSPFRAMEWORKModel.Agreement" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CSPFRAMEWORKModel.Client_Site" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
@@ -21,20 +22,45 @@
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Clients_Agreement" ManuallyRouted="false" />
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Customer_Vendors_Agreements" ManuallyRouted="false" />
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Client_Sites_Clients" ManuallyRouted="false" />
+=======
+      <Diagram DiagramId="a97fceaa320a41d28c5b8c9dcfd4e0b2" Name="Diagram1" ZoomLevel="101">
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.Agreement" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.Client_Site" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.Client" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.Customer_Vendors" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.Enum_Type_Values" Width="1.5" PointX="8" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.Enum_Types" Width="1.5" PointX="5.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.Function_Notes" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.User_Groups" Width="1.5" PointX="8" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.User" Width="3" PointX="10.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSPFRAMEWORKModel.Vendor" Width="1.5" PointX="5.25" PointY="15.5" IsExpanded="true" />
+        <AssociationConnector Association="CSPFRAMEWORKModel.FK_Clients_Agreement" ManuallyRouted="false" />
+        <AssociationConnector Association="CSPFRAMEWORKModel.FK_Customer_Vendors_Agreements" ManuallyRouted="false" />
+        <AssociationConnector Association="CSPFRAMEWORKModel.FK_Client_Sites_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="CSPFRAMEWORKModel.Sites_FK_Customer_Vendors" ManuallyRouted="false" />
+        <AssociationConnector Association="CSPFRAMEWORKModel.Account_Manager_FK_Clients_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="CSPFRAMEWORKModel.Exe_InCharge_FK_Clients_Clients" ManuallyRouted="false" />
+>>>>>>> smit-bug-fixes:CSPFramework_Dev/api.cspnetworks.net/CSPFramework.edmx.diagram
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Clients_ServiceType" ManuallyRouted="false" />
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Clients_Status" ManuallyRouted="false" />
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Clients_Team" ManuallyRouted="false" />
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Customer_Vendors_Clients" ManuallyRouted="false" />
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Hardware_Clients" ManuallyRouted="false" />
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Users_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="CSPFRAMEWORKModel.PAM_Manager_FK_Clients_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="CSPFRAMEWORKModel.Prog_Manager_FK_Clients_Clients" ManuallyRouted="false" />
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Customer_Vendors_FunctionName" ManuallyRouted="false" />
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Customer_Vendors_FunctionNotes" ManuallyRouted="false" />
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Customer_Vendors_Status" ManuallyRouted="false" />
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Customer_Vendors_Vendors" ManuallyRouted="false" />
+<<<<<<< HEAD:CSPFramework_Dev/api.cspnetworks.net/CSPFrameworkEntities.edmx.diagram
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Hardware_Item" ManuallyRouted="false" />
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Hardware_Make" ManuallyRouted="false" />
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Hardware_PurchasedBy" ManuallyRouted="false" />
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Hardware_Status" ManuallyRouted="false" />
+=======
+        <AssociationConnector Association="CSPFRAMEWORKModel.FK_Enum_Type_Values_Enum_Types" ManuallyRouted="false" />
+>>>>>>> smit-bug-fixes:CSPFramework_Dev/api.cspnetworks.net/CSPFramework.edmx.diagram
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Users_Status" ManuallyRouted="false" />
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Hardware_AssociatedHardware" ManuallyRouted="false" />
         <AssociationConnector Association="CSPFRAMEWORKModel.FK_Hardware_Softwares" ManuallyRouted="false" />

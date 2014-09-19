@@ -56,7 +56,7 @@ namespace framework.cspnetworks.net.Controllers
                 }
             }
 
-            return View(custVendorViewModel);   
+            return View(custVendorViewModel);
         }
 
         [Authorize]
@@ -71,8 +71,8 @@ namespace framework.cspnetworks.net.Controllers
             switch (selectedFunction)
             {
                 case "Application":
-                     Fun_Application application = new Fun_Application();
-                     return PartialView("_Fun_Application", application);
+                    Fun_Application application = new Fun_Application();
+                    return PartialView("_Fun_Application", application);
 
                 case "Fax":
                     Fun_Fax funFax = new Fun_Fax();
@@ -93,14 +93,14 @@ namespace framework.cspnetworks.net.Controllers
                 case "Connectivity - Internet":
                     Fun_Connectivity_Internet funConnInt = new Fun_Connectivity_Internet();
                     return PartialView("_Fun_Connectivity_Internet", funConnInt);
-                    
+
                 case "Printer":
                     Fun_Printer funPrinter = new Fun_Printer();
                     return PartialView("_Fun_Printer", funPrinter);
 
                 default:
                     break;
-            }          
+            }
             return Content("");
         }
 
@@ -111,8 +111,8 @@ namespace framework.cspnetworks.net.Controllers
             // Check if there is a agreement file and save it.
             if (Request.Files[0] != null && Request.Files[0].ContentLength > 0)
             {
-                var fileExtension = Path.GetExtension(Request.Files[0].FileName).Substring(1);       
-                if(fileExtension.ToLowerInvariant() == "pdf")
+                var fileExtension = Path.GetExtension(Request.Files[0].FileName).Substring(1);
+                if (fileExtension.ToLowerInvariant() == "pdf")
                 {
                     var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), Guid.NewGuid().ToString() + "." + fileExtension);
 
@@ -122,10 +122,10 @@ namespace framework.cspnetworks.net.Controllers
                     {
                         System.IO.Directory.CreateDirectory(Server.MapPath("~/App_Data/uploads"));
                     }
-                        
+
                     Request.Files[0].SaveAs(path);
                     customerVendorViewModelPost.newCustomerVendorModel.AgreementPath = path;
-                }                
+                }
             }
 
 
@@ -142,11 +142,11 @@ namespace framework.cspnetworks.net.Controllers
             if (response.StatusCode.Equals(HttpStatusCode.Created))
             {
                 TempData[Properties.Resources.Success] = Properties.Resources.AddCutomerVendor_Success;
-                return RedirectToAction("Index", "CustomerVendor"); 
+                return RedirectToAction("Index", "CustomerVendor");
             }
 
             TempData[Properties.Resources.Error] = Properties.Resources.Global_Error;
-            return RedirectToAction("Index", "CustomerVendor");            
+            return RedirectToAction("Index", "CustomerVendor");
         }
 
         [Authorize]
@@ -166,8 +166,8 @@ namespace framework.cspnetworks.net.Controllers
             CustomerVendorViewModelPost newCustomerVendor = new CustomerVendorViewModelPost();
             if (response.IsSuccessStatusCode)
             {
-                newCustomerVendor = response.Content.ReadAsAsync<CustomerVendorViewModelPost>().Result;                
-            }          
+                newCustomerVendor = response.Content.ReadAsAsync<CustomerVendorViewModelPost>().Result;
+            }
             return View(newCustomerVendor);
         }
 
@@ -187,11 +187,11 @@ namespace framework.cspnetworks.net.Controllers
             if (response.IsSuccessStatusCode)
             {
                 TempData[Properties.Resources.Success] = Properties.Resources.DeleteCutomerVendor_Success;
-                return RedirectToAction("Index", "CustomerVendor"); 
+                return RedirectToAction("Index", "CustomerVendor");
             }
 
             TempData[Properties.Resources.Error] = Properties.Resources.Global_Error;
-            return RedirectToAction("Index", "CustomerVendor"); 
+            return RedirectToAction("Index", "CustomerVendor");
         }
 
         [Authorize]
@@ -254,11 +254,19 @@ namespace framework.cspnetworks.net.Controllers
             if (response.StatusCode.Equals(HttpStatusCode.Created))
             {
                 TempData[Properties.Resources.Success] = Properties.Resources.EditCustomerVendor_Success;
-                return RedirectToAction("Index", "CustomerVendor"); 
+                return RedirectToAction("Index", "CustomerVendor");
             }
 
             TempData[Properties.Resources.Error] = Properties.Resources.Global_Error;
-            return RedirectToAction("Index", "CustomerVendor"); 
-        }        
-	}
+            return RedirectToAction("Index", "CustomerVendor");
+        }
+        [Authorize]
+        public ActionResult GetSitesView(int id)
+        {
+            Site_LocationModel siteModel = new Site_LocationModel();
+            siteModel.client_id = id;
+            siteModel.site_id = 0;
+            return PartialView("_Site_List_Partial", siteModel);
+        }
+    }
 }

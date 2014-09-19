@@ -37,10 +37,14 @@ namespace api.cspnetworks.net
         public virtual ICollection<Client> Clients2 { get; set; }
         public virtual ICollection<Customer_Vendors> Customer_Vendors { get; set; }
         public virtual ICollection<Customer_Vendors> Customer_Vendors1 { get; set; }
+<<<<<<< HEAD
         public virtual ICollection<Hardware> Hardwares { get; set; }
         public virtual ICollection<Hardware> Hardwares1 { get; set; }
         public virtual ICollection<Hardware> Hardwares2 { get; set; }
         public virtual ICollection<Hardware> Hardwares3 { get; set; }
+=======
+        public virtual Enum_Types Enum_Types { get; set; }
+>>>>>>> smit-bug-fixes
         public virtual ICollection<User> Users { get; set; }
     }
 }
