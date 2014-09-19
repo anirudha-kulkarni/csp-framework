@@ -81,12 +81,12 @@ namespace framework.cspnetworks.net.Controllers
             if (response.StatusCode.Equals(HttpStatusCode.Created))
             {
                 TempData[Properties.Resources.Success] = Properties.Resources.AddHardware_Success;
-                return RedirectToAction("AddNewHardware", "Hardware");
+                return RedirectToAction("Index", "Hardware");
             }
 
             TempData[Properties.Resources.Error] = Properties.Resources.Global_Error;
 
-            return RedirectToAction("AddNewHardware", "Hardware");
+            return RedirectToAction("Index", "Hardware");
         }
 
         [HttpGet]
@@ -114,9 +114,10 @@ namespace framework.cspnetworks.net.Controllers
         }
 
         [Authorize]
-        public ActionResult GetHardwareDropdownView()
+        public ActionResult GetHardwareDropdownView(string value)
         {
             NewHardwareModel newHardware = new NewHardwareModel();
+            newHardware.ItemName = value;
             return PartialView("_HardwareDropDownList", newHardware);
             
         }
@@ -157,7 +158,7 @@ namespace framework.cspnetworks.net.Controllers
                 // HTTP POST                     
                 response = client.PostAsJsonAsync("api/Hardware/UpdateHardware", newHardwareModel).Result;
             }
-            if (response.StatusCode.Equals(HttpStatusCode.Created))
+            if (response.StatusCode.Equals(HttpStatusCode.OK))
             {
                 TempData[Properties.Resources.Success] = Properties.Resources.EditHardware_Success;
                 return RedirectToAction("Index", "Hardware");

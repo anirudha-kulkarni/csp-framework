@@ -1,0 +1,13 @@
+﻿@using CSPLibrary
+@using framework.cspnetworks.net.Helpers
+@{
+    String selectedVal = "";
+    if (@Model != null)
+    {
+        selectedVal = (String)@Model.ToString();
+    }
+
+    var items = DropDonwHelper.GetItems("GetHardwareStatusList", selectedVal);
+}
+
+@Html.DropDownList("", items, new { @id = "hardware_status_list_" })

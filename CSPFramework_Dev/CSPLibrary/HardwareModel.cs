@@ -24,7 +24,7 @@ namespace CSPLibrary
         public string Serial_Number { get; set; }
 
         [Display(Name = "Make")]
-        public int Make { get; set; }
+        public int? Make { get; set; }
 
         [Display(Name = "Make Name")]
         public string MakeName { get; set; }
@@ -38,6 +38,9 @@ namespace CSPLibrary
 
         [Display(Name = "Item Name")]
         public string ItemName { get; set; }
+
+        [Display(Name = "Associated Hardware ID")]
+        public int? Associted_Hardware_Id { get; set; }
 
         [Display(Name = "Software ID")]
         public int Software_ID { get; set; }
@@ -70,6 +73,13 @@ namespace CSPLibrary
         [Required]
         [Display(Name = "Location")]
         public string Location { get; set; }
+
+        [Required]
+        [Display(Name = "Hardware Status")]
+        public int? Hardware_Status { get; set; }
+
+        [Display(Name = "Hardware Status Name")]
+        public string Hardware_Status_Value { get; set; }
     }
 
     public class HardwareViewModel

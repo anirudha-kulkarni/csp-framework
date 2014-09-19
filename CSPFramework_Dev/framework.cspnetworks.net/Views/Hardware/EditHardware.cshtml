@@ -1,22 +1,30 @@
 ﻿@model CSPLibrary.NewHardwareModel
 @{
-    ViewBag.Title = "EditHardware";
+    ViewBag.Title = "Edit Hardware Details";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+<h2>Edit Hardware Details</h2>
+
 <div class="col-lg-12 center" style="margin-left:9%">
-    <div class="tableHeader col-lg-9">
+    @*<div class="tableHeader col-lg-9">
         <h2>Edit Hardware Details</h2>
-    </div>
+    </div>*@
 
     <div class="col-lg-8">
         @using (Html.BeginForm("UpdateHardware", "Hardware", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
         {
 
+            <div class="modal-footer">
+                <a href="/Hardware/Index" class="btn">Cancel</a>
+                <input type="submit" class="btn" value="Save" />
+            </div>
+            
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
             
             @Html.HiddenFor(m => m.Hardware_Id)
+            @Html.HiddenFor(m => m.Associted_Hardware_Id);
             <div class="form-group">
             </div>
             <div class="form-group">
@@ -62,6 +70,12 @@
             </div>
         </div>
             
+        <!-- Place where you will insert your partial -->
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9" id="partialFunction_">
+            </div>
+        </div>    
+            
         <div class="form-group">
             @Html.LabelFor(m => m.Software_ID, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-9">
@@ -76,7 +90,7 @@
                 <div class="container">
                     <div class="col-sm-9">
                         <div class='input-group date' id="startDate_">
-                            @Html.TextBoxFor(m => m.WarrantyStart)
+                            @Html.TextBoxFor(m => m.WarrantyStart, new { @class = "form-control", @placeholder = "01/25/2014" })
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -93,7 +107,7 @@
                 <div class="container">
                     <div class="col-sm-9">
                         <div class='input-group date' id="endDate_">
-                            @Html.TextBoxFor(m => m.WarrantyEnd)
+                            @Html.TextBoxFor(m => m.WarrantyEnd, new { @class = "form-control", @placeholder = "01/25/2014" })
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -130,6 +144,14 @@
                 </div>
             </div>
        
+            <div class="form-group">
+                @Html.LabelFor(m => m.Hardware_Status, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-9">
+                    @Html.EditorFor(m => m.Hardware_Status, "HardwareStatusList")
+                    @Html.ValidationMessageFor(m => m.Hardware_Status)
+                </div>
+            </div>
+            
             <div class="modal-footer">
                 <a href="/Hardware/Index" class="btn">Cancel</a>
                 <input type="submit" class="btn" value="Save" />
@@ -163,6 +185,87 @@
             $("#endDate_").on("dp.change", function (e) {
                 $('#startDate_').data("DateTimePicker").setMaxDate(e.date);
             });
+
+            {
+                var itemInfo = $('#itemlist_ :selected')[0].innerHTML;
+                if (itemInfo && itemInfo.toLowerCase() === "accessory") {
+                    $.get('/Hardware/GetHardwareDropdownView?value=' + itemInfo, function (data) {
+
+                        $('#partialFunction_').html(data);
+
+                        //Setting seleted associated hardware value
+                        var assiciated_HArdwareID = $('#Associted_Hardware_Id').val();
+
+                        if (assiciated_HArdwareID !== "") {
+                            
+                            //Remove recursive hardware entry
+                            var hardwareId = $("#Hardware_Id").val();
+                            $("[name='Associted_Hardware_Id'] option[value='" + hardwareId + "']").remove();
+
+                            var index = $("#hardwarelist_ option[value='" + assiciated_HArdwareID + "']").index();
+                            var selector = $("#hardwarelist_")[0];
+                            selector.selectedIndex = index;
+
+                            if ($('#hardwarelist_ option').length === 0) {
+                                $('#partialFunction_').html("");
+                            }
+                        } else {
+
+                            $('#partialFunction_').html("");
+                        }
+
+                        $('#partialFunction_').fadeIn('fast');
+
+                    }).fail(function () {
+                        // alert("Something is Wrong !!!");
+                        $("#errorDiv_").fadeIn('slow');
+                        $("#errorDiv_").delay(3000).fadeOut(1000);
+                    });
+
+                }
+            }
+
+
+            $('#itemlist_').change(function () {
+                var currentValue = this.value;
+                var data = this.selectedOptions[0].innerHTML;
+
+                if (data && data.toLowerCase() == "accessory") {
+                    $.get('/Hardware/GetHardwareDropdownView', function (data) {
+
+                        /* data is the pure html returned from action method, load it to your page */
+                        $('#partialFunction_').html(data);
+
+                        //Remove recursive hardware entry
+                        var hardwareId = $("#Hardware_Id").val();
+                        $("[name='Associted_Hardware_Id'] option[value='" + hardwareId + "']").remove();
+
+                        if ($('#partialFunction_ option').length === 0) {
+                            $('#partialFunction_').html("<div style='color: red'>No hardware found</div>").fadeIn('slow');
+                            $("#partialFunction_").delay(2000).fadeOut(1000);
+                        } else {
+                            /* little fade in effect */
+                            $('#partialFunction_').fadeIn('fast');
+                        }
+
+                    }).fail(function () {
+                        // alert("Something is Wrong !!!");
+                        $("#errorDiv_").fadeIn('slow');
+                        $("#errorDiv_").delay(3000).fadeOut(1000);
+                    });
+                } else {
+                    $('#partialFunction_').html("");
+                    $('#partialFunction_').fadeIn('fast');
+                }
+
+            });
+
+            $("form").submit(function () {
+                var hiddenData = $('#hardwarelist_ option:selected').val();
+                $("#Associted_Hardware_Id").attr("value", hiddenData);
+            });
+            
+
         });
     </script>
 }

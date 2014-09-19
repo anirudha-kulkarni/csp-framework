@@ -47,6 +47,8 @@ namespace api.cspnetworks.net.Controllers
                 _hardware.make = newHardware.Make;
                 _hardware.model = newHardware.Model;
                 _hardware.item = newHardware.Item;
+                _hardware.associated_hardware_id = newHardware.Associted_Hardware_Id;
+
                 if (newHardware.Software_ID == 0){
                     _hardware.software_id = null;
                 }else{
@@ -65,6 +67,7 @@ namespace api.cspnetworks.net.Controllers
                 _hardware.purchased_by = newHardware.PurchasedBy;
                 _hardware.client_id = newHardware.ClientId;
                 _hardware.location = newHardware.Location;
+                _hardware.hardware_status = newHardware.Hardware_Status;
 
                 _context.Hardwares.Add(_hardware);
                 await _context.SaveChangesAsync();
@@ -98,6 +101,10 @@ namespace api.cspnetworks.net.Controllers
                     hardwareItem.Make = hardware.Make_Enum_Type_Values.enum_type_value_id;
                     hardwareItem.Model = hardware.model;
                     hardwareItem.Item = hardware.item;
+                    if(hardware.associated_hardware_id.HasValue)
+                    {
+                        hardwareItem.Associted_Hardware_Id = hardware.associated_hardware_id;
+                    }
                     if (hardware.software_id.HasValue)
                     {
                         hardwareItem.Software_ID = hardware.software_id.Value;
@@ -107,12 +114,17 @@ namespace api.cspnetworks.net.Controllers
                     hardwareItem.WarrantyEnd = hardware.warrenty_end_date;
 
                     hardwareItem.PurchasedBy = hardware.purchased_by;
-                    hardwareItem.PurchaserName = hardware.PurchasedBy_Enum_Type_Values.enum_type_value;
+                    hardwareItem.PurchaserName = hardware.Purchased_Enum_Type_Values.enum_type_value;
 
                     hardwareItem.ClientId = hardware.client_id;
                     hardwareItem.ClientCode = hardware.Client.client_code;
 
                     hardwareItem.Location = hardware.location;
+                    hardwareItem.Hardware_Status = hardware.hardware_status;
+                    if (hardware.hardware_status.HasValue)
+                    {
+                        hardwareItem.Hardware_Status_Value = hardware.Status_Enum_Type_Values.enum_type_value;
+                    }
 
                     hardwareList.Add(hardwareItem);
                 }
@@ -143,6 +155,8 @@ namespace api.cspnetworks.net.Controllers
             hardwareItem.Model = hardware.model;
             hardwareItem.Item = hardware.item;
             hardwareItem.ItemName = hardware.Item_Enum_Type_Values.enum_type_value;
+            hardwareItem.Associted_Hardware_Id = hardware.associated_hardware_id;
+            
             if (hardware.software_id.HasValue)
             {
                 hardwareItem.Software_ID = hardware.software_id.Value;
@@ -152,24 +166,34 @@ namespace api.cspnetworks.net.Controllers
             hardwareItem.WarrantyStart = hardware.warrenty_start_date;
             hardwareItem.WarrantyEnd = hardware.warrenty_end_date;
             hardwareItem.PurchasedBy = hardware.purchased_by;
-            hardwareItem.PurchaserName = hardware.PurchasedBy_Enum_Type_Values.enum_type_value;
+            hardwareItem.PurchaserName = hardware.Purchased_Enum_Type_Values.enum_type_value;
             hardwareItem.ClientId = hardware.client_id;
             hardwareItem.ClientCode = hardware.Client.client_code;
 
             hardwareItem.Location = hardware.location;
+            hardwareItem.Hardware_Status = hardware.hardware_status;
+            if (hardware.hardware_status.HasValue)
+            {
+                hardwareItem.Hardware_Status_Value = hardware.Status_Enum_Type_Values.enum_type_value;
+            }
 
             return Ok(hardwareItem);
         }
 
+        [HttpPost]
         [ResponseType(typeof(NewHardwareModel))]
         [AllowAnonymous]
         public async Task<IHttpActionResult> UpdateHardware(NewHardwareModel updatedHardware)
         {
             try
             {
+
+
                 Hardware oldHardware = (from oldHardwareInfo in _context.Hardwares
                                         where oldHardwareInfo.CSPNAssetTag == updatedHardware.Hardware_Id
                                         select oldHardwareInfo).FirstOrDefault();
+
+
                 if (oldHardware != null)
                 {
                     oldHardware.vendor_id = updatedHardware.Vendor_ID;
@@ -177,7 +201,8 @@ namespace api.cspnetworks.net.Controllers
                     oldHardware.make = updatedHardware.Make;
                     oldHardware.model = updatedHardware.Model;
                     oldHardware.item = updatedHardware.Item;
-                    //oldHardware.software_id = updatedHardware.Software_ID;
+                    oldHardware.associated_hardware_id = updatedHardware.Associted_Hardware_Id;
+
                     if (updatedHardware.Software_ID == 0)
                     {
                         oldHardware.software_id = null;
@@ -199,10 +224,17 @@ namespace api.cspnetworks.net.Controllers
                     oldHardware.purchased_by = updatedHardware.PurchasedBy;
                     oldHardware.client_id = updatedHardware.ClientId;
                     oldHardware.location = updatedHardware.Location;
+
+                    if (updatedHardware.Hardware_Status.HasValue)
+                    {
+                        oldHardware.hardware_status = updatedHardware.Hardware_Status;
+                    }
                 }
 
                 await _context.SaveChangesAsync();
-                return CreatedAtRoute("DefaultApi", new { id = oldHardware.CSPNAssetTag }, oldHardware);
+                //return CreatedAtRoute("DefaultApi", new { id = oldHardware.CSPNAssetTag }, oldHardware);
+                return Ok();
+                
             }
             catch (Exception)
             {
@@ -210,12 +242,12 @@ namespace api.cspnetworks.net.Controllers
             }
         }
 
-        // DELETE api/Hardware/DeleteHardware/1
+
         [HttpDelete]
         [ResponseType(typeof(Hardware))]
-        public async Task<IHttpActionResult> DeleteHardware(int hardwareid)
+        public async Task<IHttpActionResult> DeleteHardware(int id)
         {
-            Hardware hardware = await _context.Hardwares.FindAsync(hardwareid);
+            Hardware hardware = await _context.Hardwares.FindAsync(id);
             if (hardware == null)
             {
                 return NotFound();

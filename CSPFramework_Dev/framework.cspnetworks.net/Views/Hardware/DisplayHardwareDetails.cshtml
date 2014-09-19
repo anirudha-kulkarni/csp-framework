@@ -44,6 +44,14 @@
                                     <td>@Model.ItemName</td>
                                 </tr>
 
+                                @if (@Model.ItemName.ToLower().Contains("accessory") && @Model.Associted_Hardware_Id.HasValue)
+                                {
+                                    <tr>
+                                        <td><strong>Associated Hardware CSPNAssetTag</strong></td>
+                                        <td>@Model.Associted_Hardware_Id</td>
+                                    </tr>
+                                }
+
                                 @if (!@Model.SoftwareName.IsEmpty()) { 
                                     <tr>
                                         <td><strong>Software :</strong></td>
@@ -51,17 +59,19 @@
                                     </tr>
                                 }
                                 
+                                @if (@Model.WarrantyStart.HasValue) { 
+                                    <tr>
+                                        <td><strong>Warrenty Start Date :</strong></td>
+                                        <td>@Model.WarrantyStart.Value</td>
+                                    </tr>
+                                }
 
-                                <tr>
-                                    <td><strong>Warrenty Start Date :</strong></td>
-                                    <td>@Model.WarrantyStart.Value</td>
-                                </tr>
-
-                                <tr>
-                                    <td><strong>Warrenty End Date :</strong></td>
-                                    <td>@Model.WarrantyEnd.Value</td>
-                                </tr>
-
+                                @if (@Model.WarrantyEnd.HasValue) {
+                                    <tr>
+                                        <td><strong>Warrenty End Date :</strong></td>
+                                        <td>@Model.WarrantyEnd.Value</td>
+                                    </tr>
+                                }
                                 <tr>
                                     <td><strong>Purchased By :</strong></td>
                                     <td>@Model.PurchaserName</td>
@@ -76,6 +86,13 @@
                                     <td><strong>Location :</strong></td>
                                     <td>@Model.Location</td>
                                 </tr>
+
+                                @if (!@Model.Hardware_Status_Value.IsEmpty()) { 
+                                    <tr>
+                                        <td><strong>Hardware Status :</strong></td>
+                                        <td>@Model.Hardware_Status_Value</td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
 

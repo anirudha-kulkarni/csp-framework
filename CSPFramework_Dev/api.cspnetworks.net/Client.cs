@@ -40,7 +40,7 @@ namespace api.cspnetworks.net
     
         public virtual Agreement Agreement { get; set; }
         public virtual ICollection<Client_Site> Client_Site { get; set; }
-        public virtual Enum_Type_Values ServiceType_Enum_Type_Values { get; set; }
+        public virtual Enum_Type_Values ServiceType_Enum_Type_Value { get; set; }
         public virtual Enum_Type_Values Status_Enum_Type_Values { get; set; }
         public virtual Enum_Type_Values Team_Enum_Type_Values { get; set; }
         public virtual ICollection<Customer_Vendors> Customer_Vendors { get; set; }

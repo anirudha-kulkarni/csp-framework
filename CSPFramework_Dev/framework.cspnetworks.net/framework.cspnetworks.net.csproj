@@ -347,6 +347,7 @@
     <Content Include="Views\Shared\EditorTemplates\SoftwareList.cshtml" />
     <Content Include="Views\Shared\_HardwareDropDownList.cshtml" />
     <Content Include="Views\Hardware\EditHardware.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\HardwareStatusList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
