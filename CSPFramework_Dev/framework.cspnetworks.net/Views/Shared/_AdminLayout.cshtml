@@ -8,68 +8,107 @@
     @Styles.Render("~/Content/admin/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <style>
+        .tableHeader {
+            background: #20272d;            
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            padding: 10px;
+            margin-top: 15px;
+            color:white;
+            text-align:center;
+        }
+        table thead tr {
+            background: none repeat scroll 0 0 #444f58;
+            color:white;
+        }
+        a.btn, input[type="submit"] {
+            background-color: #f4a54f;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            text-shadow: 0 1px 0 #b8650c;
+        }
+        .tableHeader h2 {
+            color: #fff;
+            font-size: 20px;
+            margin: 9px 0 9px 5px;
+        }
+        p, ul, ol, h1, h2, h3, h4, h5, h6, dl, table {
+            margin: 0 0 15px;
+        }
+        .navbar a {
+            font-weight:bold;
+        }
+        .fixed-table-container > div.fixed-table-header {
+            display:none !important;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="wrapper">
-            <div class="userInfo">
-                <div class="userContainer">
-                    <a><span class="welText well-lg">Welcome, @User.Identity.Name</span></a>
-
-                    <b><a href="/Account/Logout" class="loading">Logout</a></b>
-
+    <div class="container-fluid">
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-static-top" href="#"><img src="/Content/images/logo_csp.gif" alt="CSP: CSP Framework - V1"></a>
                 </div>
-            </div>
-            <a class="logo" href="/People/People" title="CSP: Visual Business Documentation">
-                <img src="/Content/images/logo_csp.gif" alt="CSP: CSP Framework - V1">
-            </a>
-        </div>
 
-
-        <div class="welcome">
-            <div class="navSection">
-                <div class="wrapper">
-                    <div id="serviceProvider"></div>
-                    <div class="tabs">
-                        <div class="collapse navbar-collapse navbar-ex1-collapse">
-                            <ul>
-                                <li class="">
-                                    <a href="#" title="Dashboard">Dashboard</a>
-                                </li>
-                                <li class="dd dropdown">
-                                    <a href="/NetworkLocations" id="networksNav" title="Networks" class="dropdown-toggle" data-toggle="dropdown">Networks</a>
-                                    <ul class="dc dropdown-menu">
-                                        <li><a href="#">Server</a></li>
-                                        <li><a href="#">Router</a></li>
-                                        <li><a href="#">Switch</a></li>
-                                        <li><a href="#">Hub</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dd dropdown">
-                                    <a href="#" id="applicationsNav" title="Inventory" class="dropdown-toggle" data-toggle="dropdown">Inventory</a>
-                                    <ul class="dc dropdown-menu">
-                                        <li><a href="/Hardware/Index">Hardware</a></li>
-                                        <li><a href="#">Software</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dd selected dropdown">
-                                    <a href="#" title="Business" class="dropdown-toggle" data-toggle="dropdown">Business</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="/People/People">Users</a></li>
-                                        <li><a href="/Vendors/Index">Vendors</a></li>
-                                        <li><a href="/CustomerVendor/Index">Vendor Management</a></li>
-                                        <li><a href="/Clients/Index">Client Profle</a></li>
-                                    </ul>
-                                </li>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse col-md-offset-2" id="bs-example-navbar-collapse-1">
+                    <ul id="main-nav-bar" class="nav navbar-nav">
+                        <li class="active"><a href="#">Dashboard</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle btn-block" data-toggle="dropdown">Networks <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Server</a></li>
+                                <li><a href="#">Router</a></li>
+                                <li><a href="#">Switch</a></li>
+                                @*<li class="divider"></li>
+                                    <li><a href="#">Hub</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">One more separated link</a></li>*@
                             </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle btn-block" data-toggle="dropdown">Inventory <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="/Hardware/Index">Hardware</a></li>
+                                <li><a href="#">Software</a></li>
+                            </ul>
+                        </li>
 
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle btn-block" data-toggle="dropdown">Business <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="/People/People">Users</a></li>
+                                <li><a href="/Vendors/Index">Vendors</a></li>
+                                <li><a href="/CustomerVendor/Index">Vendor Management</a></li>
+                                <li><a href="/Clients/Index">Client Profile</a></li>
+                            </ul>
+                        </li>
 
-    </header>    
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Welcome, @User.Identity.Name</a></li>
+                        <li><a href="/Account/Logout" class="loading">Logout</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    </div>
+        
     <div class="container body-content">
 
         @if (ViewBag.Status == @framework.cspnetworks.net.Properties.Resources.Success)
@@ -87,8 +126,10 @@
         @RenderBody()
     </div>
 
+    
+
     <hr />
-    <footer>
+    <footer style="text-align:center">
         <p>&copy; @DateTime.Now.Year - CSP Networks</p>
     </footer>
 
@@ -96,6 +137,10 @@
     @Scripts.Render("~/bundles/bootstrap")    
     @RenderSection("scripts", required: false)
     <script>
+        $("#main-nav-bar").on("click", function () {
+            $("#main-nav-bar").find(".active").removeClass("active");
+            $(this).parent().addClass("active");
+        });
         //$('.navSection .tabs .dropdown').hover(function () {
         //    $(this).find('.dropdown-menu').first().stop(true, true).slideDown(200);
         //}, function () {
@@ -114,31 +159,25 @@
             }
         };
 
+        window.operateEvents = {
+            'click .flaticon-recycle': function (e, value, row, index) {
+                debugger;
+                $('#anchorDelete_').attr("href", $(e.currentTarget).attr('refer'));
+            }
+        };
+
         $(document).ready(function () {
 
             setTimeout(function () {
                 $('#messageSpan').fadeOut('slow');
             }, 3000); // <-- time in milliseconds
-
-            $("a.flaticon-recycle").click(function (event) {
-                debugger;
-                $('#anchorDelete_').attr("href", $(this).attr("refer"));
-            });
-
+            
             $(document).on('mask-it', function () {
                 handleMasks();
             }).trigger('mask-it');
 
             // call mask-it event
             $(document).trigger('mask-it');
-
-            //$('#delete-confirmation').on('show.bs.modal', function (e) {
-            //    debugger;
-            //    // do something...
-            //        var link = $(this).data('refer');
-            //        $('#anchorDelete_').href = link;
-            //})
-
         });
 
     </script>

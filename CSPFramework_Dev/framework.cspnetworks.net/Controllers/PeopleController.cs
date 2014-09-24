@@ -57,6 +57,30 @@ namespace framework.cspnetworks.net.Controllers
             return View(adminHomeModel);
         }
 
+        public string GetUsersList()
+        {
+            HttpResponseMessage response;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://api.cspnetworks.net/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // HTTP POST                     
+                response = client.GetAsync("api/User/GetUsers").Result;
+            }
+
+            IEnumerable<RegisteredUserModel> users = new List<RegisteredUserModel>();
+
+            if (response.StatusCode.Equals(HttpStatusCode.OK))
+            {
+                users = response.Content.ReadAsAsync<IEnumerable<RegisteredUserModel>>().Result;
+            }
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(users);
+            
+        }
+
         [Authorize]
         public ActionResult RegisteredCustomers()
         {

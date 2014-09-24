@@ -4,7 +4,9 @@
 }
 @model CSPLibrary.NewHardwareModel
 
-<h2>Add New Hardware</h2>
+<div style="text-align:center">
+    <h2>Add New Hardware</h2>
+</div>
 
 <div class="col-sm-10">
     @using (Html.BeginForm("PostNewHardware", "Hardware", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", @id = "NewHardwareForm" }))
@@ -30,7 +32,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Serial_Number, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.Serial_Number, new { @autofocus = "autofocus", @placeholder = "Enter Serial Number" })
+                @Html.TextBoxFor(m => m.Serial_Number, new { @class="form-control", @autofocus = "autofocus", @placeholder = "Enter Serial Number" })
                 @Html.ValidationMessageFor(m => m.Serial_Number)
             </div>
         </div>
@@ -50,7 +52,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Model, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.Model, new { @autofocus = "autofocus", @placeholder = "Enter Model" })
+                @Html.TextBoxFor(m => m.Model, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Enter Model" })
                 @Html.ValidationMessageFor(m => m.Model)
             </div>
         </div>
@@ -131,7 +133,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Location, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.Location, new { @autofocus = "autofocus", @placeholder = "Enter Location" })
+                @Html.TextBoxFor(m => m.Location, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Enter Location" })
                 @Html.ValidationMessageFor(m => m.Location)
             </div>
         </div>

@@ -27,7 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.newClientModel.Client_Code, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.newClientModel.Client_Code, new { @autofocus = "autofocus", @placeholder = "Enter Client Code" })
+                @Html.TextBoxFor(m => m.newClientModel.Client_Code, new { @class="form-control", @autofocus = "autofocus", @placeholder = "Enter Client Code" })
                 @Html.ValidationMessageFor(m => m.newClientModel.Client_Code)
             </div>
         </div>
@@ -35,7 +35,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.newClientModel.Company_Name, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.newClientModel.Company_Name, new { @autofocus = "autofocus", @placeholder = "Enter Company Name" })
+                @Html.TextBoxFor(m => m.newClientModel.Company_Name, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Enter Company Name" })
                 @Html.ValidationMessageFor(m => m.newClientModel.Company_Name)
             </div>
         </div>
@@ -43,7 +43,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.newClientModel.ServiceType, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.DisplayFor(m => m.newClientModel.ServiceType, "ServicesList", new { @autofocus = "autofocus" })
+                @Html.DisplayFor(m => m.newClientModel.ServiceType, "ServicesList", new { @class = "form-control", @autofocus = "autofocus" })
                 @Html.ValidationMessageFor(m => m.newClientModel.ServiceType)
             </div>
         </div>
@@ -51,7 +51,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.newClientModel.Website, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.newClientModel.Website, new { @autofocus = "autofocus", @class = "url", @placeholder = @"http://www.example.com" })
+                @Html.TextBoxFor(m => m.newClientModel.Website, new { @autofocus = "autofocus", @class = "url form-control", @placeholder = @"http://www.example.com" })
                 @Html.ValidationMessageFor(m => m.newClientModel.Website)
             </div>
         </div>
@@ -74,7 +74,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(m => m.newClientModel.AgreementPath, new { @class = "col-sm-3 control-label" })
                                 <div class="col-sm-8">
-                                    @Html.TextBoxFor(m => m.newClientModel.AgreementPath, new { type = "file", accept = ".pdf" })
+                                    @Html.TextBoxFor(m => m.newClientModel.AgreementPath, new { @class = "form-control", type = "file", accept = ".pdf" })
                                     @Html.ValidationMessageFor(m => m.newClientModel.AgreementPath)
                                 </div>
                             </div>
@@ -244,43 +244,43 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Site Name</label>
                                                         <div class="col-sm-8">
-                                                            <input class="siteName" value="@item.SiteName">
+                                                            <input class="siteName form-control" value="@item.SiteName">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Address</label>
                                                         <div class="col-sm-8">
-                                                            <input class="address" value="@item.Address">
+                                                            <input class="address form-control" value="@item.Address">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">City</label>
                                                         <div class="col-sm-8">
-                                                            <input class="city" value="@item.City">
+                                                            <input class="city form-control" value="@item.City">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">State</label>
                                                         <div class="col-sm-8">
-                                                            <input class="state" value="@item.State">
+                                                            <input class="state form-control" value="@item.State">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Zip</label>
                                                         <div class="col-sm-8">
-                                                            <input class="zip" maxlength="5" autocomplete="off" value="@item.Zip">
+                                                            <input class="zip form-control" maxlength="5" autocomplete="off" value="@item.Zip">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Phone Number</label>
                                                         <div class="col-sm-8">
-                                                            <input class="phone" value="@item.PhoneNumber">
+                                                            <input class="phone form-control" value="@item.PhoneNumber">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Fax</label>
                                                         <div class="col-sm-8">
-                                                            <input class="fax" value="@item.FaxNumber">
+                                                            <input class="fax form-control" value="@item.FaxNumber">
                                                         </div>
                                                     </div>
                                                     <input type="button" class="btn col-md-offset-8 col-md-3 removeSite_" value="Remove" style="margin-bottom: 15px;">
@@ -379,7 +379,7 @@
         function createFormGroupDiv(labelText, className) {
 
             var input = createElement('input');
-            $(input).attr("class", className);
+            $(input).attr("class", className + " form-control");
             var label = createElement('label');
             label.innerHTML = labelText;
             $(label).attr('class', 'control-label col-md-3');

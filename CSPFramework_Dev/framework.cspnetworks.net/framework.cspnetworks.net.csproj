@@ -29,6 +29,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -205,6 +206,8 @@
     <Content Include="Content\AdminHome.css" />
     <Content Include="Content\bootstrap-datepicker\bootstrap-datetimepicker.css" />
     <Content Include="Content\bootstrap-datepicker\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap-table\bootstrap-table.css" />
+    <Content Include="Content\bootstrap-table\bootstrap-table.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\flatfont.css" />
@@ -218,7 +221,7 @@
     <Content Include="Content\images\icons\trash.png" />
     <Content Include="Content\images\logo_csp.gif" />
     <Content Include="Content\images\profile_photo.png" />
-    <Content Include="Content\jquery-ui\images\animated-overlay.gif" />
+    <Content Include="Content\jqGrid\ui.jqgrid.css" />
     <Content Include="Content\jquery-ui\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\jquery-ui\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\jquery-ui\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -233,29 +236,21 @@
     <Content Include="Content\jquery-ui\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\jquery-ui\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Content\jquery-ui\jquery-ui.css" />
-    <Content Include="Content\jquery-ui\jquery.ui.accordion.css" />
-    <Content Include="Content\jquery-ui\jquery.ui.all.css" />
-    <Content Include="Content\jquery-ui\jquery.ui.autocomplete.css" />
-    <Content Include="Content\jquery-ui\jquery.ui.base.css" />
-    <Content Include="Content\jquery-ui\jquery.ui.button.css" />
-    <Content Include="Content\jquery-ui\jquery.ui.core.css" />
-    <Content Include="Content\jquery-ui\jquery.ui.datepicker.css" />
-    <Content Include="Content\jquery-ui\jquery.ui.dialog.css" />
-    <Content Include="Content\jquery-ui\jquery.ui.menu.css" />
-    <Content Include="Content\jquery-ui\jquery.ui.progressbar.css" />
-    <Content Include="Content\jquery-ui\jquery.ui.resizable.css" />
-    <Content Include="Content\jquery-ui\jquery.ui.selectable.css" />
-    <Content Include="Content\jquery-ui\jquery.ui.slider.css" />
-    <Content Include="Content\jquery-ui\jquery.ui.spinner.css" />
-    <Content Include="Content\jquery-ui\jquery.ui.tabs.css" />
-    <Content Include="Content\jquery-ui\jquery.ui.theme.css" />
-    <Content Include="Content\jquery-ui\jquery.ui.tooltip.css" />
+    <Content Include="Content\jquery-ui\jquery-ui.min.css" />
+    <Content Include="Content\jquery-ui\jquery-ui.structure.css" />
+    <Content Include="Content\jquery-ui\jquery-ui.structure.min.css" />
+    <Content Include="Content\jquery-ui\jquery-ui.theme.css" />
+    <Content Include="Content\jquery-ui\jquery-ui.theme.min.css" />
     <Content Include="Content\login.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap-datepicker\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap-table\bootstrap-table-en.js" />
+    <Content Include="Scripts\bootstrap-table\bootstrap-table-en.min.js" />
+    <Content Include="Scripts\bootstrap-table\bootstrap-table.js" />
+    <Content Include="Scripts\bootstrap-table\bootstrap-table.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\flat-icons\flaticon.eot" />
@@ -263,9 +258,14 @@
     <Content Include="fonts\flat-icons\flaticon.woff" />
     <None Include="Properties\PublishProfiles\AdminLocal.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jqGrid\grid.locale-en.js" />
+    <Content Include="Scripts\jqGrid\jquery.jqGrid.min.js" />
+    <Content Include="Scripts\jqGrid\jquery.jqGrid.src.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\masked-edit\jquery.mask.js" />
     <Content Include="Scripts\masked-edit\jquery.mask.min.js" />
     <Content Include="Scripts\jquery.ui.core.js" />
@@ -337,7 +337,6 @@
     <Content Include="Views\Shared\_Fun_Connectivity_Internet.cshtml" />
     <Content Include="Views\Shared\_Fun_Printer.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\FunctionNotes.cshtml" />
-
     <Content Include="Views\Hardware\Index.cshtml" />
     <Content Include="Views\Hardware\AddNewHardware.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\HardwareMakeList.cshtml" />
@@ -349,11 +348,9 @@
     <Content Include="Views\Shared\_HardwareDropDownList.cshtml" />
     <Content Include="Views\Hardware\EditHardware.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\HardwareStatusList.cshtml" />
-
     <Content Include="Views\Shared\EditorTemplates\CSPUsers.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Site_List.cshtml" />
     <Content Include="Views\Shared\_Site_List_Partial.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -58,6 +58,30 @@ namespace framework.cspnetworks.net.Controllers
             return View(vendorViewModel);         
         }
 
+         public string GetVendorsList()
+         {
+             HttpResponseMessage response;
+             using (var client = new HttpClient())
+             {
+                 client.BaseAddress = new Uri("http://api.cspnetworks.net/");
+                 client.DefaultRequestHeaders.Accept.Clear();
+                 //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                 // HTTP POST                     
+                 response = client.GetAsync("api/Vendors/GetVendors").Result;
+             }
+
+             IEnumerable<NewVendorModel> vendors = new List<NewVendorModel>();
+
+             if (response.StatusCode.Equals(HttpStatusCode.OK))
+             {
+                 vendors = response.Content.ReadAsAsync<IEnumerable<NewVendorModel>>().Result;
+             }
+
+             return Newtonsoft.Json.JsonConvert.SerializeObject(vendors);
+
+         }
+
          [Authorize]
          public ActionResult AddNewVendor(VendorsViewModel viewmodel, string returnUrl)
          {

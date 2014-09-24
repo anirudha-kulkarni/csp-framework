@@ -5,6 +5,9 @@
 }
 
 
+<div style="text-align:center">
+    <h2>Hardware Inventory</h2>
+</div>
 
 <div class="wrapper" id="companySetup">
 
@@ -17,4 +20,29 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jquery")
     @Styles.Render("~/Content/admin/css")
+    @Styles.Render("~/Content/bootstrap-table/css")
+    @Scripts.Render("~/bundles/bootstrap-table")
 }
+
+
+<script>
+    function strongDisplayFormatter(value, row) {
+        return '<strong>' + value + '</strong>';
+    }
+    function nameDisplayFormatter(value, row) {
+        return '<strong><a href="/Hardware/DisplayHardwareDetails?hardwareid=' + row.Hardware_Id + '">' + value + '</a></strong>'
+    }
+    function tableActionsFormatter(value, row) {
+        return ' <div>\
+                                <a href="/Hardware/EditHardware?hardwareid=' + row.Hardware_Id + '" class="flaticon-edit" title="Edit User Profile."></a>\
+                                <a href="#delete-confirmation" refer="/Hardware/DeleteHardware?hardwareid=' + row.Hardware_Id + '" data-toggle="modal" class="flaticon-recycle" title="Delete this Client."></a>\
+                            </div>';
+    }
+
+    $(document).ready(function () {
+        // Maked Edit Controls
+        jQuery(function ($) {
+            $(".phone").mask("000.000.0000");
+        });
+    });
+</script>

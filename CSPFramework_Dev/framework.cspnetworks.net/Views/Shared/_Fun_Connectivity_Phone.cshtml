@@ -24,7 +24,7 @@
 <div class="form-group">
     @Html.LabelFor(m => m.Conn_Phone_Solution, new { @class = "col-sm-3 control-label" })
     <div class="col-sm-8">
-        @Html.DropDownListFor(m => m.Conn_Phone_Solution, @items, new { @autofocus = "autofocus" })
+        @Html.DropDownListFor(m => m.Conn_Phone_Solution, @items, new {  @class = "form-control", @autofocus = "autofocus" })
         @Html.ValidationMessageFor(m => m.Conn_Phone_Solution)
 
     </div>
@@ -34,7 +34,7 @@
 <div class="form-group">
     @Html.LabelFor(m => m.Conn_Phone_Phone_Number, new { @class = "col-sm-3 control-label" })
     <div class="col-sm-8">
-        @Html.TextBoxFor(m => m.Conn_Phone_Phone_Number, new { @autofocus = "autofocus", @class = "multi_phone", @placeholder = "949.555.1000-1200" })
+        @Html.TextBoxFor(m => m.Conn_Phone_Phone_Number, new { @autofocus = "autofocus", @class = "multi_phone form-control", @placeholder = "949.555.1000-1200" })
         @Html.ValidationMessageFor(m => m.Conn_Phone_Phone_Number)
     </div>
 </div>
@@ -43,7 +43,7 @@
 <div class="form-group">
     @Html.LabelFor(m => m.Conn_Phone_Management_Url, new { @class = "col-sm-3 control-label" })
     <div class="col-sm-8">
-        @Html.TextBoxFor(m => m.Conn_Phone_Management_Url, new { @autofocus = "autofocus",  @class="url", @placeholder = @"http://www.example.com" })
+        @Html.TextBoxFor(m => m.Conn_Phone_Management_Url, new { @autofocus = "autofocus", @class = "url form-control", @placeholder = @"http://www.example.com" })
         @Html.ValidationMessageFor(m => m.Conn_Phone_Management_Url)
     </div>
 </div>

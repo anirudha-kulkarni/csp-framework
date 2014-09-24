@@ -1,6 +1,6 @@
 ﻿@model CSPLibrary.NewVendorModel
 
-@using (Html.BeginForm("AddNewVendor", "Vendors", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form", @id = "NewVendorForm" }))
+@using (Html.BeginForm("AddNewVendor", "Vendors", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "NewVendorForm" }))
 {
     <div class="modal" id="add-new-vendor">
         <div class="modal-dialog">
@@ -15,22 +15,37 @@
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true)
 
-                        @Html.LabelFor(m => m.Name, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.Name, new { @placeholder = "Enter Vendor Name" })
-                        @Html.ValidationMessageFor(m => m.Name)
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Name, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.Name, new {@class="form-control", @placeholder = "Enter Vendor Name" })
+                                @Html.ValidationMessageFor(m => m.Name)
+                            </div>
+                        </div>
 
-                        @Html.LabelFor(m => m.SupportNumber, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.SupportNumber, new { @placeholder = "999.999.999", @class="phone" })
-                        @Html.ValidationMessageFor(m => m.SupportNumber)
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.SupportNumber, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-7">
+                               @Html.TextBoxFor(m => m.SupportNumber, new { @placeholder = "999.999.999", @class = "phone form-control" })
+                                @Html.ValidationMessageFor(m => m.SupportNumber)
+                            </div>
+                        </div>
 
-                        @Html.LabelFor(m => m.SupportEmail, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.SupportEmail, new { @placeholder = "example@domain.com" })
-                        @Html.ValidationMessageFor(m => m.SupportEmail)
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.SupportEmail, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.SupportEmail, new { @class = "form-control", @placeholder = "example@domain.com" })
+                                @Html.ValidationMessageFor(m => m.SupportEmail)
+                            </div>
+                        </div>
 
-                        @Html.LabelFor(m => m.website, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.website, new { @placeholder = @"http://www.example.com" , @class="url" })
-                        @Html.ValidationMessageFor(m => m.website)
-
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.website, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.website, new { @placeholder = @"http://www.example.com", @class = "url form-control" })
+                                @Html.ValidationMessageFor(m => m.website)
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

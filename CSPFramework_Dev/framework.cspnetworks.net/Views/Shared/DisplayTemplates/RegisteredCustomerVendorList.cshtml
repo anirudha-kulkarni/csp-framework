@@ -1,69 +1,28 @@
 ﻿@model IEnumerable<CSPLibrary.NewCustomerVendorModel>
 
-<div class="tableHeader" id="contactHeader">
-    <span class="headerAction">
-        @*<div class="search">
-                <form id="filter-form" novalidate="novalidate">
-                    <input class="multi filter noEnterKey" rel="table-contacts" type="text" placeholder="Filter..." autocomplete="off" id="LuckyAnchor_561592259_163"> <span class="submitSearch"></span>
-                </form>
-            </div>*@
-        @*<a href="#" class=" add" onclick="Profile.openAddContact();General.clearValidationErrorsPopup();">Add</a>*@
-        @*@Html.ActionLink("Add", "Index", "Home", null, new { @class = " add" })*@
-        <a id="adduser" type="button" class=" add" href="/CustomerVendor/AddNewCustomerVendor">Add</a>
-    </span>
-
-    <h2>Vendor Management</h2>
-</div>
 
 <div id="contactList">
+    <div id="custom-toolbar">
+        <div class="form-inline" role="form">
+            <div class="form-group">
+                <a id="adduser" type="button" class="btn" href="/CustomerVendor/AddNewCustomerVendor">Add New Customer-Vendor</a>
+            </div>
+        </div>
+    </div>
 
-    <table cellpadding="0" cellspacing="0" border="0" class="tablesorter" id="table-contacts">
+    <table class="tablesorter" id="table-contacts" data-toolbar="#custom-toolbar" data-show-refresh="true" data-show-toggle="true" data-pagination="true" data-search="true" data-toggle="table" data-url="/CustomerVendor/GetCustomerVendorsList" data-cache="false" data-sort-name="VendorName" data-sort-order="asc">
         <thead>
             <tr>
-                <th width="5" class="header"></th>
-
-                <th class="header"><a href="javascript:;" title="Sort" class="arrow"><span>Vendor Name</span></a></th>
-                <th class="header"><a href="javascript:;" title="Sort" class="arrow"><span>Solution</span></a></th>
-                <th class="header"><a href="javascript:;" title="Sort" class="arrow"><span>Function</span></a></th>
-                <th class="header"><a href="javascript:;" title="" class="arrow"><span>Client Code</span></a></th>
-                <th class="header"><a href="javascript:;" title="Sort" class="arrow"><span>Site</span></a></th>
-                <th width="200" class="header">&nbsp;</th>
-                @*<th class="filter header"></th>*@
+                <th class="header" data-field="VendorName" data-sortable="true" data-formatter="nameDisplayFormatter">Vendor Name</th>
+                <th class="header" data-field="SolutionString" data-sortable="true">Solution</th>
+                <th class="header" data-field="FunctionString" data-sortable="true">Function</th>
+                <th class="header" data-field="ClientCode" data-sortable="true" data-formatter="strongDisplayFormatter">Client Code</th>
+                <th class="header" data-field="SiteString" data-sortable="true">Site</th>
+                <th class="header" data-events="operateEvents" data-formatter="tableActionsFormatter"></th>
             </tr>
         </thead>
-
-        <tfoot class="noRows">
-            <tr class="result">
-                <td colspan="11"><div>There are 0 items that match your filter criteria.</div></td>
-            </tr>
-        </tfoot>
-
-        <tbody>
-            @{
-                foreach (var custVendor in Model)
-                {
-                    <tr>
-                        <td></td>
-                        <td onclick="window.document.location = '/CustomerVendor/DisplayCustomerVendorProfile?custvendorid=@custVendor.Customer_Vendor_Id';"><strong><a href="#">@custVendor.VendorName</a></strong></td>
-                        <td onclick="window.document.location = '/CustomerVendor/DisplayCustomerVendorProfile?custvendorid=@custVendor.Customer_Vendor_Id';">@custVendor.SolutionString</td>                        
-                        <td onclick="window.document.location = '/CustomerVendor/DisplayCustomerVendorProfile?custvendorid=@custVendor.Customer_Vendor_Id';">@custVendor.FunctionString</td>
-                        <td onclick="window.document.location = '/CustomerVendor/DisplayCustomerVendorProfile?custvendorid=@custVendor.Customer_Vendor_Id';"><strong><a href="#">@custVendor.ClientCode</a></strong></td>
-                        <td onclick="window.document.location = '/CustomerVendor/DisplayCustomerVendorProfile?custvendorid=@custVendor.Customer_Vendor_Id';"><strong>@custVendor.SiteString</strong></td>
-
-                        <td>
-                            <div class="tool-Links">
-                                <a href="/CustomerVendor/EditCustomerVendorProfile?custvendorid=@custVendor.Customer_Vendor_Id" class="flaticon-edit" title="Edit Customer Vendor Profile."></a>           
-                                <a></a>                    
-                                <a href="#delete-confirmation" data-toggle="modal" refer="/CustomerVendor/DeleteCustomerVendor?custvendorid=@custVendor.Customer_Vendor_Id" class="flaticon-recycle" title="Delete this mapping."></a>
-                            </div>
-                        </td>
-                    </tr>
-                }
-            }
-        </tbody>
     </table>
 </div>
-
 
 
 <div class="modal" id="delete-confirmation">

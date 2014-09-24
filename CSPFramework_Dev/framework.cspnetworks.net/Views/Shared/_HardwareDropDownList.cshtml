@@ -10,4 +10,4 @@
     var items = DropDonwHelper.GetItems("GetHardwareList", selectedVal);
    
     }
-@Html.DropDownListFor(m => m.Associted_Hardware_Id, @items, new { @id = "hardwarelist_" })
+@Html.DropDownListFor(m => m.Associted_Hardware_Id, @items, new {  @class = "form-control", @id = "hardwarelist_" })

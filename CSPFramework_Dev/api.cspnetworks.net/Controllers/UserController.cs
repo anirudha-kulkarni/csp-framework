@@ -97,6 +97,7 @@ namespace api.cspnetworks.net.Controllers
                 regUser.LastName = user.lastname;
                 regUser.AccountRole = user.user_group;
                 regUser.Phone = user.phone;
+                regUser.MobileNumber = user.mobile;
                 regUsers.Add(regUser);
             }
             return regUsers;

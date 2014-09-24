@@ -7,7 +7,7 @@
 <h2>Add New Customer Vendor Mapping</h2>
 
 <div class="col-sm-10">
-    @using (Html.BeginForm("PostNewCustomerVendor", "CustomerVendor", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new {enctype = "multipart/form-data",  @class = "form-horizontal", @id = "NewCustomerVendorForm" }))
+    @using (Html.BeginForm("PostNewCustomerVendor", "CustomerVendor", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new {enctype = "multipart/form-data", @role= "form",  @class = "form-horizontal", @id = "NewCustomerVendorForm" }))
     {
 
          <div class="modal-footer">
@@ -22,23 +22,23 @@
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
         @Html.HiddenFor(m => m.newCustomerVendorModel.FunctionString)
-        <div class="form-group">
-            @Html.LabelFor(m => m.newCustomerVendorModel.VendorName, new { @class = "col-sm-3 control-label" })
-            <div class="col-sm-8">
-                @Html.EditorFor(m => m.newCustomerVendorModel.Vendor_Id, "VendorsList", new { @autofocus = "autofocus" })
-                @Html.ValidationMessageFor(m => m.newCustomerVendorModel.VendorName)
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.newCustomerVendorModel.VendorName, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-8">
+            @Html.EditorFor(m => m.newCustomerVendorModel.Vendor_Id, "VendorsList", new { @class="form-control", @autofocus = "autofocus" })
+            @Html.ValidationMessageFor(m => m.newCustomerVendorModel.VendorName)
         </div>
+    </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.newCustomerVendorModel.Account, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.newCustomerVendorModel.Account, new { @autofocus = "autofocus", @placeholder = "Enter Account Number" })
+                @Html.TextBoxFor(m => m.newCustomerVendorModel.Account, new { @class="form-control",  @autofocus = "autofocus", @placeholder = "Enter Account Number" })
                 @Html.ValidationMessageFor(m => m.newCustomerVendorModel.Account)
             </div>
         </div>
 
- <span  id="errorDiv_" style="display: none; font-weight:bold; font-size: 12px; padding: 10px; margin: -20px 0; color: #d35d51; background: #f7e2df; border: 1px solid #d35d51;">
+        <span  id="errorDiv_" style="display: none; font-weight:bold; font-size: 12px; padding: 10px; margin: -20px 0; color: #d35d51; background: #f7e2df; border: 1px solid #d35d51;">
                 Oops ! Something has gone wrong. Please try again !
             </span>
 
@@ -100,7 +100,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(m => m.newCustomerVendorModel.L1UserName, new { @class = "col-sm-3 control-label" })
                                 <div class="col-sm-8">
-                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.L1UserName, new { @placeholder = "Enter L1 Username" })
+                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.L1UserName, new { @placeholder = "Enter L1 Username", @class = "form-control" })
                                     @Html.ValidationMessageFor(m => m.newCustomerVendorModel.L1UserName)
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(m => m.newCustomerVendorModel.L1Password, new { @class = "col-sm-3 control-label" })
                                 <div class="col-sm-8">
-                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.L1Password, new { @placeholder = "Enter L1 Password" })
+                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.L1Password, new { @placeholder = "Enter L1 Password", @class = "form-control" })
                                     @Html.ValidationMessageFor(m => m.newCustomerVendorModel.L1Password)
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(m => m.newCustomerVendorModel.L2UserName, new { @class = "col-sm-3 control-label" })
                                 <div class="col-sm-8">
-                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.L2UserName, new { @placeholder = "Enter L2 Username" })
+                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.L2UserName, new { @placeholder = "Enter L2 Username", @class = "form-control" })
                                     @Html.ValidationMessageFor(m => m.newCustomerVendorModel.L2UserName)
                                 </div>
                             </div>
@@ -124,7 +124,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(m => m.newCustomerVendorModel.L2Password, new { @class = "col-sm-3 control-label" })
                                 <div class="col-sm-8">
-                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.L2Password, new { @placeholder = "Enter L2 Password" })
+                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.L2Password, new { @placeholder = "Enter L2 Password", @class = "form-control" })
                                     @Html.ValidationMessageFor(m => m.newCustomerVendorModel.L2Password)
                                 </div>
                             </div>
@@ -158,7 +158,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(m => m.newCustomerVendorModel.AgreementPath, new { @class = "col-sm-3 control-label" })
                                 <div class="col-sm-8">
-                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.AgreementPath, new { type = "file", accept = ".pdf" })
+                                    @Html.TextBoxFor(m => m.newCustomerVendorModel.AgreementPath, new { type = "file", accept = ".pdf", @class = "form-control" })
                                     @Html.ValidationMessageFor(m => m.newCustomerVendorModel.AgreementPath)
                                 </div>
                             </div>

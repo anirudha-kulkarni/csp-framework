@@ -23,7 +23,7 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.Name, new { @class = "col-sm-3 control-label" })
                 <div class="col-sm-9">
-                    @Html.TextBoxFor(m => m.Name)
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Name)
                 </div>
             </div>
@@ -32,7 +32,7 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.SupportEmail, new { @class = "col-sm-3 control-label" })
                 <div class="col-sm-9">
-                    @Html.TextBoxFor(m => m.SupportEmail)
+                    @Html.TextBoxFor(m => m.SupportEmail, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.SupportEmail)
                 </div>
             </div>
@@ -40,7 +40,7 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.SupportNumber, new { @class = "col-sm-3 control-label" })
                 <div class="col-sm-9">
-                    @Html.TextBoxFor(m => m.SupportNumber, new { @class="phone" })
+                    @Html.TextBoxFor(m => m.SupportNumber, new { @class="phone form-control" })
                     @Html.ValidationMessageFor(m => m.SupportNumber)
                 </div>
             </div>
@@ -48,10 +48,10 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.website, new { @class = "col-sm-3 control-label" })
                 <div class="col-sm-9">
-                    @Html.TextBoxFor(m => m.website, new { @class="url" })
+                    @Html.TextBoxFor(m => m.website, new { @class = "url form-control" })
                     @Html.ValidationMessageFor(m => m.website)
                 </div>
-            </div>            
+            </div>     
 
 
             <div class="modal-footer">

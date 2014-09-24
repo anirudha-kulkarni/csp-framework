@@ -58,6 +58,30 @@ namespace framework.cspnetworks.net.Controllers
             return View(clientsViewModel);   
         }
 
+
+        public string GetClientsList()
+        {
+            HttpResponseMessage response;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://api.cspnetworks.net/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // HTTP POST                     
+                response = client.GetAsync("api/Clients/GetClients").Result;
+            }
+
+            IEnumerable<NewClientModel> clients = new List<NewClientModel>();
+
+            if (response.StatusCode.Equals(HttpStatusCode.OK))
+            {
+                clients = response.Content.ReadAsAsync<IEnumerable<NewClientModel>>().Result;
+            }
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(clients);
+
+        }
         [Authorize]
         public ActionResult DisplayClientProfile(int clientid)
         {

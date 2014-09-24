@@ -7,7 +7,7 @@
     OnSuccess = "AddNewUSerSuccess" ,
     OnFailure = "AddNewUSerFailure"}, new { @class = "AjaxForm", @id = "formAddNewUser_"}))*@
 
-@using (Html.BeginForm("AddNewUser", "People", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form", @id = "NewUserForm" }))
+@using (Html.BeginForm("AddNewUser", "People", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "NewUserForm" }))
 {
 
 @*<form id="formAddNewUser_">*@
@@ -24,49 +24,94 @@
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true)
 
-                        @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.FirstName, new { @placeholder = "Enter Full Name" })
-                        @Html.ValidationMessageFor(m => m.FirstName)
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.FirstName, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "Enter First Name" })
+                                @Html.ValidationMessageFor(m => m.FirstName)
+                            </div>
+                        </div>
+                       
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.LastName, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Enter Last Name" })
+                                @Html.ValidationMessageFor(m => m.LastName)
+                            </div>
+                        </div>
 
-                        @Html.LabelFor(m => m.LastName, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.LastName, new { @placeholder = "Enter Full Name" })
-                        @Html.ValidationMessageFor(m => m.LastName)
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Enter Email Address" })
+                                @Html.ValidationMessageFor(m => m.Email)
+                            </div>
+                        </div>
 
-                        @Html.LabelFor(m => m.Email, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.Email, new { @placeholder = "Enter Email Address" })
-                        @Html.ValidationMessageFor(m => m.Email)
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-7">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Enter Password" })
+                                @Html.ValidationMessageFor(m => m.Password)
+                            </div>
+                        </div>
 
-                        @Html.LabelFor(m => m.Password, new { @class = "control-label" })
-                        @Html.PasswordFor(m => m.Password, new { @placeholder = "Enter Password" })
-                        @Html.ValidationMessageFor(m => m.Password)
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-7">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                            </div>
+                        </div>
+                       
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.AccountRole, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-7">
+                               @Html.EditorFor(m => m.AccountRole, "AccountRoles")
+                               @Html.ValidationMessageFor(m => m.AccountRole)
+                            </div>
+                        </div>
 
-                        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
-                        @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder = "Confirm Password" })
-                        @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Customer_Id, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-7">
+                                @Html.EditorFor(m => m.Customer_Id, "CustomersList")
+                                @Html.ValidationMessageFor(m => m.Customer_Id)
+                            </div>
+                        </div>                        
 
-                        @Html.LabelFor(m => m.AccountRole, new { @class = "control-label" })
-                        @Html.EditorFor(m => m.AccountRole, "AccountRoles")
-                        @Html.ValidationMessageFor(m => m.AccountRole)
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Status, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-7">
+                                @Html.EditorFor(m => m.Status, "UserStatus")
+                                @Html.ValidationMessageFor(m => m.Status)
+                            </div>
+                        </div>
 
-                        @Html.LabelFor(m => m.Customer_Id, new { @class = "control-label" })
-                        @Html.EditorFor(m => m.Customer_Id, "CustomersList")
-                        @Html.ValidationMessageFor(m => m.Customer_Id)
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Phone, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.Phone, new { @class = "phone form-control", @placeholder = "999-999-9999" })
+                                @Html.ValidationMessageFor(m => m.Phone)
+                            </div>
+                        </div>                       
 
-                        @Html.LabelFor(m => m.Status, new { @class = "control-label" })
-                        @Html.EditorFor(m => m.Status, "UserStatus")
-                        @Html.ValidationMessageFor(m => m.Status)
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.MobileNumber, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.MobileNumber, new { @class = "phone form-control", @placeholder = "999-999-9999" })
+                                @Html.ValidationMessageFor(m => m.MobileNumber)
+                            </div>
+                        </div>
+                        
 
-                        @Html.LabelFor(m => m.Phone, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.Phone, new { @class="phone", @placeholder = "999-999-9999" })
-                        @Html.ValidationMessageFor(m => m.Phone)
-
-                        @Html.LabelFor(m => m.MobileNumber, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.MobileNumber, new { @class="phone", @placeholder = "999-999-9999" })
-                        @Html.ValidationMessageFor(m => m.MobileNumber)
-
-                        @Html.LabelFor(m => m.Address, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.Address, new { @placeholder = "Enter Address" })
-                        @Html.ValidationMessageFor(m => m.Address)                        
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Address, new { @class = "col-sm-4 control-label" })
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Enter Address" })
+                                @Html.ValidationMessageFor(m => m.Address)                                
+                            </div>
+                        </div>
 
                     </div>
                 </div>

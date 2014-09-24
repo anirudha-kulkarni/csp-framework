@@ -5,6 +5,10 @@
 }
 
 
+<div style="text-align:center">
+    <h2>Vendor Management</h2>
+</div>
+
 <div class="wrapper" id="companySetup">
 
     @*Render Registered USers table from Editor Template*@
@@ -15,5 +19,32 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jquery")
     @Styles.Render("~/Content/admin/css")
+    @Styles.Render("~/Content/bootstrap-table/css")
+    @Scripts.Render("~/bundles/bootstrap-table")
 }
 
+<script>
+    function linkDisplayFormatter(value, row) {
+        return '<a href="'+ value +'" target="_blank">' + value + '</a>';
+    }
+
+    function strongDisplayFormatter(value, row) {
+        return '<strong>' + value + '</strong>';
+    }
+    function nameDisplayFormatter(value, row) {
+        return '<strong><a href="/CustomerVendor/DisplayCustomerVendorProfile?custvendorid=' + row.Customer_Vendor_Id + '">' + value + '</a></strong>'
+    }
+    function tableActionsFormatter(value, row) {
+        return ' <div>\
+                                <a href="/CustomerVendor/EditCustomerVendorProfile?custvendorid=' + row.Customer_Vendor_Id + '" class="flaticon-edit" title="Edit User Profile."></a>\
+                                <a href="#delete-confirmation" refer="/CustomerVendor/DeleteCustomerVendor?custvendorid=' + row.Customer_Vendor_Id + '" data-toggle="modal" class="flaticon-recycle" title="Delete this Mapping."></a>\
+                            </div>';
+    }
+
+    $(document).ready(function () {
+        // Maked Edit Controls
+        jQuery(function ($) {
+            $(".phone").mask("000.000.0000");
+        });
+    });
+</script>

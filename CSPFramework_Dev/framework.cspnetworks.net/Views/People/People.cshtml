@@ -5,10 +5,11 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-@*<h2>AdminHome</h2>*@
+<div style="text-align:center">
+    <h2>Registered Users List</h2>
+</div>
 
-<div class="wrapper" id="companySetup">
-    
+<div class="wrapper">
     @*Render Registered USers table from Editor Template*@
     @Html.DisplayFor(m => m.RegisteredUserList, "RegisteredUserList")
 
@@ -16,82 +17,42 @@
     @Html.EditorFor(m => m.NewUserRegistrationModel)
 
 </div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/bundles/jqueryui-css")
     @Styles.Render("~/Content/admin/css")
+    @Styles.Render("~/Content/bootstrap-table/css")
+    @Scripts.Render("~/bundles/bootstrap-table")
     @Scripts.Render("~/bundles/maskedEdit")
+    @Styles.Render("~/Content/jqGrid/css")
+    @Scripts.Render("~/bundles/jqGrid")
 
     <script>
-            $(document).ready(function () {
-                debugger;
-                // Maked Edit Controls
-                jQuery(function ($) {
-                    $(".phone").mask("000.000.0000");
-                });
-            });
-    </script>
-
-
-
-@*<script>
-    document.onsubmit = function () {
-        return false;
-    }
-
-    $.fn.serializeObject = function () {
-        var o = {};
-        var a = this.serializeArray();
-        $.each(a, function () {
-            var dotIndex = this.name.lastIndexOf(".");
-            if (dotIndex != -1) {
-                this.name = this.name.substr(dotIndex + 1, this.name.length);
-            }            
-            if (o[this.name]) {
-                if (!o[this.name].push) {
-                    o[this.name] = [o[this.name]];
-                }
-                o[this.name].push(this.value || '');
-            } else {
-                o[this.name] = this.value || '';
-            }
-        });
-        return o;
-    };
-
-    //callback handler for form submit
-    $("#formAddNewUser_").submit(function (e) {
-        $.support.cors = true;    
-        var postData = $(this).serializeObject();
-        var userDetails = JSON.stringify(postData);
-        var formURL = $(this).attr("action");
-        $.ajax(
+        function strongDisplayFormatter(value, row)
         {
-            type: "POST",
-            url: "http://api.cspnetworks.net/api/User/PostUser",
-            data: userDetails,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data, textStatus, jqXHR) {
-                //data: return data from server
-                alert("User Has Been Added  !!");
+            return '<strong>' + value + '</strong>';
+        }
+        function nameDisplayFormatter(value, row)
+        {
+            return '<strong><a href="/People/DisplayUserProfile?userid=' + row.User_Id + '">' + value + ' ' + row.LastName + '</a></strong>'
+        }
+        function tableActionsFormatter(value, row)
+        {
+            return ' <div>\
+                                <a href="/People/EditUser?userid=' + row.User_Id + '" class="flaticon-edit" title="Edit User Profile."></a>\
+                                <a href="/People/ChangePassword?userid=' + row.User_Id + '" class="flaticon-lock" title="Change password for this user."></a>\
+                                <a href="#delete-confirmation" refer="/People/DeleteUser?userid='+row.User_Id+'" data-toggle="modal" class="flaticon-recycle" title="Delete this user."></a>\
+                            </div>';
+        }
 
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                //if fails
-                debugger;
-                alert("Errorr!!");
-            }
+        $(document).ready(function () {            
+            // Maked Edit Controls
+            jQuery(function ($) {
+                $(".phone").mask("000.000.0000");
+            });
         });
-
-        e.preventDefault(); //STOP default action
-        e.unbind(); //unbind. to stop multiple form submit.
-    });
-   
-    
-</script>*@   
-    <script>
-        
-        
-    </script>
+    </script>    
 }

@@ -58,6 +58,31 @@ namespace framework.cspnetworks.net.Controllers
             //return View();
         }
 
+
+        public string GetHardwaresList()
+        {
+            HttpResponseMessage response;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://api.cspnetworks.net/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // HTTP POST                     
+                response = client.GetAsync("api/Hardware/GetHardwares").Result;
+            }
+
+            IEnumerable<NewHardwareModel> hardwares = new List<NewHardwareModel>();
+
+            if (response.StatusCode.Equals(HttpStatusCode.OK))
+            {
+                hardwares = response.Content.ReadAsAsync<IEnumerable<NewHardwareModel>>().Result;
+            }
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(hardwares);
+            
+        }
+
         [Authorize]
         public ActionResult AddNewHardware()
         {

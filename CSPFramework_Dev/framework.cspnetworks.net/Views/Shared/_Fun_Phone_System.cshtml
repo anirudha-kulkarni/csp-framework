@@ -24,7 +24,7 @@
 <div class="form-group">
     @Html.LabelFor(m => m.Phone_Sys_Solution, new { @class = "col-sm-3 control-label" })
     <div class="col-sm-8">
-        @Html.DropDownListFor(m => m.Phone_Sys_Solution, @items, new { @autofocus = "autofocus" })
+        @Html.DropDownListFor(m => m.Phone_Sys_Solution, @items, new {  @class = "form-control", @autofocus = "autofocus" })
         @Html.ValidationMessageFor(m => m.Phone_Sys_Solution)
 
     </div>
@@ -34,7 +34,7 @@
 <div class="form-group">
     @Html.LabelFor(m => m.Phone_Sys_IP_Address, new { @class = "col-sm-3 control-label" })
     <div class="col-sm-8">
-        @Html.TextBoxFor(m => m.Phone_Sys_IP_Address, new { @autofocus = "autofocus", @class = "ip_address", @placeholder = "127.0.0.1" })
+        @Html.TextBoxFor(m => m.Phone_Sys_IP_Address, new {@autofocus = "autofocus", @class = "ip_address form-control", @placeholder = "127.0.0.1" })
         @Html.ValidationMessageFor(m => m.Phone_Sys_IP_Address)
     </div>
 </div>
@@ -43,7 +43,7 @@
 <div class="form-group">
     @Html.LabelFor(m => m.Phone_Sys_Management_Url, new { @class = "col-sm-3 control-label" })
     <div class="col-sm-8">
-        @Html.TextBoxFor(m => m.Phone_Sys_Management_Url, new { @autofocus = "autofocus",  @class="url", @placeholder = @"http://www.example.com" })
+        @Html.TextBoxFor(m => m.Phone_Sys_Management_Url, new { @autofocus = "autofocus", @class = "url form-control", @placeholder = @"http://www.example.com" })
         @Html.ValidationMessageFor(m => m.Phone_Sys_Management_Url)
     </div>
 </div>

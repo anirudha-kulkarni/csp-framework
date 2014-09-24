@@ -10143,56 +10143,6 @@ a img {
     text-decoration: none
 }
 
-.search {
-    float: left;
-    padding-right: 3px
-}
-
-.search input[type="text"],.search textarea[type="text"],.search select[type="text"] {
-    background: #353b40;
-    color: #8a959e;
-    font-style: italic;
-    border: none;
-    width: 156px;
-    float: left;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-    padding: 10px 10px 11px;
-    -webkit-border-top-left-radius: 4px;
-    -webkit-border-bottom-left-radius: 4px;
-    -moz-border-radius-topleft: 4px;
-    -moz-border-radius-bottomleft: 4px;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-    margin: 0
-}
-
-.search .submitSearch {
-    display: block;
-    background: #353b40;
-    background-image: url(/Content/images/icons/search.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    padding: 10px 38px 10px 15px;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-    -webkit-border-top-right-radius: 4px;
-    -webkit-border-bottom-right-radius: 4px;
-    -moz-border-radius-topright: 4px;
-    -moz-border-radius-bottomright: 4px;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-    width: 30px;
-    padding: 0;
-    text-indent: -999px;
-    margin: 0 7px 0 0;
-    border: none;
-    height: 37px;
-    float: right;
-    margin-right: 7px
-}
 
 .High {
     color: #b7091d;

@@ -49,7 +49,11 @@ namespace CSPLibrary
 
         [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
-        public string Phone { get; set; }   
+        public string Phone { get; set; }
+
+        [Display(Name = "Mobile Number")]
+        [DataType(DataType.PhoneNumber)]
+        public String MobileNumber { get; set; }
 
         [Required]
         [Display(Name = "Account Role")]

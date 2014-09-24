@@ -1,67 +1,28 @@
 ﻿@model IEnumerable<CSPLibrary.NewHardwareModel>
 
-<div class="tableHeader" id="contactHeader">
-    <span class="headerAction">
-        @*<div class="search">
-                <form id="filter-form" novalidate="novalidate">
-                    <input class="multi filter noEnterKey" rel="table-contacts" type="text" placeholder="Filter..." autocomplete="off" id="LuckyAnchor_561592259_163"> <span class="submitSearch"></span>
-                </form>
-            </div>*@
-        @*<a href="#" class=" add" onclick="Profile.openAddContact();General.clearValidationErrorsPopup();">Add</a>*@
-        @*@Html.ActionLink("Add", "Index", "Home", null, new { @class = " add" })*@
-        <a id="addhardware" type="button" onclick="window.document.location = '/Hardware/AddNewHardware'" class=" add" href="" data-toggle="modal">Add</a>
-    </span>
 
-    <h2>Hardware Inventory</h2>
-</div>
 
 <div id="contactList">
+    <div id="custom-toolbar">
+        <div class="form-inline" role="form">
+            <div class="form-group">
+                <a id="adduser" type="button" class="btn" href="/Hardware/AddNewHardware">Add New Hardware</a>
+            </div>
+        </div>
+    </div>
 
-    <table cellpadding="0" cellspacing="0" border="0" class="tablesorter" id="table-contacts">
+    <table class="tablesorter" id="table-contacts" data-toolbar="#custom-toolbar" data-show-refresh="true" data-show-toggle="true" data-pagination="true" data-search="true" data-toggle="table" data-url="/Hardware/GetHardwaresList" data-cache="false" data-sort-name="Client_Code" data-sort-order="asc">
         <thead>
             <tr>
-                <th width="5" class="header"></th>
-
-                <th class="header"><a href="javascript:;" title="Sort" class="arrow"><span>Vendor Name</span></a></th>
-                <th class="header"><a href="javascript:;" title="Sort" class="arrow"><span>Purchased By</span></a></th>
-                <th class="header"><a href="javascript:;" title="" class="arrow"><span>Client Code</span></a></th>
-                <th class="header"><a href="javascript:;" title="Sort" class="arrow"><span>Location</span></a></th>
-                <th width="200" class="header">&nbsp;</th>
-                @*<th class="filter header"></th>*@
+                <th class="header" data-field="Vendor_Name" data-sortable="true" data-formatter="nameDisplayFormatter">Vendor Name</th>
+                <th class="header" data-field="PurchaserName" data-sortable="true">Purchased By</th>
+                <th class="header" data-field="ClientCode" data-sortable="true">Client Code</th>
+                <th class="header" data-field="Location" data-sortable="true" data-formatter="strongDisplayFormatter">Location</th>
+                <th class="header" data-events="operateEvents" data-formatter="tableActionsFormatter"></th>
             </tr>
         </thead>
-
-        <tfoot class="noRows">
-            <tr class="result">
-                <td colspan="11"><div>There are 0 items that match your filter criteria.</div></td>
-            </tr>
-        </tfoot>
-
-        <tbody>
-            @{
-                foreach (var hardware in Model)
-                {
-                    <tr>
-                        <td></td>
-                        <td onclick="window.document.location = '/Hardware/DisplayHardwareDetails?hardwareid=@hardware.Hardware_Id';"><strong><a href="#">@hardware.Vendor_Name</a></strong></td>
-                        <td onclick="window.document.location = '/Hardware/DisplayHardwareDetails?hardwareid=@hardware.Hardware_Id';">@hardware.PurchaserName</td>
-                        <td onclick="window.document.location = '/Hardware/DisplayHardwareDetails?hardwareid=@hardware.Hardware_Id';">@hardware.ClientCode</td>
-                        <td onclick="window.document.location = '/Hardware/DisplayHardwareDetails?hardwareid=@hardware.Hardware_Id';"><strong>@hardware.Location</strong></td>
-
-                        <td>
-                            <div class="tool-Links">
-                                <a href="/Hardware/EditHardware?hardwareid=@hardware.Hardware_Id" class="flaticon-edit" title="Edit Hardware Details"></a>
-                                <a href="#delete-confirmation" data-toggle="modal" refer="/Hardware/DeleteHardware?hardwareid=@hardware.Hardware_Id" class="flaticon-recycle" title="Delete this Hardware"></a>
-                            </div>
-                        </td>
-                    </tr>
-                }
-            }
-        </tbody>
     </table>
 </div>
-
-
 
 <div class="modal" id="delete-confirmation">
     <div class="modal-dialog">
