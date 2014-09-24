@@ -1,0 +1,211 @@
+﻿@{
+    ViewBag.Title = "AddNewSoftware";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model CSPLibrary.NewSoftwareModel
+
+<h2>Add New Software</h2>
+<div class="col-sm-10">
+    @using (Html.BeginForm("PostNewSoftware", "Software", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", @id = "NewSoftwareForm" }))
+    {
+
+        <div class="modal-footer">
+            <a href="/Software/Index" class="btn">Cancel</a>
+            <input type="submit" class="btn" value="Save" />
+        </div>
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.Make_ID, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-4 predefinedMakeList">
+                @Html.EditorFor(m => m.Make_ID, "SoftwareMakeList", new { @autofocus = "autofocus", @placeholder = "Select Software Make" })
+                @Html.ValidationMessageFor(m => m.Make_ID)
+            </div>
+            <div class="col-sm-4 newMake">
+                @Html.TextBoxFor(m => m.MakeName, new { @autofocus = "autofocus", @placeholder = "Enter New Make" })
+            </div>
+            <div class="col-sm-4">@Html.CheckBox("IsNewMake", false, new { @class = "col-sm-1" })@Html.Label("Add a new make", new { @class = "col-sm-7", @for = "IsNewMake" })</div>
+        </div>
+
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.Model_ID, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-4 predefinedModelList">
+                @Html.EditorFor(m => m.Model_ID, "SoftwareModelList", new { @autofocus = "autofocus", @placeholder = "Select Software Model" })
+                @Html.ValidationMessageFor(m => m.Model_ID)
+            </div>
+            <div class="col-sm-4 newModel">
+                @Html.TextBoxFor(m => m.ModelName, new { @autofocus = "autofocus", @placeholder = "Enter New Model" })
+            </div>
+            <div class="col-sm-4">@Html.CheckBox("IsNewModel", false, new { @class = "col-sm-1" })@Html.Label("Add a new model", new { @class = "col-sm-7", @for = "IsNewModel" })</div>
+        </div>
+        
+        
+        <span id="errorDiv_" style="display: none; font-weight:bold; font-size: 12px; padding: 10px; margin: -20px 0; color: #d35d51; background: #f7e2df; border: 1px solid #d35d51;">
+            Oops ! Something has gone wrong. Please try again !
+        </span>
+        
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.Box_Product_Key, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Box_Product_Key, new { @autofocus = "autofocus", @placeholder = "Enter Box Product Key" })
+                @Html.ValidationMessageFor(m => m.Box_Product_Key)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Digital_Product_Key, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Digital_Product_Key, new { @autofocus = "autofocus", @placeholder = "Enter Digital Product Key" })
+                @Html.ValidationMessageFor(m => m.Digital_Product_Key)
+            </div>
+        </div>
+        
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.License_ID, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.EditorFor(m => m.License_ID, "Software_LicenseTypeList", new { @autofocus = "autofocus", @placeholder = "Select License Type" })
+                @Html.ValidationMessageFor(m => m.License_ID)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.Media_ID, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.EditorFor(m => m.Media_ID, "Software_MediaTypeList", new { @autofocus = "autofocus", @placeholder = "Select Media Type" })
+                @Html.ValidationMessageFor(m => m.Media_ID)
+            </div>
+        </div>
+            
+        <div class="form-group">
+            @Html.LabelFor(m => m.PurchasedBy_ID, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.EditorFor(m => m.PurchasedBy_ID, "PurchasedBy", new { @autofocus = "autofocus", @placeholder = "Purchased By" })
+                @Html.ValidationMessageFor(m => m.PurchasedBy_ID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Client_ID, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.EditorFor(m => m.Client_ID, "CustomersList", new { @autofocus = "autofocus", @placeholder = "Select Client Code" })
+                @Html.ValidationMessageFor(m => m.Client_ID)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.site_id, new { @class = "col-sm-3 control-label" })
+             <div class="col-sm-8" id="sitesID">
+                
+             </div>
+        </div>
+        
+        <div class="modal-footer">
+            <a href="/Software/Index" class="btn">Cancel</a>
+            <input type="submit" class="btn" value="Save" />
+        </div>
+    }
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/admin/css")
+    @Scripts.Render("~/bundles/maskedEdit")
+    @Scripts.Render("~/bundles/moment")
+
+    <script>
+        $(document).ready(function () {
+            // this code will execute on form load
+            {
+                var client = $('#customerslist_ option:selected').val();
+                $.get('/CustomerVendor/GetSitesView?id=' + client, function (data) {
+                    $('#sitesID').html(data);
+                    $('#sitesID').fadeIn('fast');
+                });
+
+                $(".newMake").hide();
+                $(".newModel").hide();
+            }
+
+            //show site list as per client
+            $('#customerslist_').change(function () {
+                var selectedClient = $('#customerslist_ option:selected').val();
+                $.get('/CustomerVendor/GetSitesView?id=' + selectedClient, function (data) {
+                    $('#sitesID').html(data);
+                    $('#sitesID').fadeIn('fast');
+                });
+            });
+
+            // show/hide textbox for adding new make
+            $("#IsNewMake").click(function () {
+                if ($("#IsNewMake").is(":checked") === true) {
+                    $(".predefinedMakeList").hide();
+                    $(".newMake").show();
+                } else {
+                    $(".newMake").hide();
+                    $(".predefinedMakeList").show();
+                }
+            });
+
+            // show/hide textbox for adding new model
+            $("#IsNewModel").click(function () {
+                if ($("#IsNewModel").is(":checked") === true) {
+                    $(".predefinedModelList").hide();
+                    $(".newModel").show();
+                } else {
+                    $(".newModel").hide();
+                    $(".predefinedModelList").show();
+                }
+            });
+
+            //check if newMake/newModel is an existing make/model then do no make entry of new Make/Model into DB
+            document.forms[0].onsubmit = function () {
+
+                // FOR MAKE::
+                if ($("#IsNewMake").is(":checked") === true) {
+                    $("#software_makelist_ option").each(function (index) {
+                        var newMake = $.trim($("#MakeName").val());
+
+                        if (this.innerHTML) {
+
+                            var data = $.trim(this.innerHTML.toLowerCase());
+                            if (data && newMake && data === newMake.toLowerCase()) {
+                                $("#IsNewMake").attr("value", "false");
+                                $("#software_makelist_")[0].selectedIndex = index;
+                                return;
+                            }
+                        }
+                    });
+                } else {
+                    var makedata = $("#software_makelist_ option:selected")[0].innerHTML;
+                    $("#MakeName")[0].value = makedata;
+                }
+
+                // FOR MODEL::
+                if($("#IsNewModel").is(":checked") === true) {
+                    $("#software_modellist_ option").each(function (index) {
+                        var newModel = $.trim($("#ModelName").val());
+
+                        if (this.innerHTML) {
+
+                            var data = $.trim(this.innerHTML.toLowerCase());
+                            if (data && newModel && data === newModel.toLowerCase()) {
+                                $("#IsNewModel").attr("value", "false");
+                                $("#software_modellist_")[0].selectedIndex = index;
+                                return;
+                            }
+                        }
+                    });
+                } else {
+                    var modeldata = $("#software_modellist_ option:selected")[0].innerHTML;
+                    $("#ModelName")[0].value = modeldata;
+                }
+            }
+
+        });
+    </script>
+    }

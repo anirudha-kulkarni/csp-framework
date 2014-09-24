@@ -41,11 +41,17 @@
 
         <div class="form-group">
             @Html.LabelFor(m => m.Make, new { @class = "col-sm-3 control-label" })
-            <div class="col-sm-8">
-                @Html.EditorFor(m => m.Make,"HardwareMakeList", new { @autofocus = "autofocus", @placeholder = "Select Make" })
+            <div class="col-sm-4 predefinedMakeList">
+                @Html.EditorFor(m => m.Make, "HardwareMakeList", new { @autofocus = "autofocus", @placeholder = "Select Make" })
                 @Html.ValidationMessageFor(m => m.Make)
             </div>
+            <div class="col-sm-4 newMake">
+                @Html.TextBoxFor(m => m.MakeName, new { @autofocus = "autofocus", @placeholder = "Enter New Make" })
+            </div>
+            <div class="col-sm-4">@Html.CheckBox("IsNewMake", false, new { @class = "col-sm-1" })@Html.Label("Add a new make", new { @class = "col-sm-7", @for = "IsNewMake" })</div>
         </div>
+        
+        
 
         <div class="form-group">
             @Html.LabelFor(m => m.Model, new { @class = "col-sm-3 control-label" })
@@ -129,11 +135,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Location, new { @class = "col-sm-3 control-label" })
-            <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.Location, new { @autofocus = "autofocus", @placeholder = "Enter Location" })
-                @Html.ValidationMessageFor(m => m.Location)
-            </div>
+            @Html.LabelFor(m => m.site_id, new { @class = "col-sm-3 control-label" })
+             <div class="col-sm-8" id="sitesID">
+                
+             </div>
         </div>
         
         <div class="form-group">
@@ -222,6 +227,7 @@
 
             });
 
+            // this will show hardware dropdown list when accesory is selected as item type
             $('#itemlist_').change(function () {
                 var currentValue = this.value;
                 var data = this.selectedOptions[0].innerHTML;
@@ -252,6 +258,25 @@
 
             });
 
+            // this code will execute on form load
+            {
+                var client = $('#customerslist_ option:selected').val();
+                $.get('/CustomerVendor/GetSitesView?id=' + client, function (data) {
+                    $('#sitesID').html(data);
+                    $('#sitesID').fadeIn('fast');
+                });
+                
+            }
+
+            //show site list as per client
+            $('#customerslist_').change(function () {
+                var selectedClient = $('#customerslist_ option:selected').val();
+                $.get('/CustomerVendor/GetSitesView?id=' + selectedClient, function (data) {
+                    $('#sitesID').html(data);
+                    $('#sitesID').fadeIn('fast');
+                });
+            });
+
             // Initialize datepicker
             $("#startDate_").datetimepicker({
                 pickTime: false
@@ -268,6 +293,50 @@
 
             //
             $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', { translation: { 'Z': { pattern: /[0-9]/, optional: true } }, clearIfNotMatch: true });
+
+            //for adding new make
+            $(".newMake").hide();
+            $("#IsNewMake").click(function () {
+                if ($("#IsNewMake").is(":checked") === true) {
+                    $(".predefinedMakeList").hide();
+                    $(".newMake").show();
+                } else {
+                    $(".newMake").hide();
+                    $(".predefinedMakeList").show();
+                }
+            });
+
+            
+            document.forms[0].onsubmit = function () {
+
+                // this code will to used to set field of MakeName
+                if ($("#IsNewMake").is(":checked") === false) {
+                    var makedata = $("#makelist_ option:selected")[0].innerHTML;
+                    $("#MakeName")[0].value = makedata;
+                }
+                
+                //check if newMake is an existing make then do no make entry of new Make into DB
+                if($("#IsNewMake").is(":checked") === true) {
+                    $("#makelist_ option").each(function(index){ 
+                        var newMake = $.trim($("#MakeName").val());
+
+                        if(this.innerHTML) {
+			
+                            var data = $.trim(this.innerHTML.toLowerCase());
+                            if(data && newMake && data === newMake.toLowerCase()){
+                                $("#IsNewMake").attr("value","false");
+                                $("#makelist_")[0].selectedIndex = index;
+                                return;
+                            }
+                        }
+                    });
+                }
+
+
+            }
+
         });
+
+        
     </script>
 }

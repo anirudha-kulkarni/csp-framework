@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'E:\CSPNetworks\CSP Framework Repo\CSPFramework_Dev\api.cspnetworks.net\CSPFrameworkEntities.edmx'. 
+﻿// T4 code generation is enabled for model 'F:\Project\CSP Framework\csp-framework\CSPFramework_Dev\api.cspnetworks.net\CSPFrameworkEntities.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

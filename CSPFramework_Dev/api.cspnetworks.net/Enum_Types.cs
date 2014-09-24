@@ -14,7 +14,14 @@ namespace api.cspnetworks.net
     
     public partial class Enum_Types
     {
+        public Enum_Types()
+        {
+            this.Enum_Type_Values = new HashSet<Enum_Type_Values>();
+        }
+    
         public int enum_type_id { get; set; }
         public string enum_type_name { get; set; }
+    
+        public virtual ICollection<Enum_Type_Values> Enum_Type_Values { get; set; }
     }
 }

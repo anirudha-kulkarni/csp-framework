@@ -78,7 +78,7 @@ namespace framework.cspnetworks.net.Controllers
                 response = client.PostAsJsonAsync("api/Hardware/PostHardware", hardwareModel).Result;
             }
 
-            if (response.StatusCode.Equals(HttpStatusCode.Created))
+            if (response.StatusCode.Equals(HttpStatusCode.OK))
             {
                 TempData[Properties.Resources.Success] = Properties.Resources.AddHardware_Success;
                 return RedirectToAction("Index", "Hardware");

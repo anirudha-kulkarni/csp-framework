@@ -186,6 +186,7 @@
     <Compile Include="Controllers\CustomerVendorController.cs" />
     <Compile Include="Controllers\HardwareController.cs" />
     <Compile Include="Controllers\PeopleController.cs" />
+    <Compile Include="Controllers\SoftwareController.cs" />
     <Compile Include="Controllers\VendorsController.cs" />
     <Compile Include="CustomBinders\CustomerVendorModelBinder.cs" />
     <Compile Include="Helpers\ConfigHelper.cs" />
@@ -279,6 +280,14 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Hardware\AddNewHardware.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Hardware\DisplayHardwareDetails.cshtml" />
+    <Content Include="Views\Hardware\EditHardware.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Hardware\Index.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -337,23 +346,25 @@
     <Content Include="Views\Shared\_Fun_Connectivity_Internet.cshtml" />
     <Content Include="Views\Shared\_Fun_Printer.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\FunctionNotes.cshtml" />
-
-    <Content Include="Views\Hardware\Index.cshtml" />
-    <Content Include="Views\Hardware\AddNewHardware.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\HardwareMakeList.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\HardwareItemList.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\PurchasedBy.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\RegisteredHardwareList.cshtml" />
-    <Content Include="Views\Hardware\DisplayHardwareDetails.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SoftwareList.cshtml" />
     <Content Include="Views\Shared\_HardwareDropDownList.cshtml" />
-    <Content Include="Views\Hardware\EditHardware.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\HardwareStatusList.cshtml" />
-
     <Content Include="Views\Shared\EditorTemplates\CSPUsers.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Site_List.cshtml" />
     <Content Include="Views\Shared\_Site_List_Partial.cshtml" />
-
+    <Content Include="Views\Software\AddNewSoftware.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SoftwareMakeList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SoftwareModelList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Software_LicenseTypeList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Software_MediaTypeList.cshtml" />
+    <Content Include="Views\Software\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\RegisteredSoftwareList.cshtml" />
+    <Content Include="Views\Software\DisplaySoftwareDetails.cshtml" />
+    <Content Include="Views\Software\EditSoftware.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -53,14 +53,14 @@
                                 {
                                     <tr>
                                         <td><strong>Associated Hardware CSPN Asset Tag</strong></td>
-                                        <td>@Model.Associted_Hardware_Id</td>
+                                        <td onclick="window.document.location = '/Hardware/DisplayHardwareDetails?hardwareid=@Model.Associted_Hardware_Id';"><strong><a href="#">@Model.Associted_Hardware_Id</a></strong></td>
                                     </tr>
                                 }
 
-                                @if (!@Model.SoftwareName.IsEmpty()) { 
+                                @if (@Model.Software_ID != null && @Model.Software_ID != 0) { 
                                     <tr>
-                                        <td><strong>Software :</strong></td>
-                                        <td>@Model.SoftwareName</td>
+                                        <td><strong>Associated Software CSPN Asset Tag</strong></td>
+                                        <td onclick="window.document.location = '/Software/DisplaySoftwareDetails?softwareid=@Model.Software_ID';"><strong><a href="#">@Model.Software_ID</a></strong></td>
                                     </tr>
                                 }
                                 
@@ -89,7 +89,7 @@
 
                                 <tr>
                                     <td><strong>Location :</strong></td>
-                                    <td>@Model.Location</td>
+                                    <td>@Model.Location_Name</td>
                                 </tr>
 
                                 @if (!@Model.Hardware_Status_Value.IsEmpty()) { 

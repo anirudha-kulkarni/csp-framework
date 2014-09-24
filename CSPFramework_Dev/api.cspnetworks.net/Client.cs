@@ -19,6 +19,7 @@ namespace api.cspnetworks.net
             this.Client_Site = new HashSet<Client_Site>();
             this.Customer_Vendors = new HashSet<Customer_Vendors>();
             this.Hardwares = new HashSet<Hardware>();
+            this.Softwares = new HashSet<Software>();
             this.Users = new HashSet<User>();
         }
     
@@ -53,6 +54,7 @@ namespace api.cspnetworks.net
         public virtual User Program_Manager_User { get; set; }
         public virtual ICollection<Customer_Vendors> Customer_Vendors { get; set; }
         public virtual ICollection<Hardware> Hardwares { get; set; }
+        public virtual ICollection<Software> Softwares { get; set; }
         public virtual ICollection<User> Users { get; set; }
     }
 }
