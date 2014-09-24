@@ -37,6 +37,9 @@ namespace CSPLibrary
         [Display(Name = "Fax Number")]
         [DataType(DataType.PhoneNumber)]
         public String FaxNumber { get; set; }
+
+        [Display (Name="Site Name")]
+        public string SiteName { get; set; }
     }
 
     public class NewClientViewModel
@@ -59,30 +62,7 @@ namespace CSPLibrary
         [Required]
         [Display(Name = "Company Name")]
         public String Company_Name { get; set; }
-
-
-        //[Display(Name = "Address")]
-        //public String Address { get; set; }
-
-
-        //[Display(Name = "City")]
-        //public String City { get; set; }
-
-        //[Display(Name = "State")]
-        //public String State { get; set; }
-
-        //[Display(Name = "Zip")]
-        //public String Zip { get; set; }
-
-        //[Required]
-        //[Display(Name = "Phone Number")]
-        //[DataType(DataType.PhoneNumber)]
-        //public String PhoneNumber { get; set; }
-
-        //[Display(Name = "Mobile Number")]
-        //[DataType(DataType.PhoneNumber)]
-        //public String MobileNumber { get; set; }
-
+                 
         [Required]
         [Display(Name = "Website")]
         public String Website { get; set; }
@@ -100,6 +80,9 @@ namespace CSPLibrary
 
         [Display(Name = "Agreement End Date")]
         public DateTime? AgreementEndDate { get; set; }
+
+        [Display(Name = "Agreement File")]
+        public string AgreementPath { get; set; }
 
         [Required]
         [Display(Name = "Team")]
@@ -121,5 +104,28 @@ namespace CSPLibrary
         [Display(Name = "Sites")]
         public String Sites { get; set; }
 
+        [Display(Name = "Executive In Charge")]
+        public int? executiveIncharge { get; set; }
+
+        [Display(Name = "Program Manager")]
+        public int? programManager { get; set; }
+
+        [Display(Name = "Account Manager")]
+        public int? accountManager { get; set; }
+
+        [Display(Name = "PAM/Overflow Manager")]
+        public int? pamManager { get; set; }
+
+        [Display(Name = "Executive In Charge")]
+        public string executiveInchargeString { get; set; }
+
+        [Display(Name = "Program Manager")]
+        public string programManagerString { get; set; }
+
+        [Display(Name = "Account Manager")]
+        public string accountManagerString { get; set; }
+
+        [Display(Name = "PAM/Overflow Manager")]
+        public string pamManagerString { get; set; } 
     }
 }

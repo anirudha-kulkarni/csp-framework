@@ -24,6 +24,7 @@
         @Html.ValidationSummary(true)
         @Html.HiddenFor(m => m.newCustomerVendorModel.Customer_Vendor_Id)
         @Html.HiddenFor(m => m.newCustomerVendorModel.FunctionString)
+        @*@Html.HiddenFor(m => m.newCustomerVendorModel.SiteString)*@
         <div class="form-group">
             @Html.LabelFor(m => m.newCustomerVendorModel.VendorName, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
@@ -281,10 +282,13 @@
 
         <div class="form-group">
             @Html.LabelFor(m => m.newCustomerVendorModel.Site, new { @class = "col-sm-3 control-label" })
-            <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.newCustomerVendorModel.Site, new { @placeholder = "Enter Site" })
-                @Html.ValidationMessageFor(m => m.newCustomerVendorModel.Site)
+            <div class="col-sm-8" id="sitesID">
+                @*@Html.EditorFor(m => m.newCustomerVendorModel.Site, "Site_List", @Model.newCustomerVendorModel.Client_Id)
+            @Html.ValidationMessageFor(m => m.newCustomerVendorModel.Site)*@
+           @Html.EditorFor(m => m.site_id, "Site_List", new { client_id = @Model.newCustomerVendorModel.Client_Id })
+
             </div>
+
         </div>
 
         <div class="modal-footer">
@@ -359,6 +363,19 @@
 
             });
 
+        });
+
+
+        // Customer List Change Event
+        $('#customerslist_').change(function () {
+            
+            var selectedFunction = $('#customerslist_ option:selected').val();
+            //$('#newCustomerVendorModel_FunctionString').attr('value', selectedFunction);
+            
+            $.get('/CustomerVendor/GetSitesView?id=' + selectedFunction, function (data) {                
+                $('#sitesID').html(data);                
+                $('#sitesID').fadeIn('fast');
+            });
         });
 
         // Initialize datepicker

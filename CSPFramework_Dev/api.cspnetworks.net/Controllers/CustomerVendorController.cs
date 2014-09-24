@@ -69,6 +69,12 @@ namespace api.cspnetworks.net.Controllers
                     regCustVendor.ClientCode = custVendor.Client.client_code;
                 }
                 regCustVendor.Site = custVendor.site;
+               
+                if (custVendor.Client_Site != null)
+                {
+                    regCustVendor.SiteString = custVendor.Client_Site.site_name;    
+                }
+                
                 regCustVendors.Add(regCustVendor);
             }
             return regCustVendors;
@@ -240,7 +246,13 @@ namespace api.cspnetworks.net.Controllers
                 custVendorModel.newCustomerVendorModel.Client_Id = custVendor.Client.client_id;
                 custVendorModel.newCustomerVendorModel.ClientCode = custVendor.Client.client_code;
             }
-            custVendorModel.newCustomerVendorModel.Site = custVendor.site;
+            if (custVendor.Client_Site != null)
+            {
+                custVendorModel.newCustomerVendorModel.Site = custVendor.Client_Site.client_site_id;
+                custVendorModel.site_id = custVendor.Client_Site.client_site_id;
+                custVendorModel.newCustomerVendorModel.SiteString = custVendor.Client_Site.site_name;
+            }           
+            
 
             return Ok(custVendorModel);
         }
@@ -459,5 +471,7 @@ namespace api.cspnetworks.net.Controllers
             }
             return functionNotes;
         }
+
+        
     }
 }

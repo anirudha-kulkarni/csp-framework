@@ -32,9 +32,6 @@ namespace api.cspnetworks.net
         public virtual DbSet<Enum_Type_Values> Enum_Type_Values { get; set; }
         public virtual DbSet<Enum_Types> Enum_Types { get; set; }
         public virtual DbSet<Function_Notes> Function_Notes { get; set; }
-        public virtual DbSet<Hardware> Hardwares { get; set; }
-        public virtual DbSet<Software> Softwares { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User_Groups> User_Groups { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }

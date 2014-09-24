@@ -124,7 +124,7 @@
     <value>Customer-Vendor Mapping Has been Added Successfully !</value>
   </data>
   <data name="AddHardware_Success" xml:space="preserve">
-    <value>Hardware has been addes successfully !</value>
+    <value>Hardware has been added successfully !</value>
   </data>
   <data name="AddUser_Success" xml:space="preserve">
     <value>User Has been Added Successfully !</value>

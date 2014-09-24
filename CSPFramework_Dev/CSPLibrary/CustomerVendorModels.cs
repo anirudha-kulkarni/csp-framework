@@ -34,11 +34,11 @@ namespace CSPLibrary
         [Display(Name = "Function Notes")]
         public string FunctionNotes { get; set; }
 
-        [Required]
+        
         [Display(Name = "Level 1 UserName")]
         public string L1UserName { get; set; }
 
-        [Required]
+        
         [Display(Name = "Level 1 Password")]
         public string L1Password { get; set; }
 
@@ -75,8 +75,9 @@ namespace CSPLibrary
         public String ClientCode { get; set; }
 
         [Display(Name = "Site")]
-        public String Site { get; set; }
+        public int? Site { get; set; }
 
+        public string SiteString { get; set; }
         public String SolutionString { get; set; }
     }
 
@@ -91,6 +92,8 @@ namespace CSPLibrary
         
         public Object iFunction { get; set; } 
         //public ISP isp { get; set; } 
+
+        public int site_id { get; set; }
     }
     
 }

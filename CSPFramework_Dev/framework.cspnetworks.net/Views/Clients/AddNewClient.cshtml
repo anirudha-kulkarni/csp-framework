@@ -35,54 +35,6 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-            @Html.LabelFor(m => m.Address, new { @class = "col-sm-3 control-label" })
-            <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.Address, new { @autofocus = "autofocus", @placeholder = "Enter Address" })
-                @Html.ValidationMessageFor(m => m.Address)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.City, new { @class = "col-sm-3 control-label" })
-            <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.City, new { @autofocus = "autofocus", @placeholder = "Enter City" })
-                @Html.ValidationMessageFor(m => m.City)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.State, new { @class = "col-sm-3 control-label" })
-            <div class="col-sm-8">
-                @Html.EditorFor(m => m.State, "StateList", new { @autofocus = "autofocus" })
-                @Html.ValidationMessageFor(m => m.State)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.Zip, new { @class = "col-sm-3 control-label" })
-            <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.Zip, new { @autofocus = "autofocus", @class = "zip", @placeholder = "01001" })
-                @Html.ValidationMessageFor(m => m.Zip)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-sm-3 control-label" })
-            <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.PhoneNumber, new { @autofocus = "autofocus", @class = "phone", @placeholder = "999-999-9999" })
-                @Html.ValidationMessageFor(m => m.PhoneNumber)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.MobileNumber, new { @class = "col-sm-3 control-label" })
-            <div class="col-sm-8">
-                @Html.TextBoxFor(m => m.MobileNumber, new { @autofocus = "autofocus", @class = "phone", @placeholder = "999-999-9999" })
-                @Html.ValidationMessageFor(m => m.MobileNumber)
-            </div>
-        </div>*@
-
         <div class="form-group">
             @Html.LabelFor(m => m.ServiceType, new { @class = "col-sm-3 control-label" })
             <div class="col-sm-8">
@@ -114,7 +66,13 @@
                     </div>
                     <div id="agreementsSecChild_" class="panel-group">
                         <div class="panel-body">
-
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.AgreementPath, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.AgreementPath, new { type = "file", accept = ".pdf" })
+                                    @Html.ValidationMessageFor(m => m.AgreementPath)
+                                </div>
+                            </div>
                             <div class="form-group">
                                 @Html.LabelFor(m => m.AgreementStartDate, new { @class = "col-sm-3 control-label" })
                                 <div class="row">
@@ -157,12 +115,70 @@
 
         <div class="form-group">
         </div>
-
+        
         <div class="form-group">
-            @Html.LabelFor(m => m.Team, new { @class = "col-sm-3 control-label" })
-            <div class="col-sm-8">
-                @Html.EditorFor(m => m.Team, "TeamList")
-                @Html.ValidationMessageFor(m => m.Team)
+            <div class="panel-group" id="agreementsSec_" style="margin-left: 26.5%;margin-right: 10%;">
+                <div class="panel">
+
+                    <div class="panel-heading" style="background-color:grey">
+                        <h4 class="panel-title">
+                          <strong style="color:black">
+                                Team
+                            </strong>
+                         </h4>
+                    </div>
+                    <div id="agreementsSecChild_" class="panel-group">
+                        <div class="panel-body">
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.executiveIncharge, new { @class = "col-sm-3 control-label" })
+                                <div class="row">
+                                    <div class="container">
+                                        <div class="col-sm-8">
+                                             @Html.EditorFor(m => m.executiveIncharge, "CSPUsers")
+                                             @Html.ValidationMessageFor(m => m.executiveIncharge)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.programManager, new { @class = "col-sm-3 control-label" })
+                                <div class="row">
+                                    <div class="container">
+                                        <div class="col-sm-8">
+                                             @Html.EditorFor(m => m.programManager, "CSPUsers")
+                                             @Html.ValidationMessageFor(m => m.programManager)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.accountManager, new { @class = "col-sm-3 control-label" })
+                                <div class="row">
+                                    <div class="container">
+                                        <div class="col-sm-8">
+                                               @Html.EditorFor(m => m.accountManager, "CSPUsers")
+                                               @Html.ValidationMessageFor(m => m.accountManager)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.pamManager, new { @class = "col-sm-3 control-label" })
+                                <div class="row">
+                                    <div class="container">
+                                        <div class="col-sm-8">
+                                              @Html.EditorFor(m => m.pamManager, "CSPUsers")
+                                              @Html.ValidationMessageFor(m => m.pamManager)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -366,6 +382,7 @@
             var boostrapDiv = createElement('div');
             $(boostrapDiv).attr('class', 'panel-body');
 
+            var siteNameDiv = createFormGroupDiv('Site Name', 'siteName');
             var addressDiv = createFormGroupDiv('Address', 'address');
             var cityDiv = createFormGroupDiv('City', 'city');
             var stateDiv = createFormGroupDiv('State', 'state');
@@ -381,6 +398,7 @@
                 $(siteDiv).remove();
             });
 
+            appendChild(boostrapDiv, siteNameDiv);
             appendChild(boostrapDiv, addressDiv);
             appendChild(boostrapDiv, cityDiv);
             appendChild(boostrapDiv, stateDiv);
@@ -415,6 +433,7 @@
                 var elementID = "Sites" + i;
                 if ($("#" + elementID + "").length != 0) {
                     var sites = {
+                        SiteName:{},
                         Address: {},
                         City: {},
                         State: {},
@@ -422,6 +441,7 @@
                         PhoneNumber: {},
                         FaxNumber: {}
                     };
+                    sites.SiteName = $("#" + elementID + " .siteName").val();
                     sites.Address = $("#" + elementID + " .address").val();
                     sites.City = $("#" + elementID + " .city").val();
                     sites.State = $("#" + elementID + " .state").val();
