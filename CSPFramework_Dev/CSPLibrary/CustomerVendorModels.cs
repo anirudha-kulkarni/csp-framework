@@ -34,11 +34,11 @@ namespace CSPLibrary
         [Display(Name = "Function Notes")]
         public string FunctionNotes { get; set; }
 
-        [Required]
+        
         [Display(Name = "Level 1 UserName")]
         public string L1UserName { get; set; }
 
-        [Required]
+        
         [Display(Name = "Level 1 Password")]
         public string L1Password { get; set; }
 

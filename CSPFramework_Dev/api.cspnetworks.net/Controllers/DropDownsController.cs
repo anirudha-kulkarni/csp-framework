@@ -109,10 +109,128 @@ namespace api.cspnetworks.net.Controllers
             return dictionary;
         }
 
+
         public Dictionary<String, String> GetTeamList()
         {
             Enum_Types enumType = (from enums in _context.Enum_Types
                                    where enums.enum_type_name == "CSP_Teams"
+                                   select enums).FirstOrDefault();
+            if (enumType != null)
+            {
+                IQueryable<Enum_Type_Values> enumTypeValues = (from values in _context.Enum_Type_Values
+                                                               where values.enum_type_id == enumType.enum_type_id
+                                                               select values);
+                if (enumTypeValues != null)
+                {
+                    Dictionary<String, String> dictionary = new Dictionary<String, String>();
+                    foreach (var item in enumTypeValues)
+                    {
+                        dictionary.Add(item.enum_type_value, item.enum_type_value_id.ToString());
+                    }
+                    return dictionary;
+                }
+            }
+            return null;
+        }
+
+        public Dictionary<String, String> GetHardwareMakeList()
+        {
+            Enum_Types enumType = (from enums in _context.Enum_Types
+                                   where enums.enum_type_name == "Hardware_Makes"
+                                   select enums).FirstOrDefault();
+            if (enumType != null)
+            {
+                IQueryable<Enum_Type_Values> enumTypeValues = (from values in _context.Enum_Type_Values
+                                                               where values.enum_type_id == enumType.enum_type_id
+                                                               select values);
+                if (enumTypeValues != null)
+                {
+                    Dictionary<String, String> dictionary = new Dictionary<String, String>();
+                    foreach (var item in enumTypeValues)
+                    {
+                        dictionary.Add(item.enum_type_value, item.enum_type_value_id.ToString());
+                    }
+                    return dictionary;
+                }
+            }
+            return null;
+        }
+        public Dictionary<String, String> GetHardwareItemList()
+        {
+            Enum_Types enumType = (from enums in _context.Enum_Types
+                                   where enums.enum_type_name == "Hardware_Items"
+                                   select enums).FirstOrDefault();
+            if (enumType != null)
+            {
+                IQueryable<Enum_Type_Values> enumTypeValues = (from values in _context.Enum_Type_Values
+                                                               where values.enum_type_id == enumType.enum_type_id
+                                                               select values);
+                if (enumTypeValues != null)
+                {
+                    Dictionary<String, String> dictionary = new Dictionary<String, String>();
+                    foreach (var item in enumTypeValues)
+                    {
+                        dictionary.Add(item.enum_type_value, item.enum_type_value_id.ToString());
+                    }
+                    return dictionary;
+                }
+            }
+            return null;
+        }
+
+        public Dictionary<String, String> GetHardwareStatusList()
+        {
+            Enum_Types enumType = (from enums in _context.Enum_Types
+                                   where enums.enum_type_name == "Hardware_Status"
+                                   select enums).FirstOrDefault();
+            if (enumType != null)
+            {
+                IQueryable<Enum_Type_Values> enumTypeValues = (from values in _context.Enum_Type_Values
+                                                               where values.enum_type_id == enumType.enum_type_id
+                                                               select values);
+                if (enumTypeValues != null)
+                {
+                    Dictionary<String, String> dictionary = new Dictionary<String, String>();
+                    foreach (var item in enumTypeValues)
+                    {
+                        dictionary.Add(item.enum_type_value, item.enum_type_value_id.ToString());
+                    }
+                    return dictionary;
+                }
+            }
+            return null;
+        }
+
+        public Dictionary<String, String> GetSoftwareItemList()
+        {
+            IQueryable<Software> softwarelist = _context.Softwares;
+            Dictionary<String, String> dictionary = new Dictionary<String, String>();
+            dictionary.Add("No Software", "0");
+            foreach (var item in softwarelist)
+            {
+                dictionary.Add(item.software_name, item.software_id.ToString());
+            }
+            return dictionary;
+        }
+
+
+        public Dictionary<String, String> GetHardwareList()
+        {
+            IQueryable<Hardware> hardwarelist = _context.Hardwares;
+            Dictionary<String, String> dictionary = new Dictionary<String, String>();
+
+            foreach (var item in hardwarelist)
+            {
+                dictionary.Add(item.CSPNAssetTag.ToString(), item.CSPNAssetTag.ToString());
+                
+            }
+            return dictionary;
+        }
+
+        public Dictionary<String, String> GetPurchaserList()
+        {
+            Enum_Types enumType = (from enums in _context.Enum_Types
+                                   where enums.enum_type_name == "PurchasedBy"
                                    select enums).FirstOrDefault();
             if (enumType != null)
             {
@@ -154,6 +272,7 @@ namespace api.cspnetworks.net.Controllers
             }
             return null;
         }
+
         public Dictionary<String,String> GetCSPUsers() {
 
              Client client = (from clientDB in _context.Clients

@@ -63,16 +63,16 @@ namespace api.cspnetworks.net.Controllers
                 }
                if (client.program_manager != null) {
                     newClient.programManager = client.program_manager;
-                    newClient.programManagerString = client.Program_Manager_Enum.firstname;
+                    newClient.programManagerString = client.Program_Manager_User.firstname;
                 }
                 if (client.account_manager != null)
                 {
                     newClient.accountManager = client.account_manager;
-                    newClient.accountManagerString = client.Account_Manager_Enum.firstname;  
+                    newClient.accountManagerString = client.Account_Manager_User.firstname;  
                 }
                 if (client.PAM_manager != null) {
                     newClient.pamManager = client.PAM_manager;
-                    newClient.pamManagerString = client.PAM_Manager_Enum.firstname;
+                    newClient.pamManagerString = client.PAM_Manager_User.firstname;
                 }
                 if (client.status != null)
                 {
@@ -132,22 +132,22 @@ namespace api.cspnetworks.net.Controllers
             if (client.executive_incharge != null)
             {
                 newClient.newClientModel.executiveIncharge = client.executive_incharge;
-                newClient.newClientModel.executiveInchargeString = client.Exe_InCharge_Enum.firstname;
+                newClient.newClientModel.executiveInchargeString = client.Executive_Incharge_User.firstname;
             }
             if (client.program_manager != null)
             {
                 newClient.newClientModel.programManager = client.program_manager;
-                newClient.newClientModel.programManagerString = client.Program_Manager_Enum.firstname;
+                newClient.newClientModel.programManagerString = client.Program_Manager_User.firstname;
             }
             if (client.account_manager != null)
             {
                 newClient.newClientModel.accountManager = client.account_manager;
-                newClient.newClientModel.accountManagerString = client.Account_Manager_Enum.firstname;
+                newClient.newClientModel.accountManagerString = client.Account_Manager_User.firstname;
             }
             if (client.PAM_manager != null)
             {
                 newClient.newClientModel.pamManager = client.PAM_manager;
-                newClient.newClientModel.pamManagerString = client.PAM_Manager_Enum.firstname;
+                newClient.newClientModel.pamManagerString = client.PAM_Manager_User.firstname;
             }
             if (client.status != null)
             {

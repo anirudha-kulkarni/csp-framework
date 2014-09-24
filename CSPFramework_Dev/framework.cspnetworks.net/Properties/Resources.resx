@@ -123,6 +123,9 @@
   <data name="AddCutomerVendor_Success" xml:space="preserve">
     <value>Customer-Vendor Mapping Has been Added Successfully !</value>
   </data>
+  <data name="AddHardware_Success" xml:space="preserve">
+    <value>Hardware has been added successfully !</value>
+  </data>
   <data name="AddUser_Success" xml:space="preserve">
     <value>User Has been Added Successfully !</value>
   </data>
@@ -138,6 +141,9 @@
   <data name="DeleteCutomerVendor_Success" xml:space="preserve">
     <value>Customer-Vendor Mapping Has been Deleted Successfully !</value>
   </data>
+  <data name="DeleteHardware_Success" xml:space="preserve">
+    <value>Hardware Has been Deleted Successfully !</value>
+  </data>
   <data name="DeleteUser_Success" xml:space="preserve">
     <value>User Has been Deleted Successfully !</value>
   </data>
@@ -149,6 +155,9 @@
   </data>
   <data name="EditCustomerVendor_Success" xml:space="preserve">
     <value>Customer-Vendor Mapping Has been Updated Successfully !</value>
+  </data>
+  <data name="EditHardware_Success" xml:space="preserve">
+    <value>Hardware Has been Updated Successfully !</value>
   </data>
   <data name="EditUser_Success" xml:space="preserve">
     <value>User Has been Updated Successfully !</value>

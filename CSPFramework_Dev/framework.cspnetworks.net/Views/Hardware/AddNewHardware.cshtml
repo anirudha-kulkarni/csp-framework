@@ -1,0 +1,273 @@
+﻿@{
+    ViewBag.Title = "AddNewHardware";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model CSPLibrary.NewHardwareModel
+
+<h2>Add New Hardware</h2>
+
+<div class="col-sm-10">
+    @using (Html.BeginForm("PostNewHardware", "Hardware", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", @id = "NewHardwareForm" }))
+    {
+
+        <div class="modal-footer">
+            <a href="/Hardware/Index" class="btn">Cancel</a>
+            <input type="submit" class="btn" value="Save" />
+        </div>
+
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Vendor_ID, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.EditorFor(m => m.Vendor_ID, "VendorsList", new { @autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.Vendor_ID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Serial_Number, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Serial_Number, new { @autofocus = "autofocus", @placeholder = "Enter Serial Number" })
+                @Html.ValidationMessageFor(m => m.Serial_Number)
+            </div>
+        </div>
+
+        <span id="errorDiv_" style="display: none; font-weight:bold; font-size: 12px; padding: 10px; margin: -20px 0; color: #d35d51; background: #f7e2df; border: 1px solid #d35d51;">
+            Oops ! Something has gone wrong. Please try again !
+        </span>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Make, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.EditorFor(m => m.Make,"HardwareMakeList", new { @autofocus = "autofocus", @placeholder = "Select Make" })
+                @Html.ValidationMessageFor(m => m.Make)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Model, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Model, new { @autofocus = "autofocus", @placeholder = "Enter Model" })
+                @Html.ValidationMessageFor(m => m.Model)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Item, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.EditorFor(m => m.Item, "HardwareItemList", new { @autofocus = "autofocus", @placeholder = "Select Item" })
+                @Html.ValidationMessageFor(m => m.Item)
+            </div>
+        </div>
+        
+        <!-- Place where you will insert your partial -->
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-8" id="partialFunction_">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.Software_ID, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.EditorFor(m => m.Software_ID, "SoftwareList", new { @autofocus = "autofocus", @placeholder = "Select Software" })
+                @Html.ValidationMessageFor(m => m.Software_ID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.WarrantyStart, new { @class = "col-sm-3 control-label" })
+            <div class="row">
+                <div class="container">
+                    <div class="col-sm-8">
+                        <div class='input-group date' id="startDate_">
+                            @Html.TextBoxFor(m => m.WarrantyStart, new { @class = "form-control", @placeholder = "01/25/2014" })
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.WarrantyStart)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.WarrantyEnd, new { @class = "col-sm-3 control-label" })
+            <div class="row">
+                <div class="container">
+                    <div class="col-sm-8">
+                        <div class='input-group date' id="endDate_">
+                            @Html.TextBoxFor(m => m.WarrantyEnd, new { @class = "form-control", @placeholder = "01/25/2014" })
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.WarrantyEnd)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.PurchasedBy, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.EditorFor(m => m.PurchasedBy, "PurchasedBy", new { @autofocus = "autofocus", @placeholder = "Purchased By" })
+                @Html.ValidationMessageFor(m => m.PurchasedBy)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ClientCode, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.EditorFor(m => m.ClientId, "CustomersList", new { @autofocus = "autofocus", @placeholder = "Enter Client Code" })
+                @Html.ValidationMessageFor(m => m.ClientId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Location, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Location, new { @autofocus = "autofocus", @placeholder = "Enter Location" })
+                @Html.ValidationMessageFor(m => m.Location)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.Hardware_Status, new { @class = "col-sm-3 control-label" })
+            <div class="col-sm-8">
+                @Html.EditorFor(m => m.Hardware_Status, "HardwareStatusList", new { @autofocus = "autofocus"})
+                @Html.ValidationMessageFor(m => m.Hardware_Status)
+            </div>
+        </div>
+        
+
+        <div class="modal-footer">
+            <a href="/Hardware/Index" class="btn">Cancel</a>
+            <input type="submit" class="btn" value="Save" />
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/admin/css")
+    @Scripts.Render("~/bundles/maskedEdit")
+    @Scripts.Render("~/bundles/moment")
+    @Styles.Render("~/bundles/bootstrap-datepicker-css")
+    @Scripts.Render("~/bundles/bootstrap-datepicker")
+
+    <script>
+        var options = {
+            onKeyPress: function (cep, event, currentField, options) {
+                // console.log('An key was pressed!:', cep, ' event: ', event,'currentField: ', currentField, ' options: ', options);
+                if (cep) {
+                    var ipArray = cep.split(".");
+                    var lastValue = ipArray[ipArray.length - 1];
+                    if (lastValue != "" && parseInt(lastValue) > 255) {
+                        ipArray[ipArray.length - 1] = '255';
+                        var resultingValue = ipArray.join(".");
+                        currentField.attr('value', resultingValue);
+                    }
+                }
+            }
+        };
+
+        function App_Solution_Change() {
+            var selectedVal = $('#App_Solution option:selected').text();
+            if (selectedVal === "Cloud") {
+                $('#app_login_url').show();
+            }
+            else {
+                $('#app_login_url').hide();
+            }
+        }
+
+        function Printer_Solution_Change() {
+            var selectedVal = $('#Printer_Solution option:selected').text();
+            if (selectedVal === "Network") {
+                $('#printer_hide_group').show();
+            }
+            else {
+                $('#printer_hide_group').hide();
+            }
+        }
+
+        $(document).ready(function () {
+
+            /* This is change event for your dropdownlist */
+            $('#functionDropDown_').change(function () {
+
+                /* Get the selected value of dropdownlist */
+                var selectedFunction = $('#functionDropDown_ option:selected').text();
+                $('#newCustomerVendorModel_FunctionString').attr('value', selectedFunction);
+                /* Request the partial view with .get request. */
+                $.get('/CustomerVendor/GetFunctionView?selectedFunction=' + selectedFunction, function (data) {
+
+                    /* data is the pure html returned from action method, load it to your page */
+                    $('#partialFunction_').html(data);
+                    /* little fade in effect */
+                    $('#partialFunction_').fadeIn('fast');
+
+                }).fail(function () {
+                    // alert("Something is Wrong !!!");
+                    $("#errorDiv_").fadeIn('slow');
+                    $("#errorDiv_").delay(3000).fadeOut(1000);
+                });
+
+            });
+
+            $('#itemlist_').change(function () {
+                var currentValue = this.value;
+                var data = this.selectedOptions[0].innerHTML;
+                if(data && data.toLowerCase() == "accessory")
+                {
+                    $.get('/Hardware/GetHardwareDropdownView', function (data) {
+
+                        /* data is the pure html returned from action method, load it to your page */
+                        $('#partialFunction_').html(data);
+                        if ($('#partialFunction_ option').length === 0) {
+                            $('#partialFunction_').html("<div style='color: red'>No hardware found</div>").fadeIn('slow');
+                            $("#partialFunction_").delay(2000).fadeOut(1000);
+                        } else {
+                            /* little fade in effect */
+                            $('#partialFunction_').fadeIn('fast');
+                        }
+
+                    }).fail(function () {
+                        // alert("Something is Wrong !!!");
+                        debugger;
+                        $("#errorDiv_").fadeIn('slow');
+                        $("#errorDiv_").delay(3000).fadeOut(1000);
+                    });
+                } else {
+                    $('#partialFunction_').html("");
+                    $('#partialFunction_').fadeIn('fast');
+                }
+
+            });
+
+            // Initialize datepicker
+            $("#startDate_").datetimepicker({
+                pickTime: false
+            });
+            $("#endDate_").datetimepicker({
+                pickTime: false
+            });
+            $("#startDate_").on("dp.change", function (e) {
+                $('#endDate_').data("DateTimePicker").setMinDate(e.date);
+            });
+            $("#endDate_").on("dp.change", function (e) {
+                $('#startDate_').data("DateTimePicker").setMaxDate(e.date);
+            });
+
+            //
+            $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', { translation: { 'Z': { pattern: /[0-9]/, optional: true } }, clearIfNotMatch: true });
+        });
+    </script>
+}

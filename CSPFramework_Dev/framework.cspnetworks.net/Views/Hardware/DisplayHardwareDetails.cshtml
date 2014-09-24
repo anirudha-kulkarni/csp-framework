@@ -1,0 +1,108 @@
+﻿@model CSPLibrary.NewHardwareModel
+@{
+    ViewBag.Title = "Display Hardware Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2></h2>
+
+<div class="col-lg-12 center" style="margin-left:9%">
+    <div class="tableHeader col-lg-9">
+        <a class="col-lg-2 btn" href="/Hardware/Index/">All Hardwares</a>
+        <h2 class="col-lg-8">Details of Hardware having CSP Asset Tag : @Model.Hardware_Id</h2>
+    </div>
+    <div class="col-lg-9 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad">
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="/content/images/profile_photo.png" class="img-circle"> </div>
+                    <div class=" col-md-9 col-lg-9 ">
+                        <table class="table table-user-information">
+                            <tbody>
+                                <tr>
+                                    <td><strong>CSPN Asset Tag :</strong></td>
+                                    <td>@Model.Hardware_Id</td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Vendor Name :</strong></td>
+                                    <td>@Model.Vendor_Name</td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Serial Number :</strong></td>
+                                    <td>@Model.Serial_Number</td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Make Name:</strong></td>
+                                    <td>@Model.MakeName</td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Model :</strong></td>
+                                    <td>@Model.Model</td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Item Name :</strong></td>
+                                    <td>@Model.ItemName</td>
+                                </tr>
+
+                                @if (@Model.ItemName.ToLower().Contains("accessory") && @Model.Associted_Hardware_Id.HasValue)
+                                {
+                                    <tr>
+                                        <td><strong>Associated Hardware CSPN Asset Tag</strong></td>
+                                        <td>@Model.Associted_Hardware_Id</td>
+                                    </tr>
+                                }
+
+                                @if (!@Model.SoftwareName.IsEmpty()) { 
+                                    <tr>
+                                        <td><strong>Software :</strong></td>
+                                        <td>@Model.SoftwareName</td>
+                                    </tr>
+                                }
+                                
+                                @if (@Model.WarrantyStart.HasValue) { 
+                                    <tr>
+                                        <td><strong>Warrenty Start Date :</strong></td>
+                                        <td>@Model.WarrantyStart.Value</td>
+                                    </tr>
+                                }
+
+                                @if (@Model.WarrantyEnd.HasValue) {
+                                    <tr>
+                                        <td><strong>Warrenty End Date :</strong></td>
+                                        <td>@Model.WarrantyEnd.Value</td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td><strong>Purchased By :</strong></td>
+                                    <td>@Model.PurchaserName</td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Client Code :</strong></td>
+                                    <td>@Model.ClientCode</td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Location :</strong></td>
+                                    <td>@Model.Location</td>
+                                </tr>
+
+                                @if (!@Model.Hardware_Status_Value.IsEmpty()) { 
+                                    <tr>
+                                        <td><strong>Hardware Status :</strong></td>
+                                        <td>@Model.Hardware_Status_Value</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
