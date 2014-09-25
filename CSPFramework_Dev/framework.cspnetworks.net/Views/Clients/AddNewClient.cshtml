@@ -191,7 +191,29 @@
                 @Html.ValidationMessageFor(m => m.Status)
             </div>
         </div>
-
+        <div class="form-group">            
+            @*<div class="col-sm-8">*@
+                @Html.TextBoxFor(m => m.Bills, new { @placeholder = "Enter Sites", @style = "display:none" })               
+            @*</div>*@
+            <div class="panel-group" id="clientBillPanel_" style="margin-left: 26.5%;margin-right: 10%;">
+                <div class="panel">
+                    <div class="panel-heading" style="background-color:grey">
+                        <h4 class="panel-title">
+                            <strong style="color:black">
+                                Client Bills
+                            </strong>
+                            @*</a>*@
+                        </h4>
+                    </div>
+                    <div class="panel-group">
+                        <div class="panel-body">
+                            <div id="BillsPanel"></div>
+                            <input id="AddNew_bill" type="button" class="btn col-md-5" value="Add New Bill" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="form-group">            
             @*<div class="col-sm-8">*@
                 @Html.TextBoxFor(m => m.Sites, new { @placeholder = "Enter Sites", @style = "display:none" })               
@@ -215,6 +237,9 @@
                 </div>
             </div>
         </div>
+        
+         
+
 
         <div class="form-group">
             
@@ -283,6 +308,9 @@
             var optn = createElement("OPTION");
             optn.text = text;
             optn.value = value;
+            if (text == "California") {
+                $(optn).attr('selected', 'selected');
+            }
             selectbox.options.add(optn);
         }
         function createDropDown() {
@@ -343,7 +371,16 @@
             for (var i = 0; i < states.length; ++i) {
                 addOption(stateSelect, states[i], states[i]);
             }
+            
             return stateSelect;
+        }
+        function createBillableDropDown() {
+            var dropOptions = new Array("Yes", "No");
+            var billableSelect = createElement('select');
+            for (var index = 0; index < dropOptions.length; index++) {
+                addOption(billableSelect, dropOptions[index], index);
+            }
+            return billableSelect;
         }
         function createFormGroupDiv(labelText, className) {
             var inputField;
@@ -364,6 +401,64 @@
             appendChild(formChild, inputField);
             appendChild(formDiv, label);
             appendChild(formDiv, formChild);
+            return formDiv;
+        }
+        function createBillsFormGroupDiv(labelText, className) {
+
+            var input = createElement('input');
+            $(input).attr("class", className);
+            var label = createElement('label');
+            label.innerHTML = labelText;
+            $(label).attr('class', 'control-label col-md-7');
+
+            var formDiv = createElement('div');
+            $(formDiv).attr('class', 'form-group');
+
+            var formChild = createElement('div');
+            $(formChild).attr('class', 'col-sm-3');
+            var span = createElement('span');
+            $(span).text("$");
+            $(span).attr('style', 'float:left;color:orange;font-size: large;');
+            appendChild(formChild, input);
+            appendChild(formDiv, label);
+            appendChild(formDiv, formChild);
+            appendChild(formDiv, span);
+            return formDiv;
+        }
+        function createBillableFormGroupDiv(labelText, className) {
+
+            var input = createElement('input');
+            $(input).attr("class", className);
+            var label = createElement('label');
+            label.innerHTML = labelText;
+            $(label).attr('class', 'control-label col-md-7');
+
+            var formDiv = createElement('div');
+            $(formDiv).attr('class', 'form-group');
+
+            var formChild = createElement('div');
+            $(formChild).attr('class', 'col-sm-3');
+            var span = createElement('span');
+            $(span).text("$");
+            $(span).attr('style', 'float:left;color:orange;font-size: large;margin-top:9%;');
+            var billableDropDown = createBillableDropDown();
+
+            $(billableDropDown).change(function () {
+                if ($(billableDropDown).val() == "0") {
+                    $(input).show();
+                    $(span).show();
+                }
+                else {
+                    $(input).val("0");
+                    $(input).hide();
+                    $(span).hide();
+                }
+            });
+            appendChild(formChild, billableDropDown);
+            appendChild(formChild, input);
+            appendChild(formDiv, label);
+            appendChild(formDiv, formChild);
+            appendChild(formDiv, span);
             return formDiv;
         }
         function createSiteDiv(id) {
@@ -415,9 +510,62 @@
 
             return siteDiv;
         }
+        function createBillDiv(id) {
+            var billDiv = createElement('div');
+            $(billDiv).attr('id', id);
+            $(billDiv).attr('class', 'panel');
+            $(billDiv).attr('style', 'border-width:thin;border-color:gray;margin-bottom:2%;');
+
+            var panelHeadingDiv = createElement('div');
+            $(panelHeadingDiv).attr('style', "background-color:dimgray");
+            $(panelHeadingDiv).attr('class', 'panel-heading');
+            panelHeadingDiv.innerHTML = "<h4 class='panel-title'><strong style='color:black;'>Billing Details</strong></h4>";
+
+            var panelGroup = createElement('div');
+            $(panelGroup).attr('class', 'panel-group');
+
+            var boostrapDiv = createElement('div');
+            $(boostrapDiv).attr('class', 'panel-body');
+
+            var chiefInfoOfficer = createBillsFormGroupDiv('Chief Information Officer', 'chiefInfoOfficer');
+            var solutionsArchitect = createBillsFormGroupDiv('Solutions Architect', 'solutionsArchitect');
+            var remoteSupport = createBillsFormGroupDiv('Remote Support', 'remoteSupport');
+            var onSiteSupport = createBillsFormGroupDiv('On-Site Support	', 'onSiteSupport');
+            var billableSupportVM = createBillableFormGroupDiv('Billable Support (Vendor Management)', 'billableSupportVMgmt');
+            var billableSupportAM = createBillableFormGroupDiv('Billable Support (Add/Modify)', 'billableSupportAM');
+            var onSiteService = createBillsFormGroupDiv('Next Business Day On-Site Services', 'onSiteService');
+            var travel = createBillsFormGroupDiv('Travel ', 'travel');
+            var mileage = createBillsFormGroupDiv('Mileage', 'mileage');
+
+            var removeBtn = createElement('input');
+            $(removeBtn).attr('type', 'button');
+            $(removeBtn).attr('class', 'btn col-md-offset-8 col-md-3');
+            $(removeBtn).attr('value', 'Remove');
+            $(removeBtn).attr('style', 'margin-bottom: 15px;');
+            $(removeBtn).click(function () {
+                $(billDiv).remove();
+            });
+
+            appendChild(boostrapDiv, chiefInfoOfficer);
+            appendChild(boostrapDiv, solutionsArchitect);
+            appendChild(boostrapDiv, remoteSupport);
+            appendChild(boostrapDiv, onSiteSupport);
+            appendChild(boostrapDiv, billableSupportVM);
+            appendChild(boostrapDiv, billableSupportAM);
+            appendChild(boostrapDiv, onSiteService);
+            appendChild(boostrapDiv, travel);
+            appendChild(boostrapDiv, mileage);
+            appendChild(boostrapDiv, removeBtn);
+
+            appendChild(panelGroup, boostrapDiv);
+            appendChild(billDiv, panelHeadingDiv);
+            appendChild(billDiv, panelGroup);
+
+            return billDiv;
+        }
         var idSuffix = 1;
         $("#SitesPanel").append(createSiteDiv('Sites1'));
-
+        
         $('#AddNew_btn').click(function () {
             idSuffix++;
             var id = "Sites" + idSuffix;
@@ -429,6 +577,19 @@
             $(document).trigger('mask-it');
         });
 
+        var billIdSuffix = 1;
+        $("#BillsPanel").append(createBillDiv('Bill1'))
+
+        $("#AddNew_bill").click(function () {
+            billIdSuffix++;
+            var billId = "Bill" + billIdSuffix;
+            var billDiv = createBillDiv(billId);
+            $("#BillsPanel").append(billDiv);
+            //setTimeout(window.scrollTo(0, document.body.scrollHeight), 1000);
+
+            $(document).trigger('mask-it');
+
+        });
         function fetchAllInputs() {
             var allSites = [];
             for (var i = 1; i <= idSuffix; i++) {
@@ -454,12 +615,47 @@
                     allSites.push(sites);
                 }
             }
-            console.log(JSON.stringify(allSites));
+           // console.log(JSON.stringify(allSites));
             return JSON.stringify(allSites);
         }
-        $('#NewCustomerVendorForm').submit(function () {
-            $('[name="Sites"]').val(fetchAllInputs());
+        function fetchAllBills() {
+            var allBills = [];
+            for (var index = 1; index <= billIdSuffix; index++) {
+                var elementID = "#Bill" + index;
+                if ($(elementID).length != 0) {
+                    var bills = {
+                        ChiefInformationOfficer: {},
+                        SolutionsArchitect: {},
+                        RemoteSupport: {},
+                        OnSiteSupport: {},
+                        BillableSupportVendorManagement: {},
+                        BillableSupportAddModify: {},
+                        NextBusinessDayOnSiteServices: {},
+                        Travel: {},
+                        Mileage: {}
+                    };
+                    bills.ChiefInformationOfficer = $(elementID + " .chiefInfoOfficer").val();
+                    bills.SolutionsArchitect = $(elementID + " .solutionsArchitect").val();
+                    bills.RemoteSupport = $(elementID + " .remoteSupport").val();
+                    bills.OnSiteSupport = $(elementID + " .onSiteSupport").val();
+                    if ($(elementID + " .billableSupportVMgmt").length != 0) {
+                        bills.BillableSupportVendorManagement = $(elementID + " .billableSupportVMgmt").val();
+                    }
+                    if ($(elementID + " .billableSupportAM").length != 0) {
+                        bills.BillableSupportAddModify = $(elementID + " .billableSupportAM").val();
+                    }
+                    bills.NextBusinessDayOnSiteServices = $(elementID + " .onSiteService").val();
+                    bills.Travel = $(elementID + " .travel").val();
+                    bills.Mileage = $(elementID + " .mileage").val();
 
-        });
+                    allBills.push(bills);
+                  }
+               }
+                return JSON.stringify(allBills);
+             }
+            $('#NewCustomerVendorForm').submit(function () {
+                $('[name="Sites"]').val(fetchAllInputs());
+                $('[name="Bills"]').val(fetchAllBills());
+            });
     </script>
 }

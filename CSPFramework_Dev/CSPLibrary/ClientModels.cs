@@ -12,6 +12,23 @@ namespace CSPLibrary
         public IEnumerable<CSPLibrary.NewClientModel> RegisteredClientsList { get; set; }        
     }
 
+    public class ClientBill {
+
+        public int ClientBillId { get; set; }
+        public decimal? ChiefInformationOfficer { get; set; }
+
+        public decimal? SolutionsArchitect { get; set; }
+
+        public decimal? RemoteSupport { get; set; }
+        public decimal? OnSiteSupport { get; set; }
+        public decimal? BillableSupportVendorManagement { get; set; }
+        public decimal? BillableSupportAddModify { get; set; }
+        public decimal? NextBusinessDayOnSiteServices { get; set; }
+        public decimal? Travel { get; set; }
+        public decimal? Mileage { get; set; }
+
+    }
+
     public class ClientSite
     {
         [Display(Name = "Client_Site_Id")]
@@ -39,13 +56,15 @@ namespace CSPLibrary
         public String FaxNumber { get; set; }
 
         [Display (Name="Site Name")]
-        public string SiteName { get; set; }
+        public String SiteName { get; set; }
     }
 
     public class NewClientViewModel
     {
         public NewClientModel newClientModel { get; set; }
         public List<ClientSite> clientSites { get; set; }
+
+        public List<ClientBill> clientBills { get; set; }
 
     }
 
@@ -126,6 +145,9 @@ namespace CSPLibrary
         public string accountManagerString { get; set; }
 
         [Display(Name = "PAM/Overflow Manager")]
-        public string pamManagerString { get; set; } 
+        public string pamManagerString { get; set; }
+        
+        [Required]
+        public string Bills { get; set; } 
     }
 }

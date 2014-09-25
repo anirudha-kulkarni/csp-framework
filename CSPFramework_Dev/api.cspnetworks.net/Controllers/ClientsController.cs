@@ -173,6 +173,38 @@ namespace api.cspnetworks.net.Controllers
                 tempClientSite.FaxNumber = item.fax;
                 newClient.clientSites.Add(tempClientSite);
             }
+
+            newClient.clientBills = new List<ClientBill>();
+            IQueryable<Client_Bill> clientBills = (from clinetBillsDb in _context.Client_Bill
+                                                   where clinetBillsDb.client_id == id
+                                                   select clinetBillsDb);
+            foreach (Client_Bill item in clientBills)
+            {
+                ClientBill tempClientBill = new ClientBill();
+                tempClientBill.ClientBillId = item.bill_id;
+                tempClientBill.ChiefInformationOfficer = item.chief_information_officer;
+                tempClientBill.SolutionsArchitect = item.solutions_architect;
+                tempClientBill.RemoteSupport = item.remote_support;
+                tempClientBill.OnSiteSupport = item.on_site_support;
+                if (item.billable_support_vendor_mgmt != 0)
+                {
+                    tempClientBill.BillableSupportVendorManagement = item.billable_support_vendor_mgmt;
+                }
+                else {
+                    tempClientBill.BillableSupportVendorManagement = 0;
+                }
+                if (item.billable_support_add_modify != 0)
+                {
+                    tempClientBill.BillableSupportAddModify = item.billable_support_add_modify;
+                }
+                else {
+                    tempClientBill.BillableSupportAddModify = 0;
+                }
+                tempClientBill.NextBusinessDayOnSiteServices = item.on_site_service;
+                tempClientBill.Travel = item.travel;
+                tempClientBill.Mileage = item.mileage;
+                newClient.clientBills.Add(tempClientBill);
+            }
             return Ok(newClient);
         }
 
@@ -206,35 +238,63 @@ namespace api.cspnetworks.net.Controllers
 
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, TransactionScopeAsyncFlowOption.Enabled))
             {
-                if (agreement != null)
-                {
-                    _context.Agreements.Add(agreement);                    
-                    client.agreement_id = agreement.agreement_id;
-                }
-                _context.Clients.Add(client);                
+               
 
-
-                if (newClientViewModel.clientSites != null)
-                {
-                    List<ClientSite> clientSites = newClientViewModel.clientSites;
-                    foreach (ClientSite clientSite in clientSites)
+                    if (agreement != null)
                     {
-                        Client_Site dbClientSite = new Client_Site();
-                        dbClientSite.client_id = client.client_id;
-                        dbClientSite.site_name = clientSite.SiteName;
-                        dbClientSite.address = clientSite.Address;
-                        dbClientSite.city = clientSite.City;
-                        dbClientSite.fax = clientSite.FaxNumber;
-                        dbClientSite.phone = clientSite.PhoneNumber;
-                        dbClientSite.state = clientSite.State;
-                        dbClientSite.zip = clientSite.Zip;
-
-
-                        _context.Client_Site.Add(dbClientSite);                       
+                        _context.Agreements.Add(agreement);
+                        client.agreement_id = agreement.agreement_id;
                     }
-                }
-                await _context.SaveChangesAsync();
-                scope.Complete();
+                    _context.Clients.Add(client);
+
+
+                    if (newClientViewModel.clientSites != null)
+                    {
+                        List<ClientSite> clientSites = newClientViewModel.clientSites;
+                        foreach (ClientSite clientSite in clientSites)
+                        {
+                            Client_Site dbClientSite = new Client_Site();
+                            dbClientSite.client_id = client.client_id;
+                            dbClientSite.site_name = clientSite.SiteName;
+                            dbClientSite.address = clientSite.Address;
+                            dbClientSite.city = clientSite.City;
+                            dbClientSite.fax = clientSite.FaxNumber;
+                            dbClientSite.phone = clientSite.PhoneNumber;
+                            dbClientSite.state = clientSite.State;
+                            dbClientSite.zip = clientSite.Zip;
+
+
+                            _context.Client_Site.Add(dbClientSite);
+                        }
+                    }
+                    if (newClientViewModel.clientBills != null)
+                    {
+                        List<ClientBill> clientBills = newClientViewModel.clientBills;
+                        foreach (ClientBill clientBill in clientBills)
+                        {
+                            Client_Bill dbClientBill = new Client_Bill();
+                            dbClientBill.client_id = client.client_id;
+                            dbClientBill.chief_information_officer = clientBill.ChiefInformationOfficer;
+                            dbClientBill.solutions_architect = clientBill.SolutionsArchitect;
+                            dbClientBill.remote_support = clientBill.RemoteSupport;
+                            dbClientBill.on_site_support = clientBill.OnSiteSupport;
+                            if (clientBill.BillableSupportVendorManagement != 0)
+                            {
+                                dbClientBill.billable_support_vendor_mgmt = clientBill.BillableSupportVendorManagement;
+                            }
+                            if (clientBill.BillableSupportAddModify != 0)
+                            {
+                                dbClientBill.billable_support_add_modify = clientBill.BillableSupportAddModify;
+                            }
+                            dbClientBill.on_site_service = clientBill.NextBusinessDayOnSiteServices;
+                            dbClientBill.travel = clientBill.Travel;
+                            dbClientBill.mileage = clientBill.Mileage;
+                            _context.Client_Bill.Add(dbClientBill);
+                        }
+                    }
+                    await _context.SaveChangesAsync();
+                    scope.Complete();
+              
             }
             return CreatedAtRoute("DefaultApi", new { id = client.client_id }, client);
         }
@@ -267,6 +327,17 @@ namespace api.cspnetworks.net.Controllers
                         }
                     }
                 }
+                if (client.Client_Bill != null && client.Client_Bill.Count > 0)
+                {
+                    List<Client_Bill> clientsBills = new List<Client_Bill>(client.Client_Bill);
+                    foreach (Client_Bill item in clientsBills)
+                    {
+                        if (item != null)
+                        {
+                            _context.Client_Bill.Remove(item);
+                        }
+                    }
+                }
                 if (agreement != null)
                 {
                     _context.Agreements.Remove(agreement);                    
@@ -291,6 +362,7 @@ namespace api.cspnetworks.net.Controllers
                                  select oldClientInfo).FirstOrDefault();
 
                 List<Client_Site> dbClientSites = client.Client_Site.ToList<Client_Site>();
+                List<Client_Bill> dbClientBills = client.Client_Bill.ToList<Client_Bill>();
 
                 if (client != null)
                 {
@@ -379,6 +451,71 @@ namespace api.cspnetworks.net.Controllers
                                 clientSite.fax = item.FaxNumber;
 
                                 _context.Client_Site.Add(clientSite);                                
+                            }
+                        }
+
+                        // bills
+                        foreach (var dbBill in dbClientBills)// Present in DB and Absent in Client Array
+                        {
+                            if (newClientViewModel.clientBills.Exists(x => x.ClientBillId.Equals(dbBill.bill_id)))
+                            {
+                                // Present in Client Array
+                                // So, update DB with new one
+                                ClientBill bill = newClientViewModel.clientBills.Find(x => x.ClientBillId.Equals(dbBill.bill_id));
+                                dbBill.chief_information_officer = bill.ChiefInformationOfficer;
+                                dbBill.solutions_architect = bill.SolutionsArchitect;
+                                dbBill.remote_support = bill.RemoteSupport;
+                                dbBill.on_site_support = bill.OnSiteSupport;
+                                if (bill.BillableSupportVendorManagement != 0)
+                                {
+                                    dbBill.billable_support_vendor_mgmt = bill.BillableSupportVendorManagement;
+                                }
+                                else {
+                                    dbBill.billable_support_vendor_mgmt = 0;
+                                }
+                                if (bill.BillableSupportAddModify != 0)
+                                {
+                                    dbBill.billable_support_add_modify = bill.BillableSupportAddModify;
+                                }
+                                else {
+                                    dbBill.billable_support_add_modify = 0;
+                                }
+                                dbBill.on_site_service = bill.NextBusinessDayOnSiteServices;
+                                dbBill.travel = bill.Travel;
+                                dbBill.mileage = bill.Mileage;
+                            }
+                            else
+                            {
+                                // Not present in Client Array And present in DB
+                                // So delete from DB
+                                _context.Client_Bill.Remove(dbBill);
+
+                            }
+                        }
+
+                        foreach (var item in newClientViewModel.clientBills)// Present in Client Array and Absent in DB
+                        {
+                            if (dbClientBills.Exists(m => m.bill_id.Equals(item.ClientBillId)))
+                            {
+                                // Present in Client Array and Present in DB
+                                continue;
+                            }
+                            else
+                            {
+                                // Add new Client Bill in the DB.
+                                Client_Bill clientBill = new Client_Bill();
+                                clientBill.client_id = client.client_id;
+                                clientBill.chief_information_officer = item.ChiefInformationOfficer;
+                                clientBill.solutions_architect = item.SolutionsArchitect;
+                                clientBill.remote_support = item.RemoteSupport;
+                                clientBill.on_site_support = item.OnSiteSupport;
+                                clientBill.billable_support_vendor_mgmt = item.BillableSupportVendorManagement;
+                                clientBill.billable_support_add_modify = item.BillableSupportAddModify;
+                                clientBill.on_site_service = item.NextBusinessDayOnSiteServices;
+                                clientBill.travel = item.Travel;
+                                clientBill.mileage = item.Mileage;
+
+                                _context.Client_Bill.Add(clientBill);
                             }
                         }
                        await _context.SaveChangesAsync();                        

@@ -143,6 +143,7 @@ namespace framework.cspnetworks.net.Controllers
                 newClientViewModel.newClientModel = new NewClientModel();
                 newClientViewModel.newClientModel = newClient;
                 newClientViewModel.clientSites = JsonConvert.DeserializeObject<List<ClientSite>>(newClient.Sites);
+                newClientViewModel.clientBills = JsonConvert.DeserializeObject<List<ClientBill>>(newClient.Bills);
 
                 // HTTP POST                     
                 response = client.PostAsJsonAsync("api/Clients/PostNewClient", newClientViewModel).Result;
@@ -234,6 +235,7 @@ namespace framework.cspnetworks.net.Controllers
 
                 // HTTP POST    
                 newClientViewModel.clientSites = JsonConvert.DeserializeObject<List<ClientSite>>(newClientViewModel.newClientModel.Sites);
+                newClientViewModel.clientBills = JsonConvert.DeserializeObject<List<ClientBill>>(newClientViewModel.newClientModel.Bills);
                 response = client.PostAsJsonAsync("api/Clients/UpdateClient", newClientViewModel).Result;
             }
             if (response.StatusCode.Equals(HttpStatusCode.OK))

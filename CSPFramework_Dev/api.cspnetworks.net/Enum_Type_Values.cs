@@ -25,11 +25,14 @@ namespace api.cspnetworks.net
             this.Hardwares1 = new HashSet<Hardware>();
             this.Hardwares2 = new HashSet<Hardware>();
             this.Hardwares3 = new HashSet<Hardware>();
+<<<<<<< HEAD
             this.Softwares = new HashSet<Software>();
             this.Softwares1 = new HashSet<Software>();
             this.Softwares2 = new HashSet<Software>();
             this.Softwares3 = new HashSet<Software>();
             this.Softwares4 = new HashSet<Software>();
+=======
+>>>>>>> cbe8ccf... 1. Changes merged for adding billing section in the client's Add new, Edit details and display client details
             this.Users = new HashSet<User>();
         }
     
@@ -47,11 +50,14 @@ namespace api.cspnetworks.net
         public virtual ICollection<Hardware> Hardwares1 { get; set; }
         public virtual ICollection<Hardware> Hardwares2 { get; set; }
         public virtual ICollection<Hardware> Hardwares3 { get; set; }
+<<<<<<< HEAD
         public virtual ICollection<Software> Softwares { get; set; }
         public virtual ICollection<Software> Softwares1 { get; set; }
         public virtual ICollection<Software> Softwares2 { get; set; }
         public virtual ICollection<Software> Softwares3 { get; set; }
         public virtual ICollection<Software> Softwares4 { get; set; }
+=======
+>>>>>>> cbe8ccf... 1. Changes merged for adding billing section in the client's Add new, Edit details and display client details
         public virtual ICollection<User> Users { get; set; }
     }
 }

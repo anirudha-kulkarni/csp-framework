@@ -122,22 +122,22 @@
         </div>
 
         @*<div class="form-group">
-            @Html.LabelFor(m => m.newClientModel.Team, new { @class = "col-sm-3 control-label" })
-            <div class="col-sm-8">
-                @Html.EditorFor(m => m.newClientModel.Team, "TeamList")
-                @Html.ValidationMessageFor(m => m.newClientModel.Team)
-            </div>
-        </div>*@
+                @Html.LabelFor(m => m.newClientModel.Team, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-8">
+                    @Html.EditorFor(m => m.newClientModel.Team, "TeamList")
+                    @Html.ValidationMessageFor(m => m.newClientModel.Team)
+                </div>
+            </div>*@
         <div class="form-group">
             <div class="panel-group" id="agreementsSec_" style="margin-left: 26.5%;margin-right: 10%;">
                 <div class="panel">
 
                     <div class="panel-heading" style="background-color:grey">
                         <h4 class="panel-title">
-                          <strong style="color:black">
+                            <strong style="color:black">
                                 Team
                             </strong>
-                         </h4>
+                        </h4>
                     </div>
                     <div id="agreementsSecChild_" class="panel-group">
                         <div class="panel-body">
@@ -147,8 +147,8 @@
                                 <div class="row">
                                     <div class="container">
                                         <div class="col-sm-8">
-                                             @Html.EditorFor(m => m.newClientModel.executiveIncharge, "CSPUsers")
-                                             @Html.ValidationMessageFor(m => m.newClientModel.executiveIncharge)
+                                            @Html.EditorFor(m => m.newClientModel.executiveIncharge, "CSPUsers")
+                                            @Html.ValidationMessageFor(m => m.newClientModel.executiveIncharge)
                                         </div>
                                     </div>
                                 </div>
@@ -159,8 +159,8 @@
                                 <div class="row">
                                     <div class="container">
                                         <div class="col-sm-8">
-                                             @Html.EditorFor(m => m.newClientModel.programManager, "CSPUsers")
-                                             @Html.ValidationMessageFor(m => m.newClientModel.programManager)
+                                            @Html.EditorFor(m => m.newClientModel.programManager, "CSPUsers")
+                                            @Html.ValidationMessageFor(m => m.newClientModel.programManager)
                                         </div>
                                     </div>
                                 </div>
@@ -170,8 +170,8 @@
                                 <div class="row">
                                     <div class="container">
                                         <div class="col-sm-8">
-                                               @Html.EditorFor(m => m.newClientModel.accountManager, "CSPUsers")
-                                               @Html.ValidationMessageFor(m => m.newClientModel.accountManager)
+                                            @Html.EditorFor(m => m.newClientModel.accountManager, "CSPUsers")
+                                            @Html.ValidationMessageFor(m => m.newClientModel.accountManager)
                                         </div>
                                     </div>
                                 </div>
@@ -181,8 +181,8 @@
                                 <div class="row">
                                     <div class="container">
                                         <div class="col-sm-8">
-                                              @Html.EditorFor(m => m.newClientModel.pamManager, "CSPUsers")
-                                              @Html.ValidationMessageFor(m => m.newClientModel.pamManager)
+                                            @Html.EditorFor(m => m.newClientModel.pamManager, "CSPUsers")
+                                            @Html.ValidationMessageFor(m => m.newClientModel.pamManager)
                                         </div>
                                     </div>
                                 </div>
@@ -210,113 +210,184 @@
                 </div>
             </div>*@
 
-        <div class="form-group">            
+        <div class="form-group">
             @*<div class="col-sm-8">*@
-                @Html.TextBoxFor(m => m.newClientModel.Sites, new { @placeholder = "Enter Sites", @style = "display:none" })               
+            @Html.TextBoxFor(m => m.newClientModel.Bills, new { @placeholder = "Enter Sites", @style = "display:none" })
             @*</div>*@
             <div class="panel-group" id="clientSitePanel_" style="margin-left: 26.5%;margin-right: 10%;">
                 <div class="panel">
                     <div class="panel-heading" style="background-color:grey">
                         <h4 class="panel-title">
                             <strong style="color:black">
-                                Client Sites
+                                Client Bills
                             </strong>
                             @*</a>*@
                         </h4>
                     </div>
                     <div class="panel-group">
                         <div class="panel-body">
-                            <div id="SitesPanel">
+                            <div id="BillsPanel">
                                 @{
+                                    int billCount = 1;
+                                    foreach (CSPLibrary.ClientBill item in @Model.clientBills)
+                                    {
+                                        string divId = "Bill" + billCount;
+                                        billCount++;
+                                        <div id="@divId" class="panel" style="border-width:thin;border-color:gray;margin-bottom:2%;">
+                                            <div style="background-color:dimgray" class="panel-heading">
+                                                <h4 class="panel-title"><strong style="color:black;">Site Information</strong></h4>
+                                            </div>
+
+                                            <input style="display:none" class="Client_Bill_Id" value="@item.ClientBillId">
+                                            <div class="panel-group">
+                                                <div class="panel-body">
+                                                    <div class="form-group">
+                                                        </div>                                                    </div>
+                                                    <div class="form-group">
+                                                    </div>
+                                                    <div class="form-group">
+                                                    </div>
+                                                    <div class="form-group">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        </div>
+                                                        </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-5">Travel</label>
+                                                            <div class="col-sm-5">
+                                                                <input class="travel" value="@item.Travel">
+                                                            </div><span style="float:left;color:orange;font-size:large;">$</span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-5">Mileage</label>
+                                                            <div class="col-sm-5">
+                                                                <input class="mileage" value="@item.Mileage">
+                                                            </div><span style="float:left;color:orange;font-size:large;">$</span>
+                                                        </div>
+                                                        <input type="button" class="btn col-md-offset-8 col-md-3 removeBill_" value="Remove" style="margin-bottom: 15px;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            }
+                                            }
+                                        </div>
+                                        <input style="display:none" name="newClientModel.Bills">
+                                        <input id="AddNew_bill" type="button" class="btn col-md-5" value="Add New bill" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                                    <div class="form-group">
+                                        @*<div class="col-sm-8">*@
+                                        @Html.TextBoxFor(m => m.newClientModel.Sites, new { @placeholder = "Enter Sites", @style = "display:none" })
+                                        @*</div>*@
+                                        <div class="panel-group" id="clientSitePanel_" style="margin-left: 26.5%;margin-right: 10%;">
+                                            <div class="panel">
+                                                <div class="panel-heading" style="background-color:grey">
+                                                    <h4 class="panel-title">
+                                                        <strong style="color:black">
+                                                            Client Sites
+                                                        </strong>
+                                                        @*</a>*@
+                                                    </h4>
+                                                </div>
+                                                <div class="panel-group">
+                                                    <div class="panel-body">
+                                                        <div id="SitesPanel">
+                                                            @{
                                     int count = 1;
                                     foreach (CSPLibrary.ClientSite item in @Model.clientSites)
                                     {
                                         string divId = "Sites" + count;
                                         count++;
-                                        <div id="@divId" class="panel" style="border-width:thin;border-color:gray;margin-bottom:2%;">
-                                            <div style="background-color:dimgray" class="panel-heading">
-                                                <h4 class="panel-title"><strong style="color:black;">Site Information</strong></h4>
+                                <div id="@divId" class="panel" style="border-width:thin;border-color:gray;margin-bottom:2%;">
+                                    <div style="background-color:dimgray" class="panel-heading">
+                                        <h4 class="panel-title"><strong style="color:black;">Site Information</strong></h4>
+                                    </div>
+
+                                    <input style="display:none" class="Client_Site_Id" value="@item.Client_Site_Id">
+                                    <div class="panel-group">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Site Name</label>
+                                                <div class="col-sm-8">
+                                                    <input class="siteName" value="@item.SiteName">
+                                                </div>
                                             </div>
-                                           
-                                            <input style="display:none" class="Client_Site_Id" value="@item.Client_Site_Id">
-                                            <div class="panel-group">
-                                                <div class="panel-body">
-                                                    <div class="form-group">
-                                                        <label class="control-label col-md-3">Site Name</label>
-                                                        <div class="col-sm-8">
-                                                            <input class="siteName form-control" value="@item.SiteName">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Address</label>
+                                                <div class="col-sm-8">
+                                                    <input class="address" value="@item.Address">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">City</label>
+                                                <div class="col-sm-8">
+                                                    <input class="city" value="@item.City">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">State</label>
+                                                <div class="col-sm-8">
+                                                    @*<input class="state" value="@item.State">*@
+                                                    @Html.EditorFor(m => @item.State, "StateList", new { State = @item.State ,@autofocus = "autofocus" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Zip</label>
+                                                <div class="col-sm-8">
+                                                    <input class="zip" maxlength="5" autocomplete="off" value="@item.Zip">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Phone Number</label>
+                                                <div class="col-sm-8">
+                                                    <input class="phone" value="@item.PhoneNumber">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Fax</label>
+                                                <div class="col-sm-8">
+                                                    <input class="fax" value="@item.FaxNumber">
+                                                </div>
+                                            </div>
+                                            <input type="button" class="btn col-md-offset-8 col-md-3 removeSite_" value="Remove" style="margin-bottom: 15px;">
+                                        </div>
+                                    </div>
+                                </div>
+                                    }
+                                                            }
                                                         </div>
+                                                        <input style="display:none" name="newClientModel.Sites">
+                                                        <input id="AddNew_btn" type="button" class="btn col-md-5" value="Add More Sites" />
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label col-md-3">Address</label>
-                                                        <div class="col-sm-8">
-                                                            <input class="address form-control" value="@item.Address">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label col-md-3">City</label>
-                                                        <div class="col-sm-8">
-                                                            <input class="city form-control" value="@item.City">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label col-md-3">State</label>
-                                                        <div class="col-sm-8">
-                                                            <input class="state form-control" value="@item.State">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label col-md-3">Zip</label>
-                                                        <div class="col-sm-8">
-                                                            <input class="zip form-control" maxlength="5" autocomplete="off" value="@item.Zip">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label col-md-3">Phone Number</label>
-                                                        <div class="col-sm-8">
-                                                            <input class="phone form-control" value="@item.PhoneNumber">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label col-md-3">Fax</label>
-                                                        <div class="col-sm-8">
-                                                            <input class="fax form-control" value="@item.FaxNumber">
-                                                        </div>
-                                                    </div>
-                                                    <input type="button" class="btn col-md-offset-8 col-md-3 removeSite_" value="Remove" style="margin-bottom: 15px;">
                                                 </div>
                                             </div>
                                         </div>
-                                    }
-                                }
-                            </div>
-                            <input style="display:none" name="newClientModel.Sites">
-                            <input id="AddNew_btn" type="button" class="btn col-md-5" value="Add More Sites" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="modal-footer">
-            <a href="/Clients/Index" class="btn">Cancel</a>
-            <input type="submit" class="btn" value="Update Client" />
-        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <a href="/Clients/Index" class="btn">Cancel</a>
+                                        <input type="submit" class="btn" value="Update Client" />
+                                    </div>
     }
 
-</div>
+                                </div>
 
-@section Scripts {
+                              @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jquery")
-    @Styles.Render("~/Content/admin/css")    
+    @Styles.Render("~/Content/admin/css")
     @Scripts.Render("~/bundles/maskedEdit")
-    @Scripts.Render("~/bundles/moment")    
+    @Scripts.Render("~/bundles/moment")
     @Scripts.Render("~/bundles/bootstrap-datepicker")
     @Styles.Render("~/bundles/bootstrap-datepicker-css")
 
     <script>
-        $(document).ready(function () {            
+        $(document).ready(function () {
             // Initialize datepicker
             $("#startDate_").datetimepicker({
                 pickTime: false
@@ -345,7 +416,7 @@
             //var deleteSites = [];
             $(".removeSite_").click(function(event){
                 //deleteSites.push($("#"+e.toElement.parentNode.parentNode.parentNode.id +" .Client_Site_Id").val());
-               
+
                 if(typeof event.toElement !== "undefined")
                 {
                     event.toElement.parentNode.parentNode.parentNode.remove();
@@ -362,7 +433,59 @@
                     }
                 }
             });
-        });        
+            $(".removeBill_").click(function (event){
+                if(typeof event.toElement !== "undefined")
+                {
+                    event.toElement.parentNode.parentNode.parentNode.remove();
+                }
+                else if(typeof event.relatedTarget !== "undefined")
+                {
+                    if(event.relatedTarget !== null)
+                    {
+                        event.relatedTarget.parentNode.parentNode.parentNode.remove();
+                    }
+                    else if(typeof event.currentTarget !== "undefined")
+                    {
+                        event.currentTarget.parentNode.parentNode.parentNode.remove();
+                    }
+                }
+            });
+            $(".billableDropdown").change(function(event){
+                var element;
+                var parent;
+                if(typeof event.toElement !== "undefined")
+                {
+                    parent = event.toElement.parentNode.parentNode;
+                    element = event.toElement;
+                }
+                else if(typeof event.relatedTarget !== "undefined")
+                {
+                    if(event.relatedTarget !== null)
+                    {
+                        parent = event.relatedTarget.parentNode.parentNode;
+                        element= event.relatedTarget;
+                    }
+
+                }
+                else if(typeof event.currentTarget !== "undefined")
+                {
+                    parent = event.currentTarget.parentNode.parentNode;
+                    element= event.currentTarget;
+                }
+                var input = parent.getElementsByTagName('input');
+                var span =  parent.getElementsByTagName('span');
+
+                if($(element).val() == "0"){
+                    $(input).show();
+                    $(span).show();
+                }
+                else {
+                    $(input).val("0");
+                    $(input).hide();
+                    $(span).hide();
+                }
+            });
+        });
 
         function RemoveParent() {
             debugger;
@@ -375,11 +498,94 @@
         function appendChild(parent, child) {
             parent.appendChild(child);
         }
+        function addOption(selectbox, text, value) {
+            var optn = createElement("OPTION");
+            optn.text = text;
+            optn.value = value;
+            if (text == "California") {
+                $(optn).attr('selected', 'selected');
+            }
+            selectbox.options.add(optn);
+        }
+        function createDropDown() {
+            var states = new Array(
+                "Alabama",
+                "Alaska",
+                "Arizona",
+                "Arkansas",
+                "California",
+                "Colorado",
+                "Connecticut",
+                "Delaware",
+                "Florida",
+                "Georgia",
+                "Hawaii",
+                "Idaho",
+                "Illinois",
+                "Indiana",
+                "Iowa",
+                "Kansas",
+                "Kentucky",
+                "Louisiana",
+                "Maine",
+                "Maryland",
+                "Massachusetts",
+                "Michigan",
+                "Minnesota",
+                "Mississippi",
+                "Missouri",
+                "Montana",
+                "Nebraska",
+                "Nevada",
+                "New Hampshire",
+                "New Jersey",
+                "New Mexico",
+                "New York",
+                "North Carolina",
+                "North Dakota",
+                "Ohio",
+                "Oklahoma",
+                "Oregon",
+                "Pennsylvania",
+                "Rhode Island",
+                "South Carolina",
+                "South Dakota",
+                "Tennessee",
+                "Texas",
+                "Utah",
+                "Vermont",
+                "Virginia",
+                "Washington",
+                "West Virginia",
+                "Wisconsin",
+                "Wyoming"
 
+                );
+            var stateSelect = createElement('select');
+            for (var i = 0; i < states.length; ++i) {
+                addOption(stateSelect, states[i], states[i]);
+            }
+
+            return stateSelect;
+        }
+        function createBillableDropDown() {
+            var dropOptions = new Array("Yes", "No");
+            var billableSelect = createElement('select');
+            for (var index = 0; index < dropOptions.length; index++) {
+                addOption(billableSelect, dropOptions[index], index);
+            }
+            return billableSelect;
+        }
         function createFormGroupDiv(labelText, className) {
+            var inputField;
+            if (className == 'state') {
+                inputField = createDropDown();
+            }
+            else {
+                inputField = createElement('input');
+            }
 
-            var input = createElement('input');
-            $(input).attr("class", className + " form-control");
+            $(inputField).attr("class", className);
             var label = createElement('label');
             label.innerHTML = labelText;
             $(label).attr('class', 'control-label col-md-3');
@@ -389,9 +595,67 @@
 
             var formChild = createElement('div');
             $(formChild).attr('class', 'col-sm-8');
+            appendChild(formChild, inputField);
+            appendChild(formDiv, label);
+            appendChild(formDiv, formChild);
+            return formDiv;
+        }
+        function createBillsFormGroupDiv(labelText, className) {
+
+            var input = createElement('input');
+            $(input).attr("class", className + " form-control");
+            var label = createElement('label');
+            label.innerHTML = labelText;
+            $(label).attr('class', 'control-label col-md-7');
+
+            var formDiv = createElement('div');
+            $(formDiv).attr('class', 'form-group');
+
+            var formChild = createElement('div');
+            $(formChild).attr('class', 'col-sm-3');
+            var span = createElement('span');
+            $(span).text("$");
+            $(span).attr('style','float:left;color:orange;font-size: large;');
             appendChild(formChild, input);
             appendChild(formDiv, label);
             appendChild(formDiv, formChild);
+            appendChild(formDiv,span);
+            return formDiv;
+        }
+        function createBillableFormGroupDiv(labelText, className) {
+
+            var input = createElement('input');
+            $(input).attr("class", className);
+            var label = createElement('label');
+            label.innerHTML = labelText;
+            $(label).attr('class', 'control-label col-md-7');
+
+            var formDiv = createElement('div');
+            $(formDiv).attr('class', 'form-group');
+
+            var formChild = createElement('div');
+            $(formChild).attr('class', 'col-sm-3');
+            var span = createElement('span');
+            $(span).text("$");
+            $(span).attr('style', 'float:left;color:orange;font-size: large;margin-top:9%;');
+            var billableDropDown = createBillableDropDown();
+
+            $(billableDropDown).change(function () {
+                if ($(billableDropDown).val() == "0") {
+                    $(input).show();
+                    $(span).show();
+                }
+                else {
+                    $(input).val("0");
+                    $(input).hide();
+                    $(span).hide();
+                }
+            });
+            appendChild(formChild, billableDropDown);
+            appendChild(formChild, input);
+            appendChild(formDiv, label);
+            appendChild(formDiv, formChild);
+            appendChild(formDiv, span);
             return formDiv;
         }
         function createSiteDiv(id) {
@@ -443,21 +707,73 @@
 
             return siteDiv;
         }
+        function createBillDiv(id) {
+            var billDiv = createElement('div');
+            $(billDiv).attr('id', id);
+            $(billDiv).attr('class', 'panel');
+            $(billDiv).attr('style', 'border-width:thin;border-color:gray;margin-bottom:2%;');
+
+            var panelHeadingDiv = createElement('div');
+            $(panelHeadingDiv).attr('style', "background-color:dimgray");
+            $(panelHeadingDiv).attr('class', 'panel-heading');
+            panelHeadingDiv.innerHTML = "<h4 class='panel-title'><strong style='color:black;'>Billing Details</strong></h4>";
+
+            var panelGroup = createElement('div');
+            $(panelGroup).attr('class', 'panel-group');
+
+            var boostrapDiv = createElement('div');
+            $(boostrapDiv).attr('class', 'panel-body');
+
+            var chiefInfoOfficer = createBillsFormGroupDiv('Chief Information Officer', 'chiefInfoOfficer');
+            var solutionsArchitect = createBillsFormGroupDiv('Solutions Architect', 'solutionsArchitect');
+            var remoteSupport = createBillsFormGroupDiv('Remote Support', 'remoteSupport');
+            var onSiteSupport = createBillsFormGroupDiv('On-Site Support	', 'onSiteSupport');
+            var billableSupportVM = createBillableFormGroupDiv('Billable Support (Vendor Management)', 'billableSupportVMgmt');
+            var billableSupportAM = createBillableFormGroupDiv(' Billable Support (Add/Modify)', 'billableSupportAM');
+            var onSiteService = createBillsFormGroupDiv('Next Business Day On-Site Services', 'onSiteService');
+            var travel = createBillsFormGroupDiv('Travel ', 'travel');
+            var mileage = createBillsFormGroupDiv('Mileage', 'mileage');
+            var removeBtn = createElement('input');
+            $(removeBtn).attr('type', 'button');
+            $(removeBtn).attr('class', 'btn col-md-offset-8 col-md-3');
+            $(removeBtn).attr('value', 'Remove');
+            $(removeBtn).attr('style', 'margin-bottom: 15px;');
+            $(removeBtn).click(function () {
+                $(billDiv).remove();
+            });
+
+            appendChild(boostrapDiv, chiefInfoOfficer);
+            appendChild(boostrapDiv, solutionsArchitect);
+            appendChild(boostrapDiv, remoteSupport);
+            appendChild(boostrapDiv, onSiteSupport);
+            appendChild(boostrapDiv, billableSupportVM);
+            appendChild(boostrapDiv, billableSupportAM);
+            appendChild(boostrapDiv, onSiteService);
+            appendChild(boostrapDiv, travel);
+            appendChild(boostrapDiv, mileage);
+            appendChild(boostrapDiv, removeBtn);
+
+            appendChild(panelGroup, boostrapDiv);
+            appendChild(billDiv, panelHeadingDiv);
+            appendChild(billDiv, panelGroup);
+
+            return billDiv;
+        }
         @if (Model.clientSites.Count == 0)
         {
-            <text>
-                var idSuffix = 1;
-                $("#SitesPanel").append(createSiteDiv('Sites1'));
+        <text>
+            var idSuffix = 1;
+             $("#SitesPanel").append(createSiteDiv('Sites1'));
         </text>
         }
         else
         {
             <text>
-        var idSuffix = @Model.clientSites.Count;
+             var idSuffix = @Model.clientSites.Count;
             </text>
-            
+
         }
-        debugger;
+
 
         $('#AddNew_btn').click(function () {
             idSuffix++;
@@ -465,8 +781,35 @@
             var siteDiv = createSiteDiv(id);
             $("#SitesPanel").append(siteDiv);
             setTimeout(window.scrollTo(0, document.body.scrollHeight), 1000);
+            // call mask-it event
+            $(document).trigger('mask-it');
         });
 
+        @if (Model.clientBills.Count == 0)
+        {
+            <text>
+                var billIdSuffix = 1;
+                 $("#BillsPanel").append(createBillDiv('Bill1'));
+             </text>
+        }
+        else
+        {
+            <text>
+                var billIdSuffix = @Model.clientBills.Count;
+             </text>
+
+         }
+
+        $("#AddNew_bill").click(function () {
+            billIdSuffix++;
+            var billId = "Bill" + billIdSuffix;
+            var billDiv = createBillDiv(billId);
+            $("#BillsPanel").append(billDiv);
+            //setTimeout(window.scrollTo(0, document.body.scrollHeight), 1000);
+
+            $(document).trigger('mask-it');
+
+        });
         function fetchAllInputs() {
             var allSites = [];
             for (var i = 1; i <= idSuffix; i++) {
@@ -484,7 +827,14 @@
                     sites.SiteName = $("#" + elementID + " .siteName").val();
                     sites.Address = $("#" + elementID + " .address").val();
                     sites.City = $("#" + elementID + " .city").val();
-                    sites.State = $("#" + elementID + " .state").val();
+                    debugger;
+                    if($('#'  + elementID + ' [name="item.State"]').length != 0){
+                        sites.State = $('#'  + elementID + ' [name="item.State"]').val();
+                    }
+                    else{
+                        sites.State = $("#" + elementID + " .state").val();
+                    }
+                    
                     sites.Zip = $("#" + elementID + " .zip").val();
                     sites.PhoneNumber = $("#" + elementID + " .phone").val();
                     sites.FaxNumber = $("#" + elementID + " .fax").val();
@@ -499,9 +849,49 @@
             console.log(JSON.stringify(allSites));
             return JSON.stringify(allSites);
         }
+        function fetchAllBills() {
+            var allBills = [];
+            for (var index = 1; index <= billIdSuffix; index++) {
+                var elementID = "#Bill" + index;
+                if ($(elementID).length != 0) {
+                    var bills = {
+                        ClientBillId :{},
+                        ChiefInformationOfficer: {},
+                        SolutionsArchitect: {},
+                        RemoteSupport: {},
+                        OnSiteSupport: {},
+                        BillableSupportVendorManagement: {},
+                        BillableSupportAddModify: {},
+                        NextBusinessDayOnSiteServices: {},
+                        Travel: {},
+                        Mileage: {}
+                    };
+                    bills.ChiefInformationOfficer = $(elementID + " .chiefInfoOfficer").val();
+                    bills.SolutionsArchitect = $(elementID + " .solutionsArchitect").val();
+                    bills.RemoteSupport = $(elementID + " .remoteSupport").val();
+                    bills.OnSiteSupport = $(elementID + " .onSiteSupport").val();
+                    if ($(elementID + " .billableSupportVMgmt").length != 0) {
+                        bills.BillableSupportVendorManagement = $(elementID + " .billableSupportVMgmt").val();
+                    }
+                    if ($(elementID + " .billableSupportAM").length != 0) {
+                        bills.BillableSupportAddModify = $(elementID + " .billableSupportAM").val();
+                    }
+                    bills.NextBusinessDayOnSiteServices = $(elementID + " .onSiteService").val();
+                    bills.Travel = $(elementID + " .travel").val();
+                    bills.Mileage = $(elementID + " .mileage").val();
+                    if($(elementID + " .Client_Bill_Id")){
+                        bills.ClientBillId = $(elementID + " .Client_Bill_Id").val();
+                    }
+
+                    allBills.push(bills);
+                }
+            }
+            return JSON.stringify(allBills);
+        }
         $('#NewCustomerVendorForm').submit(function () {
             $('[name="newClientModel.Sites"]').val(fetchAllInputs());
-          //  $('[name="deleteSites"]').val(deleteSites);
+            $('[name="newClientModel.Bills"]').val(fetchAllBills());
+            //  $('[name="deleteSites"]').val(deleteSites);
         });
     </script>
 }

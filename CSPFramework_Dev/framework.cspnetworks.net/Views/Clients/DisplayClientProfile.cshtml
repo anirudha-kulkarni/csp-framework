@@ -95,7 +95,69 @@
                                     <td><strong>Status :</strong></td>
                                     <td>@Model.newClientModel.StatusString</td>
                                 </tr>
+                                <tr>
+                                    @*<td><strong>Sites :</strong></td>
+            <td>@Model.newClientModel.Sites</td>*@
+                                    <td colspan="2">
+                                        <table>
+                                            @{
+                                                int billCount = 1;
+                                                foreach (CSPLibrary.ClientBill item in @Model.clientBills)
+                                                {
+                                                    string location = "Bill " + @billCount + " :";
+                                                    <tr>
+                                                        <td colspan="2" style="border-top: none; color: rgb(244, 165, 79);"><strong>@location</strong></td>
+                                                    </tr>
+                                                    billCount++;
+                                                    <tr>
+                                                        <td><strong>Chief Information Officer :</strong></td>
+                                                        <td>@item.ChiefInformationOfficer $</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Solutions Architect :</strong></td>
+                                                        <td>@item.SolutionsArchitect $</td>
+                                                    </tr>
 
+                                                    <tr>
+                                                        <td><strong>Remote Support :</strong></td>
+                                                        <td>@item.RemoteSupport $</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><strong>On-Site Support :</strong></td>
+                                                        <td>@item.OnSiteSupport $</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><strong>Billable Support (Vendor Management) :</strong></td>
+                                                        <td>@item.BillableSupportVendorManagement $</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><strong>Billable Support (Add/Modify) :</strong></td>
+                                                        <td>@item.BillableSupportAddModify $</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><strong>Next Business Day On-Site Services :</strong></td>
+                                                        <td>@item.NextBusinessDayOnSiteServices $</td>
+                                                    </tr>
+                                                 <tr>
+                                                        <td><strong>Travel :</strong></td>
+                                                        <td>@item.Travel $</td>
+                                                    </tr>
+                                                 <tr>
+                                                        <td><strong>Mileage :</strong></td>
+                                                        <td>@item.Mileage $</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2"></td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </table>
+                                    </td>
+                                </tr>
                                 <tr>
                                     @*<td><strong>Sites :</strong></td>
                                         <td>@Model.newClientModel.Sites</td>*@
