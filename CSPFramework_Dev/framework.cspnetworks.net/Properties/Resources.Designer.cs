@@ -88,6 +88,15 @@ namespace framework.cspnetworks.net.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Software has been added successfully !.
+        /// </summary>
+        public static string AddSoftware_Success {
+            get {
+                return ResourceManager.GetString("AddSoftware_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User Has been Added Successfully !.
         /// </summary>
         public static string AddUser_Success {
@@ -142,6 +151,15 @@ namespace framework.cspnetworks.net.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Software Has been Deleted Successfully !.
+        /// </summary>
+        public static string DeleteSoftware_Success {
+            get {
+                return ResourceManager.GetString("DeleteSoftware_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User Has been Deleted Successfully !.
         /// </summary>
         public static string DeleteUser_Success {
@@ -183,6 +201,15 @@ namespace framework.cspnetworks.net.Properties {
         public static string EditHardware_Success {
             get {
                 return ResourceManager.GetString("EditHardware_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Software Has been Updated Successfully !.
+        /// </summary>
+        public static string EditSoftware_Success {
+            get {
+                return ResourceManager.GetString("EditSoftware_Success", resourceCulture);
             }
         }
         

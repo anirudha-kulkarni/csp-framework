@@ -147,7 +147,7 @@ namespace framework.cspnetworks.net.Controllers
                 // HTTP POST                     
                 response = client.PostAsJsonAsync("api/User/UpdateUser", newUserModel).Result;
             }
-            if (response.StatusCode.Equals(HttpStatusCode.Created))
+            if (response.StatusCode.Equals(HttpStatusCode.OK))
             {
                 TempData[Properties.Resources.Success] = Properties.Resources.EditUser_Success;
                 return RedirectToAction("People", "People");
@@ -201,7 +201,7 @@ namespace framework.cspnetworks.net.Controllers
                 // HTTP POST                     
                 response = client.PostAsJsonAsync("api/User/ChangePassword", changePasswordModel).Result;
             }
-            if (response.StatusCode.Equals(HttpStatusCode.Created))
+            if (response.StatusCode.Equals(HttpStatusCode.OK))
             {
 
                 TempData[Properties.Resources.Success] = Properties.Resources.ChangePassword_Success;

@@ -20,15 +20,10 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")
-    @Styles.Render("~/bundles/jqueryui-css")
-    @Styles.Render("~/Content/admin/css")
+    @Scripts.Render("~/bundles/maskedEdit")
     @Styles.Render("~/Content/bootstrap-table/css")
     @Scripts.Render("~/bundles/bootstrap-table")
-    @Scripts.Render("~/bundles/maskedEdit")
-    @Styles.Render("~/Content/jqGrid/css")
-    @Scripts.Render("~/bundles/jqGrid")
+    
 
     <script>
         function strongDisplayFormatter(value, row)
@@ -37,7 +32,7 @@
         }
         function nameDisplayFormatter(value, row)
         {
-            return '<strong><a href="/People/DisplayUserProfile?userid=' + row.User_Id + '">' + value + ' ' + row.LastName + '</a></strong>'
+            return '<strong><a href="/People/DisplayUserProfile?userid=' + row.User_Id + '">' + value + ' ' + row.LastName + '</a></strong></div>'
         }
         function tableActionsFormatter(value, row)
         {
@@ -48,7 +43,7 @@
                             </div>';
         }
 
-        $(document).ready(function () {            
+        $(document).ready(function () {
             // Maked Edit Controls
             jQuery(function ($) {
                 $(".phone").mask("000.000.0000");

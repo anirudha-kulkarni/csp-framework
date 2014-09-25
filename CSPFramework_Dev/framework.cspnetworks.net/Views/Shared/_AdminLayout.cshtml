@@ -9,6 +9,32 @@
     @Scripts.Render("~/bundles/modernizr")
 
     <style>
+        .error {
+            font-weight: bold;
+            font-size: 12px;
+            display: block;
+            padding: 10px;
+            margin: -20px 0;
+            color: #d35d51;
+            background: #f7e2df;
+            border: 1px solid #d35d51;
+            display: block;
+            width: 30%;
+            margin-left: 35%;
+        }
+
+        .success {
+            font-weight: bold;
+            font-size: 12px;
+            display: block;
+            padding: 10px;
+            margin: -20px 0;
+            color: #075c13;
+            background: #b5f9bf;
+            border: 1px solid #075c13;
+            width: 35%;
+            margin-left: 31%;
+        }
         .tableHeader {
             background: #20272d;            
             border-top-left-radius: 4px;
@@ -47,6 +73,41 @@
         .fixed-table-container > div.fixed-table-header {
             display:none !important;
         }
+
+        input:focus, textarea:focus, select:focus {
+            outline: 0;
+            border: 1px solid #6c747a;
+            background: #f0f3f5;
+        }
+
+        .input-validation-error, .input-validation-error:focus {
+            border: 1px solid #d35d51;
+            background-color: #f7e2df;
+            color: #d35d51;
+        }
+
+        div.input-validation-error {
+            border: none;
+            background: none;
+        }
+
+            div.input-validation-error .select2-chosen {
+                color: #d35d51;
+            }
+
+        .field-validation-error span, .field-validation-error {
+            color: #d35d51;
+        }
+
+            .field-validation-error span {
+                display: block;
+            }
+
+        input:focus, textarea:focus, select:focus {
+            outline: 0;
+            border: 1px solid #6c747a;
+            background: #f0f3f5;
+        }
     </style>
 </head>
 <body>
@@ -65,7 +126,7 @@
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse col-md-offset-2" id="bs-example-navbar-collapse-1">
+                <div class="collapse navbar-collapse col-md-offset-4" id="bs-example-navbar-collapse-1">
                     <ul id="main-nav-bar" class="nav navbar-nav">
                         <li class="active"><a href="#">Dashboard</a></li>
                         <li class="dropdown">
@@ -75,19 +136,20 @@
                                 <li><a href="#">Router</a></li>
                                 <li><a href="#">Switch</a></li>
                                 @*<li class="divider"></li>
-                                    <li><a href="#">Hub</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">One more separated link</a></li>*@
+                        <li><a href="#">Hub</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>*@
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle btn-block" data-toggle="dropdown">Inventory <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="/Hardware/Index">Hardware</a></li>
-                                <li><a href="#">Software</a></li>
+                                <li><a href="/Software/Index">Software</a></li>
                             </ul>
                         </li>
 
+                        
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle btn-block" data-toggle="dropdown">Business <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
@@ -110,19 +172,19 @@
     </div>
         
     <div class="container body-content">
+        <div class="col-lg-12" style="align-self: center; align-content: center; text-align: center; margin:1%">
+            @if (ViewBag.Status == @framework.cspnetworks.net.Properties.Resources.Success)
+            {
+                ViewBag.Status = "";
+                <span id="messageSpan" class="success">@ViewBag.StatusMessage</span>
+            }
 
-        @if (ViewBag.Status == @framework.cspnetworks.net.Properties.Resources.Success)
-        {
-            ViewBag.Status = "";
-            <span id="messageSpan" class="success col-lg-1">@ViewBag.StatusMessage</span>
-        }
-
-        @if (ViewBag.Status == @framework.cspnetworks.net.Properties.Resources.Error)
-        {
-            ViewBag.Status = "";
-            <span id="messageSpan" class="error">@ViewBag.StatusMessage</span>
-        }
-        
+            @if (ViewBag.Status == @framework.cspnetworks.net.Properties.Resources.Error)
+            {
+                ViewBag.Status = "";
+                <span id="messageSpan" class="error">@ViewBag.StatusMessage</span>
+            }
+        </div>
         @RenderBody()
     </div>
 
@@ -132,10 +194,11 @@
     <footer style="text-align:center">
         <p>&copy; @DateTime.Now.Year - CSP Networks</p>
     </footer>
-
+        
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")    
+    @Scripts.Render("~/bundles/bootstrap")        
     @RenderSection("scripts", required: false)
+
     <script>
         $("#main-nav-bar").on("click", function () {
             $("#main-nav-bar").find(".active").removeClass("active");
@@ -148,25 +211,33 @@
         //});
 
         var handleMasks = function () {
-            if ($(".phone") !== undefined) {
+            if ($(".phone") !== undefined && $(".phone").length > 0) {
                 $(".phone").mask("000.000.0000");
             }
-            if ($(".fax") !== undefined) {
+            if ($(".fax") !== undefined && $(".fax").length > 0) {
                 $(".fax").mask("000.000.0000");
             }
-            if ($(".zip") !== undefined) {
+            if ($(".zip") !== undefined && $(".zip").length > 0) {
                 $(".zip").mask("00000");
             }
-        };
+        };        
 
         window.operateEvents = {
             'click .flaticon-recycle': function (e, value, row, index) {
                 debugger;
                 $('#anchorDelete_').attr("href", $(e.currentTarget).attr('refer'));
-            }
+            }            
         };
 
-        $(document).ready(function () {
+        $(document).ready(function () {           
+
+            // Load event for tabular list
+            $("#table-contacts").bootstrapTable({                
+            }).on('load-success.bs.table', function (e, name, args) {
+                //if ($(".tip") !== undefined && $(".tip").length > 0) {
+                //    $(".tip").popover();                
+                //}                
+            });            
 
             setTimeout(function () {
                 $('#messageSpan').fadeOut('slow');

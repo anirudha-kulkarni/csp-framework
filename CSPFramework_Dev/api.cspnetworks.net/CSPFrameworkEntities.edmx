@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CSPFRAMEWORKModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CSPFRAMEWORKModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Agreements">
           <Key>
             <PropertyRef Name="agreement_id" />
@@ -117,26 +117,24 @@
           <Property Name="warrenty_end_date" Type="datetime" />
           <Property Name="purchased_by" Type="int" Nullable="false" />
           <Property Name="client_id" Type="int" Nullable="false" />
-          <Property Name="location" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="location" Type="int" Nullable="false" />
           <Property Name="associated_hardware_id" Type="int" />
           <Property Name="hardware_status" Type="int" />
         </EntityType>
         <EntityType Name="Software">
           <Key>
-            <PropertyRef Name="software_id" />
+            <PropertyRef Name="CSPNAssetTag" />
           </Key>
-          <Property Name="software_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="software_name" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
+          <Property Name="CSPNAssetTag" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="make" Type="int" Nullable="false" />
+          <Property Name="model" Type="int" Nullable="false" />
+          <Property Name="box_product_key" Type="varchar" MaxLength="50" />
+          <Property Name="digital_product_key" Type="varchar" MaxLength="50" />
+          <Property Name="license_type" Type="int" Nullable="false" />
+          <Property Name="media_type" Type="int" Nullable="false" />
+          <Property Name="purchased_by" Type="int" Nullable="false" />
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="location" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="User_Groups">
           <Key>
@@ -404,6 +402,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Hardware_Location">
+          <End Role="Client_Site" Type="Self.Client_Site" Multiplicity="1" />
+          <End Role="Hardware" Type="Self.Hardware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client_Site">
+              <PropertyRef Name="client_site_id" />
+            </Principal>
+            <Dependent Role="Hardware">
+              <PropertyRef Name="location" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Hardware_Make">
           <End Role="Enum_Type_Values" Type="Self.Enum_Type_Values" Multiplicity="0..1" />
           <End Role="Hardware" Type="Self.Hardware" Multiplicity="*" />
@@ -428,12 +438,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Hardware_Softwares">
+        <Association Name="FK_Hardware_Software">
           <End Role="Software" Type="Self.Software" Multiplicity="0..1" />
           <End Role="Hardware" Type="Self.Hardware" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Software">
-              <PropertyRef Name="software_id" />
+              <PropertyRef Name="CSPNAssetTag" />
             </Principal>
             <Dependent Role="Hardware">
               <PropertyRef Name="software_id" />
@@ -461,6 +471,90 @@
             </Principal>
             <Dependent Role="Hardware">
               <PropertyRef Name="vendor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Software_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Software" Type="Self.Software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="Software">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Software_License">
+          <End Role="Enum_Type_Values" Type="Self.Enum_Type_Values" Multiplicity="1" />
+          <End Role="Software" Type="Self.Software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Enum_Type_Values">
+              <PropertyRef Name="enum_type_value_id" />
+            </Principal>
+            <Dependent Role="Software">
+              <PropertyRef Name="license_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Software_Location">
+          <End Role="Client_Site" Type="Self.Client_Site" Multiplicity="1" />
+          <End Role="Software" Type="Self.Software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client_Site">
+              <PropertyRef Name="client_site_id" />
+            </Principal>
+            <Dependent Role="Software">
+              <PropertyRef Name="location" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Software_Make">
+          <End Role="Enum_Type_Values" Type="Self.Enum_Type_Values" Multiplicity="1" />
+          <End Role="Software" Type="Self.Software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Enum_Type_Values">
+              <PropertyRef Name="enum_type_value_id" />
+            </Principal>
+            <Dependent Role="Software">
+              <PropertyRef Name="make" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Software_Media">
+          <End Role="Enum_Type_Values" Type="Self.Enum_Type_Values" Multiplicity="1" />
+          <End Role="Software" Type="Self.Software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Enum_Type_Values">
+              <PropertyRef Name="enum_type_value_id" />
+            </Principal>
+            <Dependent Role="Software">
+              <PropertyRef Name="media_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Software_Model">
+          <End Role="Enum_Type_Values" Type="Self.Enum_Type_Values" Multiplicity="1" />
+          <End Role="Software" Type="Self.Software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Enum_Type_Values">
+              <PropertyRef Name="enum_type_value_id" />
+            </Principal>
+            <Dependent Role="Software">
+              <PropertyRef Name="model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Software_PurchasedBy">
+          <End Role="Enum_Type_Values" Type="Self.Enum_Type_Values" Multiplicity="1" />
+          <End Role="Software" Type="Self.Software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Enum_Type_Values">
+              <PropertyRef Name="enum_type_value_id" />
+            </Principal>
+            <Dependent Role="Software">
+              <PropertyRef Name="purchased_by" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -510,7 +604,6 @@
           <EntitySet Name="Function_Notes" EntityType="Self.Function_Notes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Hardware" EntityType="Self.Hardware" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Software" EntityType="Self.Software" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Groups" EntityType="Self.User_Groups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vendors" EntityType="Self.Vendors" Schema="dbo" store:Type="Tables" />
@@ -590,6 +683,10 @@
             <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
             <End Role="Hardware" EntitySet="Hardware" />
           </AssociationSet>
+          <AssociationSet Name="FK_Hardware_Location" Association="Self.FK_Hardware_Location">
+            <End Role="Client_Site" EntitySet="Client_Site" />
+            <End Role="Hardware" EntitySet="Hardware" />
+          </AssociationSet>
           <AssociationSet Name="FK_Hardware_Make" Association="Self.FK_Hardware_Make">
             <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
             <End Role="Hardware" EntitySet="Hardware" />
@@ -598,7 +695,7 @@
             <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
             <End Role="Hardware" EntitySet="Hardware" />
           </AssociationSet>
-          <AssociationSet Name="FK_Hardware_Softwares" Association="Self.FK_Hardware_Softwares">
+          <AssociationSet Name="FK_Hardware_Software" Association="Self.FK_Hardware_Software">
             <End Role="Software" EntitySet="Software" />
             <End Role="Hardware" EntitySet="Hardware" />
           </AssociationSet>
@@ -609,6 +706,34 @@
           <AssociationSet Name="FK_Hardware_Vendors" Association="Self.FK_Hardware_Vendors">
             <End Role="Vendors" EntitySet="Vendors" />
             <End Role="Hardware" EntitySet="Hardware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Software_Clients" Association="Self.FK_Software_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Software" EntitySet="Software" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Software_License" Association="Self.FK_Software_License">
+            <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
+            <End Role="Software" EntitySet="Software" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Software_Location" Association="Self.FK_Software_Location">
+            <End Role="Client_Site" EntitySet="Client_Site" />
+            <End Role="Software" EntitySet="Software" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Software_Make" Association="Self.FK_Software_Make">
+            <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
+            <End Role="Software" EntitySet="Software" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Software_Media" Association="Self.FK_Software_Media">
+            <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
+            <End Role="Software" EntitySet="Software" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Software_Model" Association="Self.FK_Software_Model">
+            <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
+            <End Role="Software" EntitySet="Software" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Software_PurchasedBy" Association="Self.FK_Software_PurchasedBy">
+            <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
+            <End Role="Software" EntitySet="Software" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_Clients" Association="Self.FK_Users_Clients">
             <End Role="Clients" EntitySet="Clients" />
@@ -623,8 +748,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CSPFRAMEWORKModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -654,6 +778,8 @@
           <Property Name="site_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Client_Sites_Clients" FromRole="Client_Site" ToRole="Clients" />
           <NavigationProperty Name="Customer_Vendors" Relationship="Self.FK_Customer_Vendors_Sites" FromRole="Client_Site" ToRole="Customer_Vendors" />
+          <NavigationProperty Name="Hardwares" Relationship="Self.FK_Hardware_Location" FromRole="Client_Site" ToRole="Hardware" />
+          <NavigationProperty Name="Softwares" Relationship="Self.FK_Software_Location" FromRole="Client_Site" ToRole="Software" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -689,6 +815,7 @@
           <NavigationProperty Name="Program_Manager_User" Relationship="Self.FK_Clients_Users_Program_Manager" FromRole="Clients" ToRole="Users" />
           <NavigationProperty Name="Customer_Vendors" Relationship="Self.FK_Customer_Vendors_Clients" FromRole="Clients" ToRole="Customer_Vendors" />
           <NavigationProperty Name="Hardwares" Relationship="Self.FK_Hardware_Clients" FromRole="Clients" ToRole="Hardware" />
+          <NavigationProperty Name="Softwares" Relationship="Self.FK_Software_Clients" FromRole="Clients" ToRole="Software" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Users_Clients" FromRole="Clients" ToRole="Users" />
         </EntityType>
         <EntityType Name="Customer_Vendors">
@@ -724,14 +851,20 @@
           <Property Name="enum_type_id" Type="Int32" Nullable="false" />
           <Property Name="enum_type_value" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Clients" Relationship="Self.FK_Clients_ServiceType" FromRole="Enum_Type_Values" ToRole="Clients" />
-          <NavigationProperty Name="Status_Clients" Relationship="Self.FK_Clients_Status" FromRole="Enum_Type_Values" ToRole="Clients" />
-          <NavigationProperty Name="Team_Clients" Relationship="Self.FK_Clients_Team" FromRole="Enum_Type_Values" ToRole="Clients" />
+          <NavigationProperty Name="Clients1" Relationship="Self.FK_Clients_Status" FromRole="Enum_Type_Values" ToRole="Clients" />
+          <NavigationProperty Name="Clients2" Relationship="Self.FK_Clients_Team" FromRole="Enum_Type_Values" ToRole="Clients" />
           <NavigationProperty Name="Customer_Vendors" Relationship="Self.FK_Customer_Vendors_FunctionName" FromRole="Enum_Type_Values" ToRole="Customer_Vendors" />
           <NavigationProperty Name="Customer_Vendors1" Relationship="Self.FK_Customer_Vendors_Status" FromRole="Enum_Type_Values" ToRole="Customer_Vendors" />
-          <NavigationProperty Name="Item_Hardwares" Relationship="Self.FK_Hardware_Item" FromRole="Enum_Type_Values" ToRole="Hardware" />
-          <NavigationProperty Name="Make_Hardwares" Relationship="Self.FK_Hardware_Make" FromRole="Enum_Type_Values" ToRole="Hardware" />
-          <NavigationProperty Name="PurchasedBy_Hardwares" Relationship="Self.FK_Hardware_PurchasedBy" FromRole="Enum_Type_Values" ToRole="Hardware" />
-          <NavigationProperty Name="Status_Hardwares" Relationship="Self.FK_Hardware_Status" FromRole="Enum_Type_Values" ToRole="Hardware" />
+          <NavigationProperty Name="Enum_Types" Relationship="Self.FK_Enum_Type_Values_Enum_Types" FromRole="Enum_Type_Values" ToRole="Enum_Types" />
+          <NavigationProperty Name="Hardwares" Relationship="Self.FK_Hardware_Item" FromRole="Enum_Type_Values" ToRole="Hardware" />
+          <NavigationProperty Name="Hardwares1" Relationship="Self.FK_Hardware_Make" FromRole="Enum_Type_Values" ToRole="Hardware" />
+          <NavigationProperty Name="Hardwares2" Relationship="Self.FK_Hardware_PurchasedBy" FromRole="Enum_Type_Values" ToRole="Hardware" />
+          <NavigationProperty Name="Hardwares3" Relationship="Self.FK_Hardware_Status" FromRole="Enum_Type_Values" ToRole="Hardware" />
+          <NavigationProperty Name="Softwares" Relationship="Self.FK_Software_License" FromRole="Enum_Type_Values" ToRole="Software" />
+          <NavigationProperty Name="Softwares1" Relationship="Self.FK_Software_Make" FromRole="Enum_Type_Values" ToRole="Software" />
+          <NavigationProperty Name="Softwares2" Relationship="Self.FK_Software_Media" FromRole="Enum_Type_Values" ToRole="Software" />
+          <NavigationProperty Name="Softwares3" Relationship="Self.FK_Software_Model" FromRole="Enum_Type_Values" ToRole="Software" />
+          <NavigationProperty Name="Softwares4" Relationship="Self.FK_Software_PurchasedBy" FromRole="Enum_Type_Values" ToRole="Software" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Users_Status" FromRole="Enum_Type_Values" ToRole="Users" />
         </EntityType>
         <EntityType Name="Enum_Types">
@@ -740,6 +873,7 @@
           </Key>
           <Property Name="enum_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="enum_type_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Enum_Type_Values" Relationship="Self.FK_Enum_Type_Values_Enum_Types" FromRole="Enum_Types" ToRole="Enum_Type_Values" />
         </EntityType>
         <EntityType Name="Function_Notes">
           <Key>
@@ -769,14 +903,15 @@
           <Property Name="make" Type="Int32" />
           <Property Name="model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="item" Type="Int32" Nullable="false" />
-          <Property Name="software_id" Type="Int32" />
           <Property Name="warrenty_start_date" Type="DateTime" Precision="3" />
           <Property Name="warrenty_end_date" Type="DateTime" Precision="3" />
           <Property Name="purchased_by" Type="Int32" Nullable="false" />
           <Property Name="client_id" Type="Int32" Nullable="false" />
-          <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="location" Type="Int32" Nullable="false" />
           <Property Name="associated_hardware_id" Type="Int32" />
           <Property Name="hardware_status" Type="Int32" />
+          <Property Name="software_id" Type="Int32" />
+          <NavigationProperty Name="Client_Site" Relationship="Self.FK_Hardware_Location" FromRole="Hardware" ToRole="Client_Site" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Hardware_Clients" FromRole="Hardware" ToRole="Clients" />
           <NavigationProperty Name="Item_Enum_Type_Values" Relationship="Self.FK_Hardware_Item" FromRole="Hardware" ToRole="Enum_Type_Values" />
           <NavigationProperty Name="Make_Enum_Type_Values" Relationship="Self.FK_Hardware_Make" FromRole="Hardware" ToRole="Enum_Type_Values" />
@@ -784,26 +919,31 @@
           <NavigationProperty Name="Status_Enum_Type_Values" Relationship="Self.FK_Hardware_Status" FromRole="Hardware" ToRole="Enum_Type_Values" />
           <NavigationProperty Name="AssociatedHardware_Hardware" Relationship="Self.FK_Hardware_AssociatedHardware" FromRole="Hardware" ToRole="Hardware1" />
           <NavigationProperty Name="Hardware2" Relationship="Self.FK_Hardware_AssociatedHardware" FromRole="Hardware1" ToRole="Hardware" />
-          <NavigationProperty Name="Software" Relationship="Self.FK_Hardware_Softwares" FromRole="Hardware" ToRole="Software" />
+          <NavigationProperty Name="Software" Relationship="Self.FK_Hardware_Software" FromRole="Hardware" ToRole="Software" />
           <NavigationProperty Name="Vendor" Relationship="Self.FK_Hardware_Vendors" FromRole="Hardware" ToRole="Vendors" />
         </EntityType>
         <EntityType Name="Software">
           <Key>
-            <PropertyRef Name="software_id" />
+            <PropertyRef Name="CSPNAssetTag" />
           </Key>
-          <Property Name="software_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="software_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Hardwares" Relationship="Self.FK_Hardware_Softwares" FromRole="Software" ToRole="Hardware" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="CSPNAssetTag" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="make" Type="Int32" Nullable="false" />
+          <Property Name="model" Type="Int32" Nullable="false" />
+          <Property Name="box_product_key" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="digital_product_key" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="license_type" Type="Int32" Nullable="false" />
+          <Property Name="media_type" Type="Int32" Nullable="false" />
+          <Property Name="purchased_by" Type="Int32" Nullable="false" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="location" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client_Site" Relationship="Self.FK_Software_Location" FromRole="Software" ToRole="Client_Site" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Software_Clients" FromRole="Software" ToRole="Clients" />
+          <NavigationProperty Name="License_Enum_Type_Values" Relationship="Self.FK_Software_License" FromRole="Software" ToRole="Enum_Type_Values" />
+          <NavigationProperty Name="Make_Enum_Type_Values" Relationship="Self.FK_Software_Make" FromRole="Software" ToRole="Enum_Type_Values" />
+          <NavigationProperty Name="Media_Enum_Type_Values" Relationship="Self.FK_Software_Media" FromRole="Software" ToRole="Enum_Type_Values" />
+          <NavigationProperty Name="Model_Enum_Type_Values" Relationship="Self.FK_Software_Model" FromRole="Software" ToRole="Enum_Type_Values" />
+          <NavigationProperty Name="PurchasedBy_Enum_Type_Values" Relationship="Self.FK_Software_PurchasedBy" FromRole="Software" ToRole="Enum_Type_Values" />
+          <NavigationProperty Name="Hardwares" Relationship="Self.FK_Hardware_Software" FromRole="Software" ToRole="Hardware" />
         </EntityType>
         <EntityType Name="User_Groups">
           <Key>
@@ -898,6 +1038,30 @@
             </Principal>
             <Dependent Role="Customer_Vendors">
               <PropertyRef Name="site" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hardware_Location">
+          <End Role="Client_Site" Type="Self.Client_Site" Multiplicity="1" />
+          <End Role="Hardware" Type="Self.Hardware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client_Site">
+              <PropertyRef Name="client_site_id" />
+            </Principal>
+            <Dependent Role="Hardware">
+              <PropertyRef Name="location" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Software_Location">
+          <End Role="Client_Site" Type="Self.Client_Site" Multiplicity="1" />
+          <End Role="Software" Type="Self.Software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client_Site">
+              <PropertyRef Name="client_site_id" />
+            </Principal>
+            <Dependent Role="Software">
+              <PropertyRef Name="location" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1009,6 +1173,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Software_Clients">
+          <End Role="Clients" Type="Self.Client" Multiplicity="1" />
+          <End Role="Software" Type="Self.Software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="Software">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Users_Clients">
           <End Role="Clients" Type="Self.Client" Multiplicity="0..1" />
           <End Role="Users" Type="Self.User" Multiplicity="*" />
@@ -1069,6 +1245,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Enum_Type_Values_Enum_Types">
+          <End Role="Enum_Types" Type="Self.Enum_Types" Multiplicity="1" />
+          <End Role="Enum_Type_Values" Type="Self.Enum_Type_Values" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Enum_Types">
+              <PropertyRef Name="enum_type_id" />
+            </Principal>
+            <Dependent Role="Enum_Type_Values">
+              <PropertyRef Name="enum_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Hardware_Item">
           <End Role="Enum_Type_Values" Type="Self.Enum_Type_Values" Multiplicity="1" />
           <End Role="Hardware" Type="Self.Hardware" Multiplicity="*" />
@@ -1117,6 +1305,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Software_License">
+          <End Role="Enum_Type_Values" Type="Self.Enum_Type_Values" Multiplicity="1" />
+          <End Role="Software" Type="Self.Software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Enum_Type_Values">
+              <PropertyRef Name="enum_type_value_id" />
+            </Principal>
+            <Dependent Role="Software">
+              <PropertyRef Name="license_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Software_Make">
+          <End Role="Enum_Type_Values" Type="Self.Enum_Type_Values" Multiplicity="1" />
+          <End Role="Software" Type="Self.Software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Enum_Type_Values">
+              <PropertyRef Name="enum_type_value_id" />
+            </Principal>
+            <Dependent Role="Software">
+              <PropertyRef Name="make" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Software_Media">
+          <End Role="Enum_Type_Values" Type="Self.Enum_Type_Values" Multiplicity="1" />
+          <End Role="Software" Type="Self.Software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Enum_Type_Values">
+              <PropertyRef Name="enum_type_value_id" />
+            </Principal>
+            <Dependent Role="Software">
+              <PropertyRef Name="media_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Software_Model">
+          <End Role="Enum_Type_Values" Type="Self.Enum_Type_Values" Multiplicity="1" />
+          <End Role="Software" Type="Self.Software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Enum_Type_Values">
+              <PropertyRef Name="enum_type_value_id" />
+            </Principal>
+            <Dependent Role="Software">
+              <PropertyRef Name="model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Software_PurchasedBy">
+          <End Role="Enum_Type_Values" Type="Self.Enum_Type_Values" Multiplicity="1" />
+          <End Role="Software" Type="Self.Software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Enum_Type_Values">
+              <PropertyRef Name="enum_type_value_id" />
+            </Principal>
+            <Dependent Role="Software">
+              <PropertyRef Name="purchased_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Users_Status">
           <End Role="Enum_Type_Values" Type="Self.Enum_Type_Values" Multiplicity="0..1" />
           <End Role="Users" Type="Self.User" Multiplicity="*" />
@@ -1141,12 +1389,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Hardware_Softwares">
+        <Association Name="FK_Hardware_Software">
           <End Role="Software" Type="Self.Software" Multiplicity="0..1" />
           <End Role="Hardware" Type="Self.Hardware" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Software">
-              <PropertyRef Name="software_id" />
+              <PropertyRef Name="CSPNAssetTag" />
             </Principal>
             <Dependent Role="Hardware">
               <PropertyRef Name="software_id" />
@@ -1187,7 +1435,6 @@
           <EntitySet Name="Function_Notes" EntityType="Self.Function_Notes" />
           <EntitySet Name="Hardwares" EntityType="Self.Hardware" />
           <EntitySet Name="Softwares" EntityType="Self.Software" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="User_Groups" EntityType="Self.User_Groups" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Vendors" EntityType="Self.Vendor" />
@@ -1206,6 +1453,14 @@
           <AssociationSet Name="FK_Customer_Vendors_Sites" Association="Self.FK_Customer_Vendors_Sites">
             <End Role="Client_Site" EntitySet="Client_Site" />
             <End Role="Customer_Vendors" EntitySet="Customer_Vendors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hardware_Location" Association="Self.FK_Hardware_Location">
+            <End Role="Client_Site" EntitySet="Client_Site" />
+            <End Role="Hardware" EntitySet="Hardwares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Software_Location" Association="Self.FK_Software_Location">
+            <End Role="Client_Site" EntitySet="Client_Site" />
+            <End Role="Software" EntitySet="Softwares" />
           </AssociationSet>
           <AssociationSet Name="FK_Clients_ServiceType" Association="Self.FK_Clients_ServiceType">
             <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
@@ -1243,6 +1498,10 @@
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Hardware" EntitySet="Hardwares" />
           </AssociationSet>
+          <AssociationSet Name="FK_Software_Clients" Association="Self.FK_Software_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Software" EntitySet="Softwares" />
+          </AssociationSet>
           <AssociationSet Name="FK_Users_Clients" Association="Self.FK_Users_Clients">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Users" EntitySet="Users" />
@@ -1263,6 +1522,10 @@
             <End Role="Vendors" EntitySet="Vendors" />
             <End Role="Customer_Vendors" EntitySet="Customer_Vendors" />
           </AssociationSet>
+          <AssociationSet Name="FK_Enum_Type_Values_Enum_Types" Association="Self.FK_Enum_Type_Values_Enum_Types">
+            <End Role="Enum_Types" EntitySet="Enum_Types" />
+            <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
+          </AssociationSet>
           <AssociationSet Name="FK_Hardware_Item" Association="Self.FK_Hardware_Item">
             <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
             <End Role="Hardware" EntitySet="Hardwares" />
@@ -1279,6 +1542,26 @@
             <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
             <End Role="Hardware" EntitySet="Hardwares" />
           </AssociationSet>
+          <AssociationSet Name="FK_Software_License" Association="Self.FK_Software_License">
+            <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
+            <End Role="Software" EntitySet="Softwares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Software_Make" Association="Self.FK_Software_Make">
+            <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
+            <End Role="Software" EntitySet="Softwares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Software_Media" Association="Self.FK_Software_Media">
+            <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
+            <End Role="Software" EntitySet="Softwares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Software_Model" Association="Self.FK_Software_Model">
+            <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
+            <End Role="Software" EntitySet="Softwares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Software_PurchasedBy" Association="Self.FK_Software_PurchasedBy">
+            <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
+            <End Role="Software" EntitySet="Softwares" />
+          </AssociationSet>
           <AssociationSet Name="FK_Users_Status" Association="Self.FK_Users_Status">
             <End Role="Enum_Type_Values" EntitySet="Enum_Type_Values" />
             <End Role="Users" EntitySet="Users" />
@@ -1287,7 +1570,7 @@
             <End Role="Hardware" EntitySet="Hardwares" />
             <End Role="Hardware1" EntitySet="Hardwares" />
           </AssociationSet>
-          <AssociationSet Name="FK_Hardware_Softwares" Association="Self.FK_Hardware_Softwares">
+          <AssociationSet Name="FK_Hardware_Software" Association="Self.FK_Hardware_Software">
             <End Role="Software" EntitySet="Softwares" />
             <End Role="Hardware" EntitySet="Hardwares" />
           </AssociationSet>
@@ -1419,7 +1702,6 @@
                 <ScalarProperty Name="make" ColumnName="make" />
                 <ScalarProperty Name="model" ColumnName="model" />
                 <ScalarProperty Name="item" ColumnName="item" />
-                <ScalarProperty Name="software_id" ColumnName="software_id" />
                 <ScalarProperty Name="warrenty_start_date" ColumnName="warrenty_start_date" />
                 <ScalarProperty Name="warrenty_end_date" ColumnName="warrenty_end_date" />
                 <ScalarProperty Name="purchased_by" ColumnName="purchased_by" />
@@ -1427,25 +1709,23 @@
                 <ScalarProperty Name="location" ColumnName="location" />
                 <ScalarProperty Name="associated_hardware_id" ColumnName="associated_hardware_id" />
                 <ScalarProperty Name="hardware_status" ColumnName="hardware_status" />
+                <ScalarProperty Name="software_id" ColumnName="software_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Softwares">
             <EntityTypeMapping TypeName="CSPFRAMEWORKModel.Software">
               <MappingFragment StoreEntitySet="Software">
-                <ScalarProperty Name="software_id" ColumnName="software_id" />
-                <ScalarProperty Name="software_name" ColumnName="software_name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="CSPFRAMEWORKModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="CSPNAssetTag" ColumnName="CSPNAssetTag" />
+                <ScalarProperty Name="make" ColumnName="make" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="box_product_key" ColumnName="box_product_key" />
+                <ScalarProperty Name="digital_product_key" ColumnName="digital_product_key" />
+                <ScalarProperty Name="license_type" ColumnName="license_type" />
+                <ScalarProperty Name="media_type" ColumnName="media_type" />
+                <ScalarProperty Name="purchased_by" ColumnName="purchased_by" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="location" ColumnName="location" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

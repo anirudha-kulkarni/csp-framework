@@ -12,16 +12,12 @@ namespace api.cspnetworks.net
     using System;
     using System.Collections.Generic;
     
-    public partial class Enum_Types
+    public partial class sysdiagram
     {
-        public Enum_Types()
-        {
-            this.Enum_Type_Values = new HashSet<Enum_Type_Values>();
-        }
-    
-        public int enum_type_id { get; set; }
-        public string enum_type_name { get; set; }
-    
-        public virtual ICollection<Enum_Type_Values> Enum_Type_Values { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

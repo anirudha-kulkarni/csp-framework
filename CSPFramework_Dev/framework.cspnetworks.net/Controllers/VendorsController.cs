@@ -143,7 +143,7 @@ namespace framework.cspnetworks.net.Controllers
                  // HTTP POST                     
                  response = client.PostAsJsonAsync("api/Vendors/UpdateVendor", newVendorModel).Result;
              }
-             if (response.StatusCode.Equals(HttpStatusCode.Created))
+             if (response.StatusCode.Equals(HttpStatusCode.OK))
              {
                  TempData[Properties.Resources.Success] = Properties.Resources.EditVendor_Success;
                  return RedirectToAction("Index", "Vendors");

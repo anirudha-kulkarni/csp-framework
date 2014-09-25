@@ -14,11 +14,11 @@ namespace framework.cspnetworks.net
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                        "~/Scripts/jquery-ui.*"));
+            //bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+            //            "~/Scripts/jquery-ui.*"));
 
-            bundles.Add(new StyleBundle("~/bundles/jqueryui-css").Include(
-                        "~/Content/jquery-ui/jquery-ui.*"));
+            //bundles.Add(new StyleBundle("~/bundles/jqueryui-css").Include(
+            //            "~/Content/jquery-ui/jquery-ui.*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap-datepicker").Include(
                         "~/Scripts/bootstrap-datepicker/bootstrap-*"));
@@ -32,12 +32,18 @@ namespace framework.cspnetworks.net
             bundles.Add(new ScriptBundle("~/bundles/maskedEdit").Include(
                 "~/Scripts/masked-edit/jquery.mask.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqGrid").Include(
-               "~/Scripts/jqGrid/*.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/jqGrid").Include(
+            //   "~/Scripts/jqGrid/*.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap-table").Include(
               "~/Scripts/bootstrap-table/bootstrap-table.js",
-             "~/Scripts/bootstrap-table/bootstrap-table-ens.js"));
+             "~/Scripts/bootstrap-table/bootstrap-table-en.js"));
+            
+             //bundles.Add(new ScriptBundle("~/bundles/bootstrap-tooltip").Include(
+             //"~/Scripts/bootstrap-tooltip/bootstrap-tooltip.js",
+             //"~/Scripts/bootstrap-tooltip/bootstrap-popover.js"));
+
+            
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -62,9 +68,8 @@ namespace framework.cspnetworks.net
                      
                      "~/Content/flatfont.css"));
 
-            bundles.Add(new StyleBundle("~/Content/jqGrid/css").Include(
-                   "~/Content/jqGrid/*.css"));
-
+            //bundles.Add(new StyleBundle("~/Content/jqGrid/css").Include(
+            //       "~/Content/jqGrid/*.css"));
 
             bundles.Add(new StyleBundle("~/Content/bootstrap-table/css").Include(
                    "~/Content/bootstrap-table/*.css"));   

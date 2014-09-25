@@ -1,0 +1,14 @@
+﻿@using CSPLibrary
+@using framework.cspnetworks.net.Helpers
+@{
+    String selectedVal = "";
+    if (@Model != null)
+    {
+        selectedVal = (String)@Model.ToString();
+    }
+
+    var items = DropDonwHelper.GetItems("GetSoftwareMakeList", selectedVal);
+
+}
+
+@Html.DropDownList("", items, new { @class="form-control", @id = "software_makelist_" })

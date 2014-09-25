@@ -27,6 +27,7 @@
             
             @Html.HiddenFor(m => m.Hardware_Id)
             @Html.HiddenFor(m => m.Associted_Hardware_Id);
+            @Html.HiddenFor(m => m.site_id)
             <div class="form-group">
             </div>
             <div class="form-group">
@@ -137,13 +138,11 @@
         </div>
             
             <div class="form-group">
-                @Html.LabelFor(m => m.Location, new { @class = "col-sm-3 control-label" })
-                <div class="col-sm-9">
-                    @Html.TextBoxFor(m => m.Location, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Location)
-                </div>
-            </div>
-       
+@Html.LabelFor(m => m.site_id, new { @class = "col-sm-3 control-label" })
+             <div class="col-sm-9" id="sitesID">
+                
+             </div>
+        </div>       
             <div class="form-group">
                 @Html.LabelFor(m => m.Hardware_Status, new { @class = "col-sm-3 control-label" })
                 <div class="col-sm-9">
@@ -187,6 +186,7 @@
             });
 
             {
+                // code for item == "accessory"
                 var itemInfo = $('#itemlist_ :selected')[0].innerHTML;
                 if (itemInfo && itemInfo.toLowerCase() === "accessory") {
                     $.get('/Hardware/GetHardwareDropdownView?value=' + itemInfo, function (data) {
@@ -223,6 +223,29 @@
                     });
 
                 }
+
+                //this code will display list of sites as per client
+                $('#customerslist_').change(function () {
+                    var selectedClient = $('#customerslist_ option:selected').val();
+                    $.get('/CustomerVendor/GetSitesView?id=' + selectedClient, function (data) {
+                        $('#sitesID').html(data);
+                        $('#sitesID').fadeIn('fast');
+                    });
+                });
+
+                // this code will execute on form load
+                var client = $('#customerslist_ option:selected').val();
+                $.get('/CustomerVendor/GetSitesView?id=' + client, function (data) {
+                    $('#sitesID').html(data);
+                    $('#sitesID').fadeIn('fast');
+
+                    var data = $("#site_id").val();
+                    var index = $("#siteslist_ option[value='" + data + "']").index();
+                    var selector = $("#siteslist_")[0];
+                    selector.selectedIndex = index;
+                });
+                
+
             }
 
 
@@ -261,8 +284,14 @@
             });
 
             $("form").submit(function () {
+
+                // this code will to used to update field of associated_hardware_id
                 var hiddenData = $('#hardwarelist_ option:selected').val();
                 $("#Associted_Hardware_Id").attr("value", hiddenData);
+
+                // this code will to used to update field of site_id
+                var siteID_Val = $('#siteslist_ option:selected').val();
+                $("#site_id").attr("value", siteID_Val);
             });
             
 

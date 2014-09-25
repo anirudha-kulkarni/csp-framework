@@ -144,31 +144,27 @@ namespace api.cspnetworks.net.Controllers
         [AllowAnonymous]
         public async Task<IHttpActionResult> UpdateUser(NewUserModel updatedUser)
         {
-            try
+            
+            User oldUser = (from oldUserInfo in _context.Users
+                            where oldUserInfo.user_id == updatedUser.User_Id
+                            select oldUserInfo).FirstOrDefault();
+            if(oldUser != null)
             {
-                User oldUser = (from oldUserInfo in _context.Users
-                              where oldUserInfo.user_id == updatedUser.User_Id
-                              select oldUserInfo).FirstOrDefault();
-                if(oldUser != null)
-                {
-                    oldUser.firstname = updatedUser.FirstName;
-                    oldUser.lastname = updatedUser.LastName;
-                    oldUser.user_group = updatedUser.AccountRole.ToString();
-                    oldUser.client_id = updatedUser.Customer_Id;
-                    oldUser.status = updatedUser.Status;
-                    oldUser.phone = updatedUser.Phone;
-                    oldUser.mobile = updatedUser.MobileNumber;
-                    oldUser.address = updatedUser.Address;
-                }
-                
-                await _context.SaveChangesAsync();
-                return CreatedAtRoute("DefaultApi", new { id = oldUser.user_id }, oldUser);
+
+                oldUser.firstname = updatedUser.FirstName;
+                oldUser.lastname = updatedUser.LastName;
+                oldUser.user_group = updatedUser.AccountRole.ToString();
+                oldUser.client_id = updatedUser.Customer_Id;
+                oldUser.status = updatedUser.Status;
+                oldUser.phone = updatedUser.Phone;
+                oldUser.mobile = updatedUser.MobileNumber;
+                oldUser.address = updatedUser.Address;
             }
-            catch (Exception)
-            {
                 
-                throw new InvalidOperationException();
-            }
+            await _context.SaveChangesAsync();
+           //return CreatedAtRoute("DefaultApi", new { id = oldUser.user_id }, oldUser);
+            return Ok();
+            
         }
 
         // api/User/ChangePassword
@@ -186,7 +182,8 @@ namespace api.cspnetworks.net.Controllers
                 }
 
                 await _context.SaveChangesAsync();
-                return CreatedAtRoute("DefaultApi", new { id = oldUser.user_id }, oldUser);
+                //return CreatedAtRoute("DefaultApi", new { id = oldUser.user_id }, oldUser);
+                return Ok();
             }
             catch (Exception)
             {

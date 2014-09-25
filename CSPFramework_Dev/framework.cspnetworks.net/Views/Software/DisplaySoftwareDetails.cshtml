@@ -1,0 +1,85 @@
+﻿@model CSPLibrary.NewSoftwareModel
+@{
+    ViewBag.Title = "Display Softare Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2></h2>
+
+<div class="col-lg-12 center" style="margin-left:9%">
+    <div class="tableHeader col-lg-9">
+        <a class="col-lg-2 btn" href="/Software/Index/">All Softwares</a>
+        <h2 class="col-lg-8">Details of Software having CSP Asset Tag : @Model.Software_ID</h2>
+    </div>
+    <div class="col-lg-9 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad">
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="/content/images/profile_photo.png" class="img-circle"> </div>
+                    <div class=" col-md-9 col-lg-9 ">
+                        <table class="table table-user-information">
+                            <tbody>
+                                <tr>
+                                    <td><strong>CSPN Asset Tag :</strong></td>
+                                    <td>@Model.Software_ID</td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Make :</strong></td>
+                                    <td>@Model.MakeName</td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Model :</strong></td>
+                                    <td>@Model.ModelName</td>
+                                </tr>
+
+                                @if(!@Model.Box_Product_Key.IsEmpty())
+                                { 
+                                    <tr>
+                                        <td><strong>Box Product Key :</strong></td>
+                                        <td>@Model.Box_Product_Key</td>
+                                    </tr>
+                                }
+    
+                                @if(!@Model.Digital_Product_Key.IsEmpty())
+                                {
+                                    <tr>
+                                        <td><strong>Digital Product Key :</strong></td>
+                                        <td>@Model.Digital_Product_Key</td>
+                                    </tr>
+                                }
+
+                                <tr>
+                                    <td><strong>License Type :</strong></td>
+                                    <td>@Model.License_Type_Name</td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Media Type :</strong></td>
+                                    <td>@Model.Media_Type_Name</td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Purchased By :</strong></td>
+                                    <td>@Model.PurchasedBy_Name</td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Client :</strong></td>
+                                    <td>@Model.ClientCode</td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Location :</strong></td>
+                                    <td>@Model.Location_Name</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

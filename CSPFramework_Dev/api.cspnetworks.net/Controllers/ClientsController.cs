@@ -384,7 +384,8 @@ namespace api.cspnetworks.net.Controllers
                        await _context.SaveChangesAsync();                        
                        scope.Complete();
                     }
-                    return CreatedAtRoute("DefaultApi", new { id = client.client_id }, client);
+                    //return CreatedAtRoute("DefaultApi", new { id = client.client_id }, client);
+                    return Ok();
                 }
                 return NotFound();
             }

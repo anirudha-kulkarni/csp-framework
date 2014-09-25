@@ -170,6 +170,7 @@
     <Compile Include="Controllers\DropDownsController.cs" />
     <Compile Include="Controllers\HardwareController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SoftwareController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VendorsController.cs" />
     <Compile Include="CSPFrameworkEntities.Context.cs">
@@ -207,9 +208,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Software.cs">
-      <DependentUpon>CSPFrameworkEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagram.cs">
       <DependentUpon>CSPFrameworkEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">

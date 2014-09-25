@@ -1,0 +1,13 @@
+﻿@using CSPLibrary
+@using framework.cspnetworks.net.Helpers
+@{
+    String selectedVal = "";
+    if (@Model != null)
+    {
+        selectedVal = (String)@Model.ToString();
+    }
+
+    var items = DropDonwHelper.GetItems("GetSoftware_MediaList", selectedVal);
+}
+
+@Html.DropDownList("", items, new { @class = "form-control", @id = "software_medialist_" })

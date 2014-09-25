@@ -1,0 +1,153 @@
+﻿@model CSPLibrary.NewSoftwareModel
+@{
+    ViewBag.Title = "Edit Software Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Edit Software Details</h2>
+
+<div class="col-lg-12 center" style="margin-left:9%">
+
+    <div class="col-lg-8">
+        @using (Html.BeginForm("UpdateSoftware", "Software", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+
+            <div class="modal-footer">
+                <a href="/Software/Index" class="btn">Cancel</a>
+                <input type="submit" class="btn" value="Save" />
+            </div>
+
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            @Html.HiddenFor(m => m.Software_ID)
+            @Html.HiddenFor(m => m.site_id)
+            <div class="form-group">
+            </div>
+            <div class="form-group">
+            </div>
+
+            <div class="form-group">
+            @Html.LabelFor(m => m.Make_ID, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-8">
+                    @Html.EditorFor(m => m.Make_ID,"SoftwareMakeList", new { @autofocus = "autofocus", @placeholder = "Select Software Make" })
+                    @Html.ValidationMessageFor(m => m.Make_ID)
+                </div>
+            </div>
+        
+            <div class="form-group">
+                @Html.LabelFor(m => m.Model_ID, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-8">
+                    @Html.EditorFor(m => m.Model_ID, "SoftwareModelList", new { @autofocus = "autofocus", @placeholder = "Select Software Model" })
+                    @Html.ValidationMessageFor(m => m.Model_ID)
+                </div>
+            </div>
+        
+            <span id="errorDiv_" style="display: none; font-weight:bold; font-size: 12px; padding: 10px; margin: -20px 0; color: #d35d51; background: #f7e2df; border: 1px solid #d35d51;">
+                Oops ! Something has gone wrong. Please try again !
+            </span>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Box_Product_Key, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.Box_Product_Key, new { @class="form-control", @autofocus = "autofocus", @placeholder = "Enter Box Product Key" })
+                    @Html.ValidationMessageFor(m => m.Box_Product_Key)
+                </div>
+            </div>
+        
+            <div class="form-group">
+                @Html.LabelFor(m => m.Digital_Product_Key, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.Digital_Product_Key, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Enter Digital Product Key" })
+                    @Html.ValidationMessageFor(m => m.Digital_Product_Key)
+                </div>
+            </div>
+        
+            <div class="form-group">
+                @Html.LabelFor(m => m.License_ID, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-8">
+                    @Html.EditorFor(m => m.License_ID, "Software_LicenseTypeList", new { @autofocus = "autofocus", @placeholder = "Select License Type" })
+                    @Html.ValidationMessageFor(m => m.License_ID)
+                </div>
+            </div>
+        
+            <div class="form-group">
+                @Html.LabelFor(m => m.Media_ID, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-8">
+                    @Html.EditorFor(m => m.Media_ID, "Software_MediaTypeList", new { @autofocus = "autofocus", @placeholder = "Select Media Type" })
+                    @Html.ValidationMessageFor(m => m.Media_ID)
+                </div>
+            </div>
+            
+            <div class="form-group">
+                @Html.LabelFor(m => m.PurchasedBy_ID, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-8">
+                    @Html.EditorFor(m => m.PurchasedBy_ID, "PurchasedBy", new { @autofocus = "autofocus", @placeholder = "Purchased By" })
+                    @Html.ValidationMessageFor(m => m.PurchasedBy_ID)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Client_ID, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-8">
+                    @Html.EditorFor(m => m.Client_ID, "CustomersList", new { @autofocus = "autofocus", @placeholder = "Select Client Code" })
+                    @Html.ValidationMessageFor(m => m.Client_ID)
+                </div>
+            </div>
+        
+            <div class="form-group">
+                @Html.LabelFor(m => m.site_id, new { @class = "col-sm-3 control-label" })
+                 <div class="col-sm-8" id="sitesID">
+                
+                 </div>
+            </div>
+
+            <div class="modal-footer">
+                <a href="/Software/Index" class="btn">Cancel</a>
+                <input type="submit" class="btn" value="Save" />
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/admin/css")
+    @Scripts.Render("~/bundles/maskedEdit")
+    @Scripts.Render("~/bundles/moment")
+
+    <script>
+        $(document).ready(function () {
+
+            //this code will display list of sites as per client
+            $('#customerslist_').change(function () {
+                var selectedClient = $('#customerslist_ option:selected').val();
+                $.get('/CustomerVendor/GetSitesView?id=' + selectedClient, function (data) {
+                    $('#sitesID').html(data);
+                    $('#sitesID').fadeIn('fast');
+                });
+            });
+
+            // this code will execute on form load
+            {
+                var client = $('#customerslist_ option:selected').val();
+                $.get('/CustomerVendor/GetSitesView?id=' + client, function (data) {
+                    $('#sitesID').html(data);
+                    $('#sitesID').fadeIn('fast');
+
+                    var data = $("#site_id").val();
+                    var index = $("#siteslist_ option[value='" + data + "']").index();
+                    var selector = $("#siteslist_")[0];
+                    selector.selectedIndex = index;
+                });
+            }
+
+            // this code will to used to update field of site_id
+            $("form").submit(function () {
+                var hiddenData = $('#siteslist_ option:selected').val();
+                $("#site_id").attr("value", hiddenData);
+            });
+        });
+    </script>
+}

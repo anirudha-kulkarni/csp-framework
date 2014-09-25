@@ -275,7 +275,7 @@ namespace framework.cspnetworks.net.Controllers
                 // HTTP POST                     
                 response = client.PostAsJsonAsync("api/CustomerVendor/UpdateCustomerVendor", customerVendorViewModelPost).Result;
             }
-            if (response.StatusCode.Equals(HttpStatusCode.Created))
+            if (response.StatusCode.Equals(HttpStatusCode.OK))
             {
                 TempData[Properties.Resources.Success] = Properties.Resources.EditCustomerVendor_Success;
                 return RedirectToAction("Index", "CustomerVendor");

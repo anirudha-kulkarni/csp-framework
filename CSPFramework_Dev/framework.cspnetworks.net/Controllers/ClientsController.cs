@@ -236,7 +236,7 @@ namespace framework.cspnetworks.net.Controllers
                 newClientViewModel.clientSites = JsonConvert.DeserializeObject<List<ClientSite>>(newClientViewModel.newClientModel.Sites);
                 response = client.PostAsJsonAsync("api/Clients/UpdateClient", newClientViewModel).Result;
             }
-            if (response.StatusCode.Equals(HttpStatusCode.Created))
+            if (response.StatusCode.Equals(HttpStatusCode.OK))
             {
                 TempData[Properties.Resources.Success] = Properties.Resources.EditClientr_Success;
                 return RedirectToAction("Index", "Clients");

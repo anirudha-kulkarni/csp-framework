@@ -16,28 +16,33 @@ namespace CSPLibrary
         [Required]
         [Display(Name = "Vendor ID")] 
         public int Vendor_ID { get; set; }
-
         [Display(Name = "Vendor Name")]
         public string Vendor_Name { get; set; }
+
 
         [Display(Name = "Serial Number")]
         public string Serial_Number { get; set; }
 
+
         [Display(Name = "Make")]
         public int? Make { get; set; }
-
+        [Required]
         [Display(Name = "Make Name")]
         public string MakeName { get; set; }
+        [Display(Name = "Is New Make")]
+        public string IsNewMake { get; set; }
+
 
         [Display(Name = "Model")]
         public string Model { get; set; }
 
+
         [Required]
         [Display(Name = "Item")]
         public int Item { get; set; }
-
         [Display(Name = "Item Name")]
         public string ItemName { get; set; }
+
 
         [Display(Name = "Associated Hardware ID")]
         public int? Associted_Hardware_Id { get; set; }
@@ -45,7 +50,7 @@ namespace CSPLibrary
         [Display(Name = "Software ID")]
         public int Software_ID { get; set; }
 
-        [Display(Name = "Softwware Name")]
+        [Display(Name = "Software Name")]
         public string SoftwareName { get; set; }
 
         [Display(Name = "Warranty Start")]
@@ -71,8 +76,10 @@ namespace CSPLibrary
         public string ClientCode { get; set; }
 
         [Required]
-        [Display(Name = "Location")]
-        public string Location { get; set; }
+        [Display(Name = "Location ID")]
+        public int site_id { get; set; }
+        [Display(Name = "Location Name")]
+        public string Location_Name { get; set; }
 
         [Required]
         [Display(Name = "Hardware Status")]

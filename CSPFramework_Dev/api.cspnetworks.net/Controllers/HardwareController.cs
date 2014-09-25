@@ -28,6 +28,24 @@ namespace api.cspnetworks.net.Controllers
             base.Dispose(disposing);
         }
 
+        private int AddNewMake(string makename, string data)
+        {
+            // check if already a make exist then do nothing just retun value
+
+            // save into enum_type_value db
+            Enum_Types enumType = (from enums in _context.Enum_Types
+                                   where enums.enum_type_name == data
+                                   select enums).FirstOrDefault();
+
+            Enum_Type_Values newEnum = new Enum_Type_Values();
+            newEnum.enum_type_id = enumType.enum_type_id;
+            newEnum.enum_type_value = makename;
+            _context.Enum_Type_Values.Add(newEnum);
+            _context.SaveChanges();
+
+            return newEnum.enum_type_value_id;
+        }
+
         // POST : api/Hardware/PostHardware
         [HttpPost]
         [ResponseType(typeof(Hardware))]
@@ -44,7 +62,17 @@ namespace api.cspnetworks.net.Controllers
                 Hardware _hardware = new Hardware();
                 _hardware.vendor_id = newHardware.Vendor_ID;
                 _hardware.serial_number = newHardware.Serial_Number;
-                _hardware.make = newHardware.Make;
+
+                if (newHardware.IsNewMake == "true")
+                {
+                    int value = AddNewMake(newHardware.MakeName, "Hardware_Makes");
+                    _hardware.make = value;
+                }
+                else
+                {
+                    _hardware.make = newHardware.Make;
+                }
+                
                 _hardware.model = newHardware.Model;
                 _hardware.item = newHardware.Item;
                 _hardware.associated_hardware_id = newHardware.Associted_Hardware_Id;
@@ -66,13 +94,13 @@ namespace api.cspnetworks.net.Controllers
                 
                 _hardware.purchased_by = newHardware.PurchasedBy;
                 _hardware.client_id = newHardware.ClientId;
-                _hardware.location = newHardware.Location;
+                _hardware.location = newHardware.site_id;
                 _hardware.hardware_status = newHardware.Hardware_Status;
 
                 _context.Hardwares.Add(_hardware);
                 await _context.SaveChangesAsync();
 
-                return CreatedAtRoute("DefaultApi", new { id = _hardware.CSPNAssetTag }, _hardware);
+                return Ok();
 
             }
             catch (Exception)
@@ -108,7 +136,7 @@ namespace api.cspnetworks.net.Controllers
                     if (hardware.software_id.HasValue)
                     {
                         hardwareItem.Software_ID = hardware.software_id.Value;
-                        hardwareItem.SoftwareName = hardware.Software.software_name;
+                        //hardwareItem.SoftwareName = hardware.Software.software_name;
                     }
                     hardwareItem.WarrantyStart = hardware.warrenty_start_date;
                     hardwareItem.WarrantyEnd = hardware.warrenty_end_date;
@@ -119,7 +147,9 @@ namespace api.cspnetworks.net.Controllers
                     hardwareItem.ClientId = hardware.client_id;
                     hardwareItem.ClientCode = hardware.Client.client_code;
 
-                    hardwareItem.Location = hardware.location;
+                    hardwareItem.site_id = hardware.location;
+                    hardwareItem.Location_Name = hardware.Client_Site.site_name;
+
                     hardwareItem.Hardware_Status = hardware.hardware_status;
                     if (hardware.hardware_status.HasValue)
                     {
@@ -160,7 +190,6 @@ namespace api.cspnetworks.net.Controllers
             if (hardware.software_id.HasValue)
             {
                 hardwareItem.Software_ID = hardware.software_id.Value;
-                hardwareItem.SoftwareName = hardware.Software.software_name;
             }
             
             hardwareItem.WarrantyStart = hardware.warrenty_start_date;
@@ -170,7 +199,9 @@ namespace api.cspnetworks.net.Controllers
             hardwareItem.ClientId = hardware.client_id;
             hardwareItem.ClientCode = hardware.Client.client_code;
 
-            hardwareItem.Location = hardware.location;
+            hardwareItem.site_id = hardware.location;
+            hardwareItem.Location_Name = hardware.Client_Site.site_name;
+
             hardwareItem.Hardware_Status = hardware.hardware_status;
             if (hardware.hardware_status.HasValue)
             {
@@ -223,7 +254,7 @@ namespace api.cspnetworks.net.Controllers
                     }
                     oldHardware.purchased_by = updatedHardware.PurchasedBy;
                     oldHardware.client_id = updatedHardware.ClientId;
-                    oldHardware.location = updatedHardware.Location;
+                    oldHardware.location = updatedHardware.site_id;
 
                     if (updatedHardware.Hardware_Status.HasValue)
                     {

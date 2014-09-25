@@ -376,7 +376,8 @@ namespace api.cspnetworks.net.Controllers
                         }
                         await _context.SaveChangesAsync();
                         scope.Complete();
-                        return CreatedAtRoute("DefaultApi", new { id = oldCustVendor.customer_vendor_id }, oldCustVendor);
+                        //return CreatedAtRoute("DefaultApi", new { id = oldCustVendor.customer_vendor_id }, oldCustVendor);
+                        return Ok();
                     }
 
                 }
